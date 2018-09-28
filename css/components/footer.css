@@ -13,3 +13,41 @@ footer.site-footer .site-info {
   font-size: 1.3rem;
   margin: 0.5rem 0;
 }
+
+footer.social-wrapper {
+  margin: 20px 0;
+}
+footer.social-wrapper a {
+  color: #a5a5a5;
+  margin-right: 4px;
+  margin-left: 4px;
+}
+footer.social-wrapper a:hover {
+  color: #56AFE2;
+}
+footer.social-wrapper .iconfont::before {
+  font-size: 13px;
+  display: block;
+  padding: 10px;
+}
+footer.social-wrapper > .github:hover {
+  color: #222;
+}
+footer.social-wrapper > .twitter:hover {
+  color: #30c3ef;
+}
+footer.social-wrapper > .rss:hover {
+  color: #ffad1f;
+}
+footer.social-wrapper > .weibo:hover {
+  color: #e6162e;
+}
+footer.social-wrapper > .dribbble:hover {
+  color: #c32461;
+}
+footer.social-wrapper > .tumblr:hover {
+  color: #36465d;
+}
+footer.social-wrapper > .search-do:hover {
+  color: #eb4535;
+}
