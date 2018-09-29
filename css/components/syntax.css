@@ -47,7 +47,7 @@ figure.highlight {
   line-height: 1.6;
   overflow: auto;
   position: relative;
-  font-size: 1.1em;
+  font-size: 0.9em;
 }
 figure.highlight figcaption {
   color: color-meta;
@@ -77,7 +77,7 @@ figure.highlight .gutter {
 figure.highlight .code {
   padding-left: 15px;
   border-left: 1px solid #fff;
-  color: #212121;
+  color: #666;
 }
 figure.highlight .line {
   height: 20px;
