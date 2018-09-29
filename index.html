@@ -90,12 +90,13 @@
 <h3 id="初始化-hexo"><a href="#初始化-hexo" class="headerlink" title="初始化 hexo"></a>初始化 <code>hexo</code></h3><ol>
 <li><strong>安装</strong></li>
 </ol>
-<p>打开命令行，执行以下命令：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br></pre></td></tr></table></figure></p>
-<ol start="2">
+<p>打开命令行，执行以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br></pre></td></tr></table></figure>
+<ol>
 <li><strong>初始化 <code>hexo</code></strong></li>
 </ol>
 <p>安装完成后，进入建立你的<code>hexo</code>目录,并完成初始化:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mkdir hexo-blog</span><br><span class="line">cd hexo-blog</span><br><span class="line">hexo init myblog</span><br><span class="line">cd myblog</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mkdir hexo-blog</span><br><span class="line"><span class="built_in">cd</span> hexo-blog</span><br><span class="line">hexo init myblog</span><br><span class="line"><span class="built_in">cd</span> myblog</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
 <hr>
 <h1 id="二、服务器配置"><a href="#二、服务器配置" class="headerlink" title="二、服务器配置"></a>二、服务器配置</h1><p>服务器系统为<code>CentOS(7.1)</code></p>
 <h2 id="搭建远程Git库"><a href="#搭建远程Git库" class="headerlink" title="搭建远程Git库"></a>搭建远程<code>Git</code>库</h2><ol>
@@ -104,18 +105,18 @@
 <li><p><strong>安装<code>git</code></strong></p>
 </li>
 </ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git --version // 如无，则安装</span><br><span class="line">yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel perl-devel</span><br><span class="line">yum install -y git</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git --version // 如无，则安装</span><br><span class="line">yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel perl-devel</span><br><span class="line">yum install -y git</span><br></pre></td></tr></table></figure>
 <ol start="3">
 <li><strong>建立<code>git</code>用户并配置仓库</strong></li>
 </ol>
 <ul>
 <li><a href="http://www.swiftyper.com/2016/04/17/deploy-hexo-with-git-hook/" target="_blank" rel="noopener">参考资料</a></li>
 </ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">useradd git</span><br><span class="line">passwd git // 设置密码</span><br><span class="line">su git // 这步很重要，不切换用户后面会很麻烦</span><br><span class="line">cd /home/git/</span><br><span class="line">mkdir -p hexo/blog // 项目存在的真实目录</span><br><span class="line">mkdir repos &amp;&amp; cd repos</span><br><span class="line">git init --bare blog.git // 创建一个裸露的仓库</span><br><span class="line">cd blog.git/hooks</span><br><span class="line">vi post-receive // 创建hook钩子函数，输入内容如下（原理可以参考上面的链接）</span><br></pre></td></tr></table></figure>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">g#</span>!/bin/sh</span><br><span class="line">git --work-tree=/home/git/projects/blog --git-dir=/home/git/repos/blog.git checkout -f</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">useradd git</span><br><span class="line">passwd git <span class="comment"># 设置密码</span></span><br><span class="line">su git <span class="comment"># 这步很重要，不切换用户后面会很麻烦</span></span><br><span class="line"><span class="built_in">cd</span> /home/git/</span><br><span class="line">mkdir -p hexo/blog  <span class="comment"># 项目存在的真实目录</span></span><br><span class="line">mkdir repos &amp;&amp; <span class="built_in">cd</span> repos</span><br><span class="line">git init --bare blog.git <span class="comment"># 创建一个裸露的仓库</span></span><br><span class="line"><span class="built_in">cd</span> blog.git/hooks</span><br><span class="line">vi post-receive <span class="comment"># 创建hook钩子函数，输入内容如下（原理可以参考上面的链接）</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/sh</span></span><br><span class="line">git --work-tree=/home/git/projects/blog --git-dir=/home/git/repos/blog.git checkout -f</span><br></pre></td></tr></table></figure>
 <p>添加完毕后修改钩子的权限，执行如下命令</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">chmod +x post-receive</span><br><span class="line">exit // 退出到 root 登录</span><br><span class="line">chown -R git:git /home/git/repos/blog.git // 添加权限</span><br></pre></td></tr></table></figure>
-<ol start="4">
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">chmod +x post-receive</span><br><span class="line"><span class="built_in">exit</span> <span class="comment"># 退出到 root 登录</span></span><br><span class="line">chown -R git:git /home/git/repos/blog.git <span class="comment"># 添加权限</span></span><br></pre></td></tr></table></figure>
+<ol>
 <li><strong>测试<code>git仓库</code>是否建立成功</strong></li>
 </ol>
 <p>找到另外的空白文件夹，执行如下命令<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone git@server_ip:/home/git/repos/blog.git</span><br></pre></td></tr></table></figure></p>
@@ -130,16 +131,17 @@
 <h2 id="搭建nginx服务器"><a href="#搭建nginx服务器" class="headerlink" title="搭建nginx服务器"></a>搭建<code>nginx</code>服务器</h2><ol>
 <li><strong>安装<code>nginx</code></strong></li>
 </ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y ngix</span><br></pre></td></tr></table></figure>
-<p>验证安装是否成功：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ngix  //启动后通过浏览器连接到server_IP 检查是否可以看到测试页面</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y ngix</span><br></pre></td></tr></table></figure>
+<p>验证安装是否成功：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ngix  <span class="comment">#启动后通过浏览器连接到server_IP 检查是否可以看到测试页面</span></span><br></pre></td></tr></table></figure>
 <ol start="2">
 <li><strong>配置<code>nginx</code></strong></li>
 </ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">nginx -s stop // 先停止nginx</span><br><span class="line">cd /etc/nginx</span><br><span class="line">mv nginx.conf nginx.conf.copy</span><br><span class="line">cp nginx.conf.defult nginx.conf //移除测试配置，导入默认配置</span><br><span class="line">vim nginx.conf</span><br><span class="line">修改 root 解析路径</span><br><span class="line">同时将 user 改为 root 如下图，不然nginx无法访问 /home/git/project/blog</span><br><span class="line">nginx -s reload</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">nginx -s stop <span class="comment"># 先停止nginx</span></span><br><span class="line"><span class="built_in">cd</span> /etc/nginx</span><br><span class="line">mv nginx.conf nginx.conf.copy</span><br><span class="line">cp nginx.conf.defult nginx.conf <span class="comment">#移除测试配置，导入默认配置</span></span><br><span class="line">vim nginx.conf</span><br><span class="line"><span class="comment">#修改 root 解析路径 /home/git/hexo/blog</span></span><br><span class="line"><span class="comment"># 同时将 user 改为 root 如下图，不然nginx无法访问</span></span><br><span class="line">nginx -s reload</span><br></pre></td></tr></table></figure>
 <p><img src="http://wpy-blog.oss-cn-shanghai.aliyuncs.com/nginx%E9%85%8D%E7%BD%AE.PNG" alt="nginx 配置"><br><img src="http://wpy-blog.oss-cn-shanghai.aliyuncs.com/nginx%E9%85%8D%E7%BD%AE1.PNG" alt="nginx 配置"></p>
 <hr>
 <h1 id="三、本地部署配置"><a href="#三、本地部署配置" class="headerlink" title="三、本地部署配置"></a>三、本地部署配置</h1><p>回到本地<code>hexo</code>目录，修配置文件<code>_config.yml</code><br><img src="http://wpy-blog.oss-cn-shanghai.aliyuncs.com/hexo%E9%85%8D%E7%BD%AE.PNG" alt="hexo 配置"></p>
-<h2 id="以上，所有工作顺利完成！-使用以下命令部署你的hexo"><a href="#以上，所有工作顺利完成！-使用以下命令部署你的hexo" class="headerlink" title="以上，所有工作顺利完成！ 使用以下命令部署你的hexo:"></a>以上，所有工作顺利完成！ 使用以下命令部署你的<code>hexo</code>:</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g  //生成静态文件</span><br><span class="line">hexo d  //部署到远端</span><br></pre></td></tr></table></figure>
+<h2 id="以上，所有工作顺利完成！-使用以下命令部署你的hexo"><a href="#以上，所有工作顺利完成！-使用以下命令部署你的hexo" class="headerlink" title="以上，所有工作顺利完成！ 使用以下命令部署你的hexo:"></a>以上，所有工作顺利完成！ 使用以下命令部署你的<code>hexo</code>:</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g  <span class="comment">#生成静态文件</span></span><br><span class="line">hexo d  <span class="comment">#部署到远端</span></span><br></pre></td></tr></table></figure>
 <h1 id="四、总结"><a href="#四、总结" class="headerlink" title="四、总结"></a>四、总结</h1><p>整个过程经历了许多波折，大多是<code>ssh公钥</code>相关的配置问题，不过最终，还是解决了问题，可以开心地写博客了！</p>
 
       

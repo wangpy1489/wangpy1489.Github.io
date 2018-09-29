@@ -231,7 +231,7 @@ kbd,
 pre,
 samp {
   font-family: monospace, monospace;
-  font-size: 1em;
+  font-size: 1.2em;
 }
 
 /* Forms
@@ -1012,7 +1012,8 @@ figure.highlight .gutter {
 figure.highlight .code {
   padding-left: 15px;
   border-left: 1px solid #fff;
-  color: #666;
+  color: #212121;
+  font-weight: 550;
 }
 figure.highlight .line {
   height: 20px;
