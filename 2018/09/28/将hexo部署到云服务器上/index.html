@@ -138,7 +138,7 @@
 <ul>
 <li>进入<code>C://User//你的用户名/.ssh</code>,查看是否已有密钥对:<code>id_rsa</code>和<code>id_rsa.pub</code></li>
 <li>若没有已建好密钥对<a href="https://www.cnblogs.com/my93/p/5873498.html" target="_blank" rel="noopener">参考此文</a>。</li>
-<li>将<code>id_rsa.pub</code>通过<code>WinScp</code>等工具上传至远端服务器<code>/home/git/.ssh</code>目录下，并改名为<code>authorized_keys</code>.<br><img src="https://wpy-blog.oss-cn-shanghai.aliyuncs.com/%E5%85%AC%E9%92%A5.PNG" alt="WinScp"></li>
+<li>将<code>id_rsa.pub</code>通过<code>WinScp</code>等工具上传至远端服务器<code>/home/git/.ssh</code>目录下，并改名为<code>authorized_keys</code>.<br><img src="https://wpy-blog.oss-cn-shanghai.aliyuncs.com/%E5%85%AC%E9%92%A5.PNG/wpy-blog" alt="WinScp"></li>
 <li>建议登陆<code>git</code>用户上传，上传后确保公钥拥有者为git</li>
 </ul>
 <h2 id="搭建nginx服务器"><a href="#搭建nginx服务器" class="headerlink" title="搭建nginx服务器"></a>搭建<code>nginx</code>服务器</h2><ol>
@@ -151,9 +151,9 @@
 <li><strong>配置<code>nginx</code></strong></li>
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">nginx -s stop <span class="comment"># 先停止nginx</span></span><br><span class="line"><span class="built_in">cd</span> /etc/nginx</span><br><span class="line">mv nginx.conf nginx.conf.copy</span><br><span class="line">cp nginx.conf.defult nginx.conf <span class="comment">#移除测试配置，导入默认配置</span></span><br><span class="line">vim nginx.conf</span><br><span class="line"><span class="comment">#修改 root 解析路径 /home/git/hexo/blog</span></span><br><span class="line"><span class="comment"># 同时将 user 改为 root 如下图，不然nginx无法访问</span></span><br><span class="line">nginx -s reload</span><br></pre></td></tr></table></figure>
-<p><img src="http://wpy-blog.oss-cn-shanghai.aliyuncs.com/nginx%E9%85%8D%E7%BD%AE.PNG" alt="nginx 配置"><br><img src="http://wpy-blog.oss-cn-shanghai.aliyuncs.com/nginx%E9%85%8D%E7%BD%AE1.PNG" alt="nginx 配置"></p>
+<p><img src="http://wpy-blog.oss-cn-shanghai.aliyuncs.com/nginx%E9%85%8D%E7%BD%AE.PNG/wpy-blog" alt="nginx 配置"><br><img src="http://wpy-blog.oss-cn-shanghai.aliyuncs.com/nginx%E9%85%8D%E7%BD%AE1.PNG/wpy-blog" alt="nginx 配置"></p>
 <hr>
-<h1 id="三、本地部署配置"><a href="#三、本地部署配置" class="headerlink" title="三、本地部署配置"></a>三、本地部署配置</h1><p>回到本地<code>hexo</code>目录，修配置文件<code>_config.yml</code><br><img src="http://wpy-blog.oss-cn-shanghai.aliyuncs.com/hexo%E9%85%8D%E7%BD%AE.PNG" alt="hexo 配置"></p>
+<h1 id="三、本地部署配置"><a href="#三、本地部署配置" class="headerlink" title="三、本地部署配置"></a>三、本地部署配置</h1><p>回到本地<code>hexo</code>目录，修配置文件<code>_config.yml</code><br><img src="http://wpy-blog.oss-cn-shanghai.aliyuncs.com/hexo%E9%85%8D%E7%BD%AE.PNG/wpy-blog" alt="hexo 配置"></p>
 <h2 id="以上，所有工作顺利完成！-使用以下命令部署你的hexo"><a href="#以上，所有工作顺利完成！-使用以下命令部署你的hexo" class="headerlink" title="以上，所有工作顺利完成！ 使用以下命令部署你的hexo:"></a>以上，所有工作顺利完成！ 使用以下命令部署你的<code>hexo</code>:</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g  <span class="comment">#生成静态文件</span></span><br><span class="line">hexo d  <span class="comment">#部署到远端</span></span><br></pre></td></tr></table></figure>
 <h1 id="四、总结"><a href="#四、总结" class="headerlink" title="四、总结"></a>四、总结</h1><p>整个过程经历了许多波折，大多是<code>ssh公钥</code>相关的配置问题，不过最终，还是解决了问题，可以开心地写博客了！</p>
 
