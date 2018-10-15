@@ -66,14 +66,14 @@
 
   
     
-    <h3 class="article-title"><a href="/2018/10/15/LeetCode-856/"><span>[LeetCode]#856.括号的分数</span></a></h3>
+    <h3 class="article-title"><a href="/2018/10/15/LeetCode-856/"><span></span></a></h3>
     
   
 
   <div class="article-top-meta">
     <span class="posted-on">
       <a href="/2018/10/15/LeetCode-856/" rel="bookmark">
-        <time class="entry-date published" datetime="2018-10-15T02:48:33.000Z">
+        <time class="entry-date published" datetime="2018-10-15T02:48:33.874Z">
           2018-10-15
         </time>
       </a>
@@ -86,7 +86,11 @@
   <div class="article-content">
     <div class="entry">
       
-        <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a href="https://leetcode-cn.com/problems/score-of-parentheses/description/" target="_blank" rel="noopener">括号的分数</a></p>
+        <p>title: ‘[LeetCode]#856.括号的分数’<br>date: 2018-10-15 10:48:33<br>tags:</p>
+<pre><code>- LeetCode
+</code></pre><p>categories:</p>
+<pre><code>- LeetCode
+</code></pre><h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a href="https://leetcode-cn.com/problems/score-of-parentheses/description/" target="_blank" rel="noopener">括号的分数</a></p>
 <blockquote>
 <p>给定一个平衡括号字符串 <code>S</code>，按下述规则计算该字符串的分数：</p>
 <ul>
@@ -110,7 +114,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; 输入： &quot;(()(()))&quot;</span><br><span class="line">&gt; 输出： 6</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
 </blockquote>
 <h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>有题目中的要求知道只有<code>()</code>才能得分，而且嵌套的<code>()</code>会将得分加倍，所以题目可以简化为求所有的<code>()</code>的得分，其中得分多少取决于被嵌套的层数。</p>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">scoreOfParentheses</span><span class="params">(<span class="built_in">string</span> S)</span> </span>&#123;</span><br><span class="line">​		 <span class="keyword">int</span> ans = <span class="number">0</span>, bal = <span class="number">0</span>;</span><br><span class="line">​        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; S.length(); ++i) &#123;</span><br><span class="line">​            <span class="keyword">if</span> (S[i] == <span class="string">'('</span>) &#123;</span><br><span class="line">​                bal++;</span><br><span class="line">​            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">​                bal--;</span><br><span class="line">​                <span class="keyword">if</span> (S[i<span class="number">-1</span>] == <span class="string">'('</span>)</span><br><span class="line">​                    ans += <span class="number">1</span> &lt;&lt; bal;</span><br><span class="line">​            &#125;</span><br><span class="line">​        &#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -121,21 +125,7 @@
     <div class="article-meta pull-left">
 
     
-      
 
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/categories/LeetCode/">LeetCode</a>
-    </span>
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/LeetCode/">LeetCode</a>
-    </span>
     
 
     </div>
