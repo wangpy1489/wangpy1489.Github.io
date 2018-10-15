@@ -1,0 +1,206 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>[LeetCode]#856.括号的分数 | Norton&#39;s Blog | You miss 100% of the shot you do not take.</title>
+
+  
+  <meta name="author" content="王谱越">
+  
+
+  
+  <meta name="description" content="题目括号的分数
+
+给定一个平衡括号字符串 S，按下述规则计算该字符串的分数：
+
+() 得 1 分。
+AB 得 A + B 分，其中 A 和 B 是平衡括号字符串。
+(A) 得 2 * A 分，其中 A 是平衡括号字符串。
+
+示例 1：
+123&amp;gt; 输入： &amp;quot;()&amp;quot;&amp;gt; 输">
+  
+
+  
+  
+  <meta name="keywords" content="LeetCode">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="[LeetCode]#856.括号的分数"/>
+
+  <meta property="og:site_name" content="Norton&#39;s Blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Norton&#39;s Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Norton&#39;s Blog</a>
+    </h1>
+    <p class="site-description">You miss 100% of the shot you do not take.</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>[LeetCode]#856.括号的分数</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2018/10/15/LeetCode-856/" rel="bookmark">
+        <time class="entry-date published" datetime="2018-10-15T02:48:33.000Z">
+          2018-10-15
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a href="https://leetcode-cn.com/problems/score-of-parentheses/description/" target="_blank" rel="noopener">括号的分数</a></p>
+<blockquote>
+<p>给定一个平衡括号字符串 <code>S</code>，按下述规则计算该字符串的分数：</p>
+<ul>
+<li><code>()</code> 得 1 分。</li>
+<li><code>AB</code> 得 <code>A + B</code> 分，其中 A 和 B 是平衡括号字符串。</li>
+<li><code>(A)</code> 得 <code>2 * A</code> 分，其中 A 是平衡括号字符串。</li>
+</ul>
+<p><strong>示例 1：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; 输入： &quot;()&quot;</span><br><span class="line">&gt; 输出： 1</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p><strong>示例 2：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; 输入： &quot;(())&quot;</span><br><span class="line">&gt; 输出： 2</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p><strong>示例 3：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; 输入： &quot;()()&quot;</span><br><span class="line">&gt; 输出： 2</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p><strong>示例 4：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; 输入： &quot;(()(()))&quot;</span><br><span class="line">&gt; 输出： 6</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>有题目中的要求知道只有<code>()</code>才能得分，而且嵌套的<code>()</code>会将得分加倍，所以题目可以简化为求所有的<code>()</code>的得分，其中得分多少取决于被嵌套的层数。</p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/LeetCode/">LeetCode</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/LeetCode/">LeetCode</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+    </main>
+
+    <footer class="site-footer">
+  <div class="social-wrapper">
+    
+      
+        <a href="https://github.com/wangpy1489" class="social github" target="_blank" rel="external">
+          <span class="iconfont icon-github"><i class="fab fa-github fa-2x" ></i></span>
+        </a>
+        
+        <a href="https://www.instagram.com/norton_yue/" class="social instagram" target="_blank" rel="external">
+          <span class="iconfont icon-instagram"><i class="fab fa-instagram fa-2x" ></i></span>
+        </a>
+        
+        <a href="https://weibo.com/2218602247" class="social weibo" target="_blank" rel="external">
+          <span class="iconfont icon-weibo"><i class="fab fa-weibo fa-2x" ></i></span>
+        </a>
+        
+        <a href="http://wpy-blog.oss-cn-shanghai.aliyuncs.com/qrcode_for_gh_87b7f9bafe9b_344.jpg/wpy-blog" class="social weixin" target="_blank" rel="external">
+          <span class="iconfont icon-weixin"><i class="fab fa-weixin fa-2x" ></i></span>
+        </a>
+        
+        <a href="tencent://message/?uin=439257530&amp;Site=&amp;Menu=yes" class="social qq" target="_blank" rel="external">
+          <span class="iconfont icon-qq"><i class="fab fa-qq fa-2x" ></i></span>
+        </a>
+        
+        <a href="mailto:wangpy1489@sjtu.edu.cn" class="social at" target="_blank" rel="external">
+          <span class="iconfont icon-at"><i class="fab fa-at fa-2x" ></i></span>
+        </a>
+        
+    
+  </div>
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2018 王谱越
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>
