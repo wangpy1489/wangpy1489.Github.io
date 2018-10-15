@@ -1,0 +1,204 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>[LeetCode]#141&amp;142.环形链表 | Norton&#39;s Blog | You miss 100% of the shot you do not take.</title>
+
+  
+  <meta name="author" content="王谱越">
+  
+
+  
+  <meta name="description" content="题目环形链表
+
+给定一个链表，判断链表中是否有环。
+进阶：你能否不使用额外空间解决此题？
+
+ 环形链表Ⅱ
+
+给定一个链表，返回链表开始入环的第一个节点。 如果链表无环，则返回 null。
+说明：不允许修改给定的链表。
+进阶：你是否可以不用额外空间解决此题？
+
+思路方法1：采用set，当第一个重复节点">
+  
+
+  
+  
+  <meta name="keywords" content="LeetCode,链表">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="[LeetCode]#141&amp;142.环形链表"/>
+
+  <meta property="og:site_name" content="Norton&#39;s Blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Norton&#39;s Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Norton&#39;s Blog</a>
+    </h1>
+    <p class="site-description">You miss 100% of the shot you do not take.</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>[LeetCode]#141&amp;142.环形链表</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2018/10/15/LeetCode-141/" rel="bookmark">
+        <time class="entry-date published" datetime="2018-10-15T13:07:15.000Z">
+          2018-10-15
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a href="https://leetcode-cn.com/problems/linked-list-cycle/description/" target="_blank" rel="noopener">环形链表</a></p>
+<blockquote>
+<p>给定一个链表，判断链表中是否有环。</p>
+<p><strong>进阶：</strong><br>你能否不使用额外空间解决此题？</p>
+</blockquote>
+<p> <a href="https://leetcode-cn.com/problems/linked-list-cycle-ii/description/" target="_blank" rel="noopener">环形链表Ⅱ</a></p>
+<blockquote>
+<p>给定一个链表，返回链表开始入环的第一个节点。 如果链表无环，则返回 <code>null</code>。</p>
+<p><strong>说明：</strong>不允许修改给定的链表。</p>
+<p><strong>进阶：</strong><br>你是否可以不用额外空间解决此题？</p>
+</blockquote>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>方法1：采用set，当第一个重复节点出现时链表有环，且第一个重复节点即入环的第一个节点。</p>
+<p>方法2：提交后发现时间表现不好，在网上找到了另一套解法：设置快慢两个指针，快指针一次移动2个节点，慢指针一次移动1个节点，当列表内有环时，快指针会超慢指针一圈相遇，这时，置慢指针到链表头到再次相遇即是入环节点。详细推导见：<a href="https://www.jianshu.com/p/1c59b153308c" target="_blank" rel="noopener">参考</a></p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><ul>
+<li><p>方法1：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ListNode *<span class="title">detectCycle</span><span class="params">(ListNode *head)</span> </span>&#123;</span><br><span class="line">       ListNode *cusor = head;</span><br><span class="line">       <span class="built_in">set</span>&lt;ListNode*&gt; node_set;</span><br><span class="line">       <span class="keyword">if</span>(head != <span class="literal">NULL</span>)&#123;</span><br><span class="line">           <span class="keyword">while</span>(cusor-&gt;next != <span class="literal">NULL</span>)</span><br><span class="line">       &#123;</span><br><span class="line">           node_set.insert(cusor);</span><br><span class="line">           <span class="keyword">if</span> (node_set.find(cusor-&gt;next) != node_set.end())</span><br><span class="line">           &#123;</span><br><span class="line">               <span class="keyword">return</span> cusor-&gt;next;</span><br><span class="line">           &#125;</span><br><span class="line">           cusor = cusor-&gt;next;</span><br><span class="line">       &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       </span><br><span class="line">       </span><br><span class="line">       <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>方法2：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"> </span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/LeetCode/">LeetCode</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/LeetCode/">LeetCode</a><a href="/tags/链表/">链表</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+    </main>
+
+    <footer class="site-footer">
+  <div class="social-wrapper">
+    
+      
+        <a href="https://github.com/wangpy1489" class="social github" target="_blank" rel="external">
+          <span class="iconfont icon-github"><i class="fab fa-github fa-2x" ></i></span>
+        </a>
+        
+        <a href="https://www.instagram.com/norton_yue/" class="social instagram" target="_blank" rel="external">
+          <span class="iconfont icon-instagram"><i class="fab fa-instagram fa-2x" ></i></span>
+        </a>
+        
+        <a href="https://weibo.com/2218602247" class="social weibo" target="_blank" rel="external">
+          <span class="iconfont icon-weibo"><i class="fab fa-weibo fa-2x" ></i></span>
+        </a>
+        
+        <a href="http://wpy-blog.oss-cn-shanghai.aliyuncs.com/qrcode_for_gh_87b7f9bafe9b_344.jpg/wpy-blog" class="social weixin" target="_blank" rel="external">
+          <span class="iconfont icon-weixin"><i class="fab fa-weixin fa-2x" ></i></span>
+        </a>
+        
+        <a href="tencent://message/?uin=439257530&amp;Site=&amp;Menu=yes" class="social qq" target="_blank" rel="external">
+          <span class="iconfont icon-qq"><i class="fab fa-qq fa-2x" ></i></span>
+        </a>
+        
+        <a href="mailto:wangpy1489@sjtu.edu.cn" class="social at" target="_blank" rel="external">
+          <span class="iconfont icon-at"><i class="fab fa-at fa-2x" ></i></span>
+        </a>
+        
+    
+  </div>
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2018 王谱越
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>
