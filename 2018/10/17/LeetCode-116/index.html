@@ -1,0 +1,210 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>[LeetCode]#116&amp;117. 填充同一层的兄弟节点 | Norton&#39;s Blog | You miss 100% of the shot you do not take.</title>
+
+  
+  <meta name="author" content="王谱越">
+  
+
+  
+  <meta name="description" content="题目填充同一层的兄弟节点
+
+给定一个二叉树
+123456&amp;gt; struct TreeLinkNode &amp;#123;&amp;gt;   TreeLinkNode *left;&amp;gt;   TreeLinkNode *right;&amp;gt;   TreeLinkNode *next;&amp;gt; &amp;#125;&amp;">
+  
+
+  
+  
+  <meta name="keywords" content="LeetCode">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="[LeetCode]#116&amp;117. 填充同一层的兄弟节点"/>
+
+  <meta property="og:site_name" content="Norton&#39;s Blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Norton&#39;s Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Norton&#39;s Blog</a>
+    </h1>
+    <p class="site-description">You miss 100% of the shot you do not take.</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>[LeetCode]#116&amp;117. 填充同一层的兄弟节点</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2018/10/17/LeetCode-116/" rel="bookmark">
+        <time class="entry-date published" datetime="2018-10-17T13:51:15.000Z">
+          2018-10-17
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a href="https://leetcode-cn.com/problems/populating-next-right-pointers-in-each-node/" target="_blank" rel="noopener">填充同一层的兄弟节点</a></p>
+<blockquote>
+<p>给定一个二叉树</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt; struct TreeLinkNode &#123;</span><br><span class="line">&gt;   TreeLinkNode *left;</span><br><span class="line">&gt;   TreeLinkNode *right;</span><br><span class="line">&gt;   TreeLinkNode *next;</span><br><span class="line">&gt; &#125;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>填充它的每个 next 指针，让这个指针指向其下一个右侧节点。如果找不到下一个右侧节点，则将 next 指针设置为 <code>NULL</code>。</p>
+<p>初始状态下，所有 next 指针都被设置为 <code>NULL</code>。</p>
+<p><strong>说明:</strong></p>
+<ul>
+<li>你只能使用额外常数空间。</li>
+<li>使用递归解题也符合要求，本题中递归程序占用的栈空间不算做额外的空间复杂度。</li>
+<li>你可以假设它是一个完美二叉树（即所有叶子节点都在同一层，每个父节点都有两个子节点）。</li>
+</ul>
+<p><strong>示例:</strong></p>
+<p>给定完美二叉树，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;      1</span><br><span class="line">&gt;    /  \</span><br><span class="line">&gt;   2    3</span><br><span class="line">&gt;  / \  / \</span><br><span class="line">&gt; 4  5  6  7</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>调用你的函数后，该完美二叉树变为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;      1 -&gt; NULL</span><br><span class="line">&gt;    /  \</span><br><span class="line">&gt;   2 -&gt; 3 -&gt; NULL</span><br><span class="line">&gt;  / \  / \</span><br><span class="line">&gt; 4-&gt;5-&gt;6-&gt;7 -&gt; NULL</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p><a href="https://leetcode-cn.com/problems/populating-next-right-pointers-in-each-node-ii/description/" target="_blank" rel="noopener">填充同一层的兄弟节点 II</a></p>
+<blockquote>
+<p>非完美二叉树情况。</p>
+</blockquote>
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><p>首先就想到层次遍历的方法，是很自然的想法，只要处理好边界情况就可完成：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">connect</span><span class="params">(TreeLinkNode *root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>  (root == <span class="literal">NULL</span>) <span class="keyword">return</span>;</span><br><span class="line">        <span class="built_in">queue</span>&lt;TreeLinkNode*&gt; Q;</span><br><span class="line">        Q.push(root);</span><br><span class="line">        <span class="keyword">while</span>(!Q.empty())&#123;</span><br><span class="line">            <span class="keyword">int</span> size = Q.size();</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;size;i++)&#123;</span><br><span class="line">                TreeLinkNode *now = Q.front();</span><br><span class="line">                Q.pop();</span><br><span class="line">                <span class="keyword">if</span>(i&lt;size<span class="number">-1</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    now-&gt;next = Q.front();</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>(now-&gt;left) Q.push(now-&gt;left);</span><br><span class="line">                <span class="keyword">if</span>(now-&gt;right) Q.push(now-&gt;right);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>但这样的方法不符合题目的要求，<code>你只能使用额外常数空间</code>  。</p>
+<p>题目中提到<em><code>使用递归解题也符合要求，本题中递归程序占用的栈空间不算做额外的空间复杂度。</code></em> 那么考虑采用层次遍历的递归写法。大概结构为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">for i to n </span><br><span class="line">层数 = i</span><br><span class="line">访问二叉树(节点，层数)</span><br><span class="line"></span><br><span class="line">  如果层数＝1，访问当前节点</span><br><span class="line"></span><br><span class="line">  否则  </span><br><span class="line"></span><br><span class="line">    访问二叉树(节点的左子树，层数－1)</span><br><span class="line"></span><br><span class="line">    访问二叉树(节点的右子树，层数－1)</span><br></pre></td></tr></table></figure>
+<p>最终符合题目要求的代码为：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">connect</span><span class="params">(TreeLinkNode *root)</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(!root)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            hasToTheEnd = <span class="literal">false</span>;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">int</span> level = <span class="number">1</span>;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">while</span>(!hasToTheEnd)</span><br><span class="line">            &#123;</span><br><span class="line">                nextLeft = <span class="literal">nullptr</span>;</span><br><span class="line">                VisitLevel(root, level);</span><br><span class="line">                ++level;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">        TreeLinkNode* nextLeft;</span><br><span class="line">        <span class="keyword">bool</span> hasToTheEnd;</span><br><span class="line">        <span class="function">TreeLinkNode* <span class="title">VisitLevel</span><span class="params">(TreeLinkNode* node, <span class="keyword">int</span> level)</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(level == <span class="number">1</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(nextLeft != <span class="literal">nullptr</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    nextLeft -&gt;next = node;</span><br><span class="line">                    </span><br><span class="line">                &#125;</span><br><span class="line">                nextLeft_ = node;</span><br><span class="line">                <span class="keyword">return</span> node;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            TreeLinkNode* left = VisitLevel(node-&gt;left, level - <span class="number">1</span>);</span><br><span class="line">            TreeLinkNode* right = VisitLevel(node-&gt;right, level - <span class="number">1</span>);</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span>(left == <span class="literal">nullptr</span> &amp;&amp; right == <span class="literal">nullptr</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                hasToTheEnd = <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            <span class="comment">//完全二叉树，左右非空性一致，随便返回一个</span></span><br><span class="line">            <span class="keyword">return</span> left;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="进一步思考"><a href="#进一步思考" class="headerlink" title="进一步思考"></a>进一步思考</h1><p>当解决方法迁移到非完全二叉树，原有的结束条件已经不正确，现把结束条件默认设为true,当节点仍有子节点时将结束条件置false。这样可以避免树不对称时的结束条件错误。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">connect</span><span class="params">(TreeLinkNode *root)</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(!root)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            hasToTheEnd = <span class="literal">false</span>;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">int</span> level = <span class="number">1</span>;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">while</span>(!hasToTheEnd)</span><br><span class="line">            &#123;</span><br><span class="line">                hasToTheEnd = <span class="literal">true</span>;</span><br><span class="line">                nextLeft = <span class="literal">nullptr</span>;</span><br><span class="line">                VisitLevel(root, level);</span><br><span class="line">                ++level;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">        TreeLinkNode* nextLeft;</span><br><span class="line">        <span class="keyword">bool</span> hasToTheEnd;</span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">VisitLevel</span><span class="params">(TreeLinkNode* node, <span class="keyword">int</span> level)</span></span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(level == <span class="number">1</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(nextLeft != <span class="literal">nullptr</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    nextLeft -&gt;next = node;</span><br><span class="line">                    </span><br><span class="line">                &#125;</span><br><span class="line">                nextLeft = node;</span><br><span class="line">                </span><br><span class="line">                <span class="keyword">if</span>(node-&gt;left != <span class="literal">nullptr</span> || node-&gt;right != <span class="literal">nullptr</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    hasToTheEnd = <span class="literal">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span>(node-&gt;left)</span><br><span class="line">            &#123;</span><br><span class="line">                VisitLevel(node-&gt;left, level - <span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span>(node-&gt;right)</span><br><span class="line">            &#123;</span><br><span class="line">                VisitLevel(node-&gt;right, level - <span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="知识点：掌握二叉树层次遍历的迭代和递归写法。"><a href="#知识点：掌握二叉树层次遍历的迭代和递归写法。" class="headerlink" title="知识点：掌握二叉树层次遍历的迭代和递归写法。"></a><strong>知识点：掌握二叉树层次遍历的迭代和递归写法。</strong></h3>
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/LeetCode/">LeetCode</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/LeetCode/">LeetCode</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+    </main>
+
+    <footer class="site-footer">
+  <div class="social-wrapper">
+    
+      
+        <a href="https://github.com/wangpy1489" class="social github" target="_blank" rel="external">
+          <span class="iconfont icon-github"><i class="fab fa-github fa-2x" ></i></span>
+        </a>
+        
+        <a href="https://www.instagram.com/norton_yue/" class="social instagram" target="_blank" rel="external">
+          <span class="iconfont icon-instagram"><i class="fab fa-instagram fa-2x" ></i></span>
+        </a>
+        
+        <a href="https://weibo.com/2218602247" class="social weibo" target="_blank" rel="external">
+          <span class="iconfont icon-weibo"><i class="fab fa-weibo fa-2x" ></i></span>
+        </a>
+        
+        <a href="http://wpy-blog.oss-cn-shanghai.aliyuncs.com/qrcode_for_gh_87b7f9bafe9b_344.jpg/wpy-blog" class="social weixin" target="_blank" rel="external">
+          <span class="iconfont icon-weixin"><i class="fab fa-weixin fa-2x" ></i></span>
+        </a>
+        
+        <a href="tencent://message/?uin=439257530&amp;Site=&amp;Menu=yes" class="social qq" target="_blank" rel="external">
+          <span class="iconfont icon-qq"><i class="fab fa-qq fa-2x" ></i></span>
+        </a>
+        
+        <a href="mailto:wangpy1489@sjtu.edu.cn" class="social at" target="_blank" rel="external">
+          <span class="iconfont icon-at"><i class="fab fa-at fa-2x" ></i></span>
+        </a>
+        
+    
+  </div>
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2018 王谱越
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>
