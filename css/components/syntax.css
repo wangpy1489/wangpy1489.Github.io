@@ -1,5 +1,5 @@
 .entry .gist {
-  background: #23241f;
+  background: #fdf6e3;
   border: 1px solid #fff;
   margin: 15px 0px;
   padding: 7px 15px;
@@ -38,7 +38,7 @@
   color: color-link;
 }
 figure.highlight {
-  background: #23241f;
+  background: #fdf6e3;
   border: 1px solid color-border;
   margin: 1em 0;
   padding: 1em;
@@ -77,7 +77,7 @@ figure.highlight .code {
   padding-left: 15px;
   border-left: 1px solid #fff;
   font-weight: bold;
-  color: #f8f8f2;
+  color: #657b83;
 }
 figure.highlight .line {
   height: 20px;
@@ -89,7 +89,7 @@ pre .doctype,
 pre .pi,
 pre .lisp .string,
 pre .javadoc {
-  color: #75715e;
+  color: #93a1a1;
   font-style: italic;
 }
 pre .winutils,
@@ -102,7 +102,7 @@ pre .nginx .title {
   color: #f8f8f2;
 }
 pre .keyword {
-  color: #f92672;
+  color: #859900;
 }
 pre .number,
 pre .command,
@@ -112,7 +112,7 @@ pre .tex .formula,
 pre .regexp,
 pre .hexcolor,
 pre .subst {
-  color: #ae81ff;
+  color: #2aa198;
 }
 pre .title,
 pre .localvars,
@@ -122,11 +122,13 @@ pre .identifier,
 pre .vhdl,
 pre .literal,
 pre .id {
-  color: #a6e22e;
+  color: #268bd2;
 }
-pre .built_in,
+pre .built_in {
+  color: #dc322f;
+}
 pre .string {
-  color: #e6db74;
+  color: #2aa198;
 }
 pre .variable,
 pre .lisp .body,
@@ -135,7 +137,7 @@ pre .constant,
 pre .class .title,
 pre .parent,
 pre .haskell .type {
-  color: #66d9ef;
+  color: #268bd2;
 }
 pre .symbol,
 pre .attribute {
