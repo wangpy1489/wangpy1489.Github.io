@@ -12,7 +12,11 @@
   
   <meta name="description" content="题目递增的三元子序列
 
-给定一个未排序的数组，判断这个数组中是否存在长度为 3 的递增子序列。数学表达式如下:如果存在这样的 i, j, k,  且满足 0 ≤ i &amp;lt; j &amp;lt; k ≤ n-1，使得 arr[i] &amp;lt; arr[j] &amp;lt; arr[k] ，返回 true ; 否则">
+给定一个未排序的数组，判断这个数组中是否存在长度为 3 的递增子序列。数学表达式如下:如果存在这样的 i, j, k,  且满足 0 ≤ i &amp;lt; j &amp;lt; k ≤ n-1，使得 arr[i] &amp;lt; arr[j] &amp;lt; arr[k] ，返回 true ; 否则返回 false 。说明: 要求算法的时间复杂度为 O(n)，空间复杂度为 O(1) 。
+示例 1:输入: [1,2,3,4,5]
+输出: true
+示例 2:输入: [5,4,3,2,1]
+输出: false">
   
 
   
@@ -98,7 +102,7 @@
 <p>示例 1:<br><code>输入: [1,2,3,4,5]
 输出: true</code></p>
 <p>示例 2:<br><code>输入: [5,4,3,2,1]
-输出: false</code></p>
+输出: false</code><br><a id="more"></a></p>
 </blockquote>
 <h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><h2 id="方法1："><a href="#方法1：" class="headerlink" title="方法1："></a>方法1：</h2><p>比较直接的一个想法：设置high,mid,low3个游标，遍历数组，将数组内元素逐个与游标对比，直到low,mid,high 的大小关系符合low&lt;mid&lt;high. 但这样的操作时间复杂度为O（n²），不符合题目要求。</p>
 <h2 id="方法2："><a href="#方法2：" class="headerlink" title="方法2："></a>方法2：</h2><p>后改进：遍历数组，如果数组元素小于low,则替换low,如果数组元素大于low小于mid 则替换mid,这时，数组内必有一个递增二元子序列，那么当元素大于mid小于high则替换high时，low,mid,high即形成一个递增三元子序列。只需遍历一次数组，故满足O（n）的时间复杂度。</p>

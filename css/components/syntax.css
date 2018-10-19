@@ -1,10 +1,10 @@
 .entry .gist {
-  background: #eee;
+  background: #23241f;
   border: 1px solid #fff;
   margin: 15px 0px;
   padding: 7px 15px;
   border-radius: 2px;
-  text-shadow: 0 0 1px #fff;
+  text-shadow: 0 0 1px #23241f;
   line-height: 1.6;
   overflow: auto;
   color: #666;
@@ -21,7 +21,7 @@
 }
 .entry .gist .gist-file .gist-data pre {
   padding: 0 !important;
-  font-family: font-mono;
+  font-family: monospace;
 }
 .entry .gist .gist-file .gist-meta {
   background: none;
@@ -38,16 +38,15 @@
   color: color-link;
 }
 figure.highlight {
-  background: #eee;
+  background: #23241f;
   border: 1px solid color-border;
   margin: 1em 0;
   padding: 1em;
   border-radius: 2px;
-  text-shadow: 0 0 1px #fff;
   line-height: 1.6;
   overflow: auto;
   position: relative;
-  font-size: 0.9em;
+  font-size: medium;
 }
 figure.highlight figcaption {
   color: color-meta;
@@ -68,7 +67,7 @@ figure.highlight table {
   border-spacing: 0;
 }
 figure.highlight .gutter {
-  color: color-meta;
+  color: #75715e;
   width: 20px;
   padding-right: 15px;
   border-right: 1px solid color-border;
@@ -77,7 +76,8 @@ figure.highlight .gutter {
 figure.highlight .code {
   padding-left: 15px;
   border-left: 1px solid #fff;
-  color: #666;
+  font-weight: bold;
+  color: #f8f8f2;
 }
 figure.highlight .line {
   height: 20px;
@@ -89,10 +89,9 @@ pre .doctype,
 pre .pi,
 pre .lisp .string,
 pre .javadoc {
-  color: #93a1a1;
+  color: #75715e;
   font-style: italic;
 }
-pre .keyword,
 pre .winutils,
 pre .method,
 pre .addition,
@@ -100,30 +99,35 @@ pre .css .tag,
 pre .request,
 pre .status,
 pre .nginx .title {
-  color: #859900;
+  color: #f8f8f2;
+}
+pre .keyword {
+  color: #f92672;
 }
 pre .number,
 pre .command,
-pre .string,
 pre .tag .value,
 pre .phpdoc,
 pre .tex .formula,
 pre .regexp,
-pre .hexcolor {
-  color: #2aa198;
+pre .hexcolor,
+pre .subst {
+  color: #ae81ff;
 }
 pre .title,
 pre .localvars,
 pre .chunk,
 pre .decorator,
-pre .built_in,
 pre .identifier,
 pre .vhdl,
 pre .literal,
 pre .id {
-  color: #268bd2;
+  color: #a6e22e;
 }
-pre .attribute,
+pre .built_in,
+pre .string {
+  color: #e6db74;
+}
 pre .variable,
 pre .lisp .body,
 pre .smalltalk .number,
@@ -131,22 +135,24 @@ pre .constant,
 pre .class .title,
 pre .parent,
 pre .haskell .type {
-  color: #b58900;
+  color: #66d9ef;
+}
+pre .symbol,
+pre .attribute {
+  color: #66d9ef;
 }
 pre .preprocessor,
 pre .preprocessor .keyword,
 pre .shebang,
-pre .symbol,
 pre .symbol .string,
 pre .diff .change,
 pre .special,
 pre .attr_selector,
 pre .important,
-pre .subst,
 pre .cdata,
 pre .clojure .title {
-  color: #cb4b16;
+  color: #e6db74;
 }
 pre .deletion {
-  color: #dc322f;
+  color: #75715e;
 }
