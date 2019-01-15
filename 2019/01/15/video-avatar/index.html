@@ -1,0 +1,241 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>个性化Video_avatars | Norton&#39;s Blog | You miss 100% of the shot you do not take.</title>
+
+  
+  <meta name="author" content="王谱越">
+  
+
+  
+  <meta name="description" content="Video_avatars这个项目来自马普所的一篇论文Video Based Reconstruction of 3D People Models ，日前，研究人员公布了他们的实现以及数据集。
+
+Website:https://graphics.tu-bs.de/people-snapshot
+Github: https://github.com/thmoa/videoavatars
+
+由于其文档比较匮乏，使用它的代码对自己的数据进行复现并不容易，经过几天努力，成功的完成了整个建模过程，故记录如下。相关代码以上传到了我的Github上。">
+  
+
+  
+  
+  <meta name="keywords" content="计算机视觉,3D重建">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="个性化Video_avatars"/>
+
+  <meta property="og:site_name" content="Norton&#39;s Blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Norton&#39;s Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Norton&#39;s Blog</a>
+    </h1>
+    <p class="site-description">You miss 100% of the shot you do not take.</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>个性化Video_avatars</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2019/01/15/video-avatar/" rel="bookmark">
+        <time class="entry-date published" datetime="2019-01-15T08:55:16.000Z">
+          2019-01-15
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h1 id="Video-avatars"><a href="#Video-avatars" class="headerlink" title="Video_avatars"></a>Video_avatars</h1><p>这个项目来自马普所的一篇论文<em>Video Based Reconstruction of 3D People Models</em> ，日前，研究人员公布了他们的实现以及数据集。</p>
+<ul>
+<li>Website:<a href="https://graphics.tu-bs.de/people-snapshot" target="_blank" rel="noopener">https://graphics.tu-bs.de/people-snapshot</a></li>
+<li>Github: <a href="https://github.com/thmoa/videoavatars" target="_blank" rel="noopener">https://github.com/thmoa/videoavatars</a></li>
+</ul>
+<p>由于其文档比较匮乏，使用它的代码对自己的数据进行复现并不容易，经过几天努力，成功的完成了整个建模过程，故记录如下。相关代码以上传到了我的<a href="https://github.com/wangpy1489/videoavatars_custom" target="_blank" rel="noopener">Github</a>上。</p>
+<a id="more"></a>
+<h2 id="原版本Demo"><a href="#原版本Demo" class="headerlink" title="原版本Demo"></a>原版本Demo</h2><p>请先使用原版本Demo来验证环境部署成功:<a href="https://github.com/thmoa/videoavatars/blob/master/README.md" target="_blank" rel="noopener">Video Avatars</a></p>
+<h2 id="数据准备"><a href="#数据准备" class="headerlink" title="数据准备"></a>数据准备</h2><p>这个部分，我们将利用自摄的视频来进行的建模尝试，首先需要有一段如<a href="https://graphics.tu-bs.de/upload/publications/alldieck2018video/alldieck2018videoavatar.mp4" target="_blank" rel="noopener">原论文视频</a>相同的自摄视频，提供我的格式：</p>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>格式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>分辨率</td>
+<td>1080*1080</td>
+</tr>
+<tr>
+<td>帧率</td>
+<td>24FPS</td>
+</tr>
+<tr>
+<td>身体姿态</td>
+<td>A形姿态旋转3圈</td>
+</tr>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>之后你可以使用 <code>frame_get.py</code>来获取到所有视频帧，以供下一步处理。</p>
+<h3 id="Step1-视频帧人体区域获取"><a href="#Step1-视频帧人体区域获取" class="headerlink" title="Step1:视频帧人体区域获取"></a>Step1:视频帧人体区域获取</h3><pre><code>这一步中，我们需要获得每一视频帧中，如下图形式的人体区域的二值图像：
+
+![mask1](https://wpy-blog.oss-cn-shanghai.aliyuncs.com/mask1.jpg/wpy-blog)
+</code></pre><p>在这一步中，我采用了百度AI开放平台的人像分割API来进行，你也可以采用其他AI开放平台的API，或者使用自己的语义分割实现。这一部分脚本在 <code>human_mask.py</code> 中可以找到。</p>
+<pre><code>![origin](https://wpy-blog.oss-cn-shanghai.aliyuncs.com/origin1.jpg/wpy-blog)
+</code></pre><p><img src="https://wpy-blog.oss-cn-shanghai.aliyuncs.com/mask1.jpg/wpy-blog" alt="mask2"></p>
+<p>受限于一些图像干扰，以及语义分割本身问题，获取到的<code>mask</code>图像往往还需要进一步处理：</p>
+<p><img src="https://wpy-blog.oss-cn-shanghai.aliyuncs.com/mask2.jpg/wpy-blog" alt="mask3"></p>
+<p>可以看到，有一些无意义的区域，为了提升准确率，需要对mask进行取最大连通域的处理，之后可以再进行一次形态学膨胀操作消除空洞。这部分工作在<code>mask_process.py</code>中实现。</p>
+<p><img src="https://wpy-blog.oss-cn-shanghai.aliyuncs.com/mask3.jpg/wpy-blog" alt="mask3"></p>
+<p>至此，我们就完成了mask的处理工作，之后，利用<code>video_avatars/prpare_data/mask2hdf5.py</code>即可将其转化为HDF5文件。 </p>
+<h3 id="Step2：人体关节点标识"><a href="#Step2：人体关节点标识" class="headerlink" title="Step2：人体关节点标识"></a>Step2：人体关节点标识</h3><pre><code>这一步需要将每一帧的关节点及其坐标转换为Jason格式，这里直接使用，Openpose来进行关节点识别。同样你也可以使用自己的实现或其他途径来进行关节点识别，只需符合COCO模型的关节点模式：
+</code></pre><p><img src="https://ws1.sinaimg.cn/large/662f5c1fly1fxnug3i1atj20dc0hpt8q.jpg" alt="COCO模型"></p>
+<p>Openpose具体安装和使用可以参考<a href="https://github.com/CMU-Perceptual-Computing-Lab/openpose/blob/master/doc/installation.md" target="_blank" rel="noopener">这里</a>，我就不再详细介绍。</p>
+<p>获取到所有的关节点的json文件后，使用<code>video_avatars/prpare_data/2djoints2hdf5.py</code> 可将其转化为HDF5文件。</p>
+<h3 id="Step3-相机相关参数"><a href="#Step3-相机相关参数" class="headerlink" title="Step3:相机相关参数"></a>Step3:相机相关参数</h3><p>在<code>video_avatars/prpare_data</code>下，还有    <code>create_camera.py</code>来进行相机相关参数的序列化。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">parser.add_argument(<span class="string">'out'</span>, type=str, help=<span class="string">"Output file (.pkl)"</span>)</span><br><span class="line">parser.add_argument(<span class="string">'width'</span>, type=int, help=<span class="string">"Frame width in px"</span>)</span><br><span class="line">parser.add_argument(<span class="string">'height'</span>, type=int, help=<span class="string">"Frame height in px"</span>)</span><br><span class="line">parser.add_argument(<span class="string">'-f'</span>, type=float, nargs=<span class="string">'*'</span>, help=<span class="string">"Focal length in px (2,)"</span>)</span><br><span class="line">parser.add_argument(<span class="string">'-c'</span>, type=float, nargs=<span class="string">'*'</span>, help=<span class="string">"Principal point in px (2,)"</span>)</span><br><span class="line">parser.add_argument(<span class="string">'-k'</span>, type=float, nargs=<span class="string">'*'</span>, help=<span class="string">"Distortion coefficients (5,)"</span>)</span><br></pre></td></tr></table></figure>
+<p>主要参数是分辨率以及像素焦距（Focal length in pixels ），由于我使用手机拍摄，其他参数难以获取，如果你能获取到准确数据可以将相应数据加入。</p>
+<p>对于像素焦距（Focal length in pixels ），有以下公式可以计算：</p>
+<p>$$<br>Focal length in pixels = (image width in pixels) * (focal length on earth) / (CCD width on earth)<br>$$</p>
+<h2 id="构建运行"><a href="#构建运行" class="headerlink" title="构建运行"></a>构建运行</h2><p>与之前的Demo相同，可以在<a href="https://github.com/thmoa/videoavatars#usage" target="_blank" rel="noopener">这里</a>找到具体命令。</p>
+<h2 id="最终效果"><a href="#最终效果" class="headerlink" title="最终效果"></a>最终效果</h2><ul>
+<li><p>无衣着效果：</p>
+<p><img src="https://wpy-blog.oss-cn-shanghai.aliyuncs.com/result1.PNG/wpy-blog" alt="result"></p>
+</li>
+<li><p>有衣着效果：</p>
+<p> <img src="https://wpy-blog.oss-cn-shanghai.aliyuncs.com/result2.PNG/wpy-blog" alt="result2"></p>
+</li>
+</ul>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/计算机视觉/">计算机视觉</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/计算机视觉/">计算机视觉</a><a href="/tags/3D重建/">3D重建</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+    </main>
+
+    <footer class="site-footer">
+  <div class="social-wrapper">
+    
+      
+        <a href="https://github.com/wangpy1489" class="social github" target="_blank" rel="external">
+          <span class="iconfont icon-github"><i class="fab fa-github fa-2x" ></i></span>
+        </a>
+        
+        <a href="https://www.instagram.com/norton_yue/" class="social instagram" target="_blank" rel="external">
+          <span class="iconfont icon-instagram"><i class="fab fa-instagram fa-2x" ></i></span>
+        </a>
+        
+        <a href="https://weibo.com/2218602247" class="social weibo" target="_blank" rel="external">
+          <span class="iconfont icon-weibo"><i class="fab fa-weibo fa-2x" ></i></span>
+        </a>
+        
+        <a href="http://wpy-blog.oss-cn-shanghai.aliyuncs.com/qrcode_for_gh_87b7f9bafe9b_344.jpg/wpy-blog" class="social weixin" target="_blank" rel="external">
+          <span class="iconfont icon-weixin"><i class="fab fa-weixin fa-2x" ></i></span>
+        </a>
+        
+        <a href="tencent://message/?uin=439257530&amp;Site=&amp;Menu=yes" class="social qq" target="_blank" rel="external">
+          <span class="iconfont icon-qq"><i class="fab fa-qq fa-2x" ></i></span>
+        </a>
+        
+        <a href="mailto:wangpy1489@sjtu.edu.cn" class="social at" target="_blank" rel="external">
+          <span class="iconfont icon-at"><i class="fab fa-at fa-2x" ></i></span>
+        </a>
+        
+    
+  </div>
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2019 王谱越
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>
