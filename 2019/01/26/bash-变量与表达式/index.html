@@ -14,7 +14,10 @@
 123variable=valuevariable=&#39;value&#39;variable=&#34;value&#34;
 注意，变量名和=之间不能有空格，这可能和你熟悉的所有编程语言都不一样。同时，变量名的命名须遵循如下规则：
 
-命名只能使用英文字母，数字和下划线，首个字符不能以数字">
+命名只能使用英文字母，数字和下划线，首个字符不能以数字开头。
+中间不能有空格，可以使用下划线（_）。
+不能使用标点符号。
+不能使用bash里的关键字（可用help命令查看保留关键字）。">
   
 
   
@@ -103,6 +106,7 @@
 <li>不能使用标点符号。</li>
 <li>不能使用bash里的关键字（可用help命令查看保留关键字）。</li>
 </ul>
+<a id="more"></a>
 <h2 id="使用变量"><a href="#使用变量" class="headerlink" title="使用变量"></a>使用变量</h2><p>使用一个定义过的变量，只要在变量名前面加美元符号<code>$</code>即可，如：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">author=echo $author</span><br><span class="line">echo $&#123;author&#125;</span><br></pre></td></tr></table></figure>
 <p>变量名外面的花括号<code>{ }</code>是可选的，加不加都行，加花括号是为了帮助解释器识别变量的边界，比如下面这种情况：</p>
