@@ -86,14 +86,14 @@
   <div class="article-content">
     <div class="entry">
       
-        <h1 id="malloc、calloc、realloc的区别"><a href="#malloc、calloc、realloc的区别" class="headerlink" title="malloc、calloc、realloc的区别"></a>malloc、calloc、realloc的区别</h1><h2 id="函数原型："><a href="#函数原型：" class="headerlink" title="函数原型："></a>函数原型：</h2><h3 id="1-malloc"><a href="#1-malloc" class="headerlink" title="1. malloc"></a>1. malloc</h3><p>​    <code>void* malloc(unsigned size);</code></p>
+        <h1 id="函数原型："><a href="#函数原型：" class="headerlink" title="函数原型："></a>函数原型：</h1><h2 id="1-malloc"><a href="#1-malloc" class="headerlink" title="1. malloc"></a>1. malloc</h2><p>​    <code>void* malloc(unsigned size);</code></p>
 <p>​    在堆内存中分配一块长度为size字节的连续区域，参数size为需要内存空间的长度。</p>
-<h3 id="2-calloc"><a href="#2-calloc" class="headerlink" title="2. calloc"></a>2. calloc</h3><p>​    <code>void* calloc(size_t numElements, size_t sizeOfElement);</code></p>
+<h2 id="2-calloc"><a href="#2-calloc" class="headerlink" title="2. calloc"></a>2. calloc</h2><p>​    <code>void* calloc(size_t numElements, size_t sizeOfElement);</code></p>
 <p>​    与malloc相似，参数sizeOfElement为单位元素长度（例如：sizeof(int)），numElements为元素个数，即在内存中申请numElements * sizeOfElement字节大小的连续内存空间。</p>
-<h3 id="3-realloc"><a href="#3-realloc" class="headerlink" title="3. realloc"></a>3. realloc</h3><p>​    <code>void* realloc(void* ptr, unsigned newsize);</code></p>
+<h2 id="3-realloc"><a href="#3-realloc" class="headerlink" title="3. realloc"></a>3. realloc</h2><p>​    <code>void* realloc(void* ptr, unsigned newsize);</code></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">使用realloc函数为ptr重新分配大小为size的一块内存空间。下面是这个函数的工作流程：</span><br></pre></td></tr></table></figure>
 <p>​    (1)，对ptr进行判断，如果ptr为NULL，则函数相当于malloc(new_size)，试着分配一块大小为new_size的内存，如果成功将地址返回，否则返回NULL。如果ptr不为NULL，则进入(2)。<br>​    (2)，查看ptr是不是在堆中，如果不是的话会抛出realloc invalid pointer异常。如果ptr在堆中，则查看new_size大小，如果new_size大小为0，则相当于free(ptr)，将ptr指向的内存空间释放掉，返回NULL。如果new_size小于原大小，则ptr中的数据可能会丢失，只有new_size大小的数据会保存；如果size等于原大小，等于什么都没有做；如果size大于原大小，则查看ptr指向的位置还有没有足够的连续内存空间，如果有的话，分配更多的空间，返回的地址和ptr相同，如果没有的话，在更大的空间内查找，如果找到size大小的空间，将旧的内容拷贝到新的内存中，把旧的内存释放掉，则返回新地址，否则返回NULL。</p>
-<h2 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h2><ul>
+<h1 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h1><ul>
 <li>函数malloc不能初始化所分配的内存空间,而函数calloc能.如果由malloc()函数分配的内存空间原来没有被使用过，则其中的每一位可能都是0;反之, 如果这部分内存曾经被分配过,则其中可能遗留有各种各样的数据.也就是说，使用malloc()函数的程序开始时(内存空间还没有被重新分配)能正常进行,但经过一段时间(内存空间还已经被重新分配)可能会出现问题.</li>
 <li>函数calloc() 会将所分配的内存空间中的每一位都初始化为零,也就是说,如果你是为字符类型或整数类型的元素分配内存,那么这些元素将保证会被初始化为0;如果你是为指针类型的元素分配内存,那么这些元素通常会被初始化为空指针;如果你为实型数据分配内存,则这些元素会被初始化为浮点型的零.</li>
 <li>函数malloc向系统申请分配指定size个字节的内存空间.返回类型是 void<em>类型.void</em>表示未确定类型的指针.C,C++规定，void* 类型可以强制转换为任何其它类型的指针.</li>
@@ -159,7 +159,7 @@
   <div class="article-content">
     <div class="entry">
       
-        <h1 id="malloc-与-new-的区别"><a href="#malloc-与-new-的区别" class="headerlink" title="malloc 与 new 的区别"></a>malloc 与 new 的区别</h1><p>​    malloc() 与 free()相对应，new/new[]与delete/delete[]相对应，都应配对使用。</p>
+        <p>​    malloc() 与 free()相对应，new/new[]与delete/delete[]相对应，都应配对使用。</p>
 <ol>
 <li><p><strong>申请内存位置不同</strong></p>
 <p>new操作符可以从其他位置上分配内存，不一定局限于堆。</p>
