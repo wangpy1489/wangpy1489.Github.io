@@ -66,6 +66,73 @@
 
   
     
+    <h3 class="article-title"><a href="/2019/01/26/bash-变量与表达式/"><span>bash-变量与表达式</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2019/01/26/bash-变量与表达式/" rel="bookmark">
+        <time class="entry-date published" datetime="2019-01-26T06:30:42.000Z">
+          2019-01-26
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h1 id="Shell变量"><a href="#Shell变量" class="headerlink" title="Shell变量"></a>Shell变量</h1><h2 id="变量定义"><a href="#变量定义" class="headerlink" title="变量定义"></a>变量定义</h2><p>定义变量如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">variable=value</span><br><span class="line">variable='value'</span><br><span class="line">variable="value"</span><br></pre></td></tr></table></figure>
+<p>注意，变量名和<code>=</code>之间不能有空格，这可能和你熟悉的所有编程语言都不一样。同时，变量名的命名须遵循如下规则：</p>
+<ul>
+<li>命名只能使用英文字母，数字和下划线，首个字符不能以数字开头。</li>
+<li>中间不能有空格，可以使用下划线（_）。</li>
+<li>不能使用标点符号。</li>
+<li>不能使用bash里的关键字（可用help命令查看保留关键字）。</li>
+</ul>
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/学习笔记/">-学习笔记</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/Shell/">-Shell</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
     <h3 class="article-title"><a href="/2019/01/25/LeetCode-654/"><span>LeetCode#654</span></a></h3>
     
   
@@ -332,71 +399,6 @@
     <span class="post-tags">
       <i class="icon-tags"></i>
         <a href="/tags/计算机视觉/">计算机视觉</a><a href="/tags/3D重建/">3D重建</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2019/01/14/Hadoop-jars/"><span>【Hadoop】jar包及其替换</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2019/01/14/Hadoop-jars/" rel="bookmark">
-        <time class="entry-date published" datetime="2019-01-14T02:59:04.000Z">
-          2019-01-14
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <a id="more"></a>
-<h1 id="获取Jar包"><a href="#获取Jar包" class="headerlink" title="获取Jar包"></a>获取Jar包</h1><p>安装好Hadoop后，在<code>hadoop</code>的文件夹下可以看到<code>share</code>文件夹：<img src="http://wpy-blog.oss-cn-shanghai.aliyuncs.com/Hadoop1.PNG/wpy-blog" alt="1547435155253"></p>
-<p>在<code>share</code>文件夹下，<code>doc</code>包含所有的文档内容，<code>hadoop</code>下就是我们可以获得到的Hadoop所有的源码以及测试jar包。</p>
-<p>这里我们直接进入<code>hadoop</code>文件夹下，可以看到各个hadoop模块，根据需要可以找到相应jar包。</p>
-<p><img src="http://wpy-blog.oss-cn-shanghai.aliyuncs.com/Hadoop2.PNG/wpy-blog" alt="www"></p>
-<p>如果想要修改相应的hadoop模块，那么只需将相应的jar包替换为自己的实现即可。</p>
-
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-      
-
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/categories/Hadoop/">-Hadoop</a>
-    </span>
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/Hadoop/">-Hadoop</a>
     </span>
     
 

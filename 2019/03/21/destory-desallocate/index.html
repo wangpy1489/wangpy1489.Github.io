@@ -1,0 +1,177 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>destory和desallocate的区别 | Norton&#39;s Blog | You miss 100% of the shot you do not take.</title>
+
+  
+  <meta name="author" content="王谱越">
+  
+
+  
+  <meta name="description" content="deallocate：123456template &amp;lt;class T&amp;gt;	inline void _deallocate(T* buffer)	&amp;#123;		::operator delete(buffer);    //为什么不用 delete [] ?  ,operator dele">
+  
+
+  
+  
+  <meta name="keywords" content="C/C++,内存管理,malloc">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="destory和desallocate的区别"/>
+
+  <meta property="og:site_name" content="Norton&#39;s Blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Norton&#39;s Blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">Norton&#39;s Blog</a>
+    </h1>
+    <p class="site-description">You miss 100% of the shot you do not take.</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/categories">分类</a></li>
+      
+        <li><a href="/tags">标签</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article>
+
+  
+    
+    <h3 class="article-title"><span>destory和desallocate的区别</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2019/03/21/destory-desallocate/" rel="bookmark">
+        <time class="entry-date published" datetime="2019-03-21T15:17:09.000Z">
+          2019-03-21
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h2 id="deallocate："><a href="#deallocate：" class="headerlink" title="deallocate："></a>deallocate：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class">	<span class="title">inline</span> <span class="title">void</span> _<span class="title">deallocate</span>(<span class="title">T</span>* <span class="title">buffer</span>)</span></span><br><span class="line"><span class="class">	&#123;</span></span><br><span class="line">		::<span class="function"><span class="keyword">operator</span> <span class="title">delete</span><span class="params">(buffer)</span></span>;    <span class="comment">//为什么不用 delete [] ?  ,operator delete 区别于 delete </span></span><br><span class="line">		                             <span class="comment">//operator delete  是一个底层操作符</span></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="destory"><a href="#destory" class="headerlink" title="destory:"></a>destory:</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class">	<span class="title">inline</span> <span class="title">void</span> _<span class="title">destory</span>(<span class="title">T</span> *<span class="title">ptr</span>)</span></span><br><span class="line"><span class="class">	&#123;</span></span><br><span class="line">		ptr-&gt;~T();</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p>destory负责调用类型的析构函数，销毁相应内存上的内容（但销毁后内存地址仍保留）</p>
+<p>deallocate负责释放内存（此时相应内存中的值在此之前应调用destory销毁，将内存地址返回给系统，代表这部分地址使用引用-1）</p>
+<p><a href="https://blog.csdn.net/fao9001/article/details/76255206" target="_blank" rel="noopener">原文地址</a></p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/知识辨析/">知识辨析</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/C-C/">C/C++</a><a href="/tags/内存管理/">内存管理</a><a href="/tags/malloc/">malloc</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+    </main>
+
+    <footer class="site-footer">
+  <div class="social-wrapper">
+    
+      
+        <a href="https://github.com/wangpy1489" class="social github" target="_blank" rel="external">
+          <span class="iconfont icon-github"><i class="fab fa-github fa-2x" ></i></span>
+        </a>
+        
+        <a href="https://www.instagram.com/norton_yue/" class="social instagram" target="_blank" rel="external">
+          <span class="iconfont icon-instagram"><i class="fab fa-instagram fa-2x" ></i></span>
+        </a>
+        
+        <a href="https://weibo.com/2218602247" class="social weibo" target="_blank" rel="external">
+          <span class="iconfont icon-weibo"><i class="fab fa-weibo fa-2x" ></i></span>
+        </a>
+        
+        <a href="http://wpy-blog.oss-cn-shanghai.aliyuncs.com/qrcode_for_gh_87b7f9bafe9b_344.jpg/wpy-blog" class="social weixin" target="_blank" rel="external">
+          <span class="iconfont icon-weixin"><i class="fab fa-weixin fa-2x" ></i></span>
+        </a>
+        
+        <a href="tencent://message/?uin=439257530&amp;Site=&amp;Menu=yes" class="social qq" target="_blank" rel="external">
+          <span class="iconfont icon-qq"><i class="fab fa-qq fa-2x" ></i></span>
+        </a>
+        
+        <a href="mailto:wangpy1489@sjtu.edu.cn" class="social at" target="_blank" rel="external">
+          <span class="iconfont icon-at"><i class="fab fa-at fa-2x" ></i></span>
+        </a>
+        
+    
+  </div>
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2019 王谱越
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>
