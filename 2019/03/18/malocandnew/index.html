@@ -105,12 +105,10 @@ malloc函数从堆上动态分配内存。
 <li><p><strong>返回类型安全性</strong><br>new操作符返回的是对象类型的指针，类型匹配，故类型安全。</p>
 <p>malloc函数分配成功返回void*，需要进行强制类型转换。</p>
 </li>
-<li><p><strong>内存分配失败时的返回值</strong><br>  new分配失败会抛出<code>bac_alloc</code>异常。</p>
-<p>  malloc分配内存失败时返回NULL。</p>
+<li><p><strong>内存分配失败时的返回值</strong><br>  new分配失败会抛出<code>bac_alloc</code>异常。malloc分配内存失败时返回NULL。</p>
 </li>
-<li><p><strong>空间大小指定方式不同</strong><br>  new 会根据类型推断需要分配的内存的大小。</p>
-<pre><code>malloc需要自行计算指出内存大小。
-</code></pre></li>
+<li><p><strong>空间大小指定方式不同</strong><br>  new 会根据类型推断需要分配的内存的大小。malloc需要自行计算指出内存大小。</p>
+</li>
 <li><p><strong>分配行为不同</strong><br>  new分配内存会有3个步骤：</p>
 <ul>
 <li><p>第一步：调用operator new 函数（对于数组是operator new[]）分配一块足够大的，原始的，未命名的内存空间以便存储特定类型的对象。</p>
@@ -122,15 +120,9 @@ malloc函数从堆上动态分配内存。
 </li>
 </ul>
 </li>
-<li><p><strong>对数组的处理</strong><br>  C++提供了new[]与delete[]来专门处理数组类型:</p>
-<pre><code>`A * ptr = new A[10];//分配10个A对象`
-使用new[]分配的内存必须使用delete[]进行释放：
-
-`delete [] ptr;`
-new对数组的支持体现在它会分别调用构造函数函数初始化每一个数组元素，释放对象时为每个对象调用析构函数。注意delete[]要与new[]配套使用，不然会找出数组对象部分释放的现象，造成内存泄漏。
-
-而malloc，它并不知道你在这块内存上要放的数组还是别的东西，反正它就给你一块原始的内存，在给你个内存的地址就完事。所以如果要动态分配一个数组的内存，还需要我们手动自定数组的大小：
-</code></pre></li>
+<li><p><strong>对数组的处理</strong><br>  C++提供了new[]与delete[]来专门处理数组类型: <code>A * ptr = new A[10];//分配10个A对象</code><br>  使用new[]分配的内存必须使用delete[]进行释放：<code>delete [] ptr;</code><br>  new对数组的支持体现在它会分别调用构造函数函数初始化每一个数组元素，释放对象时为每个对象调用析构函数。注意delete[]要与new[]配套使用，不然会找出数组对象部分释放的现象，造成内存泄漏。</p>
+<p>  而malloc，它并不知道你在这块内存上要放的数组还是别的东西，反正它就给你一块原始的内存，在给你个内存的地址就完事。所以如果要动态分配一个数组的内存，还需要我们手动自定数组的大小：</p>
+</li>
 <li><p><strong>是否可以被重载</strong></p>
 <p>opeartor new /operator delete可以被重载</p>
 <p>而malloc/free并不允许重载。</p>

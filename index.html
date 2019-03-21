@@ -91,8 +91,7 @@
 <h2 id="2-calloc"><a href="#2-calloc" class="headerlink" title="2. calloc"></a>2. calloc</h2><p>​    <code>void* calloc(size_t numElements, size_t sizeOfElement);</code></p>
 <p>​    与malloc相似，参数sizeOfElement为单位元素长度（例如：sizeof(int)），numElements为元素个数，即在内存中申请numElements * sizeOfElement字节大小的连续内存空间。</p>
 <h2 id="3-realloc"><a href="#3-realloc" class="headerlink" title="3. realloc"></a>3. realloc</h2><p>​    <code>void* realloc(void* ptr, unsigned newsize);</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">使用realloc函数为ptr重新分配大小为size的一块内存空间。下面是这个函数的工作流程：</span><br></pre></td></tr></table></figure>
-<p>​    (1)，对ptr进行判断，如果ptr为NULL，则函数相当于malloc(new_size)，试着分配一块大小为new_size的内存，如果成功将地址返回，否则返回NULL。如果ptr不为NULL，则进入(2)。<br>​    (2)，查看ptr是不是在堆中，如果不是的话会抛出realloc invalid pointer异常。如果ptr在堆中，则查看new_size大小，如果new_size大小为0，则相当于free(ptr)，将ptr指向的内存空间释放掉，返回NULL。如果new_size小于原大小，则ptr中的数据可能会丢失，只有new_size大小的数据会保存；如果size等于原大小，等于什么都没有做；如果size大于原大小，则查看ptr指向的位置还有没有足够的连续内存空间，如果有的话，分配更多的空间，返回的地址和ptr相同，如果没有的话，在更大的空间内查找，如果找到size大小的空间，将旧的内容拷贝到新的内存中，把旧的内存释放掉，则返回新地址，否则返回NULL。</p>
+<p>使用realloc函数为ptr重新分配大小为size的一块内存空间。下面是这个函数的工作流程：<br>​    (1)，对ptr进行判断，如果ptr为NULL，则函数相当于malloc(new_size)，试着分配一块大小为new_size的内存，如果成功将地址返回，否则返回NULL。如果ptr不为NULL，则进入(2)。<br>​    (2)，查看ptr是不是在堆中，如果不是的话会抛出realloc invalid pointer异常。如果ptr在堆中，则查看new_size大小，如果new_size大小为0，则相当于free(ptr)，将ptr指向的内存空间释放掉，返回NULL。如果new_size小于原大小，则ptr中的数据可能会丢失，只有new_size大小的数据会保存；如果size等于原大小，等于什么都没有做；如果size大于原大小，则查看ptr指向的位置还有没有足够的连续内存空间，如果有的话，分配更多的空间，返回的地址和ptr相同，如果没有的话，在更大的空间内查找，如果找到size大小的空间，将旧的内容拷贝到新的内存中，把旧的内存释放掉，则返回新地址，否则返回NULL。</p>
 <h1 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h1><ul>
 <li>函数malloc不能初始化所分配的内存空间,而函数calloc能.如果由malloc()函数分配的内存空间原来没有被使用过，则其中的每一位可能都是0;反之, 如果这部分内存曾经被分配过,则其中可能遗留有各种各样的数据.也就是说，使用malloc()函数的程序开始时(内存空间还没有被重新分配)能正常进行,但经过一段时间(内存空间还已经被重新分配)可能会出现问题.</li>
 <li>函数calloc() 会将所分配的内存空间中的每一位都初始化为零,也就是说,如果你是为字符类型或整数类型的元素分配内存,那么这些元素将保证会被初始化为0;如果你是为指针类型的元素分配内存,那么这些元素通常会被初始化为空指针;如果你为实型数据分配内存,则这些元素会被初始化为浮点型的零.</li>
@@ -168,12 +167,10 @@
 <li><p><strong>返回类型安全性</strong><br>new操作符返回的是对象类型的指针，类型匹配，故类型安全。</p>
 <p>malloc函数分配成功返回void*，需要进行强制类型转换。</p>
 </li>
-<li><p><strong>内存分配失败时的返回值</strong><br>  new分配失败会抛出<code>bac_alloc</code>异常。</p>
-<p>  malloc分配内存失败时返回NULL。</p>
+<li><p><strong>内存分配失败时的返回值</strong><br>  new分配失败会抛出<code>bac_alloc</code>异常。malloc分配内存失败时返回NULL。</p>
 </li>
-<li><p><strong>空间大小指定方式不同</strong><br>  new 会根据类型推断需要分配的内存的大小。</p>
-<pre><code>malloc需要自行计算指出内存大小。
-</code></pre></li>
+<li><p><strong>空间大小指定方式不同</strong><br>  new 会根据类型推断需要分配的内存的大小。malloc需要自行计算指出内存大小。</p>
+</li>
 <li><p><strong>分配行为不同</strong><br>  new分配内存会有3个步骤：</p>
 <ul>
 <li><p>第一步：调用operator new 函数（对于数组是operator new[]）分配一块足够大的，原始的，未命名的内存空间以便存储特定类型的对象。</p>
@@ -185,15 +182,9 @@
 </li>
 </ul>
 </li>
-<li><p><strong>对数组的处理</strong><br>  C++提供了new[]与delete[]来专门处理数组类型:</p>
-<pre><code>`A * ptr = new A[10];//分配10个A对象`
-使用new[]分配的内存必须使用delete[]进行释放：
-
-`delete [] ptr;`
-new对数组的支持体现在它会分别调用构造函数函数初始化每一个数组元素，释放对象时为每个对象调用析构函数。注意delete[]要与new[]配套使用，不然会找出数组对象部分释放的现象，造成内存泄漏。
-
-而malloc，它并不知道你在这块内存上要放的数组还是别的东西，反正它就给你一块原始的内存，在给你个内存的地址就完事。所以如果要动态分配一个数组的内存，还需要我们手动自定数组的大小：
-</code></pre></li>
+<li><p><strong>对数组的处理</strong><br>  C++提供了new[]与delete[]来专门处理数组类型: <code>A * ptr = new A[10];//分配10个A对象</code><br>  使用new[]分配的内存必须使用delete[]进行释放：<code>delete [] ptr;</code><br>  new对数组的支持体现在它会分别调用构造函数函数初始化每一个数组元素，释放对象时为每个对象调用析构函数。注意delete[]要与new[]配套使用，不然会找出数组对象部分释放的现象，造成内存泄漏。</p>
+<p>  而malloc，它并不知道你在这块内存上要放的数组还是别的东西，反正它就给你一块原始的内存，在给你个内存的地址就完事。所以如果要动态分配一个数组的内存，还需要我们手动自定数组的大小：</p>
+</li>
 <li><p><strong>是否可以被重载</strong></p>
 <p>opeartor new /operator delete可以被重载</p>
 <p>而malloc/free并不允许重载。</p>
