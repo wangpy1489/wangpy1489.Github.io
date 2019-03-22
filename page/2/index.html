@@ -66,6 +66,130 @@
 
   
     
+    <h3 class="article-title"><a href="/2019/03/02/array/"><span>[LeetCode]数组类问题心得小结</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2019/03/02/array/" rel="bookmark">
+        <time class="entry-date published" datetime="2019-03-02T02:54:02.000Z">
+          2019-03-02
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h1 id="常用方法与函数"><a href="#常用方法与函数" class="headerlink" title="常用方法与函数"></a>常用方法与函数</h1><p>在C++中，常用vector来作为数组容器。因此我们只讨论vector的相关方法与函数。</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>a.empty()</td>
+<td>判断a是否为空，空则返回ture,不空则返回false</td>
+</tr>
+<tr>
+<td>a.erase(a.begin()+1,a.begin()+3)</td>
+<td>删除a中第1个（从第0个算起）到第2个元素，也就是说删除的元素从a.begin()+1算起（包括它）一直到a.begin()+ 3（不包括它）</td>
+</tr>
+<tr>
+<td>a.size()</td>
+<td>返回a中元素的个数</td>
+</tr>
+<tr>
+<td>a.resize(10,2)</td>
+<td>将a的现有元素个数调至10个，多则删，少则补，其值为2</td>
+</tr>
+<tr>
+<td>a.swap(b)</td>
+<td>b为向量，将a中的元素和b中的元素进行整体性交换</td>
+</tr>
+<tr>
+<td>a.insert(a.begin()+1,3,5)</td>
+<td>在a的第1个元素（从第0个算起）的位置插入3个数，其值都为5</td>
+</tr>
+<tr>
+<td>a.insert(a.begin()+1,5)</td>
+<td>在a的第1个元素（从第0个算起）的位置插入数值5，如a为1,2,3,4，插入元素后为1,5,2,3,4</td>
+</tr>
+</tbody>
+</table>
+<p>C++算法库中提供了许多算法函数可以对vector进行操作，使用时要包含头文件<code>#include&lt;algorithm&gt;</code></p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sort(a.begin(),a.end())</td>
+<td>对a中的从a.begin()（包括它）到a.end()（不包括它）的元素进行从小到大排列</td>
+</tr>
+<tr>
+<td>reverse(a.begin(),a.end());</td>
+<td>对a中的从a.begin()（包括它）到a.end()（不包括它）的元素倒置，但不排列，如a中元素为1,3,2,4,倒置后为4,2,3,1</td>
+</tr>
+<tr>
+<td>copy(a.begin(),a.end(),b.begin()+1)</td>
+<td>把a中的从a.begin()（包括它）到a.end()（不包括它）的元素复制到b中，从b.begin()+1的位置（包括它）开始复制，覆盖掉原有元素</td>
+</tr>
+<tr>
+<td>find(a.begin(),a.end(),10)</td>
+<td>在a中的从a.begin()（包括它）到a.end()（不包括它）的元素中查找10，若存在返回其在向量中的位置</td>
+</tr>
+</tbody>
+</table>
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/LeetCode-Summary/">LeetCode Summary</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/LeetCode/">LeetCode</a><a href="/tags/数组/">数组</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
     <h3 class="article-title"><a href="/2019/02/28/Leetcode-array/"><span>【LeetCode】初级算法——数组</span></a></h3>
     
   
@@ -317,72 +441,6 @@
 <li>一个简单的改进方案是使用 O(<em>m</em> + <em>n</em>) 的额外空间，但这仍然不是最好的解决方案。</li>
 <li>你能想出一个常数空间的解决方案吗？</li>
 </ul>
-</blockquote>
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-      
-
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/categories/LeetCode/">LeetCode</a>
-    </span>
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/LeetCode/">LeetCode</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2019/01/21/LeetCode-401/"><span>[LeetCode] #401 二进制手表</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2019/01/21/LeetCode-401/" rel="bookmark">
-        <time class="entry-date published" datetime="2019-01-21T14:28:51.000Z">
-          2019-01-21
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <h1 id="LeetCode-401-Binary-Watch"><a href="#LeetCode-401-Binary-Watch" class="headerlink" title="[LeetCode] 401 Binary Watch"></a>[LeetCode] 401 Binary Watch</h1><p>A binary watch has 4 LEDs on the top which represent the hours (0-11), and the 6 LEDs on the bottom represent the minutes (0-59). </p>
-<blockquote>
-<p>Each LED represents a zero or one, with the least significant bit on the right. For example, the above binary watch reads “3:25”. </p>
-<p>Given a non-negative integer n which represents the number of LEDs that are currently on, return all possible times the watch could represent.</p>
-<p>Example:</p>
-<p>Input: n = 1<br>Return: [“1:00”, “2:00”, “4:00”, “8:00”, “0:01”, “0:02”, “0:04”, “0:08”, “0:16”, “0:32”]<br>1<br>2<br>Note:</p>
-<p>The order of output does not matter.输出顺序不影响<br>The hour must not contain a leading zero, for example “01:00” is not valid, it should be “1:00”.<br>The minute must be consist of two digits and may contain a leading zero, for example “10:2” is not valid, it should be “10:02”.</p>
 </blockquote>
       
     </div>
