@@ -3,21 +3,28 @@
 <head>
   <meta charset="utf-8">
   
-  <title>第 4 页 | Norton&#39;s Blog | You miss 100% of the shot you do not take.</title>
+  <title>pyrhon传值与传引用 | Norton&#39;s Blog | You miss 100% of the shot you do not take.</title>
 
   
   <meta name="author" content="王谱越">
   
 
   
+  <meta name="description" content="可变对象与不可变对象要明白python在参数传递和赋值过程中的行为，首先要明白python中的两类对象：可变对象与不可变对象。
 
+不可变对象，该对象所指向的内存中的值不能被改变。对于这样的对象解释器会采取COW的策略，即当改变某个变量时候，会把把原来的值复制一份后再改变，这会开辟一个新的地址，变量再">
+  
+
+  
+  
+  <meta name="keywords" content="Python">
   
 
   <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-  
+  <meta property="og:title" content="pyrhon传值与传引用"/>
 
   <meta property="og:site_name" content="Norton&#39;s Blog"/>
 
@@ -61,20 +68,19 @@
 </header>
 
     <main class="site-main posts-loop">
-    
-  <article>
+    <article>
 
   
     
-    <h3 class="article-title"><a href="/2018/10/14/LeetCode-334/"><span>[LeetCode]#334. 递增的三元子序列</span></a></h3>
+    <h3 class="article-title"><span>pyrhon传值与传引用</span></h3>
     
   
 
   <div class="article-top-meta">
     <span class="posted-on">
-      <a href="/2018/10/14/LeetCode-334/" rel="bookmark">
-        <time class="entry-date published" datetime="2018-10-14T13:33:15.000Z">
-          2018-10-14
+      <a href="/2019/03/22/pyrhon-valve-reference/" rel="bookmark">
+        <time class="entry-date published" datetime="2019-03-22T12:28:46.000Z">
+          2019-03-22
         </time>
       </a>
     </span>
@@ -86,13 +92,24 @@
   <div class="article-content">
     <div class="entry">
       
-        <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a href="https://leetcode-cn.com/problems/increasing-triplet-subsequence/description/" target="_blank" rel="noopener"><strong>递增的三元子序列</strong></a></p>
-<blockquote>
-<p>给定一个未排序的数组，判断这个数组中是否存在长度为 3 的递增子序列。<br>数学表达式如下:<br>如果存在这样的 i, j, k,  且满足 0 ≤ i &lt; j &lt; k ≤ n-1，<br>使得 arr[i] &lt; arr[j] &lt; arr[k] ，返回 true ; 否则返回 false 。<br>说明: 要求算法的时间复杂度为 O(n)，空间复杂度为 O(1) 。</p>
-<p>示例 1:<br><code>输入: [1,2,3,4,5]
-输出: true</code></p>
-<p>示例 2:<br><code>输入: [5,4,3,2,1]
-输出: false</code><br>
+        <h1 id="可变对象与不可变对象"><a href="#可变对象与不可变对象" class="headerlink" title="可变对象与不可变对象"></a>可变对象与不可变对象</h1><p>要明白python在参数传递和赋值过程中的行为，首先要明白python中的两类对象：可变对象与不可变对象。</p>
+<ul>
+<li><strong>不可变对象，该对象所指向的内存中的值不能被改变。</strong>对于这样的对象解释器会采取COW的策略，即当改变某个变量时候，会把把原来的值复制一份后再改变，这会开辟一个新的地址，变量再指向这个新的地址。</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/266795-84511d8863300c40.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="不可变对象"></p>
+<ul>
+<li><strong>可变对象，该对象所指向的内存中的值可以被改变。</strong>变量（准确的说是引用）改变后，实际上是其所指的值直接发生改变，并没有发生复制行为，也没有开辟新的出地址，通俗点说就是<strong>原地改变</strong>。</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/266795-6ef05eaaed4d6c2b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="可变对象"></p>
+<h1 id="Python-的参数传递与赋值"><a href="#Python-的参数传递与赋值" class="headerlink" title="Python 的参数传递与赋值"></a>Python 的参数传递与赋值</h1><p>python的函数传参以及赋值是以一种“传对象引用”的方式完成的，但是由于对象类型不同，在修改时，会有不同的结果。</p>
+<ul>
+<li><p>如果函数收到的是一个可变对象（比如字典或者列表）的引用，就能修改对象的原始值<strong>－－相当于通过“传引用”来传递对象。</strong></p>
+</li>
+<li><p>如果函数收到的是一个不可变对象（比如数值类型、字符或者元组）的引用，就不能直接修改原始对象<strong>－－相当于通过“传值’来传递对象。</strong></p>
+</li>
+</ul>
+<p>另外需要注意的一点，不可变的属性是由外至内的，也即如果一个元组内有多个数组，则这些数组作为元组内的元素，也是不可变的。</p>
+
       
     </div>
 
@@ -106,7 +123,7 @@
 
     <span class="post-categories">
       <i class="icon-categories"></i>
-        <a href="/categories/LeetCode/">LeetCode</a>
+        <a href="/categories/知识辨析/">知识辨析</a>
     </span>
     
 
@@ -115,7 +132,7 @@
 
     <span class="post-tags">
       <i class="icon-tags"></i>
-        <a href="/tags/LeetCode/">LeetCode</a>
+        <a href="/tags/Python/">Python</a>
     </span>
     
 
@@ -126,73 +143,6 @@
 </article>
 
 
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2018/09/28/将hexo部署到云服务器上/"><span>将hexo部署到云服务器上</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2018/09/28/将hexo部署到云服务器上/" rel="bookmark">
-        <time class="entry-date published" datetime="2018-09-27T16:00:00.000Z">
-          2018-09-28
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <h1 id="一、准备"><a href="#一、准备" class="headerlink" title="一、准备"></a>一、准备</h1><h2 id="本地环境配置"><a href="#本地环境配置" class="headerlink" title="本地环境配置"></a><strong>本地环境配置</strong></h2><p>  本文本地环境为<code>Windows10</code>,确保你的计算机环境中装有 <code>nodeJS</code>、<code>npm</code>以及 <code>Git</code>,再进行接下来的步骤。</p>
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-      
-
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/categories/Hexo/">Hexo</a>
-    </span>
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/hexo/">hexo</a><a href="/tags/阿里云/">阿里云</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-
-<nav class="pagination">
-  
-  <a href="/page/3/" class="pagination-prev">上一页</a>
-  
-  
-</nav>
     </main>
 
     <footer class="site-footer">
