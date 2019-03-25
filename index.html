@@ -102,7 +102,13 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">::member_name</span><br></pre></td></tr></table></figure>
 <h1 id="四、匿名名字空间"><a href="#四、匿名名字空间" class="headerlink" title="四、匿名名字空间"></a>四、匿名名字空间</h1><p> 命名空间可以是未命名的,未命名的命名空间在定义时没有给定名字。其定义方法如下： </p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span>     <span class="comment">//No name</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//members....</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>未命名的命名空间取代文件中的静态声明</strong></p>
+<ul>
+<li>未命名的命名空间与其他命名空间不同,未命名的命名空间的定义局部于特定文件,从不跨越多个文本文件。</li>
+<li>未命名的命名空间可以在给定文件中不连续,但不能跨越文件,每个文件有自己的未命名的命名空间。</li>
+<li>未命名的命名空间用于声明局部于文件的实体。在未命名的命名空间中定义的变量在程序开始时创建,在程序结束之前一直存在。</li>
+<li>未命名的命名空间中定义的名字可直接使用,因为没有命名空间名字来限定它们。</li>
+</ul>
+<p><strong>由以上特性，未命名的命名空间可以取代文件中的静态声明</strong></p>
 <p>在标准 C++ 中引入命名空间之前,程序必须将名字声明为static,使它们的作用域约束于一个文件中。<br>文件中静态声明的方法是从 C 语言继承而来, C++ 不赞成文件静态声明，因为这可能在未来版本中不支持。</p>
 <p>所以应该避免文件静态而使用未命名空间代替。</p>
 
