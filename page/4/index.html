@@ -66,6 +66,218 @@
 
   
     
+    <h3 class="article-title"><a href="/2019/01/15/video-avatar/"><span>个性化Video_avatars</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2019/01/15/video-avatar/" rel="bookmark">
+        <time class="entry-date published" datetime="2019-01-15T08:55:16.000Z">
+          2019-01-15
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h1 id="Video-avatars"><a href="#Video-avatars" class="headerlink" title="Video_avatars"></a>Video_avatars</h1><p>这个项目来自马普所的一篇论文<em>Video Based Reconstruction of 3D People Models</em> ，日前，研究人员公布了他们的实现以及数据集。</p>
+<ul>
+<li>Website:<a href="https://graphics.tu-bs.de/people-snapshot" target="_blank" rel="noopener">https://graphics.tu-bs.de/people-snapshot</a></li>
+<li>Github: <a href="https://github.com/thmoa/videoavatars" target="_blank" rel="noopener">https://github.com/thmoa/videoavatars</a></li>
+</ul>
+<p>由于其文档比较匮乏，使用它的代码对自己的数据进行复现并不容易，经过几天努力，成功的完成了整个建模过程，故记录如下。相关代码以上传到了我的<a href="https://github.com/wangpy1489/videoavatars_custom" target="_blank" rel="noopener">Github</a>上。</p>
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/计算机视觉/">计算机视觉</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/计算机视觉/">计算机视觉</a><a href="/tags/3D重建/">3D重建</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
+    <h3 class="article-title"><a href="/2019/01/14/Hadoop-jars/"><span>【Hadoop】jar包及其替换</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2019/01/14/Hadoop-jars/" rel="bookmark">
+        <time class="entry-date published" datetime="2019-01-14T02:59:04.000Z">
+          2019-01-14
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <a id="more"></a>
+<h1 id="获取Jar包"><a href="#获取Jar包" class="headerlink" title="获取Jar包"></a>获取Jar包</h1><p>安装好Hadoop后，在<code>hadoop</code>的文件夹下可以看到<code>share</code>文件夹：<img src="http://wpy-blog.oss-cn-shanghai.aliyuncs.com/Hadoop1.PNG/wpy-blog" alt="1547435155253"></p>
+<p>在<code>share</code>文件夹下，<code>doc</code>包含所有的文档内容，<code>hadoop</code>下就是我们可以获得到的Hadoop所有的源码以及测试jar包。</p>
+<p>这里我们直接进入<code>hadoop</code>文件夹下，可以看到各个hadoop模块，根据需要可以找到相应jar包。</p>
+<p><img src="http://wpy-blog.oss-cn-shanghai.aliyuncs.com/Hadoop2.PNG/wpy-blog" alt="www"></p>
+<p>如果想要修改相应的hadoop模块，那么只需将相应的jar包替换为自己的实现即可。</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/Hadoop/">-Hadoop</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/Hadoop/">-Hadoop</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
+    <h3 class="article-title"><a href="/2018/10/17/LeetCode-116/"><span>[LeetCode]#116&amp;117. 填充同一层的兄弟节点</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2018/10/17/LeetCode-116/" rel="bookmark">
+        <time class="entry-date published" datetime="2018-10-17T13:51:15.000Z">
+          2018-10-17
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a href="https://leetcode-cn.com/problems/populating-next-right-pointers-in-each-node/" target="_blank" rel="noopener">填充同一层的兄弟节点</a></p>
+<blockquote>
+<p>给定一个二叉树</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt; struct TreeLinkNode &#123;</span><br><span class="line">&gt;   TreeLinkNode *left;</span><br><span class="line">&gt;   TreeLinkNode *right;</span><br><span class="line">&gt;   TreeLinkNode *next;</span><br><span class="line">&gt; &#125;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>填充它的每个 next 指针，让这个指针指向其下一个右侧节点。如果找不到下一个右侧节点，则将 next 指针设置为 <code>NULL</code>。</p>
+<p>初始状态下，所有 next 指针都被设置为 <code>NULL</code>。</p>
+<p><strong>说明:</strong></p>
+<ul>
+<li>你只能使用额外常数空间。</li>
+<li>使用递归解题也符合要求，本题中递归程序占用的栈空间不算做额外的空间复杂度。</li>
+<li>你可以假设它是一个完美二叉树（即所有叶子节点都在同一层，每个父节点都有两个子节点）。</li>
+</ul>
+<p><strong>示例:</strong></p>
+<p>给定完美二叉树，</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;      1</span><br><span class="line">&gt;    /  \</span><br><span class="line">&gt;   2    3</span><br><span class="line">&gt;  / \  / \</span><br><span class="line">&gt; 4  5  6  7</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>调用你的函数后，该完美二叉树变为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;      1 -&gt; NULL</span><br><span class="line">&gt;    /  \</span><br><span class="line">&gt;   2 -&gt; 3 -&gt; NULL</span><br><span class="line">&gt;  / \  / \</span><br><span class="line">&gt; 4-&gt;5-&gt;6-&gt;7 -&gt; NULL</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p>非完美二叉树情况：<br><a href="https://leetcode-cn.com/problems/populating-next-right-pointers-in-each-node-ii/description/" target="_blank" rel="noopener">填充同一层的兄弟节点 II</a></p>
+</blockquote>
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/LeetCode/">LeetCode</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/LeetCode/">LeetCode</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
     <h3 class="article-title"><a href="/2018/10/15/LeetCode-141/"><span>[LeetCode]#141&amp;142.环形链表</span></a></h3>
     
   
@@ -211,135 +423,13 @@
 
 
 
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2018/10/14/LeetCode-334/"><span>[LeetCode]#334. 递增的三元子序列</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2018/10/14/LeetCode-334/" rel="bookmark">
-        <time class="entry-date published" datetime="2018-10-14T13:33:15.000Z">
-          2018-10-14
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a href="https://leetcode-cn.com/problems/increasing-triplet-subsequence/description/" target="_blank" rel="noopener"><strong>递增的三元子序列</strong></a></p>
-<blockquote>
-<p>给定一个未排序的数组，判断这个数组中是否存在长度为 3 的递增子序列。<br>数学表达式如下:<br>如果存在这样的 i, j, k,  且满足 0 ≤ i &lt; j &lt; k ≤ n-1，<br>使得 arr[i] &lt; arr[j] &lt; arr[k] ，返回 true ; 否则返回 false 。<br>说明: 要求算法的时间复杂度为 O(n)，空间复杂度为 O(1) 。</p>
-<p>示例 1:<br><code>输入: [1,2,3,4,5]
-输出: true</code></p>
-<p>示例 2:<br><code>输入: [5,4,3,2,1]
-输出: false</code><br>
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-      
-
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/categories/LeetCode/">LeetCode</a>
-    </span>
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/LeetCode/">LeetCode</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2018/09/28/将hexo部署到云服务器上/"><span>将hexo部署到云服务器上</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2018/09/28/将hexo部署到云服务器上/" rel="bookmark">
-        <time class="entry-date published" datetime="2018-09-27T16:00:00.000Z">
-          2018-09-28
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <h1 id="一、准备"><a href="#一、准备" class="headerlink" title="一、准备"></a>一、准备</h1><h2 id="本地环境配置"><a href="#本地环境配置" class="headerlink" title="本地环境配置"></a><strong>本地环境配置</strong></h2><p>  本文本地环境为<code>Windows10</code>,确保你的计算机环境中装有 <code>nodeJS</code>、<code>npm</code>以及 <code>Git</code>,再进行接下来的步骤。</p>
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-      
-
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/categories/Hexo/">Hexo</a>
-    </span>
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/hexo/">hexo</a><a href="/tags/阿里云/">阿里云</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
 
 <nav class="pagination">
   
   <a href="/page/3/" class="pagination-prev">上一页</a>
   
+  
+  <a href="/page/5/" class="pagination-next">下一页</a>
   
 </nav>
     </main>
