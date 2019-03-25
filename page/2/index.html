@@ -66,6 +66,107 @@
 
   
     
+    <h3 class="article-title"><a href="/2019/03/22/C-cast/"><span>C++类型转换符</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2019/03/22/C-cast/" rel="bookmark">
+        <time class="entry-date published" datetime="2019-03-22T13:38:59.000Z">
+          2019-03-22
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h1 id="四种类型转换运算符"><a href="#四种类型转换运算符" class="headerlink" title="四种类型转换运算符"></a>四种类型转换运算符</h1><ul>
+<li><code>dynamic_cast</code> 用于多态类型的转换</li>
+<li><code>static_cast</code> 用于非多态类型的转换</li>
+<li><code>const_cast</code> 用于删除<code>const</code> ,<code>volatile</code> 和 <code>__unaligned</code> 属性</li>
+<li><code>reinterpret_cast</code> 用于位的简单重新解释</li>
+</ul>
+<h2 id="dynamic-cast"><a href="#dynamic-cast" class="headerlink" title="dynamic_cast"></a>dynamic_cast</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">dynamic_cast</span>&lt;type&gt;(expression);</span><br></pre></td></tr></table></figure>
+<p>将expression转换为type类型,在运行期间转换，且会执行运行时检查，性能有相应消耗。</p>
+<ol>
+<li><strong>转换类型必须是一个指针、引用或者void*，用于将基类的指针或引用安全地转换成派生类的指针或引用；</strong> </li>
+<li><strong>dynamic_cast在运行期间强制转换，运行时进行类型转换检查；</strong> </li>
+<li><strong>对指针进行转换，失败返回null，成功返回type类型的对象指针，对于引用的转换，失败抛出一个bad_cast ，成功返回type类型的引用；</strong> </li>
+<li><strong>dynamic_cast不能用于内置类型的转换；</strong> </li>
+<li><strong>用于类的转换，基类中一定要有virtual定义的虚函数（保证多态性），不然会编译错误。</strong> </li>
+<li><strong>可以在整个类层次结构中移动指针，包括向上转换、向下转换</strong></li>
+</ol>
+<h2 id="static-cast"><a href="#static-cast" class="headerlink" title="static_cast"></a>static_cast</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static_cast</span>&lt;type&gt;(expression);</span><br></pre></td></tr></table></figure>
+<p>将expression转换为type类型，在编译过程中完成。有下几个应用场景：</p>
+<ol>
+<li>用于非多态类型的转换</li>
+<li><strong>内置类型转换：</strong>转换过程中的精度损失由开发者负责，除非无法完成类型转化，否则编译器不会警告或报错。</li>
+<li><strong>把void*转化为目标类型指针</strong></li>
+<li><strong>把任意类型转化为void</strong></li>
+<li><strong>基类与派生类之间指针或引用的转换</strong>：由于不会进行类型检查，所以向上转换时安全的，向下转换是不安全的。</li>
+</ol>
+<p>需要注意static_cast无法转换expression的const/volitale/__unaligned属性（会报编译时错误）。</p>
+<h2 id="const-cast"><a href="#const-cast" class="headerlink" title="const_cast"></a>const_cast</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const_cast</span>&lt;type&gt;(expression);</span><br></pre></td></tr></table></figure>
+<p>可以提供一个移除expression的const/volitale/__unaligned属性的指针，但只限同类型间转换。</p>
+<ol>
+<li><strong>const_cast不能执行其他任何类型转换，只能用于同类型之间不同const/volitale属性的移除。否则会报编译时错误。</strong> </li>
+<li><strong>需要注意的是，const_cast通常对指针和引用进行转换，而无法直接移除内置类型的const/volitale属性，换言之，这种语法直接提供了一个具有写权限的指针或引用，可以通过间接访问的方式，修改常量。</strong> </li>
+</ol>
+<h2 id="reinterpret-cast"><a href="#reinterpret-cast" class="headerlink" title="reinterpret_cast"></a>reinterpret_cast</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">reinterpret_cast</span>&lt;type&gt;(expression);</span><br></pre></td></tr></table></figure>
+<p><code>reinterpret_cast</code> 允许将任何指针转换为任何其他指针类型。 也允许将任何整数类型转换为任何指针类型以及反向转换。 </p>
+<ul>
+<li><strong>用于位的简单重新解释,本质作用是重新定义内存数据的解释方式，而不进行任何二进制转换.</strong></li>
+<li><strong>滥用 reinterpret_cast 运算符可能很容易带来风险。 除非所需转换本身是低级别的，否则应使用其他强制转换运算符之一。</strong></li>
+<li><strong>允许将任何指针转换为任何其他指针类型（如 <code>char*</code> 到 <code>int*</code> 或 <code>One_class*</code> 到 <code>Unrelated_class*</code> 之类的转换，但其本身并不安全）</strong></li>
+<li><strong>也允许将任何整数类型转换为任何指针类型以及反向转换。</strong></li>
+<li><strong>reinterpret_cast 运算符不能丢掉 const、volatile 或 __unaligned 特性。</strong></li>
+<li><strong>reinterpret_cast 的一个实际用途是在哈希函数中，即，通过让两个不同的值几乎不以相同的索引结尾的方式将值映射到索引。</strong></li>
+</ul>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/C-基础/">C++基础</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/C/">C++</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
     <h3 class="article-title"><a href="/2019/03/22/pyrhon-valve-reference/"><span>pyrhon传值与传引用</span></a></h3>
     
   
@@ -365,130 +466,6 @@
     <span class="post-tags">
       <i class="icon-tags"></i>
         <a href="/tags/C-C/">C/C++</a><a href="/tags/内存管理/">内存管理</a><a href="/tags/malloc/">malloc</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2019/03/02/array/"><span>[LeetCode]数组类问题心得小结</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2019/03/02/array/" rel="bookmark">
-        <time class="entry-date published" datetime="2019-03-02T02:54:02.000Z">
-          2019-03-02
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <h1 id="常用方法与函数"><a href="#常用方法与函数" class="headerlink" title="常用方法与函数"></a>常用方法与函数</h1><p>在C++中，常用vector来作为数组容器。因此我们只讨论vector的相关方法与函数。</p>
-<table>
-<thead>
-<tr>
-<th>方法</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>a.empty()</td>
-<td>判断a是否为空，空则返回ture,不空则返回false</td>
-</tr>
-<tr>
-<td>a.erase(a.begin()+1,a.begin()+3)</td>
-<td>删除a中第1个（从第0个算起）到第2个元素，也就是说删除的元素从a.begin()+1算起（包括它）一直到a.begin()+ 3（不包括它）</td>
-</tr>
-<tr>
-<td>a.size()</td>
-<td>返回a中元素的个数</td>
-</tr>
-<tr>
-<td>a.resize(10,2)</td>
-<td>将a的现有元素个数调至10个，多则删，少则补，其值为2</td>
-</tr>
-<tr>
-<td>a.swap(b)</td>
-<td>b为向量，将a中的元素和b中的元素进行整体性交换</td>
-</tr>
-<tr>
-<td>a.insert(a.begin()+1,3,5)</td>
-<td>在a的第1个元素（从第0个算起）的位置插入3个数，其值都为5</td>
-</tr>
-<tr>
-<td>a.insert(a.begin()+1,5)</td>
-<td>在a的第1个元素（从第0个算起）的位置插入数值5，如a为1,2,3,4，插入元素后为1,5,2,3,4</td>
-</tr>
-</tbody>
-</table>
-<p>C++算法库中提供了许多算法函数可以对vector进行操作，使用时要包含头文件<code>#include&lt;algorithm&gt;</code></p>
-<table>
-<thead>
-<tr>
-<th>函数</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>sort(a.begin(),a.end())</td>
-<td>对a中的从a.begin()（包括它）到a.end()（不包括它）的元素进行从小到大排列</td>
-</tr>
-<tr>
-<td>reverse(a.begin(),a.end());</td>
-<td>对a中的从a.begin()（包括它）到a.end()（不包括它）的元素倒置，但不排列，如a中元素为1,3,2,4,倒置后为4,2,3,1</td>
-</tr>
-<tr>
-<td>copy(a.begin(),a.end(),b.begin()+1)</td>
-<td>把a中的从a.begin()（包括它）到a.end()（不包括它）的元素复制到b中，从b.begin()+1的位置（包括它）开始复制，覆盖掉原有元素</td>
-</tr>
-<tr>
-<td>find(a.begin(),a.end(),10)</td>
-<td>在a中的从a.begin()（包括它）到a.end()（不包括它）的元素中查找10，若存在返回其在向量中的位置</td>
-</tr>
-</tbody>
-</table>
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-      
-
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/categories/LeetCode-Summary/">LeetCode Summary</a>
-    </span>
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/LeetCode/">LeetCode</a><a href="/tags/数组/">数组</a>
     </span>
     
 

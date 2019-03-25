@@ -66,6 +66,84 @@
 
   
     
+    <h3 class="article-title"><a href="/2019/03/25/c-namespace/"><span>c++命名空间</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2019/03/25/c-namespace/" rel="bookmark">
+        <time class="entry-date published" datetime="2019-03-25T14:00:49.000Z">
+          2019-03-25
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h1 id="一、命名空间"><a href="#一、命名空间" class="headerlink" title="一、命名空间"></a>一、命名空间</h1><p><strong>命名空间：</strong>实际上就是一个由程序设计者命名的内存区域，程序设计者可以根据需要指定一些有名字的空间域，把一些全局实体分别放在各个命名空间中，从而与其他全局实体分隔开来。 </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> n1&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>命名冲突</strong>：只有同一个名字空间中同一作用域下，相同的名字才会冲突。所以要解决冲突无非就是修改名字空间或者作用域。</p>
+<p>首先说修改作用域，在C中，文件作用域的标识符有一个链接属性，static修饰的，的作用域仅仅限于本.c文件，而extern（或者默认情况下）作用域是所有.c文件，所以我们可以个其中一个conan加上static修饰，这样就改变了作用域，就不会冲突了，但是问题是，我们既然定义成全局变量，通常情况下，我们都希望它有外部链接属性。我们之所以定义成全局变量，很可能就是为了让其他.c文件使用。所以static虽然解决了冲突，但是没有达到我们的目的。</p>
+<p>那么我们只能够用另一种方法解决冲突了，就是修改名字空间，这在C语言中是不可行的，但是在C++中是可行的，因为C++可以自定义名字空间。</p>
+<h1 id="二、嵌套名字空间"><a href="#二、嵌套名字空间" class="headerlink" title="二、嵌套名字空间"></a>二、嵌套名字空间</h1><h2 id="1-普通嵌套名字空间"><a href="#1-普通嵌套名字空间" class="headerlink" title="1. 普通嵌套名字空间"></a>1. 普通嵌套名字空间</h2><p> 一个嵌套名字空间就是一个嵌套作用域，其作用域嵌套在包含他的名字空间中。</p>
+<p>在外部引用嵌套空间中的成员时,使用下面的形式 </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">包含嵌套空间的名字空间的名字::嵌套空间的名字::嵌套空间的成员</span><br></pre></td></tr></table></figure>
+<h2 id="2-内联嵌套名字空间"><a href="#2-内联嵌套名字空间" class="headerlink" title="2. 内联嵌套名字空间"></a>2. 内联嵌套名字空间</h2><p>C++11中，新增inline namespace，指示命名空间中的名称同时是外层命名空间直接包含的名称。这便于命名空间的版本管理，减少冲突。</p>
+<p>inline描述符使得内联命名空间中的声明看起来就好像是直接在外围的命名空间中进行声明的一样。（使用inline关键字定义的内联名字空间成为默认名字空间。）<br>inline描述符由命名空间的设计者放置，即<strong>命名空间的作者可以通过放置inline描述符来表示当前最新的命名空间是哪个.</strong></p>
+<p><img src="https://img-blog.csdn.net/20180927202106960?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NyYWZ0c21hbjE5NzA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt=""></p>
+<p><img src="https://img-blog.csdn.net/20180927202237627?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NyYWZ0c21hbjE5NzA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt=""></p>
+<h1 id="三、全局命名空间"><a href="#三、全局命名空间" class="headerlink" title="三、全局命名空间"></a>三、全局命名空间</h1><p>全局命名空间是隐式声明的,存在于每个程序中。在全局作用域定义实体的每个文件将那些名字加到全局命名空间。<br>可以用作用域操作符引用全局命名空间的成员。因为全局命名空间是隐含的,它没有名字,<br>所以使用记号如下方法引用全局命名空间的成员。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">::member_name</span><br></pre></td></tr></table></figure>
+<h1 id="四、匿名名字空间"><a href="#四、匿名名字空间" class="headerlink" title="四、匿名名字空间"></a>四、匿名名字空间</h1><p> 命名空间可以是未命名的,未命名的命名空间在定义时没有给定名字。其定义方法如下： </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span>     <span class="comment">//No name</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//members....</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>未命名的命名空间取代文件中的静态声明</strong></p>
+<p>在标准 C++ 中引入命名空间之前,程序必须将名字声明为static,使它们的作用域约束于一个文件中。<br>文件中静态声明的方法是从 C 语言继承而来, C++ 不赞成文件静态声明，因为这可能在未来版本中不支持。</p>
+<p>所以应该避免文件静态而使用未命名空间代替。</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/C-基础/">C++ 基础</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/C/">C++</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
     <h3 class="article-title"><a href="/2019/03/25/c-classmemory/"><span>C++类内存结构</span></a></h3>
     
   
@@ -128,7 +206,7 @@
 
   
     
-    <h3 class="article-title"><a href="/2019/03/25/styleguide-note/"><span>styleguide-note</span></a></h3>
+    <h3 class="article-title"><a href="/2019/03/25/styleguide-note/"><span>goole styleguide 学习笔记</span></a></h3>
     
   
 
@@ -148,7 +226,54 @@
   <div class="article-content">
     <div class="entry">
       
-        
+        <h1 id="一、头文件"><a href="#一、头文件" class="headerlink" title="一、头文件"></a>一、头文件</h1><h2 id="1-1-Self-contained-头文件"><a href="#1-1-Self-contained-头文件" class="headerlink" title="1.1. Self-contained 头文件"></a>1.1. Self-contained 头文件</h2><p>所有<code>.h</code>头文件要能够自给自足。换言之，用户和重构工具不需要为特别场合而包含额外的头文件。</p>
+<p>不过有一个例外，即一个文件并不是 self-contained 的，而是作为文本插入到代码某处。或者，文件内容实际上是其它头文件的特定平台（platform-specific）扩展部分。这些文件就要用 <code>.inc</code> 文件扩展名。</p>
+<h2 id="1-2-define-保护"><a href="#1-2-define-保护" class="headerlink" title="1.2. #define 保护"></a>1.2. #define 保护</h2><p>所有头文件都应该使用 <code>#define</code> 来防止头文件被多重包含, <strong>命名格式当是:</strong> <code>&lt;PROJECT&gt;_&lt;PATH&gt;_&lt;FILE&gt;_H_</code> .</p>
+<h2 id="1-3-前置声明"><a href="#1-3-前置声明" class="headerlink" title="1.3. 前置声明"></a>1.3. 前置声明</h2><p>尽可能地避免使用前置声明。使用 <code>#include</code> 包含需要的头文件即可。</p>
+<p>前置声明有一些优点，也有一些缺点：</p>
+<p><strong>优点：</strong></p>
+<blockquote>
+<ul>
+<li>前置声明能够节省编译时间，多余的 <code>#include</code> 会迫使编译器展开更多的文件，处理更多的输入。</li>
+<li>前置声明能够节省不必要的重新编译的时间。 <code>#include</code> 使代码因为头文件中无关的改动而被重新编译多次。</li>
+</ul>
+</blockquote>
+<p><strong>缺点：</strong></p>
+<blockquote>
+<ul>
+<li><p>前置声明隐藏了依赖关系，头文件改动时，用户的代码会跳过必要的重新编译过程。</p>
+</li>
+<li><p>前置声明可能会被库的后续更改所破坏。前置声明函数或模板有时会妨碍头文件开发者变动其 API. 例如扩大形参类型，加个自带默认参数的模板形参等等。</p>
+</li>
+<li><p>前置声明来自命名空间 <code>std::</code> 的 symbol 时，其行为未定义。</p>
+</li>
+<li><p>很难判断什么时候该用前置声明，什么时候该用 <code>#include</code> 。极端情况下，用前置声明代替 <code>includes</code> 甚至都会暗暗地改变代码的含义：</p>
+<blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt;   &gt; <span class="comment">// b.h:</span></span><br><span class="line">&gt;   &gt; <span class="class"><span class="keyword">struct</span> <span class="title">B</span> &#123;</span>&#125;;</span><br><span class="line">&gt;   &gt; <span class="class"><span class="keyword">struct</span> <span class="title">D</span> :</span> B &#123;&#125;;</span><br><span class="line">&gt;   &gt; </span><br><span class="line">&gt;   &gt; <span class="comment">// good_user.cc:</span></span><br><span class="line">&gt;   &gt; <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"b.h"</span></span></span><br><span class="line">&gt;   &gt; <span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">(B*)</span></span>;</span><br><span class="line">&gt;   &gt; <span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">(<span class="keyword">void</span>*)</span></span>;</span><br><span class="line">&gt;   &gt; <span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">(D* x)</span> </span>&#123; f(x); &#125;  <span class="comment">// calls f(B*)</span></span><br><span class="line">&gt;   &gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+</li>
+</ul>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>如果 <code>#include</code> 被 <code>B</code> 和 <code>D</code> 的前置声明替代， <code>test()</code> 就会调用 <code>f(void*)</code> .</p>
+</blockquote>
+<ul>
+<li>前置声明了不少来自头文件的 symbol 时，就会比单单一行的 <code>include</code> 冗长。</li>
+<li>仅仅为了能前置声明而重构代码（比如用指针成员代替对象成员）会使代码变得更慢更复杂.</li>
+</ul>
+</blockquote>
+<p><strong>注意：</strong>前置声明的类是不完全类型（incomplete type），我们只能定义指向该类型的指针或引用，或者声明（但不能定义）以不完全类型作为参数或者返回类型的函数。毕竟编译器不知道不完全类型的定义，我们不能创建其类的任何对象，也不能声明成类内部的数据成员。</p>
+<h2 id="1-4-内联函数"><a href="#1-4-内联函数" class="headerlink" title="1.4. 内联函数"></a>1.4. 内联函数</h2><p>只有当函数只有 10 行甚至更少时才将其定义为内联函数.</p>
+<ul>
+<li>在通常情况下虚函数和递归函数即使声明为内联也不一定会被编译器内联。</li>
+<li>包含循环或<code>switch</code>的函数内联往往得不偿失。</li>
+<li>析构函数由于有隐含成员和基类虚构调用的关系，因此往往比想象的长，内联需谨慎。</li>
+</ul>
+<h2 id="1-5-include-的路径及顺序"><a href="#1-5-include-的路径及顺序" class="headerlink" title="1.5. #include 的路径及顺序"></a>1.5. <code>#include</code> 的路径及顺序</h2><p>使用标准的头文件包含顺序可增强可读性, 避免隐藏依赖: 对应头文件 -&gt; C 库 -&gt; C++ 库 -&gt; 其他库的 .h -&gt; 本项目内的 .h.</p>
+<p>项目内头文件应按照项目源代码目录树结构排列, 避免使用 UNIX 特殊的快捷目录 <code>.</code> (当前目录) 或 <code>..</code> (上级目录). 例如, <code>google-awesome-project/src/base/logging.h</code> 应该按如下方式包含:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"base/logging.h"</span></span></span><br></pre></td></tr></table></figure>
+<h1 id="二、作用域"><a href="#二、作用域" class="headerlink" title="二、作用域"></a>二、作用域</h1>
       
     </div>
 
@@ -158,7 +283,21 @@
     <div class="article-meta pull-left">
 
     
+      
 
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/学习笔记/">学习笔记</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/code-style/">code style</a>
+    </span>
     
 
     </div>
@@ -276,107 +415,6 @@
 <h2 id="4-部分显式具体化"><a href="#4-部分显式具体化" class="headerlink" title="4. 部分显式具体化"></a>4. 部分显式具体化</h2><p>类模板还支持部分显式具体化，即只具体化部分模板参数类型：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T2&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Point</span>&lt;char*, T2&gt; &#123;</span></span><br><span class="line">	...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 部分显式具体化还是需要加上模板头</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T2&gt;</span><br><span class="line"><span class="keyword">void</span> Point&lt;<span class="keyword">char</span>*,T2&gt;::display() <span class="keyword">const</span> &#123;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">"x="</span>&lt;&lt;m_x&lt;&lt;<span class="string">" | y="</span>&lt;&lt;m_y&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>部分显式具体化只能用于类模板，不能用于函数模板。</p>
-
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-      
-
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/categories/C-基础/">C++基础</a>
-    </span>
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/C/">C++</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2019/03/22/C-cast/"><span>C++类型转换符</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2019/03/22/C-cast/" rel="bookmark">
-        <time class="entry-date published" datetime="2019-03-22T13:38:59.000Z">
-          2019-03-22
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <h1 id="四种类型转换运算符"><a href="#四种类型转换运算符" class="headerlink" title="四种类型转换运算符"></a>四种类型转换运算符</h1><ul>
-<li><code>dynamic_cast</code> 用于多态类型的转换</li>
-<li><code>static_cast</code> 用于非多态类型的转换</li>
-<li><code>const_cast</code> 用于删除<code>const</code> ,<code>volatile</code> 和 <code>__unaligned</code> 属性</li>
-<li><code>reinterpret_cast</code> 用于位的简单重新解释</li>
-</ul>
-<h2 id="dynamic-cast"><a href="#dynamic-cast" class="headerlink" title="dynamic_cast"></a>dynamic_cast</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">dynamic_cast</span>&lt;type&gt;(expression);</span><br></pre></td></tr></table></figure>
-<p>将expression转换为type类型,在运行期间转换，且会执行运行时检查，性能有相应消耗。</p>
-<ol>
-<li><strong>转换类型必须是一个指针、引用或者void*，用于将基类的指针或引用安全地转换成派生类的指针或引用；</strong> </li>
-<li><strong>dynamic_cast在运行期间强制转换，运行时进行类型转换检查；</strong> </li>
-<li><strong>对指针进行转换，失败返回null，成功返回type类型的对象指针，对于引用的转换，失败抛出一个bad_cast ，成功返回type类型的引用；</strong> </li>
-<li><strong>dynamic_cast不能用于内置类型的转换；</strong> </li>
-<li><strong>用于类的转换，基类中一定要有virtual定义的虚函数（保证多态性），不然会编译错误。</strong> </li>
-<li><strong>可以在整个类层次结构中移动指针，包括向上转换、向下转换</strong></li>
-</ol>
-<h2 id="static-cast"><a href="#static-cast" class="headerlink" title="static_cast"></a>static_cast</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static_cast</span>&lt;type&gt;(expression);</span><br></pre></td></tr></table></figure>
-<p>将expression转换为type类型，在编译过程中完成。有下几个应用场景：</p>
-<ol>
-<li>用于非多态类型的转换</li>
-<li><strong>内置类型转换：</strong>转换过程中的精度损失由开发者负责，除非无法完成类型转化，否则编译器不会警告或报错。</li>
-<li><strong>把void*转化为目标类型指针</strong></li>
-<li><strong>把任意类型转化为void</strong></li>
-<li><strong>基类与派生类之间指针或引用的转换</strong>：由于不会进行类型检查，所以向上转换时安全的，向下转换是不安全的。</li>
-</ol>
-<p>需要注意static_cast无法转换expression的const/volitale/__unaligned属性（会报编译时错误）。</p>
-<h2 id="const-cast"><a href="#const-cast" class="headerlink" title="const_cast"></a>const_cast</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const_cast</span>&lt;type&gt;(expression);</span><br></pre></td></tr></table></figure>
-<p>可以提供一个移除expression的const/volitale/__unaligned属性的指针，但只限同类型间转换。</p>
-<ol>
-<li><strong>const_cast不能执行其他任何类型转换，只能用于同类型之间不同const/volitale属性的移除。否则会报编译时错误。</strong> </li>
-<li><strong>需要注意的是，const_cast通常对指针和引用进行转换，而无法直接移除内置类型的const/volitale属性，换言之，这种语法直接提供了一个具有写权限的指针或引用，可以通过间接访问的方式，修改常量。</strong> </li>
-</ol>
-<h2 id="reinterpret-cast"><a href="#reinterpret-cast" class="headerlink" title="reinterpret_cast"></a>reinterpret_cast</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">reinterpret_cast</span>&lt;type&gt;(expression);</span><br></pre></td></tr></table></figure>
-<p><code>reinterpret_cast</code> 允许将任何指针转换为任何其他指针类型。 也允许将任何整数类型转换为任何指针类型以及反向转换。 </p>
-<ul>
-<li><strong>用于位的简单重新解释,本质作用是重新定义内存数据的解释方式，而不进行任何二进制转换.</strong></li>
-<li><strong>滥用 reinterpret_cast 运算符可能很容易带来风险。 除非所需转换本身是低级别的，否则应使用其他强制转换运算符之一。</strong></li>
-<li><strong>允许将任何指针转换为任何其他指针类型（如 <code>char*</code> 到 <code>int*</code> 或 <code>One_class*</code> 到 <code>Unrelated_class*</code> 之类的转换，但其本身并不安全）</strong></li>
-<li><strong>也允许将任何整数类型转换为任何指针类型以及反向转换。</strong></li>
-<li><strong>reinterpret_cast 运算符不能丢掉 const、volatile 或 __unaligned 特性。</strong></li>
-<li><strong>reinterpret_cast 的一个实际用途是在哈希函数中，即，通过让两个不同的值几乎不以相同的索引结尾的方式将值映射到索引。</strong></li>
-</ul>
 
       
     </div>

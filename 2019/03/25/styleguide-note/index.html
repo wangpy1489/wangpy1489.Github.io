@@ -3,24 +3,27 @@
 <head>
   <meta charset="utf-8">
   
-  <title>styleguide-note | Norton&#39;s Blog | You miss 100% of the shot you do not take.</title>
+  <title>goole styleguide 学习笔记 | Norton&#39;s Blog | You miss 100% of the shot you do not take.</title>
 
   
   <meta name="author" content="王谱越">
   
 
   
+  <meta name="description" content="一、头文件1.1. Self-contained 头文件所有.h头文件要能够自给自足。换言之，用户和重构工具不需要为特别场合而包含额外的头文件。
+不过有一个例外，即一个文件并不是 self-contained 的，而是作为文本插入到代码某处。或者，文件内容实际上是其它头文件的特定平台（platfor">
+  
 
   
   
-  <meta name="keywords" content="">
+  <meta name="keywords" content="code style">
   
 
   <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-  <meta property="og:title" content="styleguide-note"/>
+  <meta property="og:title" content="goole styleguide 学习笔记"/>
 
   <meta property="og:site_name" content="Norton&#39;s Blog"/>
 
@@ -68,7 +71,7 @@
 
   
     
-    <h3 class="article-title"><span>styleguide-note</span></h3>
+    <h3 class="article-title"><span>goole styleguide 学习笔记</span></h3>
     
   
 
@@ -88,7 +91,54 @@
   <div class="article-content">
     <div class="entry">
       
-        
+        <h1 id="一、头文件"><a href="#一、头文件" class="headerlink" title="一、头文件"></a>一、头文件</h1><h2 id="1-1-Self-contained-头文件"><a href="#1-1-Self-contained-头文件" class="headerlink" title="1.1. Self-contained 头文件"></a>1.1. Self-contained 头文件</h2><p>所有<code>.h</code>头文件要能够自给自足。换言之，用户和重构工具不需要为特别场合而包含额外的头文件。</p>
+<p>不过有一个例外，即一个文件并不是 self-contained 的，而是作为文本插入到代码某处。或者，文件内容实际上是其它头文件的特定平台（platform-specific）扩展部分。这些文件就要用 <code>.inc</code> 文件扩展名。</p>
+<h2 id="1-2-define-保护"><a href="#1-2-define-保护" class="headerlink" title="1.2. #define 保护"></a>1.2. #define 保护</h2><p>所有头文件都应该使用 <code>#define</code> 来防止头文件被多重包含, <strong>命名格式当是:</strong> <code>&lt;PROJECT&gt;_&lt;PATH&gt;_&lt;FILE&gt;_H_</code> .</p>
+<h2 id="1-3-前置声明"><a href="#1-3-前置声明" class="headerlink" title="1.3. 前置声明"></a>1.3. 前置声明</h2><p>尽可能地避免使用前置声明。使用 <code>#include</code> 包含需要的头文件即可。</p>
+<p>前置声明有一些优点，也有一些缺点：</p>
+<p><strong>优点：</strong></p>
+<blockquote>
+<ul>
+<li>前置声明能够节省编译时间，多余的 <code>#include</code> 会迫使编译器展开更多的文件，处理更多的输入。</li>
+<li>前置声明能够节省不必要的重新编译的时间。 <code>#include</code> 使代码因为头文件中无关的改动而被重新编译多次。</li>
+</ul>
+</blockquote>
+<p><strong>缺点：</strong></p>
+<blockquote>
+<ul>
+<li><p>前置声明隐藏了依赖关系，头文件改动时，用户的代码会跳过必要的重新编译过程。</p>
+</li>
+<li><p>前置声明可能会被库的后续更改所破坏。前置声明函数或模板有时会妨碍头文件开发者变动其 API. 例如扩大形参类型，加个自带默认参数的模板形参等等。</p>
+</li>
+<li><p>前置声明来自命名空间 <code>std::</code> 的 symbol 时，其行为未定义。</p>
+</li>
+<li><p>很难判断什么时候该用前置声明，什么时候该用 <code>#include</code> 。极端情况下，用前置声明代替 <code>includes</code> 甚至都会暗暗地改变代码的含义：</p>
+<blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt;   &gt; <span class="comment">// b.h:</span></span><br><span class="line">&gt;   &gt; <span class="class"><span class="keyword">struct</span> <span class="title">B</span> &#123;</span>&#125;;</span><br><span class="line">&gt;   &gt; <span class="class"><span class="keyword">struct</span> <span class="title">D</span> :</span> B &#123;&#125;;</span><br><span class="line">&gt;   &gt; </span><br><span class="line">&gt;   &gt; <span class="comment">// good_user.cc:</span></span><br><span class="line">&gt;   &gt; <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"b.h"</span></span></span><br><span class="line">&gt;   &gt; <span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">(B*)</span></span>;</span><br><span class="line">&gt;   &gt; <span class="function"><span class="keyword">void</span> <span class="title">f</span><span class="params">(<span class="keyword">void</span>*)</span></span>;</span><br><span class="line">&gt;   &gt; <span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">(D* x)</span> </span>&#123; f(x); &#125;  <span class="comment">// calls f(B*)</span></span><br><span class="line">&gt;   &gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+</li>
+</ul>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>如果 <code>#include</code> 被 <code>B</code> 和 <code>D</code> 的前置声明替代， <code>test()</code> 就会调用 <code>f(void*)</code> .</p>
+</blockquote>
+<ul>
+<li>前置声明了不少来自头文件的 symbol 时，就会比单单一行的 <code>include</code> 冗长。</li>
+<li>仅仅为了能前置声明而重构代码（比如用指针成员代替对象成员）会使代码变得更慢更复杂.</li>
+</ul>
+</blockquote>
+<p><strong>注意：</strong>前置声明的类是不完全类型（incomplete type），我们只能定义指向该类型的指针或引用，或者声明（但不能定义）以不完全类型作为参数或者返回类型的函数。毕竟编译器不知道不完全类型的定义，我们不能创建其类的任何对象，也不能声明成类内部的数据成员。</p>
+<h2 id="1-4-内联函数"><a href="#1-4-内联函数" class="headerlink" title="1.4. 内联函数"></a>1.4. 内联函数</h2><p>只有当函数只有 10 行甚至更少时才将其定义为内联函数.</p>
+<ul>
+<li>在通常情况下虚函数和递归函数即使声明为内联也不一定会被编译器内联。</li>
+<li>包含循环或<code>switch</code>的函数内联往往得不偿失。</li>
+<li>析构函数由于有隐含成员和基类虚构调用的关系，因此往往比想象的长，内联需谨慎。</li>
+</ul>
+<h2 id="1-5-include-的路径及顺序"><a href="#1-5-include-的路径及顺序" class="headerlink" title="1.5. #include 的路径及顺序"></a>1.5. <code>#include</code> 的路径及顺序</h2><p>使用标准的头文件包含顺序可增强可读性, 避免隐藏依赖: 对应头文件 -&gt; C 库 -&gt; C++ 库 -&gt; 其他库的 .h -&gt; 本项目内的 .h.</p>
+<p>项目内头文件应按照项目源代码目录树结构排列, 避免使用 UNIX 特殊的快捷目录 <code>.</code> (当前目录) 或 <code>..</code> (上级目录). 例如, <code>google-awesome-project/src/base/logging.h</code> 应该按如下方式包含:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"base/logging.h"</span></span></span><br></pre></td></tr></table></figure>
+<h1 id="二、作用域"><a href="#二、作用域" class="headerlink" title="二、作用域"></a>二、作用域</h1>
       
     </div>
 
@@ -98,7 +148,21 @@
     <div class="article-meta pull-left">
 
     
+      
 
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/学习笔记/">学习笔记</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/code-style/">code style</a>
+    </span>
     
 
     </div>
