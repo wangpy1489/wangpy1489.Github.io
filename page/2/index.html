@@ -66,6 +66,89 @@
 
   
     
+    <h3 class="article-title"><a href="/2019/03/25/tempelte-specialize/"><span>tempelte_specialize</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2019/03/25/tempelte-specialize/" rel="bookmark">
+        <time class="entry-date published" datetime="2019-03-24T23:56:04.000Z">
+          2019-03-25
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h1 id="函数模板具体化"><a href="#函数模板具体化" class="headerlink" title="函数模板具体化"></a>函数模板具体化</h1><p>C++中允许使用模板来进行泛型编程，在C++中模板原型如下所示：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(T &amp;a, T &amp;b)</span></span></span><br></pre></td></tr></table></figure>
+<p>模板原型不提供函数声明和定义，需要经过模板具体化过程生成相应声明和定义。</p>
+<h2 id="1-隐式实例化"><a href="#1-隐式实例化" class="headerlink" title="1. 隐式实例化"></a>1. 隐式实例化</h2><p>最初，编译器只能通过隐式实例化，通过对参数列表的类型推断，来使用模板生成对应函数定义，这也是我们最常用的方法；如可以像下面这样使用上面定义的函数模板：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">short</span> a, b;</span><br><span class="line">swap(a, b); <span class="comment">// T 为 short 类型</span></span><br><span class="line"><span class="keyword">int</span> c, d;</span><br><span class="line">swap(c, d); <span class="comment">// T 为 int 类型</span></span><br></pre></td></tr></table></figure>
+<h2 id="2-显式实例化"><a href="#2-显式实例化" class="headerlink" title="2. 显式实例化"></a>2. 显式实例化</h2><p> 现在C++还允许显式实例化(explicit instrantiation)。这意味着可以直接命令编译器创建特定的实例，其语法有两种形式：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> <span class="keyword">void</span> swap&lt;<span class="keyword">int</span>&gt;(<span class="keyword">int</span>, <span class="keyword">int</span>); <span class="comment">//显式实例化声明</span></span><br><span class="line"><span class="keyword">or</span></span><br><span class="line">swap&lt;<span class="keyword">int</span>&gt;(a,b) <span class="comment">//直接在程序中调用</span></span><br></pre></td></tr></table></figure>
+<p>显示实例化可以省去编译器的类型推断过程。</p>
+<h2 id="3-显式具体化"><a href="#3-显式具体化" class="headerlink" title="3.显式具体化"></a>3.显式具体化</h2><p>显式实例化和显式具体化区别在于：这些声明的意思是“不要使用swap()模板来生成函数定义，而应使用专门为int类型显式地定义的函数定义。”这些原型必须有自己的函数定义。显式具体化声明在关键字template后包含&lt;&gt;，而显式实例化没有。</p>
+<p>显式具体化有两种等价声明：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;&gt; <span class="keyword">void</span> swap&lt;<span class="keyword">int</span>&gt; (<span class="keyword">int</span> &amp;, <span class="keyword">int</span> &amp;);     <span class="comment">//explicit specialization</span></span><br><span class="line"><span class="keyword">template</span> &lt;&gt; <span class="function"><span class="keyword">void</span> <span class="title">swap</span> <span class="params">(<span class="keyword">int</span> &amp;, <span class="keyword">int</span> &amp;)</span></span>;     <span class="comment">//根据参数列表的具体化</span></span><br></pre></td></tr></table></figure>
+<p> 警告：试图在同一个文件中(或转换单元)中使用同一种类型的显式实例化和显式具体化 将出错。</p>
+<p><strong>常规模板，具体化模板，非模板函数的优先调用顺序：</strong></p>
+<p><strong>非模板函数（普通函数）&gt; 具体化模板函数 &gt; 常规模板</strong></p>
+<h1 id="类模板具体化"><a href="#类模板具体化" class="headerlink" title="类模板具体化"></a>类模板具体化</h1><p> 使用类模板可以通过类模板自动生成多个类，其模板定义如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T1, <span class="keyword">typename</span> T2&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Point</span> &#123;</span></span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="1-隐式实例化-1"><a href="#1-隐式实例化-1" class="headerlink" title="1.隐式实例化"></a>1.隐式实例化</h2><h2 id="2-显式实例化-1"><a href="#2-显式实例化-1" class="headerlink" title="2.显式实例化"></a>2.显式实例化</h2><p>这两个部分的实例化语法，类模板和函数模板没有太大的区别。</p>
+<h2 id="3-显示具体化"><a href="#3-显示具体化" class="headerlink" title="3.显示具体化"></a>3.显示具体化</h2><p>类模板的显示具体化语法如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Point</span>&lt;char *, char *&gt; &#123;</span></span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其中模板类方法的实现的具体化语法和函数模板有所区别，不需要带模板头template&lt;&gt;：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> Point&lt;<span class="keyword">char</span>*, <span class="keyword">char</span>*&gt;::display() <span class="keyword">const</span> &#123;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">"x="</span>&lt;&lt;m_x&lt;&lt;<span class="string">", y="</span>&lt;&lt;m_y&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="4-部分显式具体化"><a href="#4-部分显式具体化" class="headerlink" title="4. 部分显式具体化"></a>4. 部分显式具体化</h2><p>类模板还支持部分显式具体化，即只具体化部分模板参数类型：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T2&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Point</span>&lt;char*, T2&gt; &#123;</span></span><br><span class="line">	...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 部分显式具体化还是需要加上模板头</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T2&gt;</span><br><span class="line"><span class="keyword">void</span> Point&lt;<span class="keyword">char</span>*,T2&gt;::display() <span class="keyword">const</span> &#123;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">"x="</span>&lt;&lt;m_x&lt;&lt;<span class="string">" | y="</span>&lt;&lt;m_y&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>部分显式具体化只能用于类模板，不能用于函数模板。</p>
+
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/C-基础/">C++基础</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/C/">C++</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
     <h3 class="article-title"><a href="/2019/03/22/C-cast/"><span>C++类型转换符</span></a></h3>
     
   
@@ -340,108 +423,6 @@
 <li>realloc可以对给定的指针所指的空间进行扩大或者缩小，无论是扩张或是缩小，原有内存的中内容将保持不变.当然，对于缩小，则被缩小的那一部分的内容会丢失.realloc并不保证调整后的内存空间和原来的内存空间保持同一内存地址.相反，realloc返回的指针很可能指向一个新的地址.</li>
 <li>realloc是从堆上分配内存的.当扩大一块内存空间时，realloc()试图直接从堆上现存的数据后面的那些字节中获得附加的字节，如果能够满足，自然天下太平；如果数据后面的字节不够，问题就出来了，那么就使用堆上第一个有足够大小的自由块，现存的数据然后就被拷贝至新的位置，而老块则放回到堆上.这句话传递的一个重要的信息就是数据可能被移动.</li>
 </ul>
-
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-      
-
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/categories/知识辨析/">知识辨析</a>
-    </span>
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/C-C/">C/C++</a><a href="/tags/内存管理/">内存管理</a><a href="/tags/malloc/">malloc</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2019/03/18/malocandnew/"><span>malloc 和new</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2019/03/18/malocandnew/" rel="bookmark">
-        <time class="entry-date published" datetime="2019-03-17T16:03:00.000Z">
-          2019-03-18
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <p>​    malloc() 与 free()相对应，new/new[]与delete/delete[]相对应，都应配对使用。</p>
-<ol>
-<li><p><strong>申请内存位置不同</strong></p>
-<p>new操作符可以从其他位置上分配内存，不一定局限于堆。</p>
-<p>malloc函数从堆上动态分配内存。</p>
-</li>
-<li><p><strong>返回类型安全性</strong><br>new操作符返回的是对象类型的指针，类型匹配，故类型安全。</p>
-<p>malloc函数分配成功返回void*，需要进行强制类型转换。</p>
-</li>
-<li><p><strong>内存分配失败时的返回值</strong><br>  new分配失败会抛出<code>bac_alloc</code>异常。malloc分配内存失败时返回NULL。</p>
-</li>
-<li><p><strong>空间大小指定方式不同</strong><br>  new 会根据类型推断需要分配的内存的大小。malloc需要自行计算指出内存大小。</p>
-</li>
-<li><p><strong>分配行为不同</strong><br>  new分配内存会有3个步骤：</p>
-<ul>
-<li><p>第一步：调用operator new 函数（对于数组是operator new[]）分配一块足够大的，原始的，未命名的内存空间以便存储特定类型的对象。</p>
-</li>
-<li><p>第二步：编译器运行相应的构造函数以构造对象，并为其传入初值。</p>
-</li>
-<li><p>第三步：对象构造完成后，返回一个指向该对象的指针。</p>
-<p>malloc 只会开辟空间。</p>
-</li>
-</ul>
-</li>
-<li><p><strong>对数组的处理</strong><br>  C++提供了new[]与delete[]来专门处理数组类型: <code>A * ptr = new A[10];//分配10个A对象</code><br>  使用new[]分配的内存必须使用delete[]进行释放：<code>delete [] ptr;</code><br>  new对数组的支持体现在它会分别调用构造函数函数初始化每一个数组元素，释放对象时为每个对象调用析构函数。注意delete[]要与new[]配套使用，不然会找出数组对象部分释放的现象，造成内存泄漏。</p>
-<p>  而malloc，它并不知道你在这块内存上要放的数组还是别的东西，反正它就给你一块原始的内存，在给你个内存的地址就完事。所以如果要动态分配一个数组的内存，还需要我们手动自定数组的大小：</p>
-</li>
-<li><p><strong>是否可以被重载</strong></p>
-<p>opeartor new /operator delete可以被重载</p>
-<p>而malloc/free并不允许重载。</p>
-</li>
-<li><p><strong>能否直观地重新分配内存</strong></p>
-<p>使用malloc分配的内存后，如果在使用过程中发现内存不足，可以使用realloc函数进行内存重新分配实现内存的扩充。realloc先判断当前的指针所指内存是否有足够的连续空间，如果有，原地扩大可分配的内存地址，并且返回原来的地址指针；如果空间不够，先按照新指定的大小分配空间，将原有数据从头到尾拷贝到新分配的内存区域，而后释放原来的内存区域。</p>
-<p>new没有。</p>
-</li>
-<li><p><strong>new与malloc是否可以相互调用</strong></p>
-<p>operator new /operator delete的实现可以基于malloc，而malloc的实现不可以去调用new。</p>
-</li>
-<li><p><strong>客户处理内存分配不足</strong></p>
-<p> 在operator new抛出异常以反映一个未获得满足的需求之前，它会先调用一个用户指定的错误处理函数。</p>
-<p> 对于malloc，客户并不能够去编程决定内存不足以分配时要干什么事，只能看着malloc返回NULL。</p>
-</li>
-</ol>
 
       
     </div>
