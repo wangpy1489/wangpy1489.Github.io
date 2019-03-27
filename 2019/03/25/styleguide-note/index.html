@@ -10,8 +10,7 @@
   
 
   
-  <meta name="description" content="一、头文件1.1. Self-contained 头文件所有.h头文件要能够自给自足。换言之，用户和重构工具不需要为特别场合而包含额外的头文件。
-不过有一个例外，即一个文件并不是 self-contained 的，而是作为文本插入到代码某处。或者，文件内容实际上是其它头文件的特定平台（platfor">
+  <meta name="description" content="[TOC]">
   
 
   
@@ -91,7 +90,9 @@
   <div class="article-content">
     <div class="entry">
       
-        <h1 id="一、头文件"><a href="#一、头文件" class="headerlink" title="一、头文件"></a>一、头文件</h1><h2 id="1-1-Self-contained-头文件"><a href="#1-1-Self-contained-头文件" class="headerlink" title="1.1. Self-contained 头文件"></a>1.1. Self-contained 头文件</h2><p>所有<code>.h</code>头文件要能够自给自足。换言之，用户和重构工具不需要为特别场合而包含额外的头文件。</p>
+        <p>[TOC]</p>
+<a id="more"></a>
+<h1 id="一、头文件"><a href="#一、头文件" class="headerlink" title="一、头文件"></a>一、头文件</h1><h2 id="1-1-Self-contained-头文件"><a href="#1-1-Self-contained-头文件" class="headerlink" title="1.1. Self-contained 头文件"></a>1.1. Self-contained 头文件</h2><p>所有<code>.h</code>头文件要能够自给自足。换言之，用户和重构工具不需要为特别场合而包含额外的头文件。</p>
 <p>不过有一个例外，即一个文件并不是 self-contained 的，而是作为文本插入到代码某处。或者，文件内容实际上是其它头文件的特定平台（platform-specific）扩展部分。这些文件就要用 <code>.inc</code> 文件扩展名。</p>
 <h2 id="1-2-define-保护"><a href="#1-2-define-保护" class="headerlink" title="1.2. #define 保护"></a>1.2. #define 保护</h2><p>所有头文件都应该使用 <code>#define</code> 来防止头文件被多重包含, <strong>命名格式当是:</strong> <code>&lt;PROJECT&gt;_&lt;PATH&gt;_&lt;FILE&gt;_H_</code> .</p>
 <h2 id="1-3-前置声明"><a href="#1-3-前置声明" class="headerlink" title="1.3. 前置声明"></a>1.3. 前置声明</h2><p>尽可能地避免使用前置声明。使用 <code>#include</code> 包含需要的头文件即可。</p>
@@ -174,6 +175,98 @@
 <li>禁止使用含有副作用的函数初始化POD全局变量，因为多编译单元中的静态变量执行时的构造和析构顺序是未明确的，这将导致代码的不可移植。</li>
 </ul>
 <p><em>TODO:这部分还看不太明白</em></p>
+<h1 id="三、类"><a href="#三、类" class="headerlink" title="三、类"></a>三、类</h1><h2 id="1-构造函数职责"><a href="#1-构造函数职责" class="headerlink" title="1.  构造函数职责"></a>1.  构造函数职责</h2><ul>
+<li><p>不要在构造函数中调用虚函数。</p>
+</li>
+<li><p>不要在构造函数中尝试报告一个非致命错误。如果代码允许, 直接终止程序是一个合适的处理错误的方式. 否则, 考虑用 <code>Init()</code> 方法或工厂函数.</p>
+</li>
+</ul>
+<h2 id="2-隐式类型转化"><a href="#2-隐式类型转化" class="headerlink" title="2. 隐式类型转化"></a>2. 隐式类型转化</h2><ul>
+<li>不要定义隐式类型转换. 对于转换运算符和单参数构造函数, 请使用 <code>explicit</code> 关键字.</li>
+<li>接受一个 <code>std::initializer_list</code> 作为参数的构造函数也应当省略 <code>explicit</code>, 以便支持拷贝初始化 (例如 <code>MyType m = {1, 2};)</code> .</li>
+<li>拷贝和移动构造函数不应当被标记为 <code>explicit</code>, 因为它们并不执行类型转换. </li>
+</ul>
+<h2 id="3-可拷贝类型和可移动类型"><a href="#3-可拷贝类型和可移动类型" class="headerlink" title="3. 可拷贝类型和可移动类型"></a>3. 可拷贝类型和可移动类型</h2><ul>
+<li><p>除非你的类型需要才让它们支持拷贝 / 移动. 否则, 就把隐式产生的拷贝和移动函数禁用.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// MyClass is neither copyable nor movable.</span></span><br><span class="line">MyClass(<span class="keyword">const</span> MyClass&amp;) = <span class="keyword">delete</span>;</span><br><span class="line">MyClass&amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> MyClass&amp;) = <span class="keyword">delete</span>;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>如果让类型可拷贝, 一定要同时给出拷贝构造函数和赋值操作的定义。</p>
+</li>
+<li><p>如果让类型可移动，那么就给出移动的两个操作 (移动构造函数和赋值操作) 的定义. </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span> &#123;</span></span><br><span class="line"> <span class="keyword">public</span>:</span><br><span class="line">  Foo(Foo&amp;&amp; other) : field_(other.field) &#123;&#125;</span><br><span class="line">  <span class="comment">// 差, 只定义了移动构造函数, 而没有定义对应的赋值运算符.</span></span><br><span class="line"></span><br><span class="line"> <span class="keyword">private</span>:</span><br><span class="line">  Field field_;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="4-结构体VS类"><a href="#4-结构体VS类" class="headerlink" title="4. 结构体VS类"></a>4. 结构体VS类</h2><ul>
+<li>仅当只有数据成员时使用 <code>struct</code>, 其它一概使用 <code>class</code>.</li>
+<li>如果需要更多的函数功能, <code>class</code> 更适合. 如果拿不准, 就用 <code>class</code>.</li>
+</ul>
+<h2 id="5-继承"><a href="#5-继承" class="headerlink" title="5. 继承"></a>5. 继承</h2><ul>
+<li>使用组合常常比使用继承更合理. 如果使用继承的话, 定义为 <code>public</code> 继承.</li>
+<li>所有继承必须是 <code>public</code> 的. 如果你想使用私有继承, 你应该替换成把基类的实例作为成员对象的方式.</li>
+</ul>
+<h2 id="6-多重继承"><a href="#6-多重继承" class="headerlink" title="6. 多重继承"></a>6. 多重继承</h2><ul>
+<li>只在以下情况我们才允许多重继承: 最多只有一个基类是非抽象类; 其它基类都是以 <code>Interface</code> 为后缀的 纯接口类</li>
+</ul>
+<h2 id="7-接口"><a href="#7-接口" class="headerlink" title="7. 接口"></a>7. 接口</h2><p>当一个类满足以下要求时, 称之为纯接口，这些类以 <code>Interface</code> 为后缀:</p>
+<ul>
+<li>只有纯虚函数 (“<code>=0</code>”) 和静态函数 (除了下文提到的析构函数).</li>
+<li>没有非静态数据成员.</li>
+<li>没有定义任何构造函数. 如果有, 也不能带有参数, 并且必须为 <code>protected</code>.</li>
+<li>如果它是一个子类, 也只能从满足上述条件并以 <code>Interface</code> 为后缀的类继承.</li>
+</ul>
+<h2 id="8-运算符重载"><a href="#8-运算符重载" class="headerlink" title="8.运算符重载"></a>8.运算符重载</h2><ul>
+<li>只有在意义明显, 不会出现奇怪的行为并且与对应的内建运算符的行为一致时才定义重载运算符. 例如, <code>|</code> 要作为位或或逻辑或来使用, 而不是作为 shell 中的管道.</li>
+<li>建议不要将不进行修改的二元运算符定义为成员函数.</li>
+<li>不要引入用户定义字面量。</li>
+<li>如果你定义了一个运算符, 请将其相关且有意义的运算符都进行定义, 并且保证这些定义的语义是一致的。 例如, 如果你重载了 <code>&lt;</code>, 那么请将所有的比较运算符都进行重载, 并且保证对于同一组参数, <code>&lt;</code> 和 <code>&gt;</code> 不会同时返回 <code>true</code>. </li>
+</ul>
+<h2 id="9-存取控制"><a href="#9-存取控制" class="headerlink" title="9. 存取控制"></a>9. 存取控制</h2><ul>
+<li>将 <em>所有</em> 数据成员声明为 <code>private</code>, 除非是 <code>static const</code> 类型成员</li>
+</ul>
+<h2 id="10-说明顺序"><a href="#10-说明顺序" class="headerlink" title="10. 说明顺序"></a>10. 说明顺序</h2><ul>
+<li><p>类定义应以 <code>public:</code> 开始, 后跟 <code>protected:</code>, 最后是 <code>private:</code>. 省略空部分.</p>
+</li>
+<li><p>建议将类似的声明放在一起, 并且建议以如下的顺序: </p>
+<ul>
+<li><p>类型 (包括 <code>typedef</code>, <code>using</code> 和嵌套的结构体与类),</p>
+</li>
+<li><p>常量,</p>
+</li>
+<li>工厂函数, 构造函数,赋值运算符, </li>
+<li>析构函数, </li>
+<li>其它函数,</li>
+<li>数据成员.</li>
+</ul>
+</li>
+<li><p>不要将大段的函数定义内联在类定义中. 只有那些普通的, 或性能关键且短小的函数可以内联在类定义中.</p>
+</li>
+</ul>
+<h1 id="四、函数"><a href="#四、函数" class="headerlink" title="四、函数"></a>四、函数</h1><h2 id="1-参数顺序"><a href="#1-参数顺序" class="headerlink" title="1.参数顺序"></a>1.参数顺序</h2><ul>
+<li>函数的参数顺序为: 输入参数在先, 后跟输出参数.</li>
+<li><strong>输入参数</strong>通常是值参或 <code>const</code> 引用, <strong>输出参数或输入/输出参数</strong>则一般为非 <code>const</code> 指针.</li>
+</ul>
+<h2 id="2-编写简短函数"><a href="#2-编写简短函数" class="headerlink" title="2.编写简短函数"></a>2.编写简短函数</h2><ul>
+<li>果函数超过 40 行, 可以思索一下能不能在不影响程序结构的前提下对其进行分割.</li>
+</ul>
+<h2 id="3-引用参数"><a href="#3-引用参数" class="headerlink" title="3. 引用参数"></a>3. 引用参数</h2><ul>
+<li>函数参数列表中, 所有引用参数都必须是 <code>const</code></li>
+<li><strong>输入参数</strong>是值参或 <code>const</code> 引用, <strong>输出参数</strong>为指针. 输入参数可以是 <code>const</code> 指针, 但决不能是非 <code>const</code> 的引用参数, 除非特殊要求, 比如 <code>swap()</code>.</li>
+</ul>
+<blockquote>
+<p>这实际上是Google codestyle 的一个硬性约定</p>
+</blockquote>
+<h2 id="4-函数重载"><a href="#4-函数重载" class="headerlink" title="4. 函数重载"></a>4. 函数重载</h2><ul>
+<li>若要使用函数重载, 则必须能让读者一看调用点就胸有成竹, 而不用花心思猜测调用的重载函数到底是哪一种. 这一规则也适用于构造函数.</li>
+</ul>
+<h2 id="5-缺省参数"><a href="#5-缺省参数" class="headerlink" title="5. 缺省参数"></a>5. 缺省参数</h2><ul>
+<li>只允许在非虚函数中使用缺省参数, 且必须保证缺省参数的值始终一致. . (例如, 不要写像 <code>void f(int n = counter++);</code> 这样的代码.)</li>
+<li>对于虚函数, 不允许使用缺省参数, 因为在虚函数中缺省参数不一定能正常工作</li>
+</ul>
+<h2 id="6-函数返回类型后置语法"><a href="#6-函数返回类型后置语法" class="headerlink" title="6. 函数返回类型后置语法"></a>6. 函数返回类型后置语法</h2><ul>
+<li>只有在常规写法 (返回类型前置) 不便于书写或不便于阅读时使用返回类型后置语法.</li>
+</ul>
 
       
     </div>
