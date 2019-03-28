@@ -666,6 +666,7 @@ article .video-container iframe {
 article table {
   max-width: 100%;
   width: 100%;
+/*toc*/
 }
 article table caption {
   padding: 5px;
@@ -697,6 +698,25 @@ article table .table-striped tbody tr:nth-of-type(odd) {
 article table pre {
   overflow-x: auto;
   overflow-y: hidden;
+}
+article table .toc-title {
+  font-size: 2em;
+}
+article table #toc {
+  line-height: 1em;
+  font-size: 0.9em;
+  float: right;
+}
+article table .toc {
+  padding: 0;
+  margin: 1em;
+  line-height: 1.8em;
+}
+article table li {
+  list-style-type: none;
+}
+article table .toc-child {
+  margin-left: 1em;
 }
 article.archive {
   padding: 0;

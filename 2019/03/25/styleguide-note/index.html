@@ -10,7 +10,8 @@
   
 
   
-  <meta name="description" content="[TOC]">
+  <meta name="description" content="一、头文件1.1. Self-contained 头文件所有.h头文件要能够自给自足。换言之，用户和重构工具不需要为特别场合而包含额外的头文件。
+不过有一个例外，即一个文件并不是 self-contained 的，而是作为文本插入到代码某处。或者，文件内容实际上是其它头文件的特定平台（platform-specific）扩展部分。这些文件就要用 .inc 文件扩展名。">
   
 
   
@@ -84,18 +85,23 @@
     </span>
   </div>
 
+  
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">一、头文件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.1.</span> <span class="toc-text">1.1. Self-contained 头文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.2.</span> <span class="toc-text">1.2. #define 保护</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.3.</span> <span class="toc-text">1.3. 前置声明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.4.</span> <span class="toc-text">1.4. 内联函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">1.5.</span> <span class="toc-text">1.5. #include 的路径及顺序</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">二、作用域</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">2.1.</span> <span class="toc-text">1.命名空间</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">2.2.</span> <span class="toc-text">2. 匿名命名空间和静态变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">2.3.</span> <span class="toc-text">3.非成员函数、静态成员函数和全局函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">2.4.</span> <span class="toc-text">4.局部变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">2.5.</span> <span class="toc-text">5. 静态和全局变量</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">三、类</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">3.1.</span> <span class="toc-text">1.  构造函数职责</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">3.2.</span> <span class="toc-text">2. 隐式类型转化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">3.3.</span> <span class="toc-text">3. 可拷贝类型和可移动类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">3.4.</span> <span class="toc-text">4. 结构体VS类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">3.5.</span> <span class="toc-text">5. 继承</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">3.6.</span> <span class="toc-text">6. 多重继承</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">3.7.</span> <span class="toc-text">7. 接口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">3.8.</span> <span class="toc-text">8.运算符重载</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">3.9.</span> <span class="toc-text">9. 存取控制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">3.10.</span> <span class="toc-text">10. 说明顺序</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-number">4.</span> <span class="toc-text">四、函数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">4.1.</span> <span class="toc-text">1.参数顺序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">4.2.</span> <span class="toc-text">2.编写简短函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">4.3.</span> <span class="toc-text">3. 引用参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">4.4.</span> <span class="toc-text">4. 函数重载</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">4.5.</span> <span class="toc-text">5. 缺省参数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#undefined"><span class="toc-number">4.6.</span> <span class="toc-text">6. 函数返回类型后置语法</span></a></li></ol></li></ol>
+  </div>
+  
 
   
 
   <div class="article-content">
     <div class="entry">
       
-        <p>[TOC]</p>
-<a id="more"></a>
-<h1 id="一、头文件"><a href="#一、头文件" class="headerlink" title="一、头文件"></a>一、头文件</h1><h2 id="1-1-Self-contained-头文件"><a href="#1-1-Self-contained-头文件" class="headerlink" title="1.1. Self-contained 头文件"></a>1.1. Self-contained 头文件</h2><p>所有<code>.h</code>头文件要能够自给自足。换言之，用户和重构工具不需要为特别场合而包含额外的头文件。</p>
+        <h1><span id="一-头文件">一、头文件</span></h1><h2><span id="11-self-contained-头文件">1.1. Self-contained 头文件</span></h2><p>所有<code>.h</code>头文件要能够自给自足。换言之，用户和重构工具不需要为特别场合而包含额外的头文件。</p>
 <p>不过有一个例外，即一个文件并不是 self-contained 的，而是作为文本插入到代码某处。或者，文件内容实际上是其它头文件的特定平台（platform-specific）扩展部分。这些文件就要用 <code>.inc</code> 文件扩展名。</p>
-<h2 id="1-2-define-保护"><a href="#1-2-define-保护" class="headerlink" title="1.2. #define 保护"></a>1.2. #define 保护</h2><p>所有头文件都应该使用 <code>#define</code> 来防止头文件被多重包含, <strong>命名格式当是:</strong> <code>&lt;PROJECT&gt;_&lt;PATH&gt;_&lt;FILE&gt;_H_</code> .</p>
-<h2 id="1-3-前置声明"><a href="#1-3-前置声明" class="headerlink" title="1.3. 前置声明"></a>1.3. 前置声明</h2><p>尽可能地避免使用前置声明。使用 <code>#include</code> 包含需要的头文件即可。</p>
+<a id="more"></a>
+<h2><span id="12-define-保护">1.2. #define 保护</span></h2><p>所有头文件都应该使用 <code>#define</code> 来防止头文件被多重包含, <strong>命名格式当是:</strong> <code>&lt;PROJECT&gt;_&lt;PATH&gt;_&lt;FILE&gt;_H_</code> .</p>
+<h2><span id="13-前置声明">1.3. 前置声明</span></h2><p>尽可能地避免使用前置声明。使用 <code>#include</code> 包含需要的头文件即可。</p>
 <p>前置声明有一些优点，也有一些缺点：</p>
 <p><strong>优点：</strong></p>
 <blockquote>
@@ -130,16 +136,16 @@
 </ul>
 </blockquote>
 <p><strong>注意：</strong>前置声明的类是不完全类型（incomplete type），我们只能定义指向该类型的指针或引用，或者声明（但不能定义）以不完全类型作为参数或者返回类型的函数。毕竟编译器不知道不完全类型的定义，我们不能创建其类的任何对象，也不能声明成类内部的数据成员。</p>
-<h2 id="1-4-内联函数"><a href="#1-4-内联函数" class="headerlink" title="1.4. 内联函数"></a>1.4. 内联函数</h2><p>只有当函数只有 10 行甚至更少时才将其定义为内联函数.</p>
+<h2><span id="14-内联函数">1.4. 内联函数</span></h2><p>只有当函数只有 10 行甚至更少时才将其定义为内联函数.</p>
 <ul>
 <li>在通常情况下虚函数和递归函数即使声明为内联也不一定会被编译器内联。</li>
 <li>包含循环或<code>switch</code>的函数内联往往得不偿失。</li>
 <li>析构函数由于有隐含成员和基类虚构调用的关系，因此往往比想象的长，内联需谨慎。</li>
 </ul>
-<h2 id="1-5-include-的路径及顺序"><a href="#1-5-include-的路径及顺序" class="headerlink" title="1.5. #include 的路径及顺序"></a>1.5. <code>#include</code> 的路径及顺序</h2><p>使用标准的头文件包含顺序可增强可读性, 避免隐藏依赖: 对应头文件 -&gt; C 库 -&gt; C++ 库 -&gt; 其他库的 .h -&gt; 本项目内的 .h.</p>
+<h2><span id="15-include-的路径及顺序">1.5. <code>#include</code> 的路径及顺序</span></h2><p>使用标准的头文件包含顺序可增强可读性, 避免隐藏依赖: 对应头文件 -&gt; C 库 -&gt; C++ 库 -&gt; 其他库的 .h -&gt; 本项目内的 .h.</p>
 <p>项目内头文件应按照项目源代码目录树结构排列, 避免使用 UNIX 特殊的快捷目录 <code>.</code> (当前目录) 或 <code>..</code> (上级目录). 例如, <code>google-awesome-project/src/base/logging.h</code> 应该按如下方式包含:</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"base/logging.h"</span></span></span><br></pre></td></tr></table></figure>
-<h1 id="二、作用域"><a href="#二、作用域" class="headerlink" title="二、作用域"></a>二、作用域</h1><h2 id="1-命名空间"><a href="#1-命名空间" class="headerlink" title="1.命名空间"></a>1.命名空间</h2><ul>
+<h1><span id="二-作用域">二、作用域</span></h1><h2><span id="1命名空间">1.命名空间</span></h2><ul>
 <li><p>鼓励在 <code>.cc</code> 文件内使用匿名命名空间或 <code>static</code> 声明。</p>
 </li>
 <li><p>使用具名的命名空间时, 其名称可基于项目名或相对路径。</p>
@@ -159,34 +165,34 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在 .cc 中使用别名缩短常用的命名空间</span></span><br><span class="line"><span class="keyword">namespace</span> baz = ::foo::bar::baz;</span><br><span class="line"><span class="comment">// 在 .h 中使用别名缩短常用的命名空间</span></span><br><span class="line"><span class="keyword">namespace</span> librarian &#123;</span><br><span class="line"><span class="keyword">namespace</span> impl &#123;  <span class="comment">// 仅限内部使用</span></span><br><span class="line"><span class="keyword">namespace</span> sidetable = ::pipeline_diagnostics::sidetable;</span><br><span class="line">&#125;  <span class="comment">// namespace impl</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">my_inline_function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">// 限制在一个函数中的命名空间别名</span></span><br><span class="line">  <span class="keyword">namespace</span> baz = ::foo::bar::baz;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br><span class="line">&#125;  <span class="comment">// namespace librarian</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h2 id="2-匿名命名空间和静态变量"><a href="#2-匿名命名空间和静态变量" class="headerlink" title="2. 匿名命名空间和静态变量"></a>2. 匿名命名空间和静态变量</h2><p>在 <code>.cc</code> 文件中定义一个不需要被外部引用的变量时，可以将它们放在匿名命名空间或声明为 <code>static</code> 。但是不要在 <code>.h</code> 文件中这么做。</p>
-<h2 id="3-非成员函数、静态成员函数和全局函数"><a href="#3-非成员函数、静态成员函数和全局函数" class="headerlink" title="3.非成员函数、静态成员函数和全局函数"></a>3.非成员函数、静态成员函数和全局函数</h2><ul>
+<h2><span id="2-匿名命名空间和静态变量">2. 匿名命名空间和静态变量</span></h2><p>在 <code>.cc</code> 文件中定义一个不需要被外部引用的变量时，可以将它们放在匿名命名空间或声明为 <code>static</code> 。但是不要在 <code>.h</code> 文件中这么做。</p>
+<h2><span id="3非成员函数-静态成员函数和全局函数">3.非成员函数、静态成员函数和全局函数</span></h2><ul>
 <li><p>使用静态成员函数或命名空间内的非成员函数, 尽量不要用裸的全局函数..</p>
 </li>
 <li><p>将一系列函数直接置于命名空间中，不要用类的静态方法模拟出命名空间的效果，类的静态方法应当和类的实例或静态数据紧密相关.</p>
 </li>
 <li>相比单纯为了封装若干不共享任何静态数据的静态成员函数而创建类, 不如使用命名空间。</li>
 </ul>
-<h2 id="4-局部变量"><a href="#4-局部变量" class="headerlink" title="4.局部变量"></a>4.局部变量</h2><p>将函数变量尽可能置于最小作用域内, 并在变量声明时进行初始化.</p>
+<h2><span id="4局部变量">4.局部变量</span></h2><p>将函数变量尽可能置于最小作用域内, 并在变量声明时进行初始化.</p>
 <p><strong>有一例外：</strong> 如果变量是一个对象, 每次进入作用域都要调用其构造函数, 每次退出作用域都要调用其析构函数. 这会导致效率降低.</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 低效的实现</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">1000000</span>; ++i) &#123;</span><br><span class="line">    Foo f;                  <span class="comment">// 构造函数和析构函数分别调用 1000000 次!</span></span><br><span class="line">    f.DoSomething(i);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//高效的实现</span></span><br><span class="line">Foo f;                      <span class="comment">// 构造函数和析构函数只调用 1 次</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">1000000</span>; ++i) &#123;</span><br><span class="line">    f.DoSomething(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="5-静态和全局变量"><a href="#5-静态和全局变量" class="headerlink" title="5. 静态和全局变量"></a>5. 静态和全局变量</h2><ul>
+<h2><span id="5-静态和全局变量">5. 静态和全局变量</span></h2><ul>
 <li>禁止定义静态储存周期非POD变量(POD : Plain Old Data 原生数据类型)</li>
 <li>禁止使用含有副作用的函数初始化POD全局变量，因为多编译单元中的静态变量执行时的构造和析构顺序是未明确的，这将导致代码的不可移植。</li>
 </ul>
 <p><em>TODO:这部分还看不太明白</em></p>
-<h1 id="三、类"><a href="#三、类" class="headerlink" title="三、类"></a>三、类</h1><h2 id="1-构造函数职责"><a href="#1-构造函数职责" class="headerlink" title="1.  构造函数职责"></a>1.  构造函数职责</h2><ul>
+<h1><span id="三-类">三、类</span></h1><h2><span id="1-构造函数职责">1.  构造函数职责</span></h2><ul>
 <li><p>不要在构造函数中调用虚函数。</p>
 </li>
 <li><p>不要在构造函数中尝试报告一个非致命错误。如果代码允许, 直接终止程序是一个合适的处理错误的方式. 否则, 考虑用 <code>Init()</code> 方法或工厂函数.</p>
 </li>
 </ul>
-<h2 id="2-隐式类型转化"><a href="#2-隐式类型转化" class="headerlink" title="2. 隐式类型转化"></a>2. 隐式类型转化</h2><ul>
+<h2><span id="2-隐式类型转化">2. 隐式类型转化</span></h2><ul>
 <li>不要定义隐式类型转换. 对于转换运算符和单参数构造函数, 请使用 <code>explicit</code> 关键字.</li>
 <li>接受一个 <code>std::initializer_list</code> 作为参数的构造函数也应当省略 <code>explicit</code>, 以便支持拷贝初始化 (例如 <code>MyType m = {1, 2};)</code> .</li>
 <li>拷贝和移动构造函数不应当被标记为 <code>explicit</code>, 因为它们并不执行类型转换. </li>
 </ul>
-<h2 id="3-可拷贝类型和可移动类型"><a href="#3-可拷贝类型和可移动类型" class="headerlink" title="3. 可拷贝类型和可移动类型"></a>3. 可拷贝类型和可移动类型</h2><ul>
+<h2><span id="3-可拷贝类型和可移动类型">3. 可拷贝类型和可移动类型</span></h2><ul>
 <li><p>除非你的类型需要才让它们支持拷贝 / 移动. 否则, 就把隐式产生的拷贝和移动函数禁用.</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// MyClass is neither copyable nor movable.</span></span><br><span class="line">MyClass(<span class="keyword">const</span> MyClass&amp;) = <span class="keyword">delete</span>;</span><br><span class="line">MyClass&amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> MyClass&amp;) = <span class="keyword">delete</span>;</span><br></pre></td></tr></table></figure>
 </li>
@@ -198,34 +204,34 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span> &#123;</span></span><br><span class="line"> <span class="keyword">public</span>:</span><br><span class="line">  Foo(Foo&amp;&amp; other) : field_(other.field) &#123;&#125;</span><br><span class="line">  <span class="comment">// 差, 只定义了移动构造函数, 而没有定义对应的赋值运算符.</span></span><br><span class="line"></span><br><span class="line"> <span class="keyword">private</span>:</span><br><span class="line">  Field field_;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h2 id="4-结构体VS类"><a href="#4-结构体VS类" class="headerlink" title="4. 结构体VS类"></a>4. 结构体VS类</h2><ul>
+<h2><span id="4-结构体vs类">4. 结构体VS类</span></h2><ul>
 <li>仅当只有数据成员时使用 <code>struct</code>, 其它一概使用 <code>class</code>.</li>
 <li>如果需要更多的函数功能, <code>class</code> 更适合. 如果拿不准, 就用 <code>class</code>.</li>
 </ul>
-<h2 id="5-继承"><a href="#5-继承" class="headerlink" title="5. 继承"></a>5. 继承</h2><ul>
+<h2><span id="5-继承">5. 继承</span></h2><ul>
 <li>使用组合常常比使用继承更合理. 如果使用继承的话, 定义为 <code>public</code> 继承.</li>
 <li>所有继承必须是 <code>public</code> 的. 如果你想使用私有继承, 你应该替换成把基类的实例作为成员对象的方式.</li>
 </ul>
-<h2 id="6-多重继承"><a href="#6-多重继承" class="headerlink" title="6. 多重继承"></a>6. 多重继承</h2><ul>
+<h2><span id="6-多重继承">6. 多重继承</span></h2><ul>
 <li>只在以下情况我们才允许多重继承: 最多只有一个基类是非抽象类; 其它基类都是以 <code>Interface</code> 为后缀的 纯接口类</li>
 </ul>
-<h2 id="7-接口"><a href="#7-接口" class="headerlink" title="7. 接口"></a>7. 接口</h2><p>当一个类满足以下要求时, 称之为纯接口，这些类以 <code>Interface</code> 为后缀:</p>
+<h2><span id="7-接口">7. 接口</span></h2><p>当一个类满足以下要求时, 称之为纯接口，这些类以 <code>Interface</code> 为后缀:</p>
 <ul>
 <li>只有纯虚函数 (“<code>=0</code>”) 和静态函数 (除了下文提到的析构函数).</li>
 <li>没有非静态数据成员.</li>
 <li>没有定义任何构造函数. 如果有, 也不能带有参数, 并且必须为 <code>protected</code>.</li>
 <li>如果它是一个子类, 也只能从满足上述条件并以 <code>Interface</code> 为后缀的类继承.</li>
 </ul>
-<h2 id="8-运算符重载"><a href="#8-运算符重载" class="headerlink" title="8.运算符重载"></a>8.运算符重载</h2><ul>
+<h2><span id="8运算符重载">8.运算符重载</span></h2><ul>
 <li>只有在意义明显, 不会出现奇怪的行为并且与对应的内建运算符的行为一致时才定义重载运算符. 例如, <code>|</code> 要作为位或或逻辑或来使用, 而不是作为 shell 中的管道.</li>
 <li>建议不要将不进行修改的二元运算符定义为成员函数.</li>
 <li>不要引入用户定义字面量。</li>
 <li>如果你定义了一个运算符, 请将其相关且有意义的运算符都进行定义, 并且保证这些定义的语义是一致的。 例如, 如果你重载了 <code>&lt;</code>, 那么请将所有的比较运算符都进行重载, 并且保证对于同一组参数, <code>&lt;</code> 和 <code>&gt;</code> 不会同时返回 <code>true</code>. </li>
 </ul>
-<h2 id="9-存取控制"><a href="#9-存取控制" class="headerlink" title="9. 存取控制"></a>9. 存取控制</h2><ul>
+<h2><span id="9-存取控制">9. 存取控制</span></h2><ul>
 <li>将 <em>所有</em> 数据成员声明为 <code>private</code>, 除非是 <code>static const</code> 类型成员</li>
 </ul>
-<h2 id="10-说明顺序"><a href="#10-说明顺序" class="headerlink" title="10. 说明顺序"></a>10. 说明顺序</h2><ul>
+<h2><span id="10-说明顺序">10. 说明顺序</span></h2><ul>
 <li><p>类定义应以 <code>public:</code> 开始, 后跟 <code>protected:</code>, 最后是 <code>private:</code>. 省略空部分.</p>
 </li>
 <li><p>建议将类似的声明放在一起, 并且建议以如下的顺序: </p>
@@ -243,28 +249,28 @@
 <li><p>不要将大段的函数定义内联在类定义中. 只有那些普通的, 或性能关键且短小的函数可以内联在类定义中.</p>
 </li>
 </ul>
-<h1 id="四、函数"><a href="#四、函数" class="headerlink" title="四、函数"></a>四、函数</h1><h2 id="1-参数顺序"><a href="#1-参数顺序" class="headerlink" title="1.参数顺序"></a>1.参数顺序</h2><ul>
+<h1><span id="四-函数">四、函数</span></h1><h2><span id="1参数顺序">1.参数顺序</span></h2><ul>
 <li>函数的参数顺序为: 输入参数在先, 后跟输出参数.</li>
 <li><strong>输入参数</strong>通常是值参或 <code>const</code> 引用, <strong>输出参数或输入/输出参数</strong>则一般为非 <code>const</code> 指针.</li>
 </ul>
-<h2 id="2-编写简短函数"><a href="#2-编写简短函数" class="headerlink" title="2.编写简短函数"></a>2.编写简短函数</h2><ul>
+<h2><span id="2编写简短函数">2.编写简短函数</span></h2><ul>
 <li>果函数超过 40 行, 可以思索一下能不能在不影响程序结构的前提下对其进行分割.</li>
 </ul>
-<h2 id="3-引用参数"><a href="#3-引用参数" class="headerlink" title="3. 引用参数"></a>3. 引用参数</h2><ul>
+<h2><span id="3-引用参数">3. 引用参数</span></h2><ul>
 <li>函数参数列表中, 所有引用参数都必须是 <code>const</code></li>
 <li><strong>输入参数</strong>是值参或 <code>const</code> 引用, <strong>输出参数</strong>为指针. 输入参数可以是 <code>const</code> 指针, 但决不能是非 <code>const</code> 的引用参数, 除非特殊要求, 比如 <code>swap()</code>.</li>
 </ul>
 <blockquote>
 <p>这实际上是Google codestyle 的一个硬性约定</p>
 </blockquote>
-<h2 id="4-函数重载"><a href="#4-函数重载" class="headerlink" title="4. 函数重载"></a>4. 函数重载</h2><ul>
+<h2><span id="4-函数重载">4. 函数重载</span></h2><ul>
 <li>若要使用函数重载, 则必须能让读者一看调用点就胸有成竹, 而不用花心思猜测调用的重载函数到底是哪一种. 这一规则也适用于构造函数.</li>
 </ul>
-<h2 id="5-缺省参数"><a href="#5-缺省参数" class="headerlink" title="5. 缺省参数"></a>5. 缺省参数</h2><ul>
+<h2><span id="5-缺省参数">5. 缺省参数</span></h2><ul>
 <li>只允许在非虚函数中使用缺省参数, 且必须保证缺省参数的值始终一致. . (例如, 不要写像 <code>void f(int n = counter++);</code> 这样的代码.)</li>
 <li>对于虚函数, 不允许使用缺省参数, 因为在虚函数中缺省参数不一定能正常工作</li>
 </ul>
-<h2 id="6-函数返回类型后置语法"><a href="#6-函数返回类型后置语法" class="headerlink" title="6. 函数返回类型后置语法"></a>6. 函数返回类型后置语法</h2><ul>
+<h2><span id="6-函数返回类型后置语法">6. 函数返回类型后置语法</span></h2><ul>
 <li>只有在常规写法 (返回类型前置) 不便于书写或不便于阅读时使用返回类型后置语法.</li>
 </ul>
 

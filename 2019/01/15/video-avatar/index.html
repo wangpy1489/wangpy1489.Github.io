@@ -89,21 +89,22 @@ Github: https://github.com/thmoa/videoavatars
     </span>
   </div>
 
+  
 
   
 
   <div class="article-content">
     <div class="entry">
       
-        <h1 id="Video-avatars"><a href="#Video-avatars" class="headerlink" title="Video_avatars"></a>Video_avatars</h1><p>这个项目来自马普所的一篇论文<em>Video Based Reconstruction of 3D People Models</em> ，日前，研究人员公布了他们的实现以及数据集。</p>
+        <h1><span id="video_avatars">Video_avatars</span></h1><p>这个项目来自马普所的一篇论文<em>Video Based Reconstruction of 3D People Models</em> ，日前，研究人员公布了他们的实现以及数据集。</p>
 <ul>
 <li>Website:<a href="https://graphics.tu-bs.de/people-snapshot" target="_blank" rel="noopener">https://graphics.tu-bs.de/people-snapshot</a></li>
 <li>Github: <a href="https://github.com/thmoa/videoavatars" target="_blank" rel="noopener">https://github.com/thmoa/videoavatars</a></li>
 </ul>
 <p>由于其文档比较匮乏，使用它的代码对自己的数据进行复现并不容易，经过几天努力，成功的完成了整个建模过程，故记录如下。相关代码以上传到了我的<a href="https://github.com/wangpy1489/videoavatars_custom" target="_blank" rel="noopener">Github</a>上。</p>
 <a id="more"></a>
-<h2 id="原版本Demo"><a href="#原版本Demo" class="headerlink" title="原版本Demo"></a>原版本Demo</h2><p>请先使用原版本Demo来验证环境部署成功:<a href="https://github.com/thmoa/videoavatars/blob/master/README.md" target="_blank" rel="noopener">Video Avatars</a></p>
-<h2 id="数据准备"><a href="#数据准备" class="headerlink" title="数据准备"></a>数据准备</h2><p>这个部分，我们将利用自摄的视频来进行的建模尝试，首先需要有一段如<a href="https://graphics.tu-bs.de/upload/publications/alldieck2018video/alldieck2018videoavatar.mp4" target="_blank" rel="noopener">原论文视频</a>相同的自摄视频，提供我的格式：</p>
+<h2><span id="原版本demo">原版本Demo</span></h2><p>请先使用原版本Demo来验证环境部署成功:<a href="https://github.com/thmoa/videoavatars/blob/master/README.md" target="_blank" rel="noopener">Video Avatars</a></p>
+<h2><span id="数据准备">数据准备</span></h2><p>这个部分，我们将利用自摄的视频来进行的建模尝试，首先需要有一段如<a href="https://graphics.tu-bs.de/upload/publications/alldieck2018video/alldieck2018videoavatar.mp4" target="_blank" rel="noopener">原论文视频</a>相同的自摄视频，提供我的格式：</p>
 <table>
 <thead>
 <tr>
@@ -130,7 +131,7 @@ Github: https://github.com/thmoa/videoavatars
 </tbody>
 </table>
 <p>之后你可以使用 <code>frame_get.py</code>来获取到所有视频帧，以供下一步处理。</p>
-<h3 id="Step1-视频帧人体区域获取"><a href="#Step1-视频帧人体区域获取" class="headerlink" title="Step1:视频帧人体区域获取"></a>Step1:视频帧人体区域获取</h3><pre><code>这一步中，我们需要获得每一视频帧中，如下图形式的人体区域的二值图像：
+<h3><span id="step1视频帧人体区域获取">Step1:视频帧人体区域获取</span></h3><pre><code>这一步中，我们需要获得每一视频帧中，如下图形式的人体区域的二值图像：
 
 ![mask1](https://wpy-blog.oss-cn-shanghai.aliyuncs.com/mask1.jpg/wpy-blog)
 </code></pre><p>在这一步中，我采用了百度AI开放平台的人像分割API来进行，你也可以采用其他AI开放平台的API，或者使用自己的语义分割实现。这一部分脚本在 <code>human_mask.py</code> 中可以找到。</p>
@@ -141,17 +142,17 @@ Github: https://github.com/thmoa/videoavatars
 <p>可以看到，有一些无意义的区域，为了提升准确率，需要对mask进行取最大连通域的处理，之后可以再进行一次形态学膨胀操作消除空洞。这部分工作在<code>mask_process.py</code>中实现。</p>
 <p><img src="https://wpy-blog.oss-cn-shanghai.aliyuncs.com/mask3.jpg/wpy-blog" alt="mask3"></p>
 <p>至此，我们就完成了mask的处理工作，之后，利用<code>video_avatars/prpare_data/mask2hdf5.py</code>即可将其转化为HDF5文件。 </p>
-<h3 id="Step2：人体关节点标识"><a href="#Step2：人体关节点标识" class="headerlink" title="Step2：人体关节点标识"></a>Step2：人体关节点标识</h3><pre><code>这一步需要将每一帧的关节点及其坐标转换为Jason格式，这里直接使用，Openpose来进行关节点识别。同样你也可以使用自己的实现或其他途径来进行关节点识别，只需符合COCO模型的关节点模式：
+<h3><span id="step2人体关节点标识">Step2：人体关节点标识</span></h3><pre><code>这一步需要将每一帧的关节点及其坐标转换为Jason格式，这里直接使用，Openpose来进行关节点识别。同样你也可以使用自己的实现或其他途径来进行关节点识别，只需符合COCO模型的关节点模式：
 </code></pre><p><img src="https://ws1.sinaimg.cn/large/662f5c1fly1fxnug3i1atj20dc0hpt8q.jpg" alt="COCO模型"></p>
 <p>Openpose具体安装和使用可以参考<a href="https://github.com/CMU-Perceptual-Computing-Lab/openpose/blob/master/doc/installation.md" target="_blank" rel="noopener">这里</a>，我就不再详细介绍。</p>
 <p>获取到所有的关节点的json文件后，使用<code>video_avatars/prpare_data/2djoints2hdf5.py</code> 可将其转化为HDF5文件。</p>
-<h3 id="Step3-相机相关参数"><a href="#Step3-相机相关参数" class="headerlink" title="Step3:相机相关参数"></a>Step3:相机相关参数</h3><p>在<code>video_avatars/prpare_data</code>下，还有    <code>create_camera.py</code>来进行相机相关参数的序列化。</p>
+<h3><span id="step3相机相关参数">Step3:相机相关参数</span></h3><p>在<code>video_avatars/prpare_data</code>下，还有    <code>create_camera.py</code>来进行相机相关参数的序列化。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">parser.add_argument(<span class="string">'out'</span>, type=str, help=<span class="string">"Output file (.pkl)"</span>)</span><br><span class="line">parser.add_argument(<span class="string">'width'</span>, type=int, help=<span class="string">"Frame width in px"</span>)</span><br><span class="line">parser.add_argument(<span class="string">'height'</span>, type=int, help=<span class="string">"Frame height in px"</span>)</span><br><span class="line">parser.add_argument(<span class="string">'-f'</span>, type=float, nargs=<span class="string">'*'</span>, help=<span class="string">"Focal length in px (2,)"</span>)</span><br><span class="line">parser.add_argument(<span class="string">'-c'</span>, type=float, nargs=<span class="string">'*'</span>, help=<span class="string">"Principal point in px (2,)"</span>)</span><br><span class="line">parser.add_argument(<span class="string">'-k'</span>, type=float, nargs=<span class="string">'*'</span>, help=<span class="string">"Distortion coefficients (5,)"</span>)</span><br></pre></td></tr></table></figure>
 <p>主要参数是分辨率以及像素焦距（Focal length in pixels ），由于我使用手机拍摄，其他参数难以获取，如果你能获取到准确数据可以将相应数据加入。</p>
 <p>对于像素焦距（Focal length in pixels ），有以下公式可以计算：</p>
 <p>$$<br>Focal length in pixels = (image width in pixels) * (focal length on earth) / (CCD width on earth)<br>$$</p>
-<h2 id="构建运行"><a href="#构建运行" class="headerlink" title="构建运行"></a>构建运行</h2><p>与之前的Demo相同，可以在<a href="https://github.com/thmoa/videoavatars#usage" target="_blank" rel="noopener">这里</a>找到具体命令。</p>
-<h2 id="最终效果"><a href="#最终效果" class="headerlink" title="最终效果"></a>最终效果</h2><ul>
+<h2><span id="构建运行">构建运行</span></h2><p>与之前的Demo相同，可以在<a href="https://github.com/thmoa/videoavatars#usage" target="_blank" rel="noopener">这里</a>找到具体命令。</p>
+<h2><span id="最终效果">最终效果</span></h2><ul>
 <li><p>无衣着效果：</p>
 <p><img src="https://wpy-blog.oss-cn-shanghai.aliyuncs.com/result1.PNG/wpy-blog" alt="result"></p>
 </li>

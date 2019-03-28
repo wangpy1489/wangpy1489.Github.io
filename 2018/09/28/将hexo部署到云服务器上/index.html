@@ -84,15 +84,16 @@
     </span>
   </div>
 
+  
 
   
 
   <div class="article-content">
     <div class="entry">
       
-        <h1 id="一、准备"><a href="#一、准备" class="headerlink" title="一、准备"></a>一、准备</h1><h2 id="本地环境配置"><a href="#本地环境配置" class="headerlink" title="本地环境配置"></a><strong>本地环境配置</strong></h2><p>  本文本地环境为<code>Windows10</code>,确保你的计算机环境中装有 <code>nodeJS</code>、<code>npm</code>以及 <code>Git</code>,再进行接下来的步骤。</p>
+        <h1><span id="一-准备">一、准备</span></h1><h2><span id="本地环境配置"><strong>本地环境配置</strong></span></h2><p>  本文本地环境为<code>Windows10</code>,确保你的计算机环境中装有 <code>nodeJS</code>、<code>npm</code>以及 <code>Git</code>,再进行接下来的步骤。</p>
 <a id="more"></a>
-<h3 id="初始化-hexo"><a href="#初始化-hexo" class="headerlink" title="初始化 hexo"></a>初始化 <code>hexo</code></h3><ol>
+<h3><span id="初始化-hexo">初始化 <code>hexo</code></span></h3><ol>
 <li><strong>安装</strong></li>
 </ol>
 <p>打开命令行，执行以下命令：</p>
@@ -103,8 +104,8 @@
 <p>安装完成后，进入建立你的<code>hexo</code>目录,并完成初始化:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mkdir hexo-blog</span><br><span class="line"><span class="built_in">cd</span> hexo-blog</span><br><span class="line">hexo init myblog</span><br><span class="line"><span class="built_in">cd</span> myblog</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
 <hr>
-<h1 id="二、服务器配置"><a href="#二、服务器配置" class="headerlink" title="二、服务器配置"></a>二、服务器配置</h1><p>服务器系统为<code>CentOS(7.1)</code></p>
-<h2 id="搭建远程Git库"><a href="#搭建远程Git库" class="headerlink" title="搭建远程Git库"></a>搭建远程<code>Git</code>库</h2><ol>
+<h1><span id="二-服务器配置">二、服务器配置</span></h1><p>服务器系统为<code>CentOS(7.1)</code></p>
+<h2><span id="搭建远程git库">搭建远程<code>Git</code>库</span></h2><ol>
 <li><p><strong>登陆到远程服务器</strong></p>
 </li>
 <li><p><strong>安装<code>git</code></strong></p>
@@ -126,14 +127,14 @@
 </ol>
 <p>找到另外的空白文件夹，执行如下命令<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone git@server_ip:/home/git/repos/blog.git</span><br></pre></td></tr></table></figure></p>
 <p>如果成功的完成克隆，则仓库可用。</p>
-<h2 id="设置ssh公钥访问"><a href="#设置ssh公钥访问" class="headerlink" title="设置ssh公钥访问"></a>设置<code>ssh</code>公钥访问</h2><p>为了免去每次部署博客时输入密码的麻烦，我们需要采用<code>ssh</code>公钥来登陆服务器.</p>
+<h2><span id="设置ssh公钥访问">设置<code>ssh</code>公钥访问</span></h2><p>为了免去每次部署博客时输入密码的麻烦，我们需要采用<code>ssh</code>公钥来登陆服务器.</p>
 <ul>
 <li>进入<code>C://User//你的用户名/.ssh</code>,查看是否已有密钥对:<code>id_rsa</code>和<code>id_rsa.pub</code></li>
 <li>若没有已建好密钥对<a href="https://www.cnblogs.com/my93/p/5873498.html" target="_blank" rel="noopener">参考此文</a>。</li>
 <li>将<code>id_rsa.pub</code>通过<code>WinScp</code>等工具上传至远端服务器<code>/home/git/.ssh</code>目录下，并改名为<code>authorized_keys</code>.<br><img src="https://wpy-blog.oss-cn-shanghai.aliyuncs.com/%E5%85%AC%E9%92%A5.PNG/wpy-blog" alt="WinScp"></li>
 <li>建议登陆<code>git</code>用户上传，上传后确保公钥拥有者为git</li>
 </ul>
-<h2 id="搭建nginx服务器"><a href="#搭建nginx服务器" class="headerlink" title="搭建nginx服务器"></a>搭建<code>nginx</code>服务器</h2><ol>
+<h2><span id="搭建nginx服务器">搭建<code>nginx</code>服务器</span></h2><ol>
 <li><strong>安装<code>nginx</code></strong></li>
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y ngix</span><br></pre></td></tr></table></figure>
@@ -145,9 +146,9 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">nginx -s stop <span class="comment"># 先停止nginx</span></span><br><span class="line"><span class="built_in">cd</span> /etc/nginx</span><br><span class="line">mv nginx.conf nginx.conf.copy</span><br><span class="line">cp nginx.conf.defult nginx.conf <span class="comment">#移除测试配置，导入默认配置</span></span><br><span class="line">vim nginx.conf</span><br><span class="line"><span class="comment">#修改 root 解析路径 /home/git/hexo/blog</span></span><br><span class="line"><span class="comment"># 同时将 user 改为 root 如下图，不然nginx无法访问</span></span><br><span class="line">nginx -s reload</span><br></pre></td></tr></table></figure>
 <p><img src="http://wpy-blog.oss-cn-shanghai.aliyuncs.com/nginx%E9%85%8D%E7%BD%AE.PNG/wpy-blog" alt="nginx 配置"><br><img src="http://wpy-blog.oss-cn-shanghai.aliyuncs.com/nginx%E9%85%8D%E7%BD%AE1.PNG/wpy-blog" alt="nginx 配置"></p>
 <hr>
-<h1 id="三、本地部署配置"><a href="#三、本地部署配置" class="headerlink" title="三、本地部署配置"></a>三、本地部署配置</h1><p>回到本地<code>hexo</code>目录，修配置文件<code>_config.yml</code><br><img src="http://wpy-blog.oss-cn-shanghai.aliyuncs.com/hexo%E9%85%8D%E7%BD%AE.PNG/wpy-blog" alt="hexo 配置"></p>
-<h2 id="以上，所有工作顺利完成！-使用以下命令部署你的hexo"><a href="#以上，所有工作顺利完成！-使用以下命令部署你的hexo" class="headerlink" title="以上，所有工作顺利完成！ 使用以下命令部署你的hexo:"></a>以上，所有工作顺利完成！ 使用以下命令部署你的<code>hexo</code>:</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g  <span class="comment">#生成静态文件</span></span><br><span class="line">hexo d  <span class="comment">#部署到远端</span></span><br></pre></td></tr></table></figure>
-<h1 id="四、总结"><a href="#四、总结" class="headerlink" title="四、总结"></a>四、总结</h1><p>整个过程经历了许多波折，大多是<code>ssh公钥</code>相关的配置问题，不过最终，还是解决了问题，可以开心地写博客了！</p>
+<h1><span id="三-本地部署配置">三、本地部署配置</span></h1><p>回到本地<code>hexo</code>目录，修配置文件<code>_config.yml</code><br><img src="http://wpy-blog.oss-cn-shanghai.aliyuncs.com/hexo%E9%85%8D%E7%BD%AE.PNG/wpy-blog" alt="hexo 配置"></p>
+<h2><span id="以上所有工作顺利完成-使用以下命令部署你的hexo">以上，所有工作顺利完成！ 使用以下命令部署你的<code>hexo</code>:</span></h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g  <span class="comment">#生成静态文件</span></span><br><span class="line">hexo d  <span class="comment">#部署到远端</span></span><br></pre></td></tr></table></figure>
+<h1><span id="四-总结">四、总结</span></h1><p>整个过程经历了许多波折，大多是<code>ssh公钥</code>相关的配置问题，不过最终，还是解决了问题，可以开心地写博客了！</p>
 
       
     </div>

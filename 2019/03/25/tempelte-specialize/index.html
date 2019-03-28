@@ -87,34 +87,35 @@
     </span>
   </div>
 
+  
 
   
 
   <div class="article-content">
     <div class="entry">
       
-        <h1 id="函数模板具体化"><a href="#函数模板具体化" class="headerlink" title="函数模板具体化"></a>函数模板具体化</h1><p>C++中允许使用模板来进行泛型编程，在C++中模板原型如下所示：</p>
+        <h1><span id="函数模板具体化">函数模板具体化</span></h1><p>C++中允许使用模板来进行泛型编程，在C++中模板原型如下所示：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(T &amp;a, T &amp;b)</span></span></span><br></pre></td></tr></table></figure>
 <p>模板原型不提供函数声明和定义，需要经过模板具体化过程生成相应声明和定义。</p>
-<h2 id="1-隐式实例化"><a href="#1-隐式实例化" class="headerlink" title="1. 隐式实例化"></a>1. 隐式实例化</h2><p>最初，编译器只能通过隐式实例化，通过对参数列表的类型推断，来使用模板生成对应函数定义，这也是我们最常用的方法；如可以像下面这样使用上面定义的函数模板：</p>
+<h2><span id="1-隐式实例化">1. 隐式实例化</span></h2><p>最初，编译器只能通过隐式实例化，通过对参数列表的类型推断，来使用模板生成对应函数定义，这也是我们最常用的方法；如可以像下面这样使用上面定义的函数模板：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">short</span> a, b;</span><br><span class="line">swap(a, b); <span class="comment">// T 为 short 类型</span></span><br><span class="line"><span class="keyword">int</span> c, d;</span><br><span class="line">swap(c, d); <span class="comment">// T 为 int 类型</span></span><br></pre></td></tr></table></figure>
-<h2 id="2-显式实例化"><a href="#2-显式实例化" class="headerlink" title="2. 显式实例化"></a>2. 显式实例化</h2><p> 现在C++还允许显式实例化(explicit instrantiation)。这意味着可以直接命令编译器创建特定的实例，其语法有两种形式：</p>
+<h2><span id="2-显式实例化">2. 显式实例化</span></h2><p> 现在C++还允许显式实例化(explicit instrantiation)。这意味着可以直接命令编译器创建特定的实例，其语法有两种形式：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> <span class="keyword">void</span> swap&lt;<span class="keyword">int</span>&gt;(<span class="keyword">int</span>, <span class="keyword">int</span>); <span class="comment">//显式实例化声明</span></span><br><span class="line"><span class="keyword">or</span></span><br><span class="line">swap&lt;<span class="keyword">int</span>&gt;(a,b) <span class="comment">//直接在程序中调用</span></span><br></pre></td></tr></table></figure>
 <p>显示实例化可以省去编译器的类型推断过程。</p>
-<h2 id="3-显式具体化"><a href="#3-显式具体化" class="headerlink" title="3.显式具体化"></a>3.显式具体化</h2><p>显式实例化和显式具体化区别在于：这些声明的意思是“不要使用swap()模板来生成函数定义，而应使用专门为int类型显式地定义的函数定义。”这些原型必须有自己的函数定义。显式具体化声明在关键字template后包含&lt;&gt;，而显式实例化没有。</p>
+<h2><span id="3显式具体化">3.显式具体化</span></h2><p>显式实例化和显式具体化区别在于：这些声明的意思是“不要使用swap()模板来生成函数定义，而应使用专门为int类型显式地定义的函数定义。”这些原型必须有自己的函数定义。显式具体化声明在关键字template后包含&lt;&gt;，而显式实例化没有。</p>
 <p>显式具体化有两种等价声明：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;&gt; <span class="keyword">void</span> swap&lt;<span class="keyword">int</span>&gt; (<span class="keyword">int</span> &amp;, <span class="keyword">int</span> &amp;);     <span class="comment">//explicit specialization</span></span><br><span class="line"><span class="keyword">template</span> &lt;&gt; <span class="function"><span class="keyword">void</span> <span class="title">swap</span> <span class="params">(<span class="keyword">int</span> &amp;, <span class="keyword">int</span> &amp;)</span></span>;     <span class="comment">//根据参数列表的具体化</span></span><br></pre></td></tr></table></figure>
 <p> 警告：试图在同一个文件中(或转换单元)中使用同一种类型的显式实例化和显式具体化 将出错。</p>
 <p><strong>常规模板，具体化模板，非模板函数的优先调用顺序：</strong></p>
 <p><strong>非模板函数（普通函数）&gt; 具体化模板函数 &gt; 常规模板</strong></p>
-<h1 id="类模板具体化"><a href="#类模板具体化" class="headerlink" title="类模板具体化"></a>类模板具体化</h1><p> 使用类模板可以通过类模板自动生成多个类，其模板定义如下：</p>
+<h1><span id="类模板具体化">类模板具体化</span></h1><p> 使用类模板可以通过类模板自动生成多个类，其模板定义如下：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T1, <span class="keyword">typename</span> T2&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Point</span> &#123;</span></span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="1-隐式实例化-1"><a href="#1-隐式实例化-1" class="headerlink" title="1.隐式实例化"></a>1.隐式实例化</h2><h2 id="2-显式实例化-1"><a href="#2-显式实例化-1" class="headerlink" title="2.显式实例化"></a>2.显式实例化</h2><p>这两个部分的实例化语法，类模板和函数模板没有太大的区别。</p>
-<h2 id="3-显示具体化"><a href="#3-显示具体化" class="headerlink" title="3.显示具体化"></a>3.显示具体化</h2><p>类模板的显示具体化语法如下：</p>
+<h2><span id="1隐式实例化">1.隐式实例化</span></h2><h2><span id="2显式实例化">2.显式实例化</span></h2><p>这两个部分的实例化语法，类模板和函数模板没有太大的区别。</p>
+<h2><span id="3显示具体化">3.显示具体化</span></h2><p>类模板的显示具体化语法如下：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Point</span>&lt;char *, char *&gt; &#123;</span></span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>其中模板类方法的实现的具体化语法和函数模板有所区别，不需要带模板头template&lt;&gt;：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> Point&lt;<span class="keyword">char</span>*, <span class="keyword">char</span>*&gt;::display() <span class="keyword">const</span> &#123;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">"x="</span>&lt;&lt;m_x&lt;&lt;<span class="string">", y="</span>&lt;&lt;m_y&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="4-部分显式具体化"><a href="#4-部分显式具体化" class="headerlink" title="4. 部分显式具体化"></a>4. 部分显式具体化</h2><p>类模板还支持部分显式具体化，即只具体化部分模板参数类型：</p>
+<h2><span id="4-部分显式具体化">4. 部分显式具体化</span></h2><p>类模板还支持部分显式具体化，即只具体化部分模板参数类型：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T2&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Point</span>&lt;char*, T2&gt; &#123;</span></span><br><span class="line">	...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 部分显式具体化还是需要加上模板头</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T2&gt;</span><br><span class="line"><span class="keyword">void</span> Point&lt;<span class="keyword">char</span>*,T2&gt;::display() <span class="keyword">const</span> &#123;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">"x="</span>&lt;&lt;m_x&lt;&lt;<span class="string">" | y="</span>&lt;&lt;m_y&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>部分显式具体化只能用于类模板，不能用于函数模板。</p>
 

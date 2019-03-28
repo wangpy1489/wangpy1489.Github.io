@@ -3,14 +3,15 @@
 <head>
   <meta charset="utf-8">
   
-  <title>EffectiveC++ 学习笔记 | Norton&#39;s Blog | You miss 100% of the shot you do not take.</title>
+  <title>copy_move_constractor | Norton&#39;s Blog | You miss 100% of the shot you do not take.</title>
 
   
   <meta name="author" content="王谱越">
   
 
   
-  <meta name="description" content="Principle 1">
+  <meta name="description" content="拷贝构造函数和拷贝赋值函数12345678910//拷贝构造函数A(const A&amp;amp; t)&amp;#123;    ...&amp;#125;//拷贝赋值运算符A&amp;amp; operator=(const A&amp;amp; rhs)&amp;#123;    ...&amp;#125;
+移动构造函数和移动赋值函数123456">
   
 
   
@@ -22,7 +23,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-  <meta property="og:title" content="EffectiveC++ 学习笔记"/>
+  <meta property="og:title" content="copy_move_constractor"/>
 
   <meta property="og:site_name" content="Norton&#39;s Blog"/>
 
@@ -70,15 +71,15 @@
 
   
     
-    <h3 class="article-title"><span>EffectiveC++ 学习笔记</span></h3>
+    <h3 class="article-title"><span>copy_move_constractor</span></h3>
     
   
 
   <div class="article-top-meta">
     <span class="posted-on">
-      <a href="/2019/03/25/effective-C-note/" rel="bookmark">
-        <time class="entry-date published" datetime="2019-03-25T12:48:46.000Z">
-          2019-03-25
+      <a href="/2019/03/27/copy-move-constractor/" rel="bookmark">
+        <time class="entry-date published" datetime="2019-03-27T15:56:18.000Z">
+          2019-03-27
         </time>
       </a>
     </span>
@@ -91,7 +92,10 @@
   <div class="article-content">
     <div class="entry">
       
-        <h1><span id="principle-1">Principle 1</span></h1>
+        <h1><span id="拷贝构造函数和拷贝赋值函数">拷贝构造函数和拷贝赋值函数</span></h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//拷贝构造函数</span></span><br><span class="line">A(<span class="keyword">const</span> A&amp; t)</span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//拷贝赋值运算符</span></span><br><span class="line">A&amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> A&amp; rhs)</span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1><span id="移动构造函数和移动赋值函数">移动构造函数和移动赋值函数</span></h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//移动构造函数</span></span><br><span class="line">A(A&amp;&amp; t)</span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//移动赋值运算符</span></span><br><span class="line">A&amp; <span class="keyword">operator</span>=(A&amp;&amp; rhs)</span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>#</p>
+
       
     </div>
 
@@ -105,7 +109,7 @@
 
     <span class="post-categories">
       <i class="icon-categories"></i>
-        <a href="/categories/读书笔记/">读书笔记</a>
+        <a href="/categories/知识辨析/">知识辨析</a>
     </span>
     
 

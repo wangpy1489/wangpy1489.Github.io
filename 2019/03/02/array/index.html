@@ -146,13 +146,14 @@ find(a.begin(),a.end(),10)
     </span>
   </div>
 
+  
 
   
 
   <div class="article-content">
     <div class="entry">
       
-        <h1 id="常用方法与函数"><a href="#常用方法与函数" class="headerlink" title="常用方法与函数"></a>常用方法与函数</h1><p>在C++中，常用vector来作为数组容器。因此我们只讨论vector的相关方法与函数。</p>
+        <h1><span id="常用方法与函数">常用方法与函数</span></h1><p>在C++中，常用vector来作为数组容器。因此我们只讨论vector的相关方法与函数。</p>
 <table>
 <thead>
 <tr>
@@ -219,7 +220,7 @@ find(a.begin(),a.end(),10)
 </tbody>
 </table>
 <a id="more"></a>
-<h1 id="数组遍历"><a href="#数组遍历" class="headerlink" title="数组遍历"></a>数组遍历</h1><p>数组遍历一般有两种方式，（1）下标访问遍历，（2）使用迭代器遍历。</p>
+<h1><span id="数组遍历">数组遍历</span></h1><p>数组遍历一般有两种方式，（1）下标访问遍历，（2）使用迭代器遍历。</p>
 <ol>
 <li><p>使用下标遍历</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a[<span class="number">6</span>]=&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>&#125;;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; b(a,a+<span class="number">4</span>);</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=b.size()<span class="number">-1</span>;i++)</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;b[i]&lt;&lt;<span class="string">" "</span>;</span><br></pre></td></tr></table></figure>
@@ -228,7 +229,7 @@ find(a.begin(),a.end(),10)
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a[<span class="number">6</span>]=&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>&#125;;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; b(a,a+<span class="number">4</span>);</span><br><span class="line"><span class="keyword">for</span>(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator it=b.begin();it!=b.end();it++)</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;*it&lt;&lt;<span class="string">" "</span>;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<h1 id="常见题型及其常见思路"><a href="#常见题型及其常见思路" class="headerlink" title="常见题型及其常见思路"></a>常见题型及其常见思路</h1><h2 id="特定模式的搜索问题"><a href="#特定模式的搜索问题" class="headerlink" title="特定模式的搜索问题"></a>特定模式的搜索问题</h2><p>​    这类题型会提供你一个特定的模式，要求你在数组中搜索，一般要求回答出现位置或者是否存在，主要考察数组的遍历。</p>
+<h1><span id="常见题型及其常见思路">常见题型及其常见思路</span></h1><h2><span id="特定模式的搜索问题">特定模式的搜索问题</span></h2><p>​    这类题型会提供你一个特定的模式，要求你在数组中搜索，一般要求回答出现位置或者是否存在，主要考察数组的遍历。</p>
 <ol>
 <li><p>暴力搜索</p>
 <p>直接遍历即可，一般都要O（n^2)的复杂度，根据一些题目具体的不同可以做一些简化。</p>
@@ -240,7 +241,7 @@ find(a.begin(),a.end(),10)
 <p>如果题目中的模式组合比较有限，则可以从模式本身出发进行问题转化，将对数组的遍历转化为有限模式的统计，复杂度可降至O（n）甚至O（1）。</p>
 </li>
 </ol>
-<h2 id="逐个修改问题"><a href="#逐个修改问题" class="headerlink" title="逐个修改问题"></a>逐个修改问题</h2><h2 id="重复问题"><a href="#重复问题" class="headerlink" title="重复问题"></a>重复问题</h2><h2 id="交换与旋转问题"><a href="#交换与旋转问题" class="headerlink" title="交换与旋转问题"></a>交换与旋转问题</h2>
+<h2><span id="逐个修改问题">逐个修改问题</span></h2><h2><span id="重复问题">重复问题</span></h2><h2><span id="交换与旋转问题">交换与旋转问题</span></h2>
       
     </div>
 

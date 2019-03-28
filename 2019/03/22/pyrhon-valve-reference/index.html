@@ -86,13 +86,14 @@
     </span>
   </div>
 
+  
 
   
 
   <div class="article-content">
     <div class="entry">
       
-        <h1 id="可变对象与不可变对象"><a href="#可变对象与不可变对象" class="headerlink" title="可变对象与不可变对象"></a>可变对象与不可变对象</h1><p>要明白python在参数传递和赋值过程中的行为，首先要明白python中的两类对象：可变对象与不可变对象。</p>
+        <h1><span id="可变对象与不可变对象">可变对象与不可变对象</span></h1><p>要明白python在参数传递和赋值过程中的行为，首先要明白python中的两类对象：可变对象与不可变对象。</p>
 <ul>
 <li><strong>不可变对象，该对象所指向的内存中的值不能被改变。</strong>对于这样的对象解释器会采取COW的策略，即当改变某个变量时候，会把把原来的值复制一份后再改变，这会开辟一个新的地址，变量再指向这个新的地址。</li>
 </ul>
@@ -101,7 +102,7 @@
 <li><strong>可变对象，该对象所指向的内存中的值可以被改变。</strong>变量（准确的说是引用）改变后，实际上是其所指的值直接发生改变，并没有发生复制行为，也没有开辟新的出地址，通俗点说就是<strong>原地改变</strong>。</li>
 </ul>
 <p><img src="http://upload-images.jianshu.io/upload_images/266795-6ef05eaaed4d6c2b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="可变对象"></p>
-<h1 id="Python-的参数传递与赋值"><a href="#Python-的参数传递与赋值" class="headerlink" title="Python 的参数传递与赋值"></a>Python 的参数传递与赋值</h1><p>python的函数传参以及赋值是以一种“传对象引用”的方式完成的，但是由于对象类型不同，在修改时，会有不同的结果。</p>
+<h1><span id="python-的参数传递与赋值">Python 的参数传递与赋值</span></h1><p>python的函数传参以及赋值是以一种“传对象引用”的方式完成的，但是由于对象类型不同，在修改时，会有不同的结果。</p>
 <ul>
 <li><p>如果函数收到的是一个可变对象（比如字典或者列表）的引用，就能修改对象的原始值<strong>－－相当于通过“传引用”来传递对象。</strong></p>
 </li>

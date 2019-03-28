@@ -66,6 +66,66 @@
 
   
     
+    <h3 class="article-title"><a href="/2019/03/25/effective-C-note/"><span>EffectiveC++ 学习笔记</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2019/03/25/effective-C-note/" rel="bookmark">
+        <time class="entry-date published" datetime="2019-03-25T12:48:46.000Z">
+          2019-03-25
+        </time>
+      </a>
+    </span>
+  </div>
+
+  
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h1><span id="principle-1">Principle 1</span></h1>
+      
+    </div>
+
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/读书笔记/">读书笔记</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/C/">C++</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article>
+
+  
+    
     <h3 class="article-title"><a href="/2019/03/25/tempelte-specialize/"><span>tempelte_specialize</span></a></h3>
     
   
@@ -80,34 +140,35 @@
     </span>
   </div>
 
+  
 
   
 
   <div class="article-content">
     <div class="entry">
       
-        <h1 id="函数模板具体化"><a href="#函数模板具体化" class="headerlink" title="函数模板具体化"></a>函数模板具体化</h1><p>C++中允许使用模板来进行泛型编程，在C++中模板原型如下所示：</p>
+        <h1><span id="函数模板具体化">函数模板具体化</span></h1><p>C++中允许使用模板来进行泛型编程，在C++中模板原型如下所示：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(T &amp;a, T &amp;b)</span></span></span><br></pre></td></tr></table></figure>
 <p>模板原型不提供函数声明和定义，需要经过模板具体化过程生成相应声明和定义。</p>
-<h2 id="1-隐式实例化"><a href="#1-隐式实例化" class="headerlink" title="1. 隐式实例化"></a>1. 隐式实例化</h2><p>最初，编译器只能通过隐式实例化，通过对参数列表的类型推断，来使用模板生成对应函数定义，这也是我们最常用的方法；如可以像下面这样使用上面定义的函数模板：</p>
+<h2><span id="1-隐式实例化">1. 隐式实例化</span></h2><p>最初，编译器只能通过隐式实例化，通过对参数列表的类型推断，来使用模板生成对应函数定义，这也是我们最常用的方法；如可以像下面这样使用上面定义的函数模板：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">short</span> a, b;</span><br><span class="line">swap(a, b); <span class="comment">// T 为 short 类型</span></span><br><span class="line"><span class="keyword">int</span> c, d;</span><br><span class="line">swap(c, d); <span class="comment">// T 为 int 类型</span></span><br></pre></td></tr></table></figure>
-<h2 id="2-显式实例化"><a href="#2-显式实例化" class="headerlink" title="2. 显式实例化"></a>2. 显式实例化</h2><p> 现在C++还允许显式实例化(explicit instrantiation)。这意味着可以直接命令编译器创建特定的实例，其语法有两种形式：</p>
+<h2><span id="2-显式实例化">2. 显式实例化</span></h2><p> 现在C++还允许显式实例化(explicit instrantiation)。这意味着可以直接命令编译器创建特定的实例，其语法有两种形式：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> <span class="keyword">void</span> swap&lt;<span class="keyword">int</span>&gt;(<span class="keyword">int</span>, <span class="keyword">int</span>); <span class="comment">//显式实例化声明</span></span><br><span class="line"><span class="keyword">or</span></span><br><span class="line">swap&lt;<span class="keyword">int</span>&gt;(a,b) <span class="comment">//直接在程序中调用</span></span><br></pre></td></tr></table></figure>
 <p>显示实例化可以省去编译器的类型推断过程。</p>
-<h2 id="3-显式具体化"><a href="#3-显式具体化" class="headerlink" title="3.显式具体化"></a>3.显式具体化</h2><p>显式实例化和显式具体化区别在于：这些声明的意思是“不要使用swap()模板来生成函数定义，而应使用专门为int类型显式地定义的函数定义。”这些原型必须有自己的函数定义。显式具体化声明在关键字template后包含&lt;&gt;，而显式实例化没有。</p>
+<h2><span id="3显式具体化">3.显式具体化</span></h2><p>显式实例化和显式具体化区别在于：这些声明的意思是“不要使用swap()模板来生成函数定义，而应使用专门为int类型显式地定义的函数定义。”这些原型必须有自己的函数定义。显式具体化声明在关键字template后包含&lt;&gt;，而显式实例化没有。</p>
 <p>显式具体化有两种等价声明：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;&gt; <span class="keyword">void</span> swap&lt;<span class="keyword">int</span>&gt; (<span class="keyword">int</span> &amp;, <span class="keyword">int</span> &amp;);     <span class="comment">//explicit specialization</span></span><br><span class="line"><span class="keyword">template</span> &lt;&gt; <span class="function"><span class="keyword">void</span> <span class="title">swap</span> <span class="params">(<span class="keyword">int</span> &amp;, <span class="keyword">int</span> &amp;)</span></span>;     <span class="comment">//根据参数列表的具体化</span></span><br></pre></td></tr></table></figure>
 <p> 警告：试图在同一个文件中(或转换单元)中使用同一种类型的显式实例化和显式具体化 将出错。</p>
 <p><strong>常规模板，具体化模板，非模板函数的优先调用顺序：</strong></p>
 <p><strong>非模板函数（普通函数）&gt; 具体化模板函数 &gt; 常规模板</strong></p>
-<h1 id="类模板具体化"><a href="#类模板具体化" class="headerlink" title="类模板具体化"></a>类模板具体化</h1><p> 使用类模板可以通过类模板自动生成多个类，其模板定义如下：</p>
+<h1><span id="类模板具体化">类模板具体化</span></h1><p> 使用类模板可以通过类模板自动生成多个类，其模板定义如下：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T1, <span class="keyword">typename</span> T2&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Point</span> &#123;</span></span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="1-隐式实例化-1"><a href="#1-隐式实例化-1" class="headerlink" title="1.隐式实例化"></a>1.隐式实例化</h2><h2 id="2-显式实例化-1"><a href="#2-显式实例化-1" class="headerlink" title="2.显式实例化"></a>2.显式实例化</h2><p>这两个部分的实例化语法，类模板和函数模板没有太大的区别。</p>
-<h2 id="3-显示具体化"><a href="#3-显示具体化" class="headerlink" title="3.显示具体化"></a>3.显示具体化</h2><p>类模板的显示具体化语法如下：</p>
+<h2><span id="1隐式实例化">1.隐式实例化</span></h2><h2><span id="2显式实例化">2.显式实例化</span></h2><p>这两个部分的实例化语法，类模板和函数模板没有太大的区别。</p>
+<h2><span id="3显示具体化">3.显示具体化</span></h2><p>类模板的显示具体化语法如下：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Point</span>&lt;char *, char *&gt; &#123;</span></span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>其中模板类方法的实现的具体化语法和函数模板有所区别，不需要带模板头template&lt;&gt;：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> Point&lt;<span class="keyword">char</span>*, <span class="keyword">char</span>*&gt;::display() <span class="keyword">const</span> &#123;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">"x="</span>&lt;&lt;m_x&lt;&lt;<span class="string">", y="</span>&lt;&lt;m_y&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="4-部分显式具体化"><a href="#4-部分显式具体化" class="headerlink" title="4. 部分显式具体化"></a>4. 部分显式具体化</h2><p>类模板还支持部分显式具体化，即只具体化部分模板参数类型：</p>
+<h2><span id="4-部分显式具体化">4. 部分显式具体化</span></h2><p>类模板还支持部分显式具体化，即只具体化部分模板参数类型：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T2&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Point</span>&lt;char*, T2&gt; &#123;</span></span><br><span class="line">	...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 部分显式具体化还是需要加上模板头</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T2&gt;</span><br><span class="line"><span class="keyword">void</span> Point&lt;<span class="keyword">char</span>*,T2&gt;::display() <span class="keyword">const</span> &#123;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">"x="</span>&lt;&lt;m_x&lt;&lt;<span class="string">" | y="</span>&lt;&lt;m_y&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>部分显式具体化只能用于类模板，不能用于函数模板。</p>
 
@@ -163,19 +224,20 @@
     </span>
   </div>
 
+  
 
   
 
   <div class="article-content">
     <div class="entry">
       
-        <h1 id="四种类型转换运算符"><a href="#四种类型转换运算符" class="headerlink" title="四种类型转换运算符"></a>四种类型转换运算符</h1><ul>
+        <h1><span id="四种类型转换运算符">四种类型转换运算符</span></h1><ul>
 <li><code>dynamic_cast</code> 用于多态类型的转换</li>
 <li><code>static_cast</code> 用于非多态类型的转换</li>
 <li><code>const_cast</code> 用于删除<code>const</code> ,<code>volatile</code> 和 <code>__unaligned</code> 属性</li>
 <li><code>reinterpret_cast</code> 用于位的简单重新解释</li>
 </ul>
-<h2 id="dynamic-cast"><a href="#dynamic-cast" class="headerlink" title="dynamic_cast"></a>dynamic_cast</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">dynamic_cast</span>&lt;type&gt;(expression);</span><br></pre></td></tr></table></figure>
+<h2><span id="dynamic_cast">dynamic_cast</span></h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">dynamic_cast</span>&lt;type&gt;(expression);</span><br></pre></td></tr></table></figure>
 <p>将expression转换为type类型,在运行期间转换，且会执行运行时检查，性能有相应消耗。</p>
 <ol>
 <li><strong>转换类型必须是一个指针、引用或者void*，用于将基类的指针或引用安全地转换成派生类的指针或引用；</strong> </li>
@@ -185,7 +247,7 @@
 <li><strong>用于类的转换，基类中一定要有virtual定义的虚函数（保证多态性），不然会编译错误。</strong> </li>
 <li><strong>可以在整个类层次结构中移动指针，包括向上转换、向下转换</strong></li>
 </ol>
-<h2 id="static-cast"><a href="#static-cast" class="headerlink" title="static_cast"></a>static_cast</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static_cast</span>&lt;type&gt;(expression);</span><br></pre></td></tr></table></figure>
+<h2><span id="static_cast">static_cast</span></h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static_cast</span>&lt;type&gt;(expression);</span><br></pre></td></tr></table></figure>
 <p>将expression转换为type类型，在编译过程中完成。有下几个应用场景：</p>
 <ol>
 <li>用于非多态类型的转换</li>
@@ -195,13 +257,13 @@
 <li><strong>基类与派生类之间指针或引用的转换</strong>：由于不会进行类型检查，所以向上转换时安全的，向下转换是不安全的。</li>
 </ol>
 <p>需要注意static_cast无法转换expression的const/volitale/__unaligned属性（会报编译时错误）。</p>
-<h2 id="const-cast"><a href="#const-cast" class="headerlink" title="const_cast"></a>const_cast</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const_cast</span>&lt;type&gt;(expression);</span><br></pre></td></tr></table></figure>
+<h2><span id="const_cast">const_cast</span></h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const_cast</span>&lt;type&gt;(expression);</span><br></pre></td></tr></table></figure>
 <p>可以提供一个移除expression的const/volitale/__unaligned属性的指针，但只限同类型间转换。</p>
 <ol>
 <li><strong>const_cast不能执行其他任何类型转换，只能用于同类型之间不同const/volitale属性的移除。否则会报编译时错误。</strong> </li>
 <li><strong>需要注意的是，const_cast通常对指针和引用进行转换，而无法直接移除内置类型的const/volitale属性，换言之，这种语法直接提供了一个具有写权限的指针或引用，可以通过间接访问的方式，修改常量。</strong> </li>
 </ol>
-<h2 id="reinterpret-cast"><a href="#reinterpret-cast" class="headerlink" title="reinterpret_cast"></a>reinterpret_cast</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">reinterpret_cast</span>&lt;type&gt;(expression);</span><br></pre></td></tr></table></figure>
+<h2><span id="reinterpret_cast">reinterpret_cast</span></h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">reinterpret_cast</span>&lt;type&gt;(expression);</span><br></pre></td></tr></table></figure>
 <p><code>reinterpret_cast</code> 允许将任何指针转换为任何其他指针类型。 也允许将任何整数类型转换为任何指针类型以及反向转换。 </p>
 <ul>
 <li><strong>用于位的简单重新解释,本质作用是重新定义内存数据的解释方式，而不进行任何二进制转换.</strong></li>
@@ -264,13 +326,14 @@
     </span>
   </div>
 
+  
 
   
 
   <div class="article-content">
     <div class="entry">
       
-        <h1 id="可变对象与不可变对象"><a href="#可变对象与不可变对象" class="headerlink" title="可变对象与不可变对象"></a>可变对象与不可变对象</h1><p>要明白python在参数传递和赋值过程中的行为，首先要明白python中的两类对象：可变对象与不可变对象。</p>
+        <h1><span id="可变对象与不可变对象">可变对象与不可变对象</span></h1><p>要明白python在参数传递和赋值过程中的行为，首先要明白python中的两类对象：可变对象与不可变对象。</p>
 <ul>
 <li><strong>不可变对象，该对象所指向的内存中的值不能被改变。</strong>对于这样的对象解释器会采取COW的策略，即当改变某个变量时候，会把把原来的值复制一份后再改变，这会开辟一个新的地址，变量再指向这个新的地址。</li>
 </ul>
@@ -279,7 +342,7 @@
 <li><strong>可变对象，该对象所指向的内存中的值可以被改变。</strong>变量（准确的说是引用）改变后，实际上是其所指的值直接发生改变，并没有发生复制行为，也没有开辟新的出地址，通俗点说就是<strong>原地改变</strong>。</li>
 </ul>
 <p><img src="http://upload-images.jianshu.io/upload_images/266795-6ef05eaaed4d6c2b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="可变对象"></p>
-<h1 id="Python-的参数传递与赋值"><a href="#Python-的参数传递与赋值" class="headerlink" title="Python 的参数传递与赋值"></a>Python 的参数传递与赋值</h1><p>python的函数传参以及赋值是以一种“传对象引用”的方式完成的，但是由于对象类型不同，在修改时，会有不同的结果。</p>
+<h1><span id="python-的参数传递与赋值">Python 的参数传递与赋值</span></h1><p>python的函数传参以及赋值是以一种“传对象引用”的方式完成的，但是由于对象类型不同，在修改时，会有不同的结果。</p>
 <ul>
 <li><p>如果函数收到的是一个可变对象（比如字典或者列表）的引用，就能修改对象的原始值<strong>－－相当于通过“传引用”来传递对象。</strong></p>
 </li>
@@ -340,89 +403,18 @@
     </span>
   </div>
 
+  
 
   
 
   <div class="article-content">
     <div class="entry">
       
-        <h2 id="deallocate："><a href="#deallocate：" class="headerlink" title="deallocate："></a>deallocate：</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class">	<span class="title">inline</span> <span class="title">void</span> _<span class="title">deallocate</span>(<span class="title">T</span>* <span class="title">buffer</span>)</span></span><br><span class="line"><span class="class">	&#123;</span></span><br><span class="line">		::<span class="function"><span class="keyword">operator</span> <span class="title">delete</span><span class="params">(buffer)</span></span>;    <span class="comment">//为什么不用 delete [] ?  ,operator delete 区别于 delete </span></span><br><span class="line">		                             <span class="comment">//operator delete  是一个底层操作符</span></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="destory"><a href="#destory" class="headerlink" title="destory:"></a>destory:</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class">	<span class="title">inline</span> <span class="title">void</span> _<span class="title">destory</span>(<span class="title">T</span> *<span class="title">ptr</span>)</span></span><br><span class="line"><span class="class">	&#123;</span></span><br><span class="line">		ptr-&gt;~T();</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+        <h2><span id="deallocate">deallocate：</span></h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class">	<span class="title">inline</span> <span class="title">void</span> _<span class="title">deallocate</span>(<span class="title">T</span>* <span class="title">buffer</span>)</span></span><br><span class="line"><span class="class">	&#123;</span></span><br><span class="line">		::<span class="function"><span class="keyword">operator</span> <span class="title">delete</span><span class="params">(buffer)</span></span>;    <span class="comment">//为什么不用 delete [] ?  ,operator delete 区别于 delete </span></span><br><span class="line">		                             <span class="comment">//operator delete  是一个底层操作符</span></span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<h2><span id="destory">destory:</span></h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class">	<span class="title">inline</span> <span class="title">void</span> _<span class="title">destory</span>(<span class="title">T</span> *<span class="title">ptr</span>)</span></span><br><span class="line"><span class="class">	&#123;</span></span><br><span class="line">		ptr-&gt;~T();</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
 <p>destory负责调用类型的析构函数，销毁相应内存上的内容（但销毁后内存地址仍保留）</p>
 <p>deallocate负责释放内存（此时相应内存中的值在此之前应调用destory销毁，将内存地址返回给系统，代表这部分地址使用引用-1）</p>
 <p><a href="https://blog.csdn.net/fao9001/article/details/76255206" target="_blank" rel="noopener">原文地址</a></p>
-
-      
-    </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
-
-    
-      
-
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/categories/知识辨析/">知识辨析</a>
-    </span>
-    
-
-    
-    
-
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/C-C/">C/C++</a><a href="/tags/内存管理/">内存管理</a><a href="/tags/malloc/">malloc</a>
-    </span>
-    
-
-    </div>
-
-    
-  </div>
-</article>
-
-
-
-  <article>
-
-  
-    
-    <h3 class="article-title"><a href="/2019/03/21/malloc-calloc-realloc/"><span>malloc、calloc、realloc的区别</span></a></h3>
-    
-  
-
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2019/03/21/malloc-calloc-realloc/" rel="bookmark">
-        <time class="entry-date published" datetime="2019-03-21T15:01:04.000Z">
-          2019-03-21
-        </time>
-      </a>
-    </span>
-  </div>
-
-
-  
-
-  <div class="article-content">
-    <div class="entry">
-      
-        <h1 id="函数原型："><a href="#函数原型：" class="headerlink" title="函数原型："></a>函数原型：</h1><h2 id="1-malloc"><a href="#1-malloc" class="headerlink" title="1. malloc"></a>1. malloc</h2><p>​    <code>void* malloc(unsigned size);</code></p>
-<p>​    在堆内存中分配一块长度为size字节的连续区域，参数size为需要内存空间的长度。</p>
-<h2 id="2-calloc"><a href="#2-calloc" class="headerlink" title="2. calloc"></a>2. calloc</h2><p>​    <code>void* calloc(size_t numElements, size_t sizeOfElement);</code></p>
-<p>​    与malloc相似，参数sizeOfElement为单位元素长度（例如：sizeof(int)），numElements为元素个数，即在内存中申请numElements * sizeOfElement字节大小的连续内存空间。</p>
-<h2 id="3-realloc"><a href="#3-realloc" class="headerlink" title="3. realloc"></a>3. realloc</h2><p>​    <code>void* realloc(void* ptr, unsigned newsize);</code></p>
-<p>使用realloc函数为ptr重新分配大小为size的一块内存空间。下面是这个函数的工作流程：<br>​    (1)，对ptr进行判断，如果ptr为NULL，则函数相当于malloc(new_size)，试着分配一块大小为new_size的内存，如果成功将地址返回，否则返回NULL。如果ptr不为NULL，则进入(2)。<br>​    (2)，查看ptr是不是在堆中，如果不是的话会抛出realloc invalid pointer异常。如果ptr在堆中，则查看new_size大小，如果new_size大小为0，则相当于free(ptr)，将ptr指向的内存空间释放掉，返回NULL。如果new_size小于原大小，则ptr中的数据可能会丢失，只有new_size大小的数据会保存；如果size等于原大小，等于什么都没有做；如果size大于原大小，则查看ptr指向的位置还有没有足够的连续内存空间，如果有的话，分配更多的空间，返回的地址和ptr相同，如果没有的话，在更大的空间内查找，如果找到size大小的空间，将旧的内容拷贝到新的内存中，把旧的内存释放掉，则返回新地址，否则返回NULL。</p>
-<h1 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h1><ul>
-<li>函数malloc不能初始化所分配的内存空间,而函数calloc能.如果由malloc()函数分配的内存空间原来没有被使用过，则其中的每一位可能都是0;反之, 如果这部分内存曾经被分配过,则其中可能遗留有各种各样的数据.也就是说，使用malloc()函数的程序开始时(内存空间还没有被重新分配)能正常进行,但经过一段时间(内存空间还已经被重新分配)可能会出现问题.</li>
-<li>函数calloc() 会将所分配的内存空间中的每一位都初始化为零,也就是说,如果你是为字符类型或整数类型的元素分配内存,那么这些元素将保证会被初始化为0;如果你是为指针类型的元素分配内存,那么这些元素通常会被初始化为空指针;如果你为实型数据分配内存,则这些元素会被初始化为浮点型的零.</li>
-<li>函数malloc向系统申请分配指定size个字节的内存空间.返回类型是 void<em>类型.void</em>表示未确定类型的指针.C,C++规定，void* 类型可以强制转换为任何其它类型的指针.</li>
-<li>realloc可以对给定的指针所指的空间进行扩大或者缩小，无论是扩张或是缩小，原有内存的中内容将保持不变.当然，对于缩小，则被缩小的那一部分的内容会丢失.realloc并不保证调整后的内存空间和原来的内存空间保持同一内存地址.相反，realloc返回的指针很可能指向一个新的地址.</li>
-<li>realloc是从堆上分配内存的.当扩大一块内存空间时，realloc()试图直接从堆上现存的数据后面的那些字节中获得附加的字节，如果能够满足，自然天下太平；如果数据后面的字节不够，问题就出来了，那么就使用堆上第一个有足够大小的自由块，现存的数据然后就被拷贝至新的位置，而老块则放回到堆上.这句话传递的一个重要的信息就是数据可能被移动.</li>
-</ul>
 
       
     </div>

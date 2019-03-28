@@ -90,19 +90,20 @@ dynamic_cast1dyna">
     </span>
   </div>
 
+  
 
   
 
   <div class="article-content">
     <div class="entry">
       
-        <h1 id="四种类型转换运算符"><a href="#四种类型转换运算符" class="headerlink" title="四种类型转换运算符"></a>四种类型转换运算符</h1><ul>
+        <h1><span id="四种类型转换运算符">四种类型转换运算符</span></h1><ul>
 <li><code>dynamic_cast</code> 用于多态类型的转换</li>
 <li><code>static_cast</code> 用于非多态类型的转换</li>
 <li><code>const_cast</code> 用于删除<code>const</code> ,<code>volatile</code> 和 <code>__unaligned</code> 属性</li>
 <li><code>reinterpret_cast</code> 用于位的简单重新解释</li>
 </ul>
-<h2 id="dynamic-cast"><a href="#dynamic-cast" class="headerlink" title="dynamic_cast"></a>dynamic_cast</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">dynamic_cast</span>&lt;type&gt;(expression);</span><br></pre></td></tr></table></figure>
+<h2><span id="dynamic_cast">dynamic_cast</span></h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">dynamic_cast</span>&lt;type&gt;(expression);</span><br></pre></td></tr></table></figure>
 <p>将expression转换为type类型,在运行期间转换，且会执行运行时检查，性能有相应消耗。</p>
 <ol>
 <li><strong>转换类型必须是一个指针、引用或者void*，用于将基类的指针或引用安全地转换成派生类的指针或引用；</strong> </li>
@@ -112,7 +113,7 @@ dynamic_cast1dyna">
 <li><strong>用于类的转换，基类中一定要有virtual定义的虚函数（保证多态性），不然会编译错误。</strong> </li>
 <li><strong>可以在整个类层次结构中移动指针，包括向上转换、向下转换</strong></li>
 </ol>
-<h2 id="static-cast"><a href="#static-cast" class="headerlink" title="static_cast"></a>static_cast</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static_cast</span>&lt;type&gt;(expression);</span><br></pre></td></tr></table></figure>
+<h2><span id="static_cast">static_cast</span></h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static_cast</span>&lt;type&gt;(expression);</span><br></pre></td></tr></table></figure>
 <p>将expression转换为type类型，在编译过程中完成。有下几个应用场景：</p>
 <ol>
 <li>用于非多态类型的转换</li>
@@ -122,13 +123,13 @@ dynamic_cast1dyna">
 <li><strong>基类与派生类之间指针或引用的转换</strong>：由于不会进行类型检查，所以向上转换时安全的，向下转换是不安全的。</li>
 </ol>
 <p>需要注意static_cast无法转换expression的const/volitale/__unaligned属性（会报编译时错误）。</p>
-<h2 id="const-cast"><a href="#const-cast" class="headerlink" title="const_cast"></a>const_cast</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const_cast</span>&lt;type&gt;(expression);</span><br></pre></td></tr></table></figure>
+<h2><span id="const_cast">const_cast</span></h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const_cast</span>&lt;type&gt;(expression);</span><br></pre></td></tr></table></figure>
 <p>可以提供一个移除expression的const/volitale/__unaligned属性的指针，但只限同类型间转换。</p>
 <ol>
 <li><strong>const_cast不能执行其他任何类型转换，只能用于同类型之间不同const/volitale属性的移除。否则会报编译时错误。</strong> </li>
 <li><strong>需要注意的是，const_cast通常对指针和引用进行转换，而无法直接移除内置类型的const/volitale属性，换言之，这种语法直接提供了一个具有写权限的指针或引用，可以通过间接访问的方式，修改常量。</strong> </li>
 </ol>
-<h2 id="reinterpret-cast"><a href="#reinterpret-cast" class="headerlink" title="reinterpret_cast"></a>reinterpret_cast</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">reinterpret_cast</span>&lt;type&gt;(expression);</span><br></pre></td></tr></table></figure>
+<h2><span id="reinterpret_cast">reinterpret_cast</span></h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">reinterpret_cast</span>&lt;type&gt;(expression);</span><br></pre></td></tr></table></figure>
 <p><code>reinterpret_cast</code> 允许将任何指针转换为任何其他指针类型。 也允许将任何整数类型转换为任何指针类型以及反向转换。 </p>
 <ul>
 <li><strong>用于位的简单重新解释,本质作用是重新定义内存数据的解释方式，而不进行任何二进制转换.</strong></li>

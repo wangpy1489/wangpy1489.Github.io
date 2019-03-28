@@ -90,13 +90,14 @@
     </span>
   </div>
 
+  
 
   
 
   <div class="article-content">
     <div class="entry">
       
-        <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p><a href="https://leetcode-cn.com/problems/increasing-triplet-subsequence/description/" target="_blank" rel="noopener"><strong>递增的三元子序列</strong></a></p>
+        <h1><span id="题目">题目</span></h1><p><a href="https://leetcode-cn.com/problems/increasing-triplet-subsequence/description/" target="_blank" rel="noopener"><strong>递增的三元子序列</strong></a></p>
 <blockquote>
 <p>给定一个未排序的数组，判断这个数组中是否存在长度为 3 的递增子序列。<br>数学表达式如下:<br>如果存在这样的 i, j, k,  且满足 0 ≤ i &lt; j &lt; k ≤ n-1，<br>使得 arr[i] &lt; arr[j] &lt; arr[k] ，返回 true ; 否则返回 false 。<br>说明: 要求算法的时间复杂度为 O(n)，空间复杂度为 O(1) 。</p>
 <p>示例 1:<br><code>输入: [1,2,3,4,5]
@@ -104,10 +105,10 @@
 <p>示例 2:<br><code>输入: [5,4,3,2,1]
 输出: false</code><br><a id="more"></a></p>
 </blockquote>
-<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><h2 id="方法1："><a href="#方法1：" class="headerlink" title="方法1："></a>方法1：</h2><p>比较直接的一个想法：设置high,mid,low3个游标，遍历数组，将数组内元素逐个与游标对比，直到low,mid,high 的大小关系符合low&lt;mid&lt;high. 但这样的操作时间复杂度为O（n²），不符合题目要求。</p>
-<h2 id="方法2："><a href="#方法2：" class="headerlink" title="方法2："></a>方法2：</h2><p>后改进：遍历数组，如果数组元素小于low,则替换low,如果数组元素大于low小于mid 则替换mid,这时，数组内必有一个递增二元子序列，那么当元素大于mid小于high则替换high时，low,mid,high即形成一个递增三元子序列。只需遍历一次数组，故满足O（n）的时间复杂度。</p>
-<h2 id="方法3："><a href="#方法3：" class="headerlink" title="方法3："></a>方法3：</h2><p>由于本题只需判断是否存在递增三元子序列，只需两个游标即可完成判断，当数组元素比较大的游标都大时，则递增三元子序列存在。</p>
-<h1 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">increasingTriplet</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> m1 = INT_MAX, m2 = INT_MAX;</span><br><span class="line">    <span class="keyword">if</span>(nums.size()&lt;<span class="number">3</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> a : nums) &#123;</span><br><span class="line">        <span class="keyword">if</span> (m1 &gt;= a) m1 = a;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (m2 &gt;= a) m2 = a;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1><span id="思路">思路</span></h1><h2><span id="方法1">方法1：</span></h2><p>比较直接的一个想法：设置high,mid,low3个游标，遍历数组，将数组内元素逐个与游标对比，直到low,mid,high 的大小关系符合low&lt;mid&lt;high. 但这样的操作时间复杂度为O（n²），不符合题目要求。</p>
+<h2><span id="方法2">方法2：</span></h2><p>后改进：遍历数组，如果数组元素小于low,则替换low,如果数组元素大于low小于mid 则替换mid,这时，数组内必有一个递增二元子序列，那么当元素大于mid小于high则替换high时，low,mid,high即形成一个递增三元子序列。只需遍历一次数组，故满足O（n）的时间复杂度。</p>
+<h2><span id="方法3">方法3：</span></h2><p>由于本题只需判断是否存在递增三元子序列，只需两个游标即可完成判断，当数组元素比较大的游标都大时，则递增三元子序列存在。</p>
+<h1><span id="代码实现">代码实现</span></h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">increasingTriplet</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> m1 = INT_MAX, m2 = INT_MAX;</span><br><span class="line">    <span class="keyword">if</span>(nums.size()&lt;<span class="number">3</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> a : nums) &#123;</span><br><span class="line">        <span class="keyword">if</span> (m1 &gt;= a) m1 = a;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (m2 &gt;= a) m2 = a;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
