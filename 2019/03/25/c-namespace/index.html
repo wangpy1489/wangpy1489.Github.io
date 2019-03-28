@@ -87,13 +87,13 @@
 <meta property="og:site_name" content="Norton&#39;s Blog">
 <meta property="og:description" content="一、命名空间命名空间：实际上就是一个由程序设计者命名的内存区域，程序设计者可以根据需要指定一些有名字的空间域，把一些全局实体分别放在各个命名空间中，从而与其他全局实体分隔开来。  123namespace n1&amp;#123;    ...&amp;#125; 命名冲突：只有同一个名字空间中同一作用域下，相同的名字才会冲突。所以要解决冲突无非就是修改名字空间或者作用域。 首先说修改作用域，在C中，文件作用域的">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://img-blog.csdn.net/20180927202106960?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NyYWZ0c21hbjE5NzA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
-<meta property="og:image" content="https://img-blog.csdn.net/20180927202237627?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NyYWZ0c21hbjE5NzA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
-<meta property="og:updated_time" content="2019-03-25T14:35:17.502Z">
+<meta property="og:image" content="http://wpy-blog.oss-cn-shanghai.aliyuncs.com/namespace-1.jpg/wpy-blog">
+<meta property="og:image" content="http://wpy-blog.oss-cn-shanghai.aliyuncs.com/namespace-2.jpg/wpy-blog">
+<meta property="og:updated_time" content="2019-03-28T08:36:55.439Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="c++命名空间">
 <meta name="twitter:description" content="一、命名空间命名空间：实际上就是一个由程序设计者命名的内存区域，程序设计者可以根据需要指定一些有名字的空间域，把一些全局实体分别放在各个命名空间中，从而与其他全局实体分隔开来。  123namespace n1&amp;#123;    ...&amp;#125; 命名冲突：只有同一个名字空间中同一作用域下，相同的名字才会冲突。所以要解决冲突无非就是修改名字空间或者作用域。 首先说修改作用域，在C中，文件作用域的">
-<meta name="twitter:image" content="https://img-blog.csdn.net/20180927202106960?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NyYWZ0c21hbjE5NzA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta name="twitter:image" content="http://wpy-blog.oss-cn-shanghai.aliyuncs.com/namespace-1.jpg/wpy-blog">
 
 
 
@@ -370,8 +370,8 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">包含嵌套空间的名字空间的名字::嵌套空间的名字::嵌套空间的成员</span><br></pre></td></tr></table></figure>
 <h2 id="2-内联嵌套名字空间"><a href="#2-内联嵌套名字空间" class="headerlink" title="2. 内联嵌套名字空间"></a>2. 内联嵌套名字空间</h2><p>C++11中，新增inline namespace，指示命名空间中的名称同时是外层命名空间直接包含的名称。这便于命名空间的版本管理，减少冲突。</p>
 <p>inline描述符使得内联命名空间中的声明看起来就好像是直接在外围的命名空间中进行声明的一样。（使用inline关键字定义的内联名字空间成为默认名字空间。）<br>inline描述符由命名空间的设计者放置，即<strong>命名空间的作者可以通过放置inline描述符来表示当前最新的命名空间是哪个.</strong></p>
-<p><img src="https://img-blog.csdn.net/20180927202106960?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NyYWZ0c21hbjE5NzA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt=""></p>
-<p><img src="https://img-blog.csdn.net/20180927202237627?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NyYWZ0c21hbjE5NzA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt=""></p>
+<p><img src="http://wpy-blog.oss-cn-shanghai.aliyuncs.com/namespace-1.jpg/wpy-blog" alt=""></p>
+<p><img src="http://wpy-blog.oss-cn-shanghai.aliyuncs.com/namespace-2.jpg/wpy-blog" alt=""></p>
 <h1 id="三、全局命名空间"><a href="#三、全局命名空间" class="headerlink" title="三、全局命名空间"></a>三、全局命名空间</h1><p>全局命名空间是隐式声明的,存在于每个程序中。在全局作用域定义实体的每个文件将那些名字加到全局命名空间。<br>可以用作用域操作符引用全局命名空间的成员。因为全局命名空间是隐含的,它没有名字,<br>所以使用记号如下方法引用全局命名空间的成员。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">::member_name</span><br></pre></td></tr></table></figure>
 <h1 id="四、匿名名字空间"><a href="#四、匿名名字空间" class="headerlink" title="四、匿名名字空间"></a>四、匿名名字空间</h1><p> 命名空间可以是未命名的,未命名的命名空间在定义时没有给定名字。其定义方法如下： </p>
