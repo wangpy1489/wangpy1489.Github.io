@@ -1,99 +1,370 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
 <head>
-  <meta charset="utf-8">
-  
-  <title>将hexo部署到云服务器上 | Norton&#39;s Blog | You miss 100% of the shot you do not take.</title>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   
-  <meta name="author" content="王谱越">
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="hexo,阿里云," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一、准备本地环境配置  本文本地环境为Windows10,确保你的计算机环境中装有 nodeJS、npm以及 Git,再进行接下来的步骤。">
+<meta name="keywords" content="hexo,阿里云">
+<meta property="og:type" content="article">
+<meta property="og:title" content="将hexo部署到云服务器上">
+<meta property="og:url" content="http://yoursite.com/2018/09/28/将hexo部署到云服务器上/index.html">
+<meta property="og:site_name" content="Norton&#39;s Blog">
+<meta property="og:description" content="一、准备本地环境配置  本文本地环境为Windows10,确保你的计算机环境中装有 nodeJS、npm以及 Git,再进行接下来的步骤。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://wpy-blog.oss-cn-shanghai.aliyuncs.com/%E5%85%AC%E9%92%A5.PNG/wpy-blog">
+<meta property="og:image" content="http://wpy-blog.oss-cn-shanghai.aliyuncs.com/nginx%E9%85%8D%E7%BD%AE.PNG/wpy-blog">
+<meta property="og:image" content="http://wpy-blog.oss-cn-shanghai.aliyuncs.com/nginx%E9%85%8D%E7%BD%AE1.PNG/wpy-blog">
+<meta property="og:image" content="http://wpy-blog.oss-cn-shanghai.aliyuncs.com/hexo%E9%85%8D%E7%BD%AE.PNG/wpy-blog">
+<meta property="og:updated_time" content="2019-01-15T09:08:02.783Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="将hexo部署到云服务器上">
+<meta name="twitter:description" content="一、准备本地环境配置  本文本地环境为Windows10,确保你的计算机环境中装有 nodeJS、npm以及 Git,再进行接下来的步骤。">
+<meta name="twitter:image" content="https://wpy-blog.oss-cn-shanghai.aliyuncs.com/%E5%85%AC%E9%92%A5.PNG/wpy-blog">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/09/28/将hexo部署到云服务器上/"/>
+
+
+
+
+
+  <title>将hexo部署到云服务器上 | Norton's Blog</title>
   
 
-  
-  <meta name="description" content="一、准备本地环境配置  本文本地环境为Windows10,确保你的计算机环境中装有 nodeJS、npm以及 Git,再进行接下来的步骤。">
-  
 
-  
-  
-  <meta name="keywords" content="hexo,阿里云">
-  
 
-  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-  <meta property="og:title" content="将hexo部署到云服务器上"/>
 
-  <meta property="og:site_name" content="Norton&#39;s Blog"/>
 
-  
-  <meta property="og:image" content="/favicon.ico"/>
-  
 
-  <link href="/favicon.ico" rel="icon">
-  <link rel="alternate" href="/atom.xml" title="Norton&#39;s Blog" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
 </head>
 
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-<body>
-<div class="blog">
-  <div class="content">
+  
+  
+    
+  
 
-    <header>
-  <div class="site-branding">
-    <h1 class="site-title">
-      <a href="/">Norton&#39;s Blog</a>
-    </h1>
-    <p class="site-description">You miss 100% of the shot you do not take.</p>
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Norton's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">You miss 100% of the shot you do not take.</p>
+      
   </div>
-  <nav class="site-navigation">
-    <ul>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
       
-        <li><a href="/">主页</a></li>
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
       
-        <li><a href="/archives">归档</a></li>
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
       
-        <li><a href="/categories">分类</a></li>
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
       
-        <li><a href="/tags">标签</a></li>
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
       
-        <li><a href="/about">关于</a></li>
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
       
     </ul>
-  </nav>
-</header>
-
-    <main class="site-main posts-loop">
-    <article>
-
-  
-    
-    <h3 class="article-title"><span>将hexo部署到云服务器上</span></h3>
-    
   
 
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2018/09/28/将hexo部署到云服务器上/" rel="bookmark">
-        <time class="entry-date published" datetime="2018-09-27T16:00:00.000Z">
-          2018-09-28
-        </time>
-      </a>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/28/将hexo部署到云服务器上/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王谱越">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
     </span>
-  </div>
 
-  
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Norton's Blog">
+    </span>
 
-  
+    
+      <header class="post-header">
 
-  <div class="article-content">
-    <div class="entry">
+        
+        
+          <h1 class="post-title" itemprop="name headline">将hexo部署到云服务器上</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-28T00:00:00+08:00">
+                2018-09-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Hexo/" itemprop="url" rel="index">
+                    <span itemprop="name">Hexo</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
-        <h1><span id="一-准备">一、准备</span></h1><h2><span id="本地环境配置"><strong>本地环境配置</strong></span></h2><p>  本文本地环境为<code>Windows10</code>,确保你的计算机环境中装有 <code>nodeJS</code>、<code>npm</code>以及 <code>Git</code>,再进行接下来的步骤。</p>
+      
+
+      
+        <h1 id="一、准备"><a href="#一、准备" class="headerlink" title="一、准备"></a>一、准备</h1><h2 id="本地环境配置"><a href="#本地环境配置" class="headerlink" title="本地环境配置"></a><strong>本地环境配置</strong></h2><p>  本文本地环境为<code>Windows10</code>,确保你的计算机环境中装有 <code>nodeJS</code>、<code>npm</code>以及 <code>Git</code>,再进行接下来的步骤。</p>
 <a id="more"></a>
-<h3><span id="初始化-hexo">初始化 <code>hexo</code></span></h3><ol>
+<h3 id="初始化-hexo"><a href="#初始化-hexo" class="headerlink" title="初始化 hexo"></a>初始化 <code>hexo</code></h3><ol>
 <li><strong>安装</strong></li>
 </ol>
 <p>打开命令行，执行以下命令：</p>
@@ -104,8 +375,8 @@
 <p>安装完成后，进入建立你的<code>hexo</code>目录,并完成初始化:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mkdir hexo-blog</span><br><span class="line"><span class="built_in">cd</span> hexo-blog</span><br><span class="line">hexo init myblog</span><br><span class="line"><span class="built_in">cd</span> myblog</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
 <hr>
-<h1><span id="二-服务器配置">二、服务器配置</span></h1><p>服务器系统为<code>CentOS(7.1)</code></p>
-<h2><span id="搭建远程git库">搭建远程<code>Git</code>库</span></h2><ol>
+<h1 id="二、服务器配置"><a href="#二、服务器配置" class="headerlink" title="二、服务器配置"></a>二、服务器配置</h1><p>服务器系统为<code>CentOS(7.1)</code></p>
+<h2 id="搭建远程Git库"><a href="#搭建远程Git库" class="headerlink" title="搭建远程Git库"></a>搭建远程<code>Git</code>库</h2><ol>
 <li><p><strong>登陆到远程服务器</strong></p>
 </li>
 <li><p><strong>安装<code>git</code></strong></p>
@@ -127,14 +398,14 @@
 </ol>
 <p>找到另外的空白文件夹，执行如下命令<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone git@server_ip:/home/git/repos/blog.git</span><br></pre></td></tr></table></figure></p>
 <p>如果成功的完成克隆，则仓库可用。</p>
-<h2><span id="设置ssh公钥访问">设置<code>ssh</code>公钥访问</span></h2><p>为了免去每次部署博客时输入密码的麻烦，我们需要采用<code>ssh</code>公钥来登陆服务器.</p>
+<h2 id="设置ssh公钥访问"><a href="#设置ssh公钥访问" class="headerlink" title="设置ssh公钥访问"></a>设置<code>ssh</code>公钥访问</h2><p>为了免去每次部署博客时输入密码的麻烦，我们需要采用<code>ssh</code>公钥来登陆服务器.</p>
 <ul>
 <li>进入<code>C://User//你的用户名/.ssh</code>,查看是否已有密钥对:<code>id_rsa</code>和<code>id_rsa.pub</code></li>
 <li>若没有已建好密钥对<a href="https://www.cnblogs.com/my93/p/5873498.html" target="_blank" rel="noopener">参考此文</a>。</li>
 <li>将<code>id_rsa.pub</code>通过<code>WinScp</code>等工具上传至远端服务器<code>/home/git/.ssh</code>目录下，并改名为<code>authorized_keys</code>.<br><img src="https://wpy-blog.oss-cn-shanghai.aliyuncs.com/%E5%85%AC%E9%92%A5.PNG/wpy-blog" alt="WinScp"></li>
 <li>建议登陆<code>git</code>用户上传，上传后确保公钥拥有者为git</li>
 </ul>
-<h2><span id="搭建nginx服务器">搭建<code>nginx</code>服务器</span></h2><ol>
+<h2 id="搭建nginx服务器"><a href="#搭建nginx服务器" class="headerlink" title="搭建nginx服务器"></a>搭建<code>nginx</code>服务器</h2><ol>
 <li><strong>安装<code>nginx</code></strong></li>
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y ngix</span><br></pre></td></tr></table></figure>
@@ -146,86 +417,427 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">nginx -s stop <span class="comment"># 先停止nginx</span></span><br><span class="line"><span class="built_in">cd</span> /etc/nginx</span><br><span class="line">mv nginx.conf nginx.conf.copy</span><br><span class="line">cp nginx.conf.defult nginx.conf <span class="comment">#移除测试配置，导入默认配置</span></span><br><span class="line">vim nginx.conf</span><br><span class="line"><span class="comment">#修改 root 解析路径 /home/git/hexo/blog</span></span><br><span class="line"><span class="comment"># 同时将 user 改为 root 如下图，不然nginx无法访问</span></span><br><span class="line">nginx -s reload</span><br></pre></td></tr></table></figure>
 <p><img src="http://wpy-blog.oss-cn-shanghai.aliyuncs.com/nginx%E9%85%8D%E7%BD%AE.PNG/wpy-blog" alt="nginx 配置"><br><img src="http://wpy-blog.oss-cn-shanghai.aliyuncs.com/nginx%E9%85%8D%E7%BD%AE1.PNG/wpy-blog" alt="nginx 配置"></p>
 <hr>
-<h1><span id="三-本地部署配置">三、本地部署配置</span></h1><p>回到本地<code>hexo</code>目录，修配置文件<code>_config.yml</code><br><img src="http://wpy-blog.oss-cn-shanghai.aliyuncs.com/hexo%E9%85%8D%E7%BD%AE.PNG/wpy-blog" alt="hexo 配置"></p>
-<h2><span id="以上所有工作顺利完成-使用以下命令部署你的hexo">以上，所有工作顺利完成！ 使用以下命令部署你的<code>hexo</code>:</span></h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g  <span class="comment">#生成静态文件</span></span><br><span class="line">hexo d  <span class="comment">#部署到远端</span></span><br></pre></td></tr></table></figure>
-<h1><span id="四-总结">四、总结</span></h1><p>整个过程经历了许多波折，大多是<code>ssh公钥</code>相关的配置问题，不过最终，还是解决了问题，可以开心地写博客了！</p>
+<h1 id="三、本地部署配置"><a href="#三、本地部署配置" class="headerlink" title="三、本地部署配置"></a>三、本地部署配置</h1><p>回到本地<code>hexo</code>目录，修配置文件<code>_config.yml</code><br><img src="http://wpy-blog.oss-cn-shanghai.aliyuncs.com/hexo%E9%85%8D%E7%BD%AE.PNG/wpy-blog" alt="hexo 配置"></p>
+<h2 id="以上，所有工作顺利完成！-使用以下命令部署你的hexo"><a href="#以上，所有工作顺利完成！-使用以下命令部署你的hexo" class="headerlink" title="以上，所有工作顺利完成！ 使用以下命令部署你的hexo:"></a>以上，所有工作顺利完成！ 使用以下命令部署你的<code>hexo</code>:</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g  <span class="comment">#生成静态文件</span></span><br><span class="line">hexo d  <span class="comment">#部署到远端</span></span><br></pre></td></tr></table></figure>
+<h1 id="四、总结"><a href="#四、总结" class="headerlink" title="四、总结"></a>四、总结</h1><p>整个过程经历了许多波折，大多是<code>ssh公钥</code>相关的配置问题，不过最终，还是解决了问题，可以开心地写博客了！</p>
 
       
     </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
+    
+    
+    
 
     
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/hexo/" rel="tag"># hexo</a>
+          
+            <a href="/tags/阿里云/" rel="tag"># 阿里云</a>
+          
+        </div>
       
 
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/categories/Hexo/">Hexo</a>
-    </span>
-    
+      
+      
+      
 
-    
-    
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
 
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/hexo/">hexo</a><a href="/tags/阿里云/">阿里云</a>
-    </span>
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/14/LeetCode-334/" rel="prev" title="[LeetCode]#334. 递增的三元子序列">
+                [LeetCode]#334. 递增的三元子序列 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
     
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">王谱越</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/wangpy1489" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:wangpy1489@sjtu.edu.cn" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.instagram.com/norton_yue/" target="_blank" title="Instagram">
+                      
+                        <i class="fa fa-fw fa-instagram"></i>Instagram</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、准备"><span class="nav-text">一、准备</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#本地环境配置"><span class="nav-text">本地环境配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#初始化-hexo"><span class="nav-text">初始化 hexo</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、服务器配置"><span class="nav-text">二、服务器配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#搭建远程Git库"><span class="nav-text">搭建远程Git库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置ssh公钥访问"><span class="nav-text">设置ssh公钥访问</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搭建nginx服务器"><span class="nav-text">搭建nginx服务器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三、本地部署配置"><span class="nav-text">三、本地部署配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#以上，所有工作顺利完成！-使用以下命令部署你的hexo"><span class="nav-text">以上，所有工作顺利完成！ 使用以下命令部署你的hexo:</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#四、总结"><span class="nav-text">四、总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
 
     </div>
-
-    
-  </div>
-</article>
+  </aside>
 
 
+        
+      </div>
     </main>
 
-    <footer class="site-footer">
-  <div class="social-wrapper">
-    
-      
-        <a href="https://github.com/wangpy1489" class="social github" target="_blank" rel="external">
-          <span class="iconfont icon-github"><i class="fab fa-github fa-2x" ></i></span>
-        </a>
-        
-        <a href="https://www.instagram.com/norton_yue/" class="social instagram" target="_blank" rel="external">
-          <span class="iconfont icon-instagram"><i class="fab fa-instagram fa-2x" ></i></span>
-        </a>
-        
-        <a href="https://weibo.com/2218602247" class="social weibo" target="_blank" rel="external">
-          <span class="iconfont icon-weibo"><i class="fab fa-weibo fa-2x" ></i></span>
-        </a>
-        
-        <a href="http://wpy-blog.oss-cn-shanghai.aliyuncs.com/qrcode_for_gh_87b7f9bafe9b_344.jpg/wpy-blog" class="social weixin" target="_blank" rel="external">
-          <span class="iconfont icon-weixin"><i class="fab fa-weixin fa-2x" ></i></span>
-        </a>
-        
-        <a href="tencent://message/?uin=439257530&amp;Site=&amp;Menu=yes" class="social qq" target="_blank" rel="external">
-          <span class="iconfont icon-qq"><i class="fab fa-qq fa-2x" ></i></span>
-        </a>
-        
-        <a href="mailto:wangpy1489@sjtu.edu.cn" class="social at" target="_blank" rel="external">
-          <span class="iconfont icon-at"><i class="fab fa-at fa-2x" ></i></span>
-        </a>
-        
-    
-  </div>
-  <p class="site-info">
-    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
-    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
-    </br>
-    
-    &copy; 2019 王谱越
-    
-  </p>
-</footer>
-    
-  </div>
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">王谱越</span>
+
+  
 </div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
 </body>
 </html>

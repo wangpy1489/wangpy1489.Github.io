@@ -1,113 +1,380 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
 <head>
-  <meta charset="utf-8">
-  
-  <title>c++命名空间 | Norton&#39;s Blog | You miss 100% of the shot you do not take.</title>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   
-  <meta name="author" content="王谱越">
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="C++," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一、命名空间命名空间：实际上就是一个由程序设计者命名的内存区域，程序设计者可以根据需要指定一些有名字的空间域，把一些全局实体分别放在各个命名空间中，从而与其他全局实体分隔开来。  123namespace n1&amp;#123;    ...&amp;#125; 命名冲突：只有同一个名字空间中同一作用域下，相同的名字才会冲突。所以要解决冲突无非就是修改名字空间或者作用域。 首先说修改作用域，在C中，文件作用域的">
+<meta name="keywords" content="C++">
+<meta property="og:type" content="article">
+<meta property="og:title" content="c++命名空间">
+<meta property="og:url" content="http://yoursite.com/2019/03/25/c-namespace/index.html">
+<meta property="og:site_name" content="Norton&#39;s Blog">
+<meta property="og:description" content="一、命名空间命名空间：实际上就是一个由程序设计者命名的内存区域，程序设计者可以根据需要指定一些有名字的空间域，把一些全局实体分别放在各个命名空间中，从而与其他全局实体分隔开来。  123namespace n1&amp;#123;    ...&amp;#125; 命名冲突：只有同一个名字空间中同一作用域下，相同的名字才会冲突。所以要解决冲突无非就是修改名字空间或者作用域。 首先说修改作用域，在C中，文件作用域的">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://img-blog.csdn.net/20180927202106960?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NyYWZ0c21hbjE5NzA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:image" content="https://img-blog.csdn.net/20180927202237627?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NyYWZ0c21hbjE5NzA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:updated_time" content="2019-03-25T14:35:17.502Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="c++命名空间">
+<meta name="twitter:description" content="一、命名空间命名空间：实际上就是一个由程序设计者命名的内存区域，程序设计者可以根据需要指定一些有名字的空间域，把一些全局实体分别放在各个命名空间中，从而与其他全局实体分隔开来。  123namespace n1&amp;#123;    ...&amp;#125; 命名冲突：只有同一个名字空间中同一作用域下，相同的名字才会冲突。所以要解决冲突无非就是修改名字空间或者作用域。 首先说修改作用域，在C中，文件作用域的">
+<meta name="twitter:image" content="https://img-blog.csdn.net/20180927202106960?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NyYWZ0c21hbjE5NzA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/03/25/c-namespace/"/>
+
+
+
+
+
+  <title>c++命名空间 | Norton's Blog</title>
   
 
-  
-  <meta name="description" content="一、命名空间命名空间：实际上就是一个由程序设计者命名的内存区域，程序设计者可以根据需要指定一些有名字的空间域，把一些全局实体分别放在各个命名空间中，从而与其他全局实体分隔开来。 
-123namespace n1&amp;#123;    ...&amp;#125;
-命名冲突：只有同一个名字空间中同一作用域下，相同的">
-  
 
-  
-  
-  <meta name="keywords" content="C++">
-  
 
-  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-  <meta property="og:title" content="c++命名空间"/>
 
-  <meta property="og:site_name" content="Norton&#39;s Blog"/>
 
-  
-  <meta property="og:image" content="/favicon.ico"/>
-  
 
-  <link href="/favicon.ico" rel="icon">
-  <link rel="alternate" href="/atom.xml" title="Norton&#39;s Blog" type="application/atom+xml">
-  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
 </head>
 
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-<body>
-<div class="blog">
-  <div class="content">
+  
+  
+    
+  
 
-    <header>
-  <div class="site-branding">
-    <h1 class="site-title">
-      <a href="/">Norton&#39;s Blog</a>
-    </h1>
-    <p class="site-description">You miss 100% of the shot you do not take.</p>
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Norton's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">You miss 100% of the shot you do not take.</p>
+      
   </div>
-  <nav class="site-navigation">
-    <ul>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
       
-        <li><a href="/">主页</a></li>
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
       
-        <li><a href="/archives">归档</a></li>
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
       
-        <li><a href="/categories">分类</a></li>
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
       
-        <li><a href="/tags">标签</a></li>
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
       
-        <li><a href="/about">关于</a></li>
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
       
     </ul>
-  </nav>
-</header>
-
-    <main class="site-main posts-loop">
-    <article>
-
-  
-    
-    <h3 class="article-title"><span>c++命名空间</span></h3>
-    
   
 
-  <div class="article-top-meta">
-    <span class="posted-on">
-      <a href="/2019/03/25/c-namespace/" rel="bookmark">
-        <time class="entry-date published" datetime="2019-03-25T14:00:49.000Z">
-          2019-03-25
-        </time>
-      </a>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/25/c-namespace/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王谱越">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
     </span>
-  </div>
 
-  
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Norton's Blog">
+    </span>
 
-  
+    
+      <header class="post-header">
 
-  <div class="article-content">
-    <div class="entry">
+        
+        
+          <h1 class="post-title" itemprop="name headline">c++命名空间</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-25T22:00:49+08:00">
+                2019-03-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C-基础/" itemprop="url" rel="index">
+                    <span itemprop="name">C++ 基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
-        <h1><span id="一-命名空间">一、命名空间</span></h1><p><strong>命名空间：</strong>实际上就是一个由程序设计者命名的内存区域，程序设计者可以根据需要指定一些有名字的空间域，把一些全局实体分别放在各个命名空间中，从而与其他全局实体分隔开来。 </p>
+      
+
+      
+        <h1 id="一、命名空间"><a href="#一、命名空间" class="headerlink" title="一、命名空间"></a>一、命名空间</h1><p><strong>命名空间：</strong>实际上就是一个由程序设计者命名的内存区域，程序设计者可以根据需要指定一些有名字的空间域，把一些全局实体分别放在各个命名空间中，从而与其他全局实体分隔开来。 </p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> n1&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><strong>命名冲突</strong>：只有同一个名字空间中同一作用域下，相同的名字才会冲突。所以要解决冲突无非就是修改名字空间或者作用域。</p>
 <p>首先说修改作用域，在C中，文件作用域的标识符有一个链接属性，static修饰的，的作用域仅仅限于本.c文件，而extern（或者默认情况下）作用域是所有.c文件，所以我们可以个其中一个conan加上static修饰，这样就改变了作用域，就不会冲突了，但是问题是，我们既然定义成全局变量，通常情况下，我们都希望它有外部链接属性。我们之所以定义成全局变量，很可能就是为了让其他.c文件使用。所以static虽然解决了冲突，但是没有达到我们的目的。</p>
 <p>那么我们只能够用另一种方法解决冲突了，就是修改名字空间，这在C语言中是不可行的，但是在C++中是可行的，因为C++可以自定义名字空间。</p>
-<h1><span id="二-嵌套名字空间">二、嵌套名字空间</span></h1><h2><span id="1-普通嵌套名字空间">1. 普通嵌套名字空间</span></h2><p> 一个嵌套名字空间就是一个嵌套作用域，其作用域嵌套在包含他的名字空间中。</p>
+<h1 id="二、嵌套名字空间"><a href="#二、嵌套名字空间" class="headerlink" title="二、嵌套名字空间"></a>二、嵌套名字空间</h1><h2 id="1-普通嵌套名字空间"><a href="#1-普通嵌套名字空间" class="headerlink" title="1. 普通嵌套名字空间"></a>1. 普通嵌套名字空间</h2><p> 一个嵌套名字空间就是一个嵌套作用域，其作用域嵌套在包含他的名字空间中。</p>
 <p>在外部引用嵌套空间中的成员时,使用下面的形式 </p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">包含嵌套空间的名字空间的名字::嵌套空间的名字::嵌套空间的成员</span><br></pre></td></tr></table></figure>
-<h2><span id="2-内联嵌套名字空间">2. 内联嵌套名字空间</span></h2><p>C++11中，新增inline namespace，指示命名空间中的名称同时是外层命名空间直接包含的名称。这便于命名空间的版本管理，减少冲突。</p>
+<h2 id="2-内联嵌套名字空间"><a href="#2-内联嵌套名字空间" class="headerlink" title="2. 内联嵌套名字空间"></a>2. 内联嵌套名字空间</h2><p>C++11中，新增inline namespace，指示命名空间中的名称同时是外层命名空间直接包含的名称。这便于命名空间的版本管理，减少冲突。</p>
 <p>inline描述符使得内联命名空间中的声明看起来就好像是直接在外围的命名空间中进行声明的一样。（使用inline关键字定义的内联名字空间成为默认名字空间。）<br>inline描述符由命名空间的设计者放置，即<strong>命名空间的作者可以通过放置inline描述符来表示当前最新的命名空间是哪个.</strong></p>
 <p><img src="https://img-blog.csdn.net/20180927202106960?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NyYWZ0c21hbjE5NzA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt=""></p>
 <p><img src="https://img-blog.csdn.net/20180927202237627?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NyYWZ0c21hbjE5NzA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt=""></p>
-<h1><span id="三-全局命名空间">三、全局命名空间</span></h1><p>全局命名空间是隐式声明的,存在于每个程序中。在全局作用域定义实体的每个文件将那些名字加到全局命名空间。<br>可以用作用域操作符引用全局命名空间的成员。因为全局命名空间是隐含的,它没有名字,<br>所以使用记号如下方法引用全局命名空间的成员。</p>
+<h1 id="三、全局命名空间"><a href="#三、全局命名空间" class="headerlink" title="三、全局命名空间"></a>三、全局命名空间</h1><p>全局命名空间是隐式声明的,存在于每个程序中。在全局作用域定义实体的每个文件将那些名字加到全局命名空间。<br>可以用作用域操作符引用全局命名空间的成员。因为全局命名空间是隐含的,它没有名字,<br>所以使用记号如下方法引用全局命名空间的成员。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">::member_name</span><br></pre></td></tr></table></figure>
-<h1><span id="四-匿名名字空间">四、匿名名字空间</span></h1><p> 命名空间可以是未命名的,未命名的命名空间在定义时没有给定名字。其定义方法如下： </p>
+<h1 id="四、匿名名字空间"><a href="#四、匿名名字空间" class="headerlink" title="四、匿名名字空间"></a>四、匿名名字空间</h1><p> 命名空间可以是未命名的,未命名的命名空间在定义时没有给定名字。其定义方法如下： </p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span>     <span class="comment">//No name</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//members....</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>未命名的命名空间与其他命名空间不同,未命名的命名空间的定义局部于特定文件,从不跨越多个文本文件。</li>
@@ -121,80 +388,423 @@
 
       
     </div>
-
-  </div>
-
-  <div class="article-footer">
-    <div class="article-meta pull-left">
+    
+    
+    
 
     
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/C/" rel="tag"># C++</a>
+          
+        </div>
       
 
-    <span class="post-categories">
-      <i class="icon-categories"></i>
-        <a href="/categories/C-基础/">C++ 基础</a>
-    </span>
-    
+      
+      
+      
 
-    
-    
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/25/c-classmemory/" rel="next" title="C++类内存结构">
+                <i class="fa fa-chevron-left"></i> C++类内存结构
+              </a>
+            
+          </div>
 
-    <span class="post-tags">
-      <i class="icon-tags"></i>
-        <a href="/tags/C/">C++</a>
-    </span>
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/26/dynamic-programing/" rel="prev" title="动态规划总结">
+                动态规划总结 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
     
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">王谱越</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/wangpy1489" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:wangpy1489@sjtu.edu.cn" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.instagram.com/norton_yue/" target="_blank" title="Instagram">
+                      
+                        <i class="fa fa-fw fa-instagram"></i>Instagram</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、命名空间"><span class="nav-text">一、命名空间</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、嵌套名字空间"><span class="nav-text">二、嵌套名字空间</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-普通嵌套名字空间"><span class="nav-text">1. 普通嵌套名字空间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-内联嵌套名字空间"><span class="nav-text">2. 内联嵌套名字空间</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三、全局命名空间"><span class="nav-text">三、全局命名空间</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#四、匿名名字空间"><span class="nav-text">四、匿名名字空间</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
 
     </div>
-
-    
-  </div>
-</article>
+  </aside>
 
 
+        
+      </div>
     </main>
 
-    <footer class="site-footer">
-  <div class="social-wrapper">
-    
-      
-        <a href="https://github.com/wangpy1489" class="social github" target="_blank" rel="external">
-          <span class="iconfont icon-github"><i class="fab fa-github fa-2x" ></i></span>
-        </a>
-        
-        <a href="https://www.instagram.com/norton_yue/" class="social instagram" target="_blank" rel="external">
-          <span class="iconfont icon-instagram"><i class="fab fa-instagram fa-2x" ></i></span>
-        </a>
-        
-        <a href="https://weibo.com/2218602247" class="social weibo" target="_blank" rel="external">
-          <span class="iconfont icon-weibo"><i class="fab fa-weibo fa-2x" ></i></span>
-        </a>
-        
-        <a href="http://wpy-blog.oss-cn-shanghai.aliyuncs.com/qrcode_for_gh_87b7f9bafe9b_344.jpg/wpy-blog" class="social weixin" target="_blank" rel="external">
-          <span class="iconfont icon-weixin"><i class="fab fa-weixin fa-2x" ></i></span>
-        </a>
-        
-        <a href="tencent://message/?uin=439257530&amp;Site=&amp;Menu=yes" class="social qq" target="_blank" rel="external">
-          <span class="iconfont icon-qq"><i class="fab fa-qq fa-2x" ></i></span>
-        </a>
-        
-        <a href="mailto:wangpy1489@sjtu.edu.cn" class="social at" target="_blank" rel="external">
-          <span class="iconfont icon-at"><i class="fab fa-at fa-2x" ></i></span>
-        </a>
-        
-    
-  </div>
-  <p class="site-info">
-    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
-    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
-    </br>
-    
-    &copy; 2019 王谱越
-    
-  </p>
-</footer>
-    
-  </div>
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">王谱越</span>
+
+  
 </div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
 </body>
 </html>
