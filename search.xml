@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[copy_move_constractor]]></title>
+    <url>%2F2019%2F03%2F27%2Fcopy-move-constractor%2F</url>
+    <content type="text"><![CDATA[拷贝构造函数和拷贝赋值函数 12345678910//拷贝构造函数A(const A&amp; t)&#123; ...&#125;//拷贝赋值运算符A&amp; operator=(const A&amp; rhs)&#123; ...&#125; 拷贝构造函数只在对象实例化时才会被调用，也就是说，在复制构造函数调用期间，这个对象处于一个未决状态（直到复制构造函数被成功调用），另外拷贝构造函数不返回任何值。 拷贝构造函数应用的场合有以下几个方面： 1 函数的参数是一个对象，并且是值传递方式 2 函数的返回值是一个对象，并且是值传递方式 3 用一个对象初始化另外一个对象 赋值运算符则在一个现存的对象被赋予新的值时被调用，并且它有返回值。 123456789Test test; //实例化test对象时调用了默认构造函数Test test1=test;// test1使用了复制构造函数（因为这是一个新的对象产生）Test test2(test);//test2时也是用了复制构造函数，Test test3=test2=test1;//而test2=test1则使用了赋值构造函数（没有新的对象产生），Test test3=test2=test1;//test3=test2则使用了复制构造函数，原因同上。 移动构造函数和移动赋值函数 12345678910//移动构造函数A(A&amp;&amp; t)&#123; ...&#125;//移动赋值运算符A&amp; operator=(A&amp;&amp; rhs)&#123; ...&#125; 要实现转移语义，需要定义转移构造函数，当然还可以定义转移赋值操作符。对于右值的拷贝和赋值会调用转移构造函数和转移赋值操作符。如果转移构造函数和转移拷贝操作符没有定义，那么拷贝构造函数和赋值操作符会被调用。 两者区别与拷贝构造函数和赋值运算符的区别相同，这里不再赘述。]]></content>
+      <categories>
+        <category>知识辨析</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[动态规划总结]]></title>
+    <url>%2F2019%2F03%2F26%2Fdynamic-programing%2F</url>
+    <content type="text"><![CDATA[动态规划的两大原则 最优子结构 用动态规划求解最优化问题的第一步就是刻画最优解的结构，如果一个问题的解结构包含其子问题的最优解，就称此问题具有最优子结构性质。因此，某个问题是否适合应用动态规划算法，它是否具有最优子结构性质是一个很好的线索。使用动态规划算法时，用子问题的最优解来构造原问题的最优解。因此必须考查最优解中用到的所有子问题。 重叠子问题 在斐波拉契数列求解中，可以看到大量的重叠子问题，比如说在求fib（6）的时候，fib（2）被调用了5次。如果使用递归算法的时候会反复的求解相同的子问题，不停的调用函数，而不是生成新的子问题。如果递归算法反复求解相同的子问题，就称为具有重叠子问题（overlapping subproblems）性质。在动态规划算法中使用数组来保存子问题的解，这样子问题多次求解的时候可以直接查表不用调用函数递归。 状态转移方程 构建一个动态规划算法分为几个步骤： 刻画一个最优解的结构特征。 递归地定义最优解的值。 计算最优解的值，通常采用自底向上的方法。 利用计算出的信息构造一个最优解。 确定状态转移方程就在第一步和第二步中，首先要确定问题的决策对象，接着对决策对象划分阶段并确定各个阶段的状态变量，最后建立各阶段的状态变量的转移方程。其形式如下： 状态i=最优解（当前状态k,下一转移状态）+变化量（optional）状态i = 最优解（当前状态k,下一转移状态）+变化量（optional） 状态i=最优解（当前状态k,下一转移状态）+变化量（optional） 常见问题的状态转移公式总结 动态规划的编程模板 ①递归版本 1234567891011int cut(vector&lt;int&gt; p,int n) &#123; if(n==0) return 0; int q=INT_MIN; for(int i=1;i&lt;=n;i++) &#123; q=max(q, p[i-1]+cut(p, n-i)); &#125; return q; &#125; ②备忘录版本 12345678910111213141516171819202122int cutMemo(vector&lt;int&gt; p) &#123; int r[p.size()]]; for(int i=0;i&lt;=p.size();i++) r[i]=-1; return cut(p, p.size(), r); &#125; public static int cut(vector&lt;int&gt; p,int n,vector&lt;int&gt; &amp;r) &#123; int q=-1; if(r[n]&gt;=0) return r[n]; if(n==0) q=0; else &#123; for(int i=1;i&lt;=n;i++) q=max(q, cut(p, n-i,r)+p[i-1]); &#125; r[n]=q; return q; &#125; 备忘录方法就是在递归的时候记录下已经调用过的子函数的值。 ③自底向上 12345678910111213int buttom_up_cut(vector&lt;int&gt; p) &#123; int r[p.size()]; for(int i=0;i&lt;p.size();i++) &#123; int q=-1; //① for(int j=0;j&lt;=i;j++) q=Math.max(q, p[j-1]+r[i-j]); r[i]=q; &#125; return r[p.size()-1]; &#125;]]></content>
+      <categories>
+        <category>知识总结</category>
+      </categories>
+      <tags>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[c++命名空间]]></title>
+    <url>%2F2019%2F03%2F25%2Fc-namespace%2F</url>
+    <content type="text"><![CDATA[一、命名空间 **命名空间：**实际上就是一个由程序设计者命名的内存区域，程序设计者可以根据需要指定一些有名字的空间域，把一些全局实体分别放在各个命名空间中，从而与其他全局实体分隔开来。 123namespace n1&#123; ...&#125; 命名冲突：只有同一个名字空间中同一作用域下，相同的名字才会冲突。所以要解决冲突无非就是修改名字空间或者作用域。 首先说修改作用域，在C中，文件作用域的标识符有一个链接属性，static修饰的，的作用域仅仅限于本.c文件，而extern（或者默认情况下）作用域是所有.c文件，所以我们可以个其中一个conan加上static修饰，这样就改变了作用域，就不会冲突了，但是问题是，我们既然定义成全局变量，通常情况下，我们都希望它有外部链接属性。我们之所以定义成全局变量，很可能就是为了让其他.c文件使用。所以static虽然解决了冲突，但是没有达到我们的目的。 那么我们只能够用另一种方法解决冲突了，就是修改名字空间，这在C语言中是不可行的，但是在C中是可行的，因为C可以自定义名字空间。 二、嵌套名字空间 1. 普通嵌套名字空间 一个嵌套名字空间就是一个嵌套作用域，其作用域嵌套在包含他的名字空间中。 在外部引用嵌套空间中的成员时,使用下面的形式 1包含嵌套空间的名字空间的名字::嵌套空间的名字::嵌套空间的成员 2. 内联嵌套名字空间 C++11中，新增inline namespace，指示命名空间中的名称同时是外层命名空间直接包含的名称。这便于命名空间的版本管理，减少冲突。 inline描述符使得内联命名空间中的声明看起来就好像是直接在外围的命名空间中进行声明的一样。（使用inline关键字定义的内联名字空间成为默认名字空间。） inline描述符由命名空间的设计者放置，即命名空间的作者可以通过放置inline描述符来表示当前最新的命名空间是哪个. 三、全局命名空间 全局命名空间是隐式声明的,存在于每个程序中。在全局作用域定义实体的每个文件将那些名字加到全局命名空间。 可以用作用域操作符引用全局命名空间的成员。因为全局命名空间是隐含的,它没有名字, 所以使用记号如下方法引用全局命名空间的成员。 1::member_name 四、匿名名字空间 命名空间可以是未命名的,未命名的命名空间在定义时没有给定名字。其定义方法如下： 1234namespace //No name&#123; //members....&#125; 未命名的命名空间与其他命名空间不同,未命名的命名空间的定义局部于特定文件,从不跨越多个文本文件。 未命名的命名空间可以在给定文件中不连续,但不能跨越文件,每个文件有自己的未命名的命名空间。 未命名的命名空间用于声明局部于文件的实体。在未命名的命名空间中定义的变量在程序开始时创建,在程序结束之前一直存在。 未命名的命名空间中定义的名字可直接使用,因为没有命名空间名字来限定它们。 由以上特性，未命名的命名空间可以取代文件中的静态声明 在标准 C++ 中引入命名空间之前,程序必须将名字声明为static,使它们的作用域约束于一个文件中。 文件中静态声明的方法是从 C 语言继承而来, C++ 不赞成文件静态声明，因为这可能在未来版本中不支持。 所以应该避免文件静态而使用未命名空间代替。]]></content>
+      <categories>
+        <category>C++ 基础</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[C++类内存结构]]></title>
+    <url>%2F2019%2F03%2F25%2Fc-classmemory%2F</url>
+    <content type="text"><![CDATA[原文地址]]></content>
+      <categories>
+        <category>C++基础</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[goole styleguide 学习笔记]]></title>
+    <url>%2F2019%2F03%2F25%2Fstyleguide-note%2F</url>
+    <content type="text"><![CDATA[一、头文件 1.1. Self-contained 头文件 所有.h头文件要能够自给自足。换言之，用户和重构工具不需要为特别场合而包含额外的头文件。 不过有一个例外，即一个文件并不是 self-contained 的，而是作为文本插入到代码某处。或者，文件内容实际上是其它头文件的特定平台（platform-specific）扩展部分。这些文件就要用 .inc 文件扩展名。 1.2. #define 保护 所有头文件都应该使用 #define 来防止头文件被多重包含, 命名格式当是: &lt;PROJECT&gt;_&lt;PATH&gt;_&lt;FILE&gt;_H_ . 1.3. 前置声明 尽可能地避免使用前置声明。使用 #include 包含需要的头文件即可。 前置声明有一些优点，也有一些缺点： 优点： 前置声明能够节省编译时间，多余的 #include 会迫使编译器展开更多的文件，处理更多的输入。 前置声明能够节省不必要的重新编译的时间。 #include 使代码因为头文件中无关的改动而被重新编译多次。 缺点： 前置声明隐藏了依赖关系，头文件改动时，用户的代码会跳过必要的重新编译过程。 前置声明可能会被库的后续更改所破坏。前置声明函数或模板有时会妨碍头文件开发者变动其 API. 例如扩大形参类型，加个自带默认参数的模板形参等等。 前置声明来自命名空间 std:: 的 symbol 时，其行为未定义。 很难判断什么时候该用前置声明，什么时候该用 #include 。极端情况下，用前置声明代替 includes 甚至都会暗暗地改变代码的含义： 12345678910&gt; &gt; // b.h:&gt; &gt; struct B &#123;&#125;;&gt; &gt; struct D : B &#123;&#125;;&gt; &gt; &gt; &gt; // good_user.cc:&gt; &gt; #include "b.h"&gt; &gt; void f(B*);&gt; &gt; void f(void*);&gt; &gt; void test(D* x) &#123; f(x); &#125; // calls f(B*)&gt; &gt; 如果 #include 被 B 和 D 的前置声明替代， test() 就会调用 f(void*) . 前置声明了不少来自头文件的 symbol 时，就会比单单一行的 include 冗长。 仅仅为了能前置声明而重构代码（比如用指针成员代替对象成员）会使代码变得更慢更复杂. **注意：**前置声明的类是不完全类型（incomplete type），我们只能定义指向该类型的指针或引用，或者声明（但不能定义）以不完全类型作为参数或者返回类型的函数。毕竟编译器不知道不完全类型的定义，我们不能创建其类的任何对象，也不能声明成类内部的数据成员。 1.4. 内联函数 只有当函数只有 10 行甚至更少时才将其定义为内联函数. 在通常情况下虚函数和递归函数即使声明为内联也不一定会被编译器内联。 包含循环或switch的函数内联往往得不偿失。 析构函数由于有隐含成员和基类虚构调用的关系，因此往往比想象的长，内联需谨慎。 1.5. #include 的路径及顺序 使用标准的头文件包含顺序可增强可读性, 避免隐藏依赖: 对应头文件 -&gt; C 库 -&gt; C++ 库 -&gt; 其他库的 .h -&gt; 本项目内的 .h. 项目内头文件应按照项目源代码目录树结构排列, 避免使用 UNIX 特殊的快捷目录 . (当前目录) 或 .. (上级目录). 例如, google-awesome-project/src/base/logging.h 应该按如下方式包含: 1#include "base/logging.h" 二、作用域 1.命名空间 鼓励在 .cc 文件内使用匿名命名空间或 static 声明。 使用具名的命名空间时, 其名称可基于项目名或相对路径。 禁止使用 using 指示（using-directive）。 禁止使用内联命名空间（inline namespace）。 遵守 命名空间命名 中的规则。 像之前的几个例子中一样，在命名空间的最后注释出命名空间的名字。 123456789101112131415161718192021// .h 文件namespace mynamespace &#123;// 所有声明都置于命名空间中// 注意不要使用缩进class MyClass &#123; public: ... void Foo();&#125;;&#125; // namespace mynamespace// .cc 文件namespace mynamespace &#123;// 函数定义都置于命名空间中void MyClass::Foo() &#123; ...&#125;&#125; // namespace mynamespace 不要在命名空间 std 内声明任何东西, 包括标准库的类前置声明. 在 std 命名空间声明实体是未定义的行为, 会导致如不可移植. 声明标准库下的实体, 需要包含对应的头文件. 不要在头文件中使用 命名空间别名 除非显式标记内部命名空间使用。因为任何在头文件中引入的命名空间都会成为公开API的一部分。 1234567891011121314// 在 .cc 中使用别名缩短常用的命名空间namespace baz = ::foo::bar::baz;// 在 .h 中使用别名缩短常用的命名空间namespace librarian &#123;namespace impl &#123; // 仅限内部使用namespace sidetable = ::pipeline_diagnostics::sidetable;&#125; // namespace implinline void my_inline_function() &#123; // 限制在一个函数中的命名空间别名 namespace baz = ::foo::bar::baz; ...&#125;&#125; // namespace librarian 2. 匿名命名空间和静态变量 在 .cc 文件中定义一个不需要被外部引用的变量时，可以将它们放在匿名命名空间或声明为 static 。但是不要在 .h 文件中这么做。 3.非成员函数、静态成员函数和全局函数 使用静态成员函数或命名空间内的非成员函数, 尽量不要用裸的全局函数… 将一系列函数直接置于命名空间中，不要用类的静态方法模拟出命名空间的效果，类的静态方法应当和类的实例或静态数据紧密相关. 相比单纯为了封装若干不共享任何静态数据的静态成员函数而创建类, 不如使用命名空间。 4.局部变量 将函数变量尽可能置于最小作用域内, 并在变量声明时进行初始化. 有一例外： 如果变量是一个对象, 每次进入作用域都要调用其构造函数, 每次退出作用域都要调用其析构函数. 这会导致效率降低. 1234567891011// 低效的实现for (int i = 0; i &lt; 1000000; ++i) &#123; Foo f; // 构造函数和析构函数分别调用 1000000 次! f.DoSomething(i);&#125;//高效的实现Foo f; // 构造函数和析构函数只调用 1 次for (int i = 0; i &lt; 1000000; ++i) &#123; f.DoSomething(i);&#125; 5. 静态和全局变量 禁止定义静态储存周期非POD变量(POD : Plain Old Data 原生数据类型) 禁止使用含有副作用的函数初始化POD全局变量，因为多编译单元中的静态变量执行时的构造和析构顺序是未明确的，这将导致代码的不可移植。 TODO:这部分还看不太明白 三、类 1. 构造函数职责 不要在构造函数中调用虚函数。 不要在构造函数中尝试报告一个非致命错误。如果代码允许, 直接终止程序是一个合适的处理错误的方式. 否则, 考虑用 Init() 方法或工厂函数. 2. 隐式类型转化 不要定义隐式类型转换. 对于转换运算符和单参数构造函数, 请使用 explicit 关键字. 接受一个 std::initializer_list 作为参数的构造函数也应当省略 explicit, 以便支持拷贝初始化 (例如 MyType m = {1, 2};) . 拷贝和移动构造函数不应当被标记为 explicit, 因为它们并不执行类型转换. 3. 可拷贝类型和可移动类型 除非你的类型需要才让它们支持拷贝 / 移动. 否则, 就把隐式产生的拷贝和移动函数禁用. 123// MyClass is neither copyable nor movable.MyClass(const MyClass&amp;) = delete;MyClass&amp; operator=(const MyClass&amp;) = delete; 如果让类型可拷贝, 一定要同时给出拷贝构造函数和赋值操作的定义。 如果让类型可移动，那么就给出移动的两个操作 (移动构造函数和赋值操作) 的定义. 12345678class Foo &#123; public: Foo(Foo&amp;&amp; other) : field_(other.field) &#123;&#125; // 差, 只定义了移动构造函数, 而没有定义对应的赋值运算符. private: Field field_;&#125;; 4. 结构体VS类 仅当只有数据成员时使用 struct, 其它一概使用 class. 如果需要更多的函数功能, class 更适合. 如果拿不准, 就用 class. 5. 继承 使用组合常常比使用继承更合理. 如果使用继承的话, 定义为 public 继承. 所有继承必须是 public 的. 如果你想使用私有继承, 你应该替换成把基类的实例作为成员对象的方式. 6. 多重继承 只在以下情况我们才允许多重继承: 最多只有一个基类是非抽象类; 其它基类都是以 Interface 为后缀的 纯接口类 7. 接口 当一个类满足以下要求时, 称之为纯接口，这些类以 Interface 为后缀: 只有纯虚函数 (“=0”) 和静态函数 (除了下文提到的析构函数). 没有非静态数据成员. 没有定义任何构造函数. 如果有, 也不能带有参数, 并且必须为 protected. 如果它是一个子类, 也只能从满足上述条件并以 Interface 为后缀的类继承. 8.运算符重载 只有在意义明显, 不会出现奇怪的行为并且与对应的内建运算符的行为一致时才定义重载运算符. 例如, | 要作为位或或逻辑或来使用, 而不是作为 shell 中的管道. 建议不要将不进行修改的二元运算符定义为成员函数. 不要引入用户定义字面量。 如果你定义了一个运算符, 请将其相关且有意义的运算符都进行定义, 并且保证这些定义的语义是一致的。 例如, 如果你重载了 &lt;, 那么请将所有的比较运算符都进行重载, 并且保证对于同一组参数, &lt; 和 &gt; 不会同时返回 true. 9. 存取控制 将 所有 数据成员声明为 private, 除非是 static const 类型成员 10. 说明顺序 类定义应以 public: 开始, 后跟 protected:, 最后是 private:. 省略空部分. 建议将类似的声明放在一起, 并且建议以如下的顺序: 类型 (包括 typedef, using 和嵌套的结构体与类), 常量, 工厂函数, 构造函数,赋值运算符, 析构函数, 其它函数, 数据成员. 不要将大段的函数定义内联在类定义中. 只有那些普通的, 或性能关键且短小的函数可以内联在类定义中. 四、函数 1.参数顺序 函数的参数顺序为: 输入参数在先, 后跟输出参数. 输入参数通常是值参或 const 引用, 输出参数或输入/输出参数则一般为非 const 指针. 2.编写简短函数 果函数超过 40 行, 可以思索一下能不能在不影响程序结构的前提下对其进行分割. 3. 引用参数 函数参数列表中, 所有引用参数都必须是 const 输入参数是值参或 const 引用, 输出参数为指针. 输入参数可以是 const 指针, 但决不能是非 const 的引用参数, 除非特殊要求, 比如 swap(). 这实际上是Google codestyle 的一个硬性约定 4. 函数重载 若要使用函数重载, 则必须能让读者一看调用点就胸有成竹, 而不用花心思猜测调用的重载函数到底是哪一种. 这一规则也适用于构造函数. 5. 缺省参数 只允许在非虚函数中使用缺省参数, 且必须保证缺省参数的值始终一致. . (例如, 不要写像 void f(int n = counter++); 这样的代码.) 对于虚函数, 不允许使用缺省参数, 因为在虚函数中缺省参数不一定能正常工作 6. 函数返回类型后置语法 只有在常规写法 (返回类型前置) 不便于书写或不便于阅读时使用返回类型后置语法.]]></content>
+      <categories>
+        <category>学习笔记</category>
+      </categories>
+      <tags>
+        <tag>code style</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[EffectiveC++ 学习笔记]]></title>
+    <url>%2F2019%2F03%2F25%2Feffective-C-note%2F</url>
+    <content type="text"><![CDATA[Principle 1]]></content>
+      <categories>
+        <category>读书笔记</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[tempelte_specialize]]></title>
+    <url>%2F2019%2F03%2F25%2Ftempelte-specialize%2F</url>
+    <content type="text"><![CDATA[函数模板具体化 C中允许使用模板来进行泛型编程，在C中模板原型如下所示： 12template &lt;typename T&gt;void swap(T &amp;a, T &amp;b) 模板原型不提供函数声明和定义，需要经过模板具体化过程生成相应声明和定义。 1. 隐式实例化 最初，编译器只能通过隐式实例化，通过对参数列表的类型推断，来使用模板生成对应函数定义，这也是我们最常用的方法；如可以像下面这样使用上面定义的函数模板： 1234short a, b;swap(a, b); // T 为 short 类型int c, d;swap(c, d); // T 为 int 类型 2. 显式实例化 现在C++还允许显式实例化(explicit instrantiation)。这意味着可以直接命令编译器创建特定的实例，其语法有两种形式： 123template void swap&lt;int&gt;(int, int); //显式实例化声明orswap&lt;int&gt;(a,b) //直接在程序中调用 显示实例化可以省去编译器的类型推断过程。 3.显式具体化 显式实例化和显式具体化区别在于：这些声明的意思是“不要使用swap()模板来生成函数定义，而应使用专门为int类型显式地定义的函数定义。”这些原型必须有自己的函数定义。显式具体化声明在关键字template后包含&lt;&gt;，而显式实例化没有。 显式具体化有两种等价声明： 12template &lt;&gt; void swap&lt;int&gt; (int &amp;, int &amp;); //explicit specializationtemplate &lt;&gt; void swap (int &amp;, int &amp;); //根据参数列表的具体化 警告：试图在同一个文件中(或转换单元)中使用同一种类型的显式实例化和显式具体化 将出错。 常规模板，具体化模板，非模板函数的优先调用顺序： 非模板函数（普通函数）&gt; 具体化模板函数 &gt; 常规模板 类模板具体化 使用类模板可以通过类模板自动生成多个类，其模板定义如下： 1234template&lt;typename T1, typename T2&gt;class Point &#123; ...&#125; 1.隐式实例化 2.显式实例化 这两个部分的实例化语法，类模板和函数模板没有太大的区别。 3.显示具体化 类模板的显示具体化语法如下： 1234template&lt;&gt;class Point&lt;char *, char *&gt; &#123; ...&#125; 其中模板类方法的实现的具体化语法和函数模板有所区别，不需要带模板头template&lt;&gt;： 123void Point&lt;char*, char*&gt;::display() const &#123; cout&lt;&lt;"x="&lt;&lt;m_x&lt;&lt;", y="&lt;&lt;m_y&lt;&lt;endl;&#125; 4. 部分显式具体化 类模板还支持部分显式具体化，即只具体化部分模板参数类型： 12345678910template&lt;typename T2&gt;class Point&lt;char*, T2&gt; &#123; ...&#125;// 部分显式具体化还是需要加上模板头template&lt;typename T2&gt;void Point&lt;char*,T2&gt;::display() const &#123; cout&lt;&lt;"x="&lt;&lt;m_x&lt;&lt;" | y="&lt;&lt;m_y&lt;&lt;endl;&#125; 部分显式具体化只能用于类模板，不能用于函数模板。]]></content>
+      <categories>
+        <category>C++基础</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[C++类型转换符]]></title>
+    <url>%2F2019%2F03%2F22%2FC-cast%2F</url>
+    <content type="text"><![CDATA[四种类型转换运算符 dynamic_cast 用于多态类型的转换 static_cast 用于非多态类型的转换 const_cast 用于删除const ,volatile 和 __unaligned 属性 reinterpret_cast 用于位的简单重新解释 dynamic_cast 1dynamic_cast&lt;type&gt;(expression); 将expression转换为type类型,在运行期间转换，且会执行运行时检查，性能有相应消耗。 转换类型必须是一个指针、引用或者void，用于将基类的指针或引用安全地转换成派生类的指针或引用；* dynamic_cast在运行期间强制转换，运行时进行类型转换检查； 对指针进行转换，失败返回null，成功返回type类型的对象指针，对于引用的转换，失败抛出一个bad_cast ，成功返回type类型的引用； dynamic_cast不能用于内置类型的转换； 用于类的转换，基类中一定要有virtual定义的虚函数（保证多态性），不然会编译错误。 可以在整个类层次结构中移动指针，包括向上转换、向下转换 static_cast 1static_cast&lt;type&gt;(expression); 将expression转换为type类型，在编译过程中完成。有下几个应用场景： 用于非多态类型的转换 **内置类型转换：**转换过程中的精度损失由开发者负责，除非无法完成类型转化，否则编译器不会警告或报错。 把void*转化为目标类型指针 把任意类型转化为void 基类与派生类之间指针或引用的转换：由于不会进行类型检查，所以向上转换时安全的，向下转换是不安全的。 需要注意static_cast无法转换expression的const/volitale/__unaligned属性（会报编译时错误）。 const_cast 1const_cast&lt;type&gt;(expression); 可以提供一个移除expression的const/volitale/__unaligned属性的指针，但只限同类型间转换。 const_cast不能执行其他任何类型转换，只能用于同类型之间不同const/volitale属性的移除。否则会报编译时错误。 需要注意的是，const_cast通常对指针和引用进行转换，而无法直接移除内置类型的const/volitale属性，换言之，这种语法直接提供了一个具有写权限的指针或引用，可以通过间接访问的方式，修改常量。 reinterpret_cast 1reinterpret_cast&lt;type&gt;(expression); reinterpret_cast 允许将任何指针转换为任何其他指针类型。 也允许将任何整数类型转换为任何指针类型以及反向转换。 用于位的简单重新解释,本质作用是重新定义内存数据的解释方式，而不进行任何二进制转换. 滥用 reinterpret_cast 运算符可能很容易带来风险。 除非所需转换本身是低级别的，否则应使用其他强制转换运算符之一。 允许将任何指针转换为任何其他指针类型（如 char* 到 int* 或 One_class* 到 Unrelated_class* 之类的转换，但其本身并不安全） 也允许将任何整数类型转换为任何指针类型以及反向转换。 reinterpret_cast 运算符不能丢掉 const、volatile 或 __unaligned 特性。 reinterpret_cast 的一个实际用途是在哈希函数中，即，通过让两个不同的值几乎不以相同的索引结尾的方式将值映射到索引。]]></content>
+      <categories>
+        <category>C++基础</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[python传值与传引用]]></title>
+    <url>%2F2019%2F03%2F22%2Fpyrhon-valve-reference%2F</url>
+    <content type="text"><![CDATA[可变对象与不可变对象 要明白python在参数传递和赋值过程中的行为，首先要明白python中的两类对象：可变对象与不可变对象。 **不可变对象，该对象所指向的内存中的值不能被改变。**对于这样的对象解释器会采取COW的策略，即当改变某个变量时候，会把把原来的值复制一份后再改变，这会开辟一个新的地址，变量再指向这个新的地址。 可变对象，该对象所指向的内存中的值可以被改变。变量（准确的说是引用）改变后，实际上是其所指的值直接发生改变，并没有发生复制行为，也没有开辟新的出地址，通俗点说就是原地改变。 Python 的参数传递与赋值 python的函数传参以及赋值是以一种“传对象引用”的方式完成的，但是由于对象类型不同，在修改时，会有不同的结果。 如果函数收到的是一个可变对象（比如字典或者列表）的引用，就能修改对象的原始值**－－相当于通过“传引用”来传递对象。** 如果函数收到的是一个不可变对象（比如数值类型、字符或者元组）的引用，就不能直接修改原始对象**－－相当于通过“传值’来传递对象。** 另外需要注意的一点，不可变的属性是由外至内的，也即如果一个元组内有多个数组，则这些数组作为元组内的元素，也是不可变的。]]></content>
+      <categories>
+        <category>知识辨析</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[destory和desallocate的区别]]></title>
+    <url>%2F2019%2F03%2F21%2Fdestory-desallocate%2F</url>
+    <content type="text"><![CDATA[deallocate： 123456template &lt;class T&gt; inline void _deallocate(T* buffer) &#123; ::operator delete(buffer); //为什么不用 delete [] ? ,operator delete 区别于 delete //operator delete 是一个底层操作符 &#125; destory: 12345template &lt;class T&gt; inline void _destory(T *ptr) &#123; ptr-&gt;~T(); &#125; destory负责调用类型的析构函数，销毁相应内存上的内容（但销毁后内存地址仍保留） deallocate负责释放内存（此时相应内存中的值在此之前应调用destory销毁，将内存地址返回给系统，代表这部分地址使用引用-1） 原文地址]]></content>
+      <categories>
+        <category>知识辨析</category>
+      </categories>
+      <tags>
+        <tag>C/C++</tag>
+        <tag>内存管理</tag>
+        <tag>malloc</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[malloc、calloc、realloc的区别]]></title>
+    <url>%2F2019%2F03%2F21%2Fmalloc-calloc-realloc%2F</url>
+    <content type="text"><![CDATA[函数原型： 1. malloc ​ void* malloc(unsigned size); ​ 在堆内存中分配一块长度为size字节的连续区域，参数size为需要内存空间的长度。 2. calloc ​ void* calloc(size_t numElements, size_t sizeOfElement); ​ 与malloc相似，参数sizeOfElement为单位元素长度（例如：sizeof(int)），numElements为元素个数，即在内存中申请numElements * sizeOfElement字节大小的连续内存空间。 3. realloc ​ void* realloc(void* ptr, unsigned newsize); 使用realloc函数为ptr重新分配大小为size的一块内存空间。下面是这个函数的工作流程： ​ (1)，对ptr进行判断，如果ptr为NULL，则函数相当于malloc(new_size)，试着分配一块大小为new_size的内存，如果成功将地址返回，否则返回NULL。如果ptr不为NULL，则进入(2)。 ​ (2)，查看ptr是不是在堆中，如果不是的话会抛出realloc invalid pointer异常。如果ptr在堆中，则查看new_size大小，如果new_size大小为0，则相当于free(ptr)，将ptr指向的内存空间释放掉，返回NULL。如果new_size小于原大小，则ptr中的数据可能会丢失，只有new_size大小的数据会保存；如果size等于原大小，等于什么都没有做；如果size大于原大小，则查看ptr指向的位置还有没有足够的连续内存空间，如果有的话，分配更多的空间，返回的地址和ptr相同，如果没有的话，在更大的空间内查找，如果找到size大小的空间，将旧的内容拷贝到新的内存中，把旧的内存释放掉，则返回新地址，否则返回NULL。 区别 函数malloc不能初始化所分配的内存空间,而函数calloc能.如果由malloc()函数分配的内存空间原来没有被使用过，则其中的每一位可能都是0;反之, 如果这部分内存曾经被分配过,则其中可能遗留有各种各样的数据.也就是说，使用malloc()函数的程序开始时(内存空间还没有被重新分配)能正常进行,但经过一段时间(内存空间还已经被重新分配)可能会出现问题. 函数calloc() 会将所分配的内存空间中的每一位都初始化为零,也就是说,如果你是为字符类型或整数类型的元素分配内存,那么这些元素将保证会被初始化为0;如果你是为指针类型的元素分配内存,那么这些元素通常会被初始化为空指针;如果你为实型数据分配内存,则这些元素会被初始化为浮点型的零. 函数malloc向系统申请分配指定size个字节的内存空间.返回类型是 void类型.void表示未确定类型的指针.C,C++规定，void* 类型可以强制转换为任何其它类型的指针. realloc可以对给定的指针所指的空间进行扩大或者缩小，无论是扩张或是缩小，原有内存的中内容将保持不变.当然，对于缩小，则被缩小的那一部分的内容会丢失.realloc并不保证调整后的内存空间和原来的内存空间保持同一内存地址.相反，realloc返回的指针很可能指向一个新的地址. realloc是从堆上分配内存的.当扩大一块内存空间时，realloc()试图直接从堆上现存的数据后面的那些字节中获得附加的字节，如果能够满足，自然天下太平；如果数据后面的字节不够，问题就出来了，那么就使用堆上第一个有足够大小的自由块，现存的数据然后就被拷贝至新的位置，而老块则放回到堆上.这句话传递的一个重要的信息就是数据可能被移动.]]></content>
+      <categories>
+        <category>知识辨析</category>
+      </categories>
+      <tags>
+        <tag>C/C++</tag>
+        <tag>内存管理</tag>
+        <tag>malloc</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[malloc 和new]]></title>
+    <url>%2F2019%2F03%2F18%2Fmalocandnew%2F</url>
+    <content type="text"><![CDATA[​ malloc() 与 free()相对应，new/new[]与delete/delete[]相对应，都应配对使用。 申请内存位置不同 new操作符可以从其他位置上分配内存，不一定局限于堆。 malloc函数从堆上动态分配内存。 返回类型安全性 new操作符返回的是对象类型的指针，类型匹配，故类型安全。 malloc函数分配成功返回void*，需要进行强制类型转换。 内存分配失败时的返回值 new分配失败会抛出bac_alloc异常。malloc分配内存失败时返回NULL。 空间大小指定方式不同 new 会根据类型推断需要分配的内存的大小。malloc需要自行计算指出内存大小。 分配行为不同 new分配内存会有3个步骤： 第一步：调用operator new 函数（对于数组是operator new[]）分配一块足够大的，原始的，未命名的内存空间以便存储特定类型的对象。 第二步：编译器运行相应的构造函数以构造对象，并为其传入初值。 第三步：对象构造完成后，返回一个指向该对象的指针。 malloc 只会开辟空间。 对数组的处理 C++提供了new[]与delete[]来专门处理数组类型: A * ptr = new A[10];//分配10个A对象 使用new[]分配的内存必须使用delete[]进行释放：delete [] ptr; new对数组的支持体现在它会分别调用构造函数函数初始化每一个数组元素，释放对象时为每个对象调用析构函数。注意delete[]要与new[]配套使用，不然会找出数组对象部分释放的现象，造成内存泄漏。 而malloc，它并不知道你在这块内存上要放的数组还是别的东西，反正它就给你一块原始的内存，在给你个内存的地址就完事。所以如果要动态分配一个数组的内存，还需要我们手动自定数组的大小： 是否可以被重载 opeartor new /operator delete可以被重载 而malloc/free并不允许重载。 能否直观地重新分配内存 使用malloc分配的内存后，如果在使用过程中发现内存不足，可以使用realloc函数进行内存重新分配实现内存的扩充。realloc先判断当前的指针所指内存是否有足够的连续空间，如果有，原地扩大可分配的内存地址，并且返回原来的地址指针；如果空间不够，先按照新指定的大小分配空间，将原有数据从头到尾拷贝到新分配的内存区域，而后释放原来的内存区域。 new没有。 new与malloc是否可以相互调用 operator new /operator delete的实现可以基于malloc，而malloc的实现不可以去调用new。 客户处理内存分配不足 在operator new抛出异常以反映一个未获得满足的需求之前，它会先调用一个用户指定的错误处理函数。 对于malloc，客户并不能够去编程决定内存不足以分配时要干什么事，只能看着malloc返回NULL。]]></content>
+      <categories>
+        <category>知识辨析</category>
+      </categories>
+      <tags>
+        <tag>C/C++</tag>
+        <tag>内存管理</tag>
+        <tag>malloc</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[[LeetCode]数组类问题心得小结]]></title>
+    <url>%2F2019%2F03%2F02%2Farray%2F</url>
+    <content type="text"><![CDATA[常用方法与函数 在C++中，常用vector来作为数组容器。因此我们只讨论vector的相关方法与函数。 方法 作用 a.empty() 判断a是否为空，空则返回ture,不空则返回false a.erase(a.begin()+1,a.begin()+3) 删除a中第1个（从第0个算起）到第2个元素，也就是说删除的元素从a.begin()+1算起（包括它）一直到a.begin()+ 3（不包括它） a.size() 返回a中元素的个数 a.resize(10,2) 将a的现有元素个数调至10个，多则删，少则补，其值为2 a.swap(b) b为向量，将a中的元素和b中的元素进行整体性交换 a.insert(a.begin()+1,3,5) 在a的第1个元素（从第0个算起）的位置插入3个数，其值都为5 a.insert(a.begin()+1,5) 在a的第1个元素（从第0个算起）的位置插入数值5，如a为1,2,3,4，插入元素后为1,5,2,3,4 C++算法库中提供了许多算法函数可以对vector进行操作，使用时要包含头文件#include&lt;algorithm&gt; 函数 作用 sort(a.begin(),a.end()) 对a中的从a.begin()（包括它）到a.end()（不包括它）的元素进行从小到大排列 reverse(a.begin(),a.end()); 对a中的从a.begin()（包括它）到a.end()（不包括它）的元素倒置，但不排列，如a中元素为1,3,2,4,倒置后为4,2,3,1 copy(a.begin(),a.end(),b.begin()+1) 把a中的从a.begin()（包括它）到a.end()（不包括它）的元素复制到b中，从b.begin()+1的位置（包括它）开始复制，覆盖掉原有元素 find(a.begin(),a.end(),10) 在a中的从a.begin()（包括它）到a.end()（不包括它）的元素中查找10，若存在返回其在向量中的位置 数组遍历 数组遍历一般有两种方式，（1）下标访问遍历，（2）使用迭代器遍历。 使用下标遍历 1234int a[6]=&#123;1,2,3,4,5,6&#125;;vector&lt;int&gt; b(a,a+4);for(int i=0;i&lt;=b.size()-1;i++) cout&lt;&lt;b[i]&lt;&lt;" "; 使用迭代器遍历 1234int a[6]=&#123;1,2,3,4,5,6&#125;;vector&lt;int&gt; b(a,a+4);for(vector&lt;int&gt;::iterator it=b.begin();it!=b.end();it++) cout&lt;&lt;*it&lt;&lt;" "; 常见题型及其常见思路 特定模式的搜索问题 ​ 这类题型会提供你一个特定的模式，要求你在数组中搜索，一般要求回答出现位置或者是否存在，主要考察数组的遍历。 暴力搜索 直接遍历即可，一般都要O（n^2)的复杂度，根据一些题目具体的不同可以做一些简化。 双指针法 使用两个指针来进行遍历，可以保留更多的信息易于判断，同时也减少判断。一般分为快指针+慢指针和头指针+尾指针两种模式。 转化法 如果题目中的模式组合比较有限，则可以从模式本身出发进行问题转化，将对数组的遍历转化为有限模式的统计，复杂度可降至O（n）甚至O（1）。 逐个修改问题 重复问题 交换与旋转问题]]></content>
+      <categories>
+        <category>LeetCode Summary</category>
+      </categories>
+      <tags>
+        <tag>LeetCode</tag>
+        <tag>数组</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[【LeetCode】初级算法——数组]]></title>
+    <url>%2F2019%2F02%2F28%2FLeetcode-array%2F</url>
+    <content type="text"><![CDATA[[LeetCode]# 217 存在重复元素 给定一个整数数组，判断是否存在重复元素。 如果任何值在数组中出现至少两次，函数返回 true。如果数组中每个元素都不相同，则返回 false。 示例 1: 123&gt; 输入: [1,2,3,1]&gt; 输出: true&gt; 示例 2: 123&gt; 输入: [1,2,3,4]&gt; 输出: false&gt; 示例 3: 123&gt; 输入: [1,1,1,3,3,4,3,2,4,2]&gt; 输出: true&gt; 解答思路 暴力搜索： 最容易想到的方法，当然速度非常慢。 1234567891011121314151617class Solution &#123;public: bool containsDuplicate(vector&lt;int&gt;&amp; nums) &#123; if(nums.empty())&#123; return false; &#125; int len =nums.size(); for(int i =0; i&lt;len;i++)&#123; for(int j =i+1; j&lt;len;j++)&#123; if (nums[i] == nums[j])&#123; return true; &#125; &#125; &#125; return false; &#125;&#125;; 先排序 这个方法的好处在于：排序后重复元素就变成相邻元素了，之后的检索时间减少为O(1). 1234567891011class Solution &#123;public: bool containsDuplicate(vector&lt;int&gt;&amp; nums) &#123; sort(nums.begin(),nums.end()); int len=nums.size(); for(int i=0;i&lt;len-1;i++)&#123; if(nums[i]==nums[i+1]) return 1; &#125; return 0; &#125;&#125;; [LeetCode] #122 买卖股票的最佳时机 Ⅱ 给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。 设计一个算法来计算你所能获取的最大利润。你可以尽可能地完成更多的交易（多次买卖一支股票）。 **注意：**你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。 示例 1: 12345&gt; 输入: [7,1,5,3,6,4]&gt; 输出: 7&gt; 解释: 在第 2 天（股票价格 = 1）的时候买入，在第 3 天（股票价格 = 5）的时候卖出, 这笔交易所能获得利润 = 5-1 = 4 。&gt; 随后，在第 4 天（股票价格 = 3）的时候买入，在第 5 天（股票价格 = 6）的时候卖出, 这笔交易所能获得利润 = 6-3 = 3 。&gt; 示例 2: 123456&gt; 输入: [1,2,3,4,5]&gt; 输出: 4&gt; 解释: 在第 1 天（股票价格 = 1）的时候买入，在第 5 天 （股票价格 = 5）的时候卖出, 这笔交易所能获得利润 = 5-1 = 4 。&gt; 注意你不能在第 1 天和第 2 天接连购买股票，之后再将它们卖出。&gt; 因为这样属于同时参与了多笔交易，你必须在再次购买前出售掉之前的股票。&gt; 示例 3: 1234&gt; 输入: [7,6,4,3,1]&gt; 输出: 0&gt; 解释: 在这种情况下, 没有交易完成, 所以最大利润为 0。&gt; 解答思路 暴力法 遍历所有可能组合，时间复杂度高达O(n^n),很明显不是最好的方法。 12345678910111213141516171819202122int calculateMaxProfit(vector&lt;int&gt; &amp;prices, int start)&#123;//调用此calculateMaxProfit函数使用递归暴力法 if(start &gt;= prices.size()) return 0; int maxProfit = 0; for (int i = start; i &lt; prices.size() - 1; i++) &#123; int tempProfit = 0; for (int j = i + 1; j &lt; prices.size(); j++) &#123; if (prices[i] &lt; prices[j]) &#123; int profit = prices[j] - prices[i] + calculateMaxProfit(prices, j + 1); if(profit &gt; tempProfit) tempProfit = profit; &#125; &#125; if(tempProfit &gt; maxProfit) maxProfit = tempProfit; &#125; return maxProfit;&#125; 贪心法 事实上由于只能进行一次交易，且交易日连续，因此，利用贪心算法，局部最优解即全局最优解。 123456789101112131415class Solution &#123;public: int maxProfit(vector&lt;int&gt;&amp; prices) &#123; if(prices.empty())&#123; return 0; &#125; int max =0; for (int i=0; i&lt;prices.size()-1; i++ )&#123; if(prices[i]&lt;prices[i+1])&#123; max += prices[i+1] - prices[i] ; &#125; &#125; return max; &#125;&#125;; [LeetCode]#189 旋转数组 给定一个数组，将数组中的元素向右移动 k 个位置，其中 k 是非负数。 示例 1: 1234567&gt; 输入: [1,2,3,4,5,6,7] 和 k = 3&gt; 输出: [5,6,7,1,2,3,4]&gt; 解释:&gt; 向右旋转 1 步: [7,1,2,3,4,5,6]&gt; 向右旋转 2 步: [6,7,1,2,3,4,5]&gt; 向右旋转 3 步: [5,6,7,1,2,3,4]&gt; 示例 2: 123456&gt; 输入: [-1,-100,3,99] 和 k = 2&gt; 输出: [3,99,-1,-100]&gt; 解释: &gt; 向右旋转 1 步: [99,-1,-100,3]&gt; 向右旋转 2 步: [3,99,-1,-100]&gt; 说明: 尽可能想出更多的解决方案，至少有三种不同的方法可以解决这个问题。 要求使用空间复杂度为 O(1) 的原地算法。 解答思路 直接移动 将数组向右移动K次，每次移动一格，时间复杂度为O(Kn). 123456789101112131415161718class Solution &#123;public: void rotate(vector&lt;int&gt;&amp; nums, int k) &#123; if(nums.empty())&#123; return; &#125; int temp =0; int len = nums.size(); for(int i =0; i&lt;k;i++)&#123; temp = nums[len-1]; for(int j =0; j&lt;len-1;j++)&#123; nums[len-1 - j] = nums[len-2 - j]; &#125; nums[0] = temp; &#125; return; &#125;&#125;; 翻转法 这是一个很巧妙的方法： 利用数组的length - k 把数组 分为两半； 1.翻转左边和右边的数组； 2.翻转总数组。 时间复杂度是O(n),空间复杂度是O(1)。 12345678910111213141516171819202122class Solution &#123;public: void rotate(vector&lt;int&gt;&amp; nums, int k) &#123; int n=nums.size(); k=k%n; if(k==0) return ; reverseString(nums,0,n-k-1); reverseString(nums,n-k,n-1); reverseString(nums,0,n-1); &#125; void reverseString(vector&lt;int&gt;&amp; nums,int from,int to) &#123; while(from&lt;to) &#123; int temp=nums[from]; nums[from++]=nums[to]; nums[to--]=temp; &#125; &#125;&#125;; [LeetCode]# 217 存在重复元素 给定一个整数数组，判断是否存在重复元素。 如果任何值在数组中出现至少两次，函数返回 true。如果数组中每个元素都不相同，则返回 false。 示例 1: 123&gt; 输入: [1,2,3,1]&gt; 输出: true&gt; 示例 2: 123&gt; 输入: [1,2,3,4]&gt; 输出: false&gt; 示例 3: 123&gt; 输入: [1,1,1,3,3,4,3,2,4,2]&gt; 输出: true&gt; 解答思路 暴力搜索 相较于最朴素的遍历略有改进，每次只搜索相应元素后面的元素，时间复杂度仍是O(n^2). 1234567891011121314151617class Solution &#123;public: bool containsDuplicate(vector&lt;int&gt;&amp; nums) &#123; if(nums.empty())&#123; return false; &#125; int len =nums.size(); for(int i =0; i&lt;len;i++)&#123; for(int j =i+1; j&lt;len;j++)&#123; if (nums[i] == nums[j])&#123; return true; &#125; &#125; &#125; return false; &#125;&#125;; 排序后检测 这种方法非常快。先对数组进行排序，这样相同的元素一定是挨着的，那么只需要对每一对挨着的元素进行判断即可。 123456789101112public boolean containsDuplicate(int[] nums) &#123; if (nums.length &lt;= 1) &#123; return false; &#125; Arrays.sort(nums); for (int i = 0; i &lt; nums.length - 1; i++) &#123; if (nums[i] == nums[i + 1]) &#123; return true; &#125; &#125; return false;&#125; [LeetCode]# 136 只出现一次的数字 给定一个非空整数数组，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素。 说明： 你的算法应该具有线性时间复杂度。 你可以不使用额外空间来实现吗？ 示例 1: 123&gt; 输入: [2,2,1]&gt; 输出: 1&gt; 示例 2: 123&gt; 输入: [4,1,2,1,2]&gt; 输出: 4&gt; 解题思路 排序后查找 排序后重复数字将会变成相邻元素，这时搜索时间复杂度就下降为O(n)。 12345678910111213141516171819202122class Solution &#123;public: int singleNumber(vector&lt;int&gt;&amp; nums) &#123; if(nums.empty())&#123; return 0; &#125; if(nums.size()==1)&#123; return nums[0]; &#125; sort(nums.begin(),nums.end()); int k=0; for(int i=0;i&lt;nums.size();i++)&#123; if(nums[k] != nums[i])&#123; if((i-k)&lt;=1)&#123; return nums[k]; &#125; k = i; &#125; &#125; return nums[nums.size()-1]; &#125;&#125;; 异或操作 异或操作可以区分两个值是否相同。也就是当a b 两个值相同时，返回0；a b两个值不相等是，返回1。相同为真，不相同为假。 同时有：0 ^ a = a 1234567class Solution &#123; public int singleNumber(int[] nums) &#123; int result = nums[0]; for (int i = 1; i &lt; nums.length; i++) result ^= nums[i]; return result; &#125;&#125; [LeetCode]#283 移动零 给定一个数组 nums，编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序。 示例: 123&gt; 输入: [0,1,0,3,12]&gt; 输出: [1,3,12,0,0]&gt; 说明: 必须在原数组上操作，不能拷贝额外的数组。 尽量减少操作次数。 解题思路 依次后移 12345678910111213141516171819202122class Solution &#123;public: void moveZeroes(vector&lt;int&gt;&amp; nums) &#123; if(nums.empty())&#123; return; &#125; for(vector&lt;int&gt;::iterator it = nums.begin(); it != nums.end(); it++)&#123; if((*it)==0)&#123; vector&lt;int&gt;::iterator zit = it; for(vector&lt;int&gt;::iterator jt = it+1 ; jt != nums.end(); jt++)&#123; if((*jt)!=0)&#123; int temp = *jt; *jt = 0; *zit = temp; zit = jt; &#125; &#125; &#125; &#125; &#125;&#125;; [LeetCode]#68 旋转图像 给定一个 n × n 的二维矩阵表示一个图像。 将图像顺时针旋转 90 度。 说明： 你必须在原地旋转图像，这意味着你需要直接修改输入的二维矩阵。请不要使用另一个矩阵来旋转图像。 示例 1: 1234567891011121314&gt; 给定 matrix = &gt; [&gt; [1,2,3],&gt; [4,5,6],&gt; [7,8,9]&gt; ],&gt; &gt; 原地旋转输入矩阵，使其变为:&gt; [&gt; [7,4,1],&gt; [8,5,2],&gt; [9,6,3]&gt; ]&gt; 示例 2: 12345678910111213141516&gt; 给定 matrix =&gt; [&gt; [ 5, 1, 9,11],&gt; [ 2, 4, 8,10],&gt; [13, 3, 6, 7],&gt; [15,14,12,16]&gt; ], &gt; &gt; 原地旋转输入矩阵，使其变为:&gt; [&gt; [15,13, 2, 5],&gt; [14, 3, 4, 1],&gt; [12, 6, 8, 9],&gt; [16, 7,10,11]&gt; ]&gt; 解题思路 逐个移动 由于是旋转90°，因此将第一个元素旋转90°后再将下一个元素依次移动，这样4步即可停止回到原位。 123456789101112131415class Solution &#123;public: void rotate(vector&lt;vector&lt;int&gt; &gt; &amp;matrix) &#123; int n = matrix.size(); for (int i = 0; i &lt; n / 2; ++i) &#123; for (int j = i; j &lt; n - 1 - i; ++j) &#123; int tmp = matrix[i][j]; matrix[i][j] = matrix[n - 1 - j][i]; matrix[n - 1 - j][i] = matrix[n - 1 - i][n - 1 - j]; matrix[n - 1 - i][n - 1 - j] = matrix[j][n - 1 - i]; matrix[j][n - 1 - i] = tmp; &#125; &#125; &#125;&#125;; 翻转1 首先以从对角线为轴翻转，然后再以x轴中线上下翻转即可得到结果。 12345678910111213141516class Solution &#123;public: void rotate(vector&lt;vector&lt;int&gt; &gt; &amp;matrix) &#123; int n = matrix.size(); for (int i = 0; i &lt; n - 1; ++i) &#123; for (int j = 0; j &lt; n - i; ++j) &#123; swap(matrix[i][j], matrix[n - 1- j][n - 1 - i]); &#125; &#125; for (int i = 0; i &lt; n / 2; ++i) &#123; for (int j = 0; j &lt; n; ++j) &#123; swap(matrix[i][j], matrix[n - 1 - i][j]); &#125; &#125; &#125;&#125;; 翻转2 先对原数组取其转置矩阵，然后把每行的数字翻转可得到结果。 123456789101112class Solution &#123;public: void rotate(vector&lt;vector&lt;int&gt; &gt; &amp;matrix) &#123; int n = matrix.size(); for (int i = 0; i &lt; n; ++i) &#123; for (int j = i + 1; j &lt; n; ++j) &#123; swap(matrix[i][j], matrix[j][i]); &#125; reverse(matrix[i].begin(), matrix[i].end()); &#125; &#125;&#125;; [LeetCode]#36 有效的数独 判断一个 9x9 的数独是否有效。只需要根据以下规则，验证已经填入的数字是否有效即可。 数字 1-9 在每一行只能出现一次。 数字 1-9 在每一列只能出现一次。 数字 1-9 在每一个以粗实线分隔的 3x3 宫内只能出现一次。 上图是一个部分填充的有效的数独。 数独部分空格内已填入了数字，空白格用 '.' 表示。 示例 1: 1234567891011121314&gt; 输入:&gt; [&gt; [&quot;5&quot;,&quot;3&quot;,&quot;.&quot;,&quot;.&quot;,&quot;7&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;],&gt; [&quot;6&quot;,&quot;.&quot;,&quot;.&quot;,&quot;1&quot;,&quot;9&quot;,&quot;5&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;],&gt; [&quot;.&quot;,&quot;9&quot;,&quot;8&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;6&quot;,&quot;.&quot;],&gt; [&quot;8&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;6&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;3&quot;],&gt; [&quot;4&quot;,&quot;.&quot;,&quot;.&quot;,&quot;8&quot;,&quot;.&quot;,&quot;3&quot;,&quot;.&quot;,&quot;.&quot;,&quot;1&quot;],&gt; [&quot;7&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;2&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;6&quot;],&gt; [&quot;.&quot;,&quot;6&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;2&quot;,&quot;8&quot;,&quot;.&quot;],&gt; [&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;4&quot;,&quot;1&quot;,&quot;9&quot;,&quot;.&quot;,&quot;.&quot;,&quot;5&quot;],&gt; [&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;8&quot;,&quot;.&quot;,&quot;.&quot;,&quot;7&quot;,&quot;9&quot;]&gt; ]&gt; 输出: true&gt; 示例 2: 12345678910111213141516&gt; 输入:&gt; [&gt; [&quot;8&quot;,&quot;3&quot;,&quot;.&quot;,&quot;.&quot;,&quot;7&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;],&gt; [&quot;6&quot;,&quot;.&quot;,&quot;.&quot;,&quot;1&quot;,&quot;9&quot;,&quot;5&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;],&gt; [&quot;.&quot;,&quot;9&quot;,&quot;8&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;6&quot;,&quot;.&quot;],&gt; [&quot;8&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;6&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;3&quot;],&gt; [&quot;4&quot;,&quot;.&quot;,&quot;.&quot;,&quot;8&quot;,&quot;.&quot;,&quot;3&quot;,&quot;.&quot;,&quot;.&quot;,&quot;1&quot;],&gt; [&quot;7&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;2&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;6&quot;],&gt; [&quot;.&quot;,&quot;6&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;2&quot;,&quot;8&quot;,&quot;.&quot;],&gt; [&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;4&quot;,&quot;1&quot;,&quot;9&quot;,&quot;.&quot;,&quot;.&quot;,&quot;5&quot;],&gt; [&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;.&quot;,&quot;8&quot;,&quot;.&quot;,&quot;.&quot;,&quot;7&quot;,&quot;9&quot;]&gt; ]&gt; 输出: false&gt; 解释: 除了第一行的第一个数字从 5 改为 8 以外，空格内其他数字均与 示例1 相同。&gt; 但由于位于左上角的 3x3 宫内有两个 8 存在, 因此这个数独是无效的。&gt; 说明: 一个有效的数独（部分已被填充）不一定是可解的。 只需要根据以上规则，验证已经填入的数字是否有效即可。 给定数独序列只包含数字 1-9 和字符 '.' 。 给定数独永远是 9x9 形式的。 解题思路 转换 将数组内的数的区域问题转换为多个坐标比较的问题。这个解决方案有更广泛的通用性，对其他尺寸的数独也适用。 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950class Solution &#123;public: bool isValidSudoku(vector&lt;vector&lt;char&gt;&gt;&amp; board) &#123; map&lt;int,vector&lt;pair&lt;int,int&gt;&gt;&gt; num_map; if(board.empty())&#123; return false; &#125; //记录每个数及其坐标 for(int i = 0; i&lt; board.size(); i++)&#123; for(int j = 0; j&lt; board[i].size();j++)&#123; if(isdigit(board[i][j]) )&#123; pair&lt;int,int&gt; k = make_pair(i,j); int num = int(board[i][j]); if(num_map[num].empty())&#123; vector&lt;pair&lt;int,int&gt;&gt; list; list.push_back(k); num_map[num] = list; &#125; else&#123; num_map[num].push_back(k); &#125; &#125; &#125; &#125; //比较相同数字的坐标 for(map&lt;int,vector&lt;pair&lt;int,int&gt;&gt;&gt;::iterator iter=num_map.begin();iter!=num_map.end();iter++)&#123; int len = iter-&gt;second.size(); vector&lt;pair&lt;int,int&gt;&gt; array = iter-&gt;second; if(len&gt;1)&#123; for(int i = 0; i&lt;len;i++)&#123; for(int j = i+1; j&lt;len; j++)&#123; pair&lt;int,int&gt; item1 = array[i]; pair&lt;int,int&gt; item2 = array[j]; if(item1.first==item2.first || item1.second == item2.second || (item2.first/3 == item1.first/3 &amp;&amp; item2.second/3 == item1.second/3 ))&#123; cout &lt;&lt; item1.first &lt;&lt; item1.second&lt;&lt;endl; cout &lt;&lt; item2.first &lt;&lt; item2.second&lt;&lt;endl; return false; &#125; &#125; &#125; &#125; &#125; return true; &#125;&#125;; 利用边界 由于数组都是9*9形式，且3 * 3方格固定,故采用数组下标边界即可区分。 12345678910111213141516171819public boolean isValidSudoku(char[][] board) &#123; for(int i = 0; i&lt;9; i++)&#123; HashSet&lt;Character&gt; rows = new HashSet&lt;Character&gt;(); HashSet&lt;Character&gt; columns = new HashSet&lt;Character&gt;(); HashSet&lt;Character&gt; cube = new HashSet&lt;Character&gt;(); for (int j = 0; j &lt; 9;j++)&#123; if(board[i][j]!='.' &amp;&amp; !rows.add(board[i][j])) return false; if(board[j][i]!='.' &amp;&amp; !columns.add(board[j][i])) return false; int RowIndex = 3*(i/3); int ColIndex = 3*(i%3); if(board[RowIndex + j/3][ColIndex + j%3]!='.' &amp;&amp; !cube.add(board[RowIndex + j/3][ColIndex + j%3])) return false; &#125; &#125; return true; &#125;]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+      <tags>
+        <tag>LeetCode</tag>
+        <tag>数组</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[bash-变量与表达式]]></title>
+    <url>%2F2019%2F01%2F26%2Fbash-%E5%8F%98%E9%87%8F%E4%B8%8E%E8%A1%A8%E8%BE%BE%E5%BC%8F%2F</url>
+    <content type="text"><![CDATA[Shell变量 变量定义 定义变量如下： 123variable=valuevariable='value'variable="value" 注意，变量名和=之间不能有空格，这可能和你熟悉的所有编程语言都不一样。同时，变量名的命名须遵循如下规则： 命名只能使用英文字母，数字和下划线，首个字符不能以数字开头。 中间不能有空格，可以使用下划线（_）。 不能使用标点符号。 不能使用bash里的关键字（可用help命令查看保留关键字）。 使用变量 使用一个定义过的变量，只要在变量名前面加美元符号$即可，如： 12author=echo $authorecho $&#123;author&#125; 变量名外面的花括号{ }是可选的，加不加都行，加花括号是为了帮助解释器识别变量的边界，比如下面这种情况： 1skill=&quot;Java&quot;echo &quot;I am good at $&#123;skill&#125;Script&quot; 如果不给 skill 变量加花括号，写成echo &quot;I am good at $skillScript&quot;，解释器就会把 $skillScript 当成一个变量. 单引号与双引号 以单引号' '包围变量的值时，单引号里面是什么就输出什么，即使内容中有变量和命令（命令需要反引起来）也会把它们原样输出。这种方式比较适合定义显示纯字符串的情况，即不希望解析变量、命令等的场景。 以双引号&quot; &quot;包围变量的值时，输出时会先解析里面的变量和命令，而不是把双引号中的变量名和命令原样输出。这种方式比较适合字符串中附带有变量和命令并且想将其解析后再输出的变量定义。 特殊变量 变量 含义 $0 当前脚本的文件名。 $n（n≥1） 传递给脚本或函数的参数。n 是一个数字，表示第几个参数。例如，第一个参数是 $1，第二个参数是 $2。 $# 传递给脚本或函数的参数个数。 $* 传递给脚本或函数的所有参数。 $@ 传递给脚本或函数的所有参数。当被双引号&quot; &quot;包含时，$@ 与 $* 稍有不同。 $? 上个命令的退出状态，或函数的返回值。 $$ 当前 Shell 进程 ID。对于 Shell 脚本，就是这些脚本所在的进程 ID。 表达式与操作符 比较操作符 对应的操作 整数操作 字符串操作 相同 -eq = 不同 -ne != 大于 -gt &gt; 小于 -lt &lt; 大于或等于 -ge 小于或等于 -le 为空 -z 不为空 -n 字符串操作符 字符串替换 格式 解释 ${varname:-word} 返回默认值 ${varname:=word} 设置varname默认值 ${varname:?message} 为空时输出报错信息，message可以为空 ${varname:+word} 若为空，返回word，否则返回空 ${varname:offset:length} 返回从offset开始长度为length的子串。:length可省略，则子串一直到末尾。若offset小于0，offset为字符串末尾。若offset为@，length为从参数offset开始的参数数目 字符串匹配 格式 解释 ${variable#pattern} 删除开头的最短匹配部分 ${variable##pattern} 删除开头的最长匹配部分 ${variable%pattern} 删除结尾的最短匹配部分 ${variable%%pattern} 删除结尾的最长匹配部分 ${variable/pattern/string} 使用string替换匹配到的第一个字符串，pattern中可以以#或%开头 ${variable//pattern/string} 替换所有的字符串 获取字符串长度 命令 解释 ${#variable} 返回variable的长度 字符串截取 格式 说明 ${string: start :length} 从 string 字符串的左边第 start 个字符开始，向右截取 length 个字符。 ${string: start} 从 string 字符串的左边第 start 个字符开始截取，直到最后。 ${string: 0-start :length} 从 string 字符串的右边第 start 个字符开始，向右截取 length 个字符。 ${string: 0-start} 从 string 字符串的右边第 start 个字符开始截取，直到最后。 ${string#*chars} 从 string 字符串第一次出现 *chars 的位置开始，截取 *chars 右边的所有字符。 ${string##*chars} 从 string 字符串最后一次出现 *chars 的位置开始，截取 *chars 右边的所有字符。 ${string%*chars} 从 string 字符串第一次出现 *chars 的位置开始，截取 *chars 左边的所有字符。 ${string%%*chars} 从 string 字符串最后一次出现 *chars 的位置开始，截取 *chars 左边的所有字符 文件操作符 运算符 含义（ 满足下面要求时返回 TRUE ） -e file 文件 file 已经存在 -f file 文件 file 是普通文件 -s file 文件 file 大小不为零 -d file 文件 file 是一个目录 -r file 文件 file 对当前用户可以读取 -w file 文件 file 对当前用户可以写入 -x file 文件 file 对当前用户可以执行 -g file 文件 file 的 GID 标志被设置 -u file 文件 file 的 UID 标志被设置 -O file 文件 file 是属于当前用户的 -G file 文件 file 的组 ID 和当前用户相同 file1 -nt file2 文件 file1 比 file2 更新 file1 -ot file2 文件 file1 比 file2 更老]]></content>
+      <categories>
+        <category>-学习笔记</category>
+      </categories>
+      <tags>
+        <tag>-Shell</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[LeetCode#654]]></title>
+    <url>%2F2019%2F01%2F25%2FLeetCode-654%2F</url>
+    <content type="text"><![CDATA[[LeetCode] #654 最大二叉树 给定一个不含重复元素的整数数组。一个以此数组构建的最大二叉树定义如下： 二叉树的根是数组中的最大元素。 左子树是通过数组中最大值左边部分构造出的最大二叉树。 右子树是通过数组中最大值右边部分构造出的最大二叉树。 通过给定的数组构建最大二叉树，并且输出这个树的根节点。 Example 1: 1234567891011&gt; 输入: [3,2,1,6,0,5]&gt; 输入: 返回下面这棵树的根节点：&gt; &gt; 6&gt; / \&gt; 3 5&gt; \ / &gt; 2 0 &gt; \&gt; 1&gt; 注意: 给定的数组的大小在 [1, 1000] 之间。 给定的数组的大小在 [1, 1000] 之间1。 思路 123456789101112131415161718192021222324252627282930313233343536struct TreeNode &#123; int val; TreeNode *left; TreeNode *right; TreeNode(int x) : val(x), left(NULL), right(NULL) &#123;&#125; &#125;; class Solution &#123;public: TreeNode* constructMaximumBinaryTree(vector&lt;int&gt;&amp; nums) &#123; if(nums.size()==0)return NULL; else if(nums.size()==1)&#123; TreeNode * node=new TreeNode(nums[0]); return node; &#125; else&#123; int max=0; for(int i=0;i&lt;nums.size();i++)&#123; if(nums[i]&gt;nums[max]) max=i; &#125; vector&lt;int&gt; left_num,right_num; for(int i=0;i&lt;max;i++)&#123; left_num.push_back(nums[i]); &#125; for(int j=max+1;j&lt;nums.size();j++)&#123; right_num.push_back(nums[j]); &#125; TreeNode * node=new TreeNode(nums[max]); node-&gt;left=constructMaximumBinaryTree(left_num); node-&gt;right=constructMaximumBinaryTree(right_num); return node; &#125; &#125;&#125;; 以上是我的解决。]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+      <tags>
+        <tag>LeetCode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[[LeetCode]#73 矩阵置零]]></title>
+    <url>%2F2019%2F01%2F23%2FLeetCode-73%2F</url>
+    <content type="text"><![CDATA[[LeetCode] #73 矩阵置零 矩阵置零 给定一个 m x n 的矩阵，如果一个元素为 0，则将其所在行和列的所有元素都设为 0。请使用原地算法**。** 示例 1: 12345678910111213&gt; 输入: &gt; [&gt; [1,1,1],&gt; [1,0,1],&gt; [1,1,1]&gt; ]&gt; 输出: &gt; [&gt; [1,0,1],&gt; [0,0,0],&gt; [1,0,1]&gt; ]&gt; 示例 2: 12345678910111213&gt; 输入: &gt; [&gt; [0,1,2,0],&gt; [3,4,5,2],&gt; [1,3,1,5]&gt; ]&gt; 输出: &gt; [&gt; [0,0,0,0],&gt; [0,4,5,0],&gt; [0,3,1,0]&gt; ]&gt; 进阶: 一个直接的解决方案是使用 O(m**n) 的额外空间，但这并不是一个好的解决方案。 一个简单的改进方案是使用 O(m + n) 的额外空间，但这仍然不是最好的解决方案。 你能想出一个常数空间的解决方案吗？ 思路 这道题的空间复杂度为O(mn)的解法自不用多说，直接新建一个和matrix等大小的矩阵，然后一行一行的扫，只要有0，就将新建的矩阵的对应行全赋0，行扫完再扫列，然后把更新完的矩阵赋给matrix即可，这个算法的空间复杂度太高。将其优化到O(m+n)的方法是，用一个长度为m的一维数组记录各行中是否有0，用一个长度为n的一维数组记录各列中是否有0，最后直接更新matrix数组即可。这道题的要求是原地算法，应该就是要用O(1)的空间，那么我们就不能新建数组，我们考虑就用原数组的第一行第一列来记录各行各列是否有0。 - 先扫描第一行第一列，如果有0，则将各自的flag设置为true - 然后扫描除去第一行第一列的整个数组，如果有0，则将对应的第一行和第一列的数字赋0 - 再次遍历除去第一行第一列的整个数组，如果对应的第一行和第一列的数字有一个为0，则将当前值赋0 - 最后根据第一行第一列的flag来更新第一行第一列 1234567891011121314151617181920212223242526272829303132333435class Solution &#123;public: void setZeroes(vector&lt;vector&lt;int&gt; &gt; &amp;matrix) &#123; if (matrix.empty() || matrix[0].empty()) return; int m = matrix.size(), n = matrix[0].size(); bool rowZero = false, colZero = false; for (int i = 0; i &lt; m; ++i) &#123; if (matrix[i][0] == 0) colZero = true; &#125; for (int i = 0; i &lt; n; ++i) &#123; if (matrix[0][i] == 0) rowZero = true; &#125; for (int i = 1; i &lt; m; ++i) &#123; for (int j = 1; j &lt; n; ++j) &#123; if (matrix[i][j] == 0) &#123; matrix[0][j] = 0; matrix[i][0] = 0; &#125; &#125; &#125; for (int i = 1; i &lt; m; ++i) &#123; for (int j = 1; j &lt; n; ++j) &#123; if (matrix[0][j] == 0 || matrix[i][0] == 0) &#123; matrix[i][j] = 0; &#125; &#125; &#125; if (rowZero) &#123; for (int i = 0; i &lt; n; ++i) matrix[0][i] = 0; &#125; if (colZero) &#123; for (int i = 0; i &lt; m; ++i) matrix[i][0] = 0; &#125; &#125;&#125;;]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+      <tags>
+        <tag>LeetCode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[[LeetCode] #401 二进制手表]]></title>
+    <url>%2F2019%2F01%2F21%2FLeetCode-401%2F</url>
+    <content type="text"><![CDATA[[LeetCode] 401 Binary Watch A binary watch has 4 LEDs on the top which represent the hours (0-11), and the 6 LEDs on the bottom represent the minutes (0-59). Each LED represents a zero or one, with the least significant bit on the right. For example, the above binary watch reads “3:25”. Given a non-negative integer n which represents the number of LEDs that are currently on, return all possible times the watch could represent. Example: Input: n = 1 Return: [“1:00”, “2:00”, “4:00”, “8:00”, “0:01”, “0:02”, “0:04”, “0:08”, “0:16”, “0:32”] 1 2 Note: The order of output does not matter.输出顺序不影响 The hour must not contain a leading zero, for example “01:00” is not valid, it should be “1:00”. The minute must be consist of two digits and may contain a leading zero, for example “10:2” is not valid, it should be “10:02”. 思路 我的思路： 首先先明白二进制手表的含义，把1，2，4，8转化为四位的二进制就是0001， 0010， 0100，1000， 9点时亮1和8，是1001。分钟数也是同理。 其次表示小时的数值只有0-11，表示分钟的数值只有0-59。先分别对小时跟分钟的数值进行预处理，按照包含而二进制中包含1的个数分开保存小时数值的字符串跟分钟数值的字符串。 代码如下： 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051#include &lt;iostream&gt;#include &lt;vector&gt;#include &lt;string&gt;using namespace std;class Solution &#123;public: vector&lt;string&gt; readBinaryWatch(int num) &#123; vector&lt;string&gt; times; if(num&lt;0 || num&gt;8) return times; vector&lt;vector &lt;int&gt;&gt; hours(4); vector&lt;vector &lt;int&gt;&gt; minutes(6); for(int i=0; i&lt;12; i++)&#123; hours[numOfRow(i)].push_back(i); &#125; for(int j=0; j&lt;60; j++)&#123; minutes[numOfRow(j)].push_back(j); &#125; for(int h=0; h&lt;4&amp;&amp;h&lt;=num; h++)&#123; if(num-h&lt;6)&#123; for(int H: hours[h])&#123; for(int M: minutes[num-h])&#123; string time = M&lt;10 ? ":0" : ":"; times.push_back(to_string(H) + time + to_string(M)); &#125; &#125; &#125; &#125; return times; &#125; int numOfRow(int num)&#123; int Count = 0; while(num != 0)&#123; if(num%2 == 1) Count++; num /= 2; &#125; return Count; &#125;&#125;;int main()&#123; Solution a; int num = 0; cin &gt;&gt; num; vector&lt;string&gt; times = a.readBinaryWatch(num); for(int t=0; t&lt;times.size(); t++) cout &lt;&lt; times[t] &lt;&lt; endl; return 0;&#125; 其他思路： 1.使用bitset： [bitset的使用方法](https://blog.csdn.net/qll125596718/article/details/6901935 1234567891011121314#include &lt;bitset&gt;vector&lt;string&gt; readBinaryWatch1(int num) &#123;//bitset STL模板 vector&lt;string&gt; times; for (int i = 0; i &lt; 12; i++) &#123; bitset&lt;4&gt; h(i);//4位的二进制数 for (int j = 0; j &lt; 60; j++) &#123; bitset&lt;6&gt; m(j);//6位的二进制数 if (h.count() + m.count() == num)//h.count()函数判断h中1的个数 times.push_back(to_string(i) + (j &lt; 10? ":0": ":") + to_string(j)); &#125; &#125; return times; &#125; 2.动态规划： ​ 提供一个链接以供参考：参考链接1]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+      <tags>
+        <tag>LeetCode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[个性化Video_avatars]]></title>
+    <url>%2F2019%2F01%2F15%2Fvideo-avatar%2F</url>
+    <content type="text"><![CDATA[Video_avatars 这个项目来自马普所的一篇论文Video Based Reconstruction of 3D People Models ，日前，研究人员公布了他们的实现以及数据集。 Website:https://graphics.tu-bs.de/people-snapshot Github: https://github.com/thmoa/videoavatars 由于其文档比较匮乏，使用它的代码对自己的数据进行复现并不容易，经过几天努力，成功的完成了整个建模过程，故记录如下。相关代码以上传到了我的Github上。 原版本Demo 请先使用原版本Demo来验证环境部署成功:Video Avatars 数据准备 这个部分，我们将利用自摄的视频来进行的建模尝试，首先需要有一段如原论文视频相同的自摄视频，提供我的格式： 项目 格式 分辨率 1080*1080 帧率 24FPS 身体姿态 A形姿态旋转3圈 之后你可以使用 frame_get.py来获取到所有视频帧，以供下一步处理。 Step1:视频帧人体区域获取 这一步中，我们需要获得每一视频帧中，如下图形式的人体区域的二值图像： ![mask1](https://wpy-blog.oss-cn-shanghai.aliyuncs.com/mask1.jpg/wpy-blog) 在这一步中，我采用了百度AI开放平台的人像分割API来进行，你也可以采用其他AI开放平台的API，或者使用自己的语义分割实现。这一部分脚本在 human_mask.py 中可以找到。 ![origin](https://wpy-blog.oss-cn-shanghai.aliyuncs.com/origin1.jpg/wpy-blog) 受限于一些图像干扰，以及语义分割本身问题，获取到的mask图像往往还需要进一步处理： 可以看到，有一些无意义的区域，为了提升准确率，需要对mask进行取最大连通域的处理，之后可以再进行一次形态学膨胀操作消除空洞。这部分工作在mask_process.py中实现。 至此，我们就完成了mask的处理工作，之后，利用video_avatars/prpare_data/mask2hdf5.py即可将其转化为HDF5文件。 Step2：人体关节点标识 这一步需要将每一帧的关节点及其坐标转换为Jason格式，这里直接使用，Openpose来进行关节点识别。同样你也可以使用自己的实现或其他途径来进行关节点识别，只需符合COCO模型的关节点模式： Openpose具体安装和使用可以参考这里，我就不再详细介绍。 获取到所有的关节点的json文件后，使用video_avatars/prpare_data/2djoints2hdf5.py 可将其转化为HDF5文件。 Step3:相机相关参数 在video_avatars/prpare_data下，还有 create_camera.py来进行相机相关参数的序列化。 1234567parser.add_argument('out', type=str, help="Output file (.pkl)")parser.add_argument('width', type=int, help="Frame width in px")parser.add_argument('height', type=int, help="Frame height in px")parser.add_argument('-f', type=float, nargs='*', help="Focal length in px (2,)")parser.add_argument('-c', type=float, nargs='*', help="Principal point in px (2,)")parser.add_argument('-k', type=float, nargs='*', help="Distortion coefficients (5,)") 主要参数是分辨率以及像素焦距（Focal length in pixels ），由于我使用手机拍摄，其他参数难以获取，如果你能获取到准确数据可以将相应数据加入。 对于像素焦距（Focal length in pixels ），有以下公式可以计算： Focallengthinpixels=(imagewidthinpixels)∗(focallengthonearth)/(CCDwidthonearth)Focal length in pixels = (image width in pixels) * (focal length on earth) / (CCD width on earth) Focallengthinpixels=(imagewidthinpixels)∗(focallengthonearth)/(CCDwidthonearth) 构建运行 与之前的Demo相同，可以在这里找到具体命令。 最终效果 无衣着效果： 有衣着效果：]]></content>
+      <categories>
+        <category>计算机视觉</category>
+      </categories>
+      <tags>
+        <tag>计算机视觉</tag>
+        <tag>3D重建</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[【Hadoop】jar包及其替换]]></title>
+    <url>%2F2019%2F01%2F14%2FHadoop-jars%2F</url>
+    <content type="text"><![CDATA[获取Jar包 安装好Hadoop后，在hadoop的文件夹下可以看到share文件夹： 在share文件夹下，doc包含所有的文档内容，hadoop下就是我们可以获得到的Hadoop所有的源码以及测试jar包。 这里我们直接进入hadoop文件夹下，可以看到各个hadoop模块，根据需要可以找到相应jar包。 如果想要修改相应的hadoop模块，那么只需将相应的jar包替换为自己的实现即可。]]></content>
+      <categories>
+        <category>-Hadoop</category>
+      </categories>
+      <tags>
+        <tag>-Hadoop</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[[LeetCode]#116&117. 填充同一层的兄弟节点]]></title>
+    <url>%2F2018%2F10%2F17%2FLeetCode-116%2F</url>
+    <content type="text"><![CDATA[题目 填充同一层的兄弟节点 给定一个二叉树 123456&gt; struct TreeLinkNode &#123;&gt; TreeLinkNode *left;&gt; TreeLinkNode *right;&gt; TreeLinkNode *next;&gt; &#125;&gt; 填充它的每个 next 指针，让这个指针指向其下一个右侧节点。如果找不到下一个右侧节点，则将 next 指针设置为 NULL。 初始状态下，所有 next 指针都被设置为 NULL。 说明: 你只能使用额外常数空间。 使用递归解题也符合要求，本题中递归程序占用的栈空间不算做额外的空间复杂度。 你可以假设它是一个完美二叉树（即所有叶子节点都在同一层，每个父节点都有两个子节点）。 示例: 给定完美二叉树， 123456&gt; 1&gt; / \&gt; 2 3&gt; / \ / \&gt; 4 5 6 7&gt; 调用你的函数后，该完美二叉树变为： 123456&gt; 1 -&gt; NULL&gt; / \&gt; 2 -&gt; 3 -&gt; NULL&gt; / \ / \&gt; 4-&gt;5-&gt;6-&gt;7 -&gt; NULL&gt; 非完美二叉树情况： 填充同一层的兄弟节点 II 思路 首先就想到层次遍历的方法，是很自然的想法，只要处理好边界情况就可完成： 12345678910111213141516171819void connect(TreeLinkNode *root) &#123; if (root == NULL) return; queue&lt;TreeLinkNode*&gt; Q; Q.push(root); while(!Q.empty())&#123; int size = Q.size(); for(int i=0; i&lt;size;i++)&#123; TreeLinkNode *now = Q.front(); Q.pop(); if(i&lt;size-1) &#123; now-&gt;next = Q.front(); &#125; if(now-&gt;left) Q.push(now-&gt;left); if(now-&gt;right) Q.push(now-&gt;right); &#125; &#125; &#125; 但这样的方法不符合题目的要求，你只能使用额外常数空间 。 题目中提到*使用递归解题也符合要求，本题中递归程序占用的栈空间不算做额外的空间复杂度。* 那么考虑采用层次遍历的递归写法。大概结构为： 1234567891011for i to n 层数 = i访问二叉树(节点，层数) 如果层数＝1，访问当前节点 否则 访问二叉树(节点的左子树，层数－1) 访问二叉树(节点的右子树，层数－1) 最终符合题目要求的代码为： 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152class Solution &#123;public: void connect(TreeLinkNode *root) &#123; if(!root) &#123; return; &#125; hasToTheEnd = false; int level = 1; while(!hasToTheEnd) &#123; nextLeft = nullptr; VisitLevel(root, level); ++level; &#125; &#125; private: TreeLinkNode* nextLeft; bool hasToTheEnd; TreeLinkNode* VisitLevel(TreeLinkNode* node, int level) &#123; if(level == 1) &#123; if(nextLeft != nullptr) &#123; nextLeft -&gt;next = node; &#125; nextLeft_ = node; return node; &#125; TreeLinkNode* left = VisitLevel(node-&gt;left, level - 1); TreeLinkNode* right = VisitLevel(node-&gt;right, level - 1); if(left == nullptr &amp;&amp; right == nullptr) &#123; hasToTheEnd = true; &#125; //完全二叉树，左右非空性一致，随便返回一个 return left; &#125; &#125;; 进一步思考 当解决方法迁移到非完全二叉树，原有的结束条件已经不正确，现把结束条件默认设为true,当节点仍有子节点时将结束条件置false。这样可以避免树不对称时的结束条件错误。 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556class Solution &#123;public: void connect(TreeLinkNode *root) &#123; if(!root) &#123; return; &#125; hasToTheEnd = false; int level = 1; while(!hasToTheEnd) &#123; hasToTheEnd = true; nextLeft = nullptr; VisitLevel(root, level); ++level; &#125; &#125; private: TreeLinkNode* nextLeft; bool hasToTheEnd; void VisitLevel(TreeLinkNode* node, int level) &#123; if(level == 1) &#123; if(nextLeft != nullptr) &#123; nextLeft -&gt;next = node; &#125; nextLeft = node; if(node-&gt;left != nullptr || node-&gt;right != nullptr) &#123; hasToTheEnd = false; &#125; &#125; if(node-&gt;left) &#123; VisitLevel(node-&gt;left, level - 1); &#125; if(node-&gt;right) &#123; VisitLevel(node-&gt;right, level - 1); &#125; &#125; &#125;; 知识点：掌握二叉树层次遍历的迭代和递归写法。]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+      <tags>
+        <tag>LeetCode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[[LeetCode]#141&142.环形链表]]></title>
+    <url>%2F2018%2F10%2F15%2FLeetCode-141%2F</url>
+    <content type="text"><![CDATA[题目 环形链表 给定一个链表，判断链表中是否有环。 进阶： 你能否不使用额外空间解决此题？ 环形链表Ⅱ 给定一个链表，返回链表开始入环的第一个节点。 如果链表无环，则返回 null。 **说明：**不允许修改给定的链表。 思路 方法1：采用set，当第一个重复节点出现时链表有环，且第一个重复节点即入环的第一个节点。 方法2：提交后发现时间表现不好，在网上找到了另一套解法：设置快慢两个指针，快指针一次移动2个节点，慢指针一次移动1个节点，当列表内有环时，快指针会超慢指针一圈相遇，这时，置慢指针到链表头到再次相遇即是入环节点。详细推导见：参考 代码 方法1： 1234567891011121314151617ListNode *detectCycle(ListNode *head) &#123; ListNode *cusor = head; set&lt;ListNode*&gt; node_set; if(head != NULL)&#123; while(cusor-&gt;next != NULL) &#123; node_set.insert(cusor); if (node_set.find(cusor-&gt;next) != node_set.end()) &#123; return cusor-&gt;next; &#125; cusor = cusor-&gt;next; &#125; &#125; return NULL;&#125; 方法2： 12345678910111213141516171819202122ListNode *detectCycle(ListNode *head) &#123; if (head == NULL || head-&gt;next ==NULL) return NULL; ListNode *slowIndex = head; ListNode *fastIndex = head; while (fastIndex != NULL &amp;&amp; fastIndex-&gt;next != NULL)&#123; slowIndex =slowIndex-&gt;next; fastIndex =fastIndex-&gt;next-&gt;next; if (slowIndex == fastIndex)&#123; slowIndex = head; while (slowIndex != fastIndex)&#123; slowIndex = slowIndex-&gt;next; fastIndex =fastIndex-&gt;next; &#125; return slowIndex; &#125; &#125; return NULL;&#125;]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+      <tags>
+        <tag>LeetCode</tag>
+        <tag>链表</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[[LeetCode]#856.括号的分数]]></title>
+    <url>%2F2018%2F10%2F15%2FLeetCode-856%2F</url>
+    <content type="text"><![CDATA[题目 括号的分数 给定一个平衡括号字符串 S，按下述规则计算该字符串的分数： () 得 1 分。 AB 得 A + B 分，其中 A 和 B 是平衡括号字符串。 (A) 得 2 * A 分，其中 A 是平衡括号字符串。 示例 1： 123&gt; 输入： &quot;()&quot;&gt; 输出： 1&gt; 示例 2： 123&gt; 输入： &quot;(())&quot;&gt; 输出： 2&gt; 示例 3： 123&gt; 输入： &quot;()()&quot;&gt; 输出： 2&gt; 示例 4： 123&gt; 输入： &quot;(()(()))&quot;&gt; 输出： 6&gt; 思路 有题目中的要求知道只有()才能得分，而且嵌套的()会将得分加倍，所以题目可以简化为求所有的()的得分，其中得分多少取决于被嵌套的层数。 代码 1234567891011121314int scoreOfParentheses(string S) &#123;​ int result = 0, level = 0;​ for (int i = 0; i &lt; S.length(); ++i) &#123;​ if (S[i] == '(') &#123;​ level++;​ &#125; else &#123;​ level--; if (S[i-1] == '(')&#123;​ result += 1 &lt;&lt; bal;​ &#125;​ &#125; return result; &#125; 以上。]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+      <tags>
+        <tag>LeetCode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[[LeetCode]#334. 递增的三元子序列]]></title>
+    <url>%2F2018%2F10%2F14%2FLeetCode-334%2F</url>
+    <content type="text"><![CDATA[题目 递增的三元子序列 给定一个未排序的数组，判断这个数组中是否存在长度为 3 的递增子序列。 数学表达式如下: 如果存在这样的 i, j, k, 且满足 0 ≤ i &lt; j &lt; k ≤ n-1， 使得 arr[i] &lt; arr[j] &lt; arr[k] ，返回 true ; 否则返回 false 。 说明: 要求算法的时间复杂度为 O(n)，空间复杂度为 O(1) 。 示例 1: 输入: [1,2,3,4,5] 输出: true 示例 2: 输入: [5,4,3,2,1] 输出: false 思路 方法1： 比较直接的一个想法：设置high,mid,low3个游标，遍历数组，将数组内元素逐个与游标对比，直到low,mid,high 的大小关系符合low&lt;mid&lt;high. 但这样的操作时间复杂度为O（n²），不符合题目要求。 方法2： 后改进：遍历数组，如果数组元素小于low,则替换low,如果数组元素大于low小于mid 则替换mid,这时，数组内必有一个递增二元子序列，那么当元素大于mid小于high则替换high时，low,mid,high即形成一个递增三元子序列。只需遍历一次数组，故满足O（n）的时间复杂度。 方法3： 由于本题只需判断是否存在递增三元子序列，只需两个游标即可完成判断，当数组元素比较大的游标都大时，则递增三元子序列存在。 代码实现 12345678910111213bool increasingTriplet(vector&lt;int&gt;&amp; nums) &#123; int m1 = INT_MAX, m2 = INT_MAX; if(nums.size()&lt;3) &#123; return false; &#125; for (auto a : nums) &#123; if (m1 &gt;= a) m1 = a; else if (m2 &gt;= a) m2 = a; else return true; &#125; return false;&#125;]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+      <tags>
+        <tag>LeetCode</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[将hexo部署到云服务器上]]></title>
+    <url>%2F2018%2F09%2F28%2F%E5%B0%86hexo%E9%83%A8%E7%BD%B2%E5%88%B0%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%2F</url>
+    <content type="text"><![CDATA[一、准备 本地环境配置 本文本地环境为Windows10,确保你的计算机环境中装有 nodeJS、npm以及 Git,再进行接下来的步骤。 初始化 hexo 安装 打开命令行，执行以下命令： 1npm install hexo-cli -g 初始化 hexo 安装完成后，进入建立你的hexo目录,并完成初始化: 12345mkdir hexo-blogcd hexo-bloghexo init myblogcd myblognpm install 二、服务器配置 服务器系统为CentOS(7.1) 搭建远程Git库 登陆到远程服务器 安装git 123git --version // 如无，则安装yum install curl-devel expat-devel gettext-devel openssl-devel zlib-devel perl-develyum install -y git 建立git用户并配置仓库 参考资料 123456789useradd gitpasswd git # 设置密码su git # 这步很重要，不切换用户后面会很麻烦cd /home/git/mkdir -p hexo/blog # 项目存在的真实目录mkdir repos &amp;&amp; cd reposgit init --bare blog.git # 创建一个裸露的仓库cd blog.git/hooksvi post-receive # 创建hook钩子函数，输入内容如下（原理可以参考上面的链接） 12#!/bin/shgit --work-tree=/home/git/projects/blog --git-dir=/home/git/repos/blog.git checkout -f 添加完毕后修改钩子的权限，执行如下命令 123chmod +x post-receiveexit # 退出到 root 登录chown -R git:git /home/git/repos/blog.git # 添加权限 测试git仓库是否建立成功 找到另外的空白文件夹，执行如下命令 1git clone git@server_ip:/home/git/repos/blog.git 如果成功的完成克隆，则仓库可用。 设置ssh公钥访问 为了免去每次部署博客时输入密码的麻烦，我们需要采用ssh公钥来登陆服务器. 进入C://User//你的用户名/.ssh,查看是否已有密钥对:id_rsa和id_rsa.pub 若没有已建好密钥对参考此文。 将id_rsa.pub通过WinScp等工具上传至远端服务器/home/git/.ssh目录下，并改名为authorized_keys. 建议登陆git用户上传，上传后确保公钥拥有者为git 搭建nginx服务器 安装nginx 1yum install -y ngix 验证安装是否成功： 1ngix #启动后通过浏览器连接到server_IP 检查是否可以看到测试页面 配置nginx 12345678nginx -s stop # 先停止nginxcd /etc/nginxmv nginx.conf nginx.conf.copycp nginx.conf.defult nginx.conf #移除测试配置，导入默认配置vim nginx.conf#修改 root 解析路径 /home/git/hexo/blog# 同时将 user 改为 root 如下图，不然nginx无法访问nginx -s reload 三、本地部署配置 回到本地hexo目录，修配置文件_config.yml 以上，所有工作顺利完成！ 使用以下命令部署你的hexo: 12hexo g #生成静态文件hexo d #部署到远端 四、总结 整个过程经历了许多波折，大多是ssh公钥相关的配置问题，不过最终，还是解决了问题，可以开心地写博客了！]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>阿里云</tag>
+      </tags>
+  </entry>
+</search>
