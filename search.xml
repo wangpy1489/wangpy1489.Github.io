@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[C++ trivial类型]]></title>
+    <url>%2F2019%2F03%2F31%2Fc-trivial%2F</url>
+    <content type="text"><![CDATA[Trival类型 最近在看《STL源码剖析》时看到对于Trival和POD类型，模板会有相应的特化，对于Trival类型的操作不需逐个调用构造函数和析构函数。但是不清楚Trival的含义，因此查了一下。 A trivially copyable class is a class that: — has no non-trivial copy constructors (12.8), — has no non-trivial move constructors (12.8), — has no non-trivial copy assignment operators (13.5.3, 12.8), — has no non-trivial move assignment operators (13.5.3, 12.8), and — has a trivial destructor (12.4). A trivial class is a class that has a trivial default constructor (12.1) and is trivially copyable. [ Note: In particular, a trivially copyable or trivial class does not have virtual functions or virtual base classes.—end note ] 其他要求： ①没有虚成员（不含虚函数以及虚基类） ②没有类内初始化的非静态数据成员 ③如果它拥有基类或者非静态成员，它们也应该是trivial的 trivial constructor and trivial destructor trivial构造函数即构造函数“什么都不干”。通常情况下，不定义类的构造函数，编译器就会为我们生成一个平凡的默认构造函数。但如果该类含有虚函数或者数据成员没有默认构造函数，编译器是不会为我们生成trivial的默认构造函数的。析构函数也是一样的道理。 trivial copy constructor and trivial copy constructor trivial 拷贝构造函数基本上等同于memcpy进行类型的构造。同trivial 构造函数一样，编译器在用户不提供的情况下，通常会提供trivial 拷贝构造函数。 trivial 移动构造函数执行的操作与trivial 拷贝构造函数相同，都是bytewise的拷贝，只是用于移动语义。 详细请看]]></content>
+      <categories>
+        <category>C++基础知识</category>
+      </categories>
+      <tags>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[copy_move_constractor]]></title>
     <url>%2F2019%2F03%2F27%2Fcopy-move-constractor%2F</url>
     <content type="text"><![CDATA[拷贝构造函数和拷贝赋值函数 12345678910//拷贝构造函数A(const A&amp; t)&#123; ...&#125;//拷贝赋值运算符A&amp; operator=(const A&amp; rhs)&#123; ...&#125; 拷贝构造函数只在对象实例化时才会被调用，也就是说，在复制构造函数调用期间，这个对象处于一个未决状态（直到复制构造函数被成功调用），另外拷贝构造函数不返回任何值。 拷贝构造函数应用的场合有以下几个方面： 1 函数的参数是一个对象，并且是值传递方式 2 函数的返回值是一个对象，并且是值传递方式 3 用一个对象初始化另外一个对象 赋值运算符则在一个现存的对象被赋予新的值时被调用，并且它有返回值。 123456789Test test; //实例化test对象时调用了默认构造函数Test test1=test;// test1使用了复制构造函数（因为这是一个新的对象产生）Test test2(test);//test2时也是用了复制构造函数，Test test3=test2=test1;//而test2=test1则使用了赋值构造函数（没有新的对象产生），Test test3=test2=test1;//test3=test2则使用了复制构造函数，原因同上。 移动构造函数和移动赋值函数 12345678910//移动构造函数A(A&amp;&amp; t)&#123; ...&#125;//移动赋值运算符A&amp; operator=(A&amp;&amp; rhs)&#123; ...&#125; 要实现转移语义，需要定义转移构造函数，当然还可以定义转移赋值操作符。对于右值的拷贝和赋值会调用转移构造函数和转移赋值操作符。如果转移构造函数和转移拷贝操作符没有定义，那么拷贝构造函数和赋值操作符会被调用。 两者区别与拷贝构造函数和赋值运算符的区别相同，这里不再赘述。]]></content>
