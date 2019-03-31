@@ -606,7 +606,7 @@
                 
               
 
-              <time title="创建时间：2019-03-31 19:54:27 / 修改时间：20:28:48" itemprop="dateCreated datePublished" datetime="2019-03-31T19:54:27+08:00">2019-03-31</time>
+              <time title="创建时间：2019-03-31 19:54:27 / 修改时间：21:58:37" itemprop="dateCreated datePublished" datetime="2019-03-31T19:54:27+08:00">2019-03-31</time>
             
 
             
@@ -692,143 +692,17 @@
 
       
         
-          
-            <h1 id="namespace-概述"><a class="markdownIt-Anchor" href="#namespace-概述"></a> NameSpace 概述</h1>
+          <h1 id="namespace-概述"><a class="markdownIt-Anchor" href="#namespace-概述"></a> NameSpace 概述</h1>
 <p>Namespace 用于不同进程组之间的资源隔离，其目的是将某个特定的全局系统资源（global system resource）通过抽象方法使得namespace 中的进程看起来拥有它们自己的隔离的全局系统资源实例。</p>
-<p>Linux 内核中实现了六种 namespace，按照引入的先后顺序，列表如下：</p>
-<table>
-<thead>
-<tr>
-<th>namespace</th>
-<th>引入的相关内核版本</th>
-<th>被隔离的全局系统资源</th>
-<th>在容器语境下的隔离效果</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Mount namespaces</strong></td>
-<td><a href="http://lwn.net/2001/0301/a/namespaces.php3" target="_blank" rel="noopener">Linux 2.4.19</a></td>
-<td>文件系统挂接点</td>
-<td>每个容器能看到不同的文件系统层次结构</td>
-</tr>
-<tr>
-<td><strong>UTS namespaces</strong></td>
-<td><a href="http://lwn.net/Articles/179345/" target="_blank" rel="noopener">Linux 2.6.19</a></td>
-<td>nodename 和 domainname</td>
-<td>每个容器可以有自己的 hostname 和 domainame</td>
-</tr>
-<tr>
-<td><strong>PID namespaces</strong></td>
-<td><a href="http://lwn.net/Articles/259217/" target="_blank" rel="noopener">Linux 2.6.24</a></td>
-<td>进程 ID 数字空间 （process ID number space）</td>
-<td>每个 PID namespace 中的进程可以有其独立的 PID； 每个容器可以有其 PID 为 1 的root 进程；也使得容器可以在不同的 host 之间迁移，因为 namespace 中的进程 ID 和 host 无关了。这也使得容器中的每个进程有两个PID：容器中的 PID 和 host 上的 PID。</td>
-</tr>
-<tr>
-<td><strong>IPC namespaces</strong></td>
-<td><a href="http://lwn.net/Articles/187274/" target="_blank" rel="noopener">Linux 2.6.19</a></td>
-<td>特定的进程间通信资源，包括<a href="http://www.kernel.org/doc/man-pages/online/pages/man7/svipc.7.html" target="_blank" rel="noopener">System V IPC</a> 和  <a href="http://www.kernel.org/doc/man-pages/online/pages/man7/mq_overview.7.html" target="_blank" rel="noopener">POSIX message queues</a></td>
-<td>每个容器有其自己的 System V IPC 和 POSIX 消息队列文件系统，因此，只有在同一个 IPC namespace 的进程之间才能互相通信</td>
-</tr>
-<tr>
-<td><strong>Network namespaces</strong></td>
-<td><a href="http://lwn.net/Articles/219794/" target="_blank" rel="noopener">始于Linux 2.6.24 完成于 Linux 2.6.29</a></td>
-<td>网络相关的系统资源</td>
-<td>每个容器用有其独立的网络设备，IP 地址，IP 路由表，/proc/net 目录，端口号等等。这也使得一个 host 上多个容器内的同一个应用都绑定到各自容器的 80 端口上。</td>
-</tr>
-<tr>
-<td><strong>User namespaces</strong></td>
-<td><a href="http://lwn.net/Articles/528078/" target="_blank" rel="noopener">始于 Linux 2.6.23 完成于 Linux 3.8)</a></td>
-<td>用户和组 ID 空间</td>
-<td>在 user namespace 中的进程的用户和组 ID 可以和在 host 上不同； 每个 container 可以有不同的 user 和 group id；一个 host 上的非特权用户可以成为 user namespace 中的特权用户；</td>
-</tr>
-</tbody>
-</table>
-<h1 id="cgroup概述"><a class="markdownIt-Anchor" href="#cgroup概述"></a> Cgroup概述</h1>
-<p>在Linux里，一直以来就有对进程进行分组的概念和需求，比如<a href="https://www.win.tue.nl/~aeb/linux/lk/lk-10.html" target="_blank" rel="noopener">session group， progress group</a>等，后来随着人们对这方面的需求越来越多，比如需要追踪一组进程的内存和IO使用情况等，于是出现了cgroup,主要有两大用途:</p>
-<ul>
-<li>用来统一将进程进行分组。</li>
-<li>在分组的基础上对进程进行监控和资源控制管理等。</li>
-</ul>
-<p>cgroup是Linux下的一种将进程按组进行管理的机制，在用户层看来，cgroup技术就是把系统中的所有进程组织成一颗一颗独立的树，每棵树都包含系统的所有进程，树的每个节点是一个进程组，而每颗树又和一个或者多个subsystem关联，树的作用是将进程分组，而subsystem的作用就是对这些组进行操作。cgroup主要包括下面两部分：</p>
-<ul>
-<li><strong>subsystem</strong> 一个subsystem就是一个内核模块，他被关联到一颗cgroup树之后，就会在树的每个节点（进程组）上做具体的操作。subsystem经常被称作&quot;resource controller&quot;，因为它主要被用来<strong>调度或者限制每个进程组的资源</strong>，但是这个说法不完全准确，因为有时我们将进程分组只是为了做一些监控，观察一下他们的状态，比如perf_event subsystem。</li>
-<li><strong>hierarchy</strong> 一个hierarchy可以理解为一棵cgroup树，树的每个节点就是一个进程组，每棵树都会与零到多个subsystem关联。在一颗树里面，会包含Linux系统中的所有进程，但每个进程只能属于一个节点（进程组）。系统中可以有很多颗cgroup树，每棵树都和不同的subsystem关联，一个进程可以属于多颗树，即<strong>一个进程可以属于多个进程组，只是这些进程组和不同的subsystem关联</strong>。目前Linux支持12种subsystem，如果不考虑不与任何subsystem关联的情况（systemd就属于这种情况），Linux里面最多可以建12颗cgroup树，每棵树关联一个subsystem，当然也可以只建一棵树，然后让这棵树关联所有的subsystem。当一颗cgroup树不和任何subsystem关联的时候，意味着这棵树只是将进程进行分组，至于要在分组的基础上做些什么，将由应用程序自己决定，systemd就是一个这样的例子。</li>
-</ul>
-<p>到目前为止，Linux支持12种subsystem，比如限制CPU的使用时间，限制使用的内存，统计CPU的使用情况，冻结和恢复一组进程等。</p>
-<table>
-<thead>
-<tr>
-<th>subsystemID</th>
-<th>引入的相关内核版本</th>
-<th>提供效果</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="https://www.kernel.org/doc/Documentation/scheduler/sched-bwc.txt" target="_blank" rel="noopener">cpu</a></td>
-<td>Linux 2.6.24; CONFIG_CGROUP_SCHED</td>
-<td>用来限制cgroup的CPU使</td>
-</tr>
-<tr>
-<td><a href="https://www.kernel.org/doc/Documentation/cgroup-v1/cpuacct.txt" target="_blank" rel="noopener">cpuacct</a></td>
-<td>Linux 2.6.24; CONFIG_CGROUP_CPUACCT</td>
-<td>统计cgroup的CPU的使用率。</td>
-</tr>
-<tr>
-<td><a href="https://www.kernel.org/doc/Documentation/cgroup-v1/cpusets.txt" target="_blank" rel="noopener">cpuset</a></td>
-<td>Linux 2.6.24; CONFIG_CPUSETS</td>
-<td>绑定cgroup到指定CPUs和NUMA节点。</td>
-</tr>
-<tr>
-<td><a href="https://www.kernel.org/doc/Documentation/cgroup-v1/memory.txt" target="_blank" rel="noopener">memory</a></td>
-<td>Linux 2.6.25; CONFIG_MEMCG</td>
-<td>统计和限制cgroup的内存的使用率，包括process memory, kernel memory, 和swap。</td>
-</tr>
-<tr>
-<td><a href="https://www.kernel.org/doc/Documentation/cgroup-v1/devices.txt" target="_blank" rel="noopener">devices</a></td>
-<td>Linux 2.6.26; CONFIG_CGROUP_DEVICE</td>
-<td>限制cgroup创建(mknod)和访问设备的权限。</td>
-</tr>
-<tr>
-<td><a href="https://www.kernel.org/doc/Documentation/cgroup-v1/freezer-subsystem.txt" target="_blank" rel="noopener">freezer</a></td>
-<td>Linux 2.6.28; CONFIG_CGROUP_FREEZER</td>
-<td>suspend和restore一个cgroup中的所有进程。</td>
-</tr>
-<tr>
-<td><a href="https://www.kernel.org/doc/Documentation/cgroup-v1/net_cls.txt" target="_blank" rel="noopener">net_cls</a></td>
-<td>Linux 2.6.29; CONFIG_CGROUP_NET_CLASSID</td>
-<td>将一个cgroup中进程创建的所有网络包加上一个classid标记，用于<a href="http://man7.org/linux/man-pages/man8/tc.8.html" target="_blank" rel="noopener">tc</a>和iptables。 只对发出去的网络包生效，对收到的网络包不起作用。</td>
-</tr>
-<tr>
-<td><a href="https://www.kernel.org/doc/Documentation/cgroup-v1/blkio-controller.txt" target="_blank" rel="noopener">blkio</a></td>
-<td>Linux 2.6.33; CONFIG_BLK_CGROUP</td>
-<td>限制cgroup访问块设备的IO速度。</td>
-</tr>
-<tr>
-<td><a href="https://www.kernel.org/doc/Documentation/perf-record.txt" target="_blank" rel="noopener">perf_event</a></td>
-<td>Linux 2.6.39; CONFIG_CGROUP_PERF</td>
-<td>对cgroup进行性能监控</td>
-</tr>
-<tr>
-<td><a href="https://www.kernel.org/doc/Documentation/cgroup-v1/net_prio.txt" target="_blank" rel="noopener">net_prio</a></td>
-<td>Linux 3.3; CONFIG_CGROUP_NET_PRIO</td>
-<td>针对每个网络接口设置cgroup的访问优先级。</td>
-</tr>
-<tr>
-<td><a href="https://www.kernel.org/doc/Documentation/cgroup-v1/hugetlb.txt" target="_blank" rel="noopener">hugetlb</a></td>
-<td>Linux 3.5; CONFIG_CGROUP_HUGETLB</td>
-<td>限制cgroup的huge pages的使用量。</td>
-</tr>
-<tr>
-<td><a href="https://www.kernel.org/doc/Documentation/cgroup-v1/pids.txt" target="_blank" rel="noopener">pids</a></td>
-<td>Linux 4.3; CONFIG_CGROUP_PIDS</td>
-<td>限制一个cgroup及其子孙cgroup中的总进程数。</td>
-</tr>
-</tbody>
-</table>
-
+          <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/03/31/namespace-cgroup/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -1374,7 +1248,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-03-28 10:24:50" itemprop="dateModified" datetime="2019-03-28T10:24:50+08:00">2019-03-28</time>
+                <time title="修改时间：2019-03-31 21:59:06" itemprop="dateModified" datetime="2019-03-31T21:59:06+08:00">2019-03-31</time>
               
             
           </span>
@@ -1455,35 +1329,20 @@
 
       
         
-          
-            <h1 id="动态规划的两大原则"><a class="markdownIt-Anchor" href="#动态规划的两大原则"></a> 动态规划的两大原则</h1>
+          <h1 id="动态规划的两大原则"><a class="markdownIt-Anchor" href="#动态规划的两大原则"></a> 动态规划的两大原则</h1>
 <h2 id="最优子结构"><a class="markdownIt-Anchor" href="#最优子结构"></a> 最优子结构</h2>
 <p>用动态规划求解最优化问题的第一步就是刻画最优解的结构，如果一个问题的解结构包含其子问题的最优解，就称此问题具有最优子结构性质。因此，某个问题是否适合应用动态规划算法，它是否具有最优子结构性质是一个很好的线索。使用动态规划算法时，用子问题的最优解来构造原问题的最优解。因此必须考查最优解中用到的所有子问题。</p>
 <h2 id="重叠子问题"><a class="markdownIt-Anchor" href="#重叠子问题"></a> <strong>重叠子问题</strong></h2>
 <p>在斐波拉契数列求解中，可以看到大量的重叠子问题，比如说在求fib（6）的时候，fib（2）被调用了5次。如果使用递归算法的时候会反复的求解相同的子问题，不停的调用函数，而不是生成新的子问题。如果递归算法反复求解相同的子问题，就称为具有重叠子问题（overlapping subproblems）性质。在动态规划算法中使用数组来保存子问题的解，这样子问题多次求解的时候可以直接查表不用调用函数递归。</p>
-<h1 id="状态转移方程"><a class="markdownIt-Anchor" href="#状态转移方程"></a> 状态转移方程</h1>
-<p>构建一个动态规划算法分为几个步骤：</p>
-<ol>
-<li>刻画一个最优解的结构特征。</li>
-<li>递归地定义最优解的值。</li>
-<li>计算最优解的值，通常采用自底向上的方法。</li>
-<li>利用计算出的信息构造一个最优解。</li>
-</ol>
-<p>确定状态转移方程就在第一步和第二步中，首先要确定问题的决策对象，接着对决策对象划分阶段并确定各个阶段的状态变量，最后建立各阶段的状态变量的转移方程。其形式如下：</p>
-<p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">状</mi><mi mathvariant="normal">态</mi><mi>i</mi><mo>=</mo><mi mathvariant="normal">最</mi><mi mathvariant="normal">优</mi><mi mathvariant="normal">解</mi><mi mathvariant="normal">（</mi><mi mathvariant="normal">当</mi><mi mathvariant="normal">前</mi><mi mathvariant="normal">状</mi><mi mathvariant="normal">态</mi><mi>k</mi><mo separator="true">,</mo><mi mathvariant="normal">下</mi><mi mathvariant="normal">一</mi><mi mathvariant="normal">转</mi><mi mathvariant="normal">移</mi><mi mathvariant="normal">状</mi><mi mathvariant="normal">态</mi><mi mathvariant="normal">）</mi><mo>+</mo><mi mathvariant="normal">变</mi><mi mathvariant="normal">化</mi><mi mathvariant="normal">量</mi><mi mathvariant="normal">（</mi><mi>o</mi><mi>p</mi><mi>t</mi><mi>i</mi><mi>o</mi><mi>n</mi><mi>a</mi><mi>l</mi><mi mathvariant="normal">）</mi></mrow><annotation encoding="application/x-tex">状态i = 最优解（当前状态k,下一转移状态）+变化量（optional）
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.65952em;vertical-align:0em;"></span><span class="mord cjk_fallback">状</span><span class="mord cjk_fallback">态</span><span class="mord mathdefault">i</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord cjk_fallback">最</span><span class="mord cjk_fallback">优</span><span class="mord cjk_fallback">解</span><span class="mord cjk_fallback">（</span><span class="mord cjk_fallback">当</span><span class="mord cjk_fallback">前</span><span class="mord cjk_fallback">状</span><span class="mord cjk_fallback">态</span><span class="mord mathdefault" style="margin-right:0.03148em;">k</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord cjk_fallback">下</span><span class="mord cjk_fallback">一</span><span class="mord cjk_fallback">转</span><span class="mord cjk_fallback">移</span><span class="mord cjk_fallback">状</span><span class="mord cjk_fallback">态</span><span class="mord cjk_fallback">）</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord cjk_fallback">变</span><span class="mord cjk_fallback">化</span><span class="mord cjk_fallback">量</span><span class="mord cjk_fallback">（</span><span class="mord mathdefault">o</span><span class="mord mathdefault">p</span><span class="mord mathdefault">t</span><span class="mord mathdefault">i</span><span class="mord mathdefault">o</span><span class="mord mathdefault">n</span><span class="mord mathdefault">a</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord cjk_fallback">）</span></span></span></span></span></p>
-<p><a href="https://www.cnblogs.com/tgycoder/p/5037559.html" target="_blank" rel="noopener">常见问题的状态转移公式总结</a></p>
-<h1 id="动态规划的编程模板"><a class="markdownIt-Anchor" href="#动态规划的编程模板"></a> 动态规划的编程模板</h1>
-<p><img src="http://wpy-blog.oss-cn-shanghai.aliyuncs.com/dynamic_p1.png/wpy-blog" alt="img"></p>
-<h2 id="1递归版本"><a class="markdownIt-Anchor" href="#1递归版本"></a> ①递归版本</h2>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">cut</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; p,<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(n==<span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> q=INT_MIN;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            q=max(q, p[i<span class="number">-1</span>]+cut(p, n-i));  </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> q;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<h2 id="2备忘录版本"><a class="markdownIt-Anchor" href="#2备忘录版本"></a> ②备忘录版本</h2>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">cutMemo</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; p)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> r[p.size()]];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=p.size();i++)</span><br><span class="line">            r[i]=<span class="number">-1</span>;                        </span><br><span class="line">        <span class="keyword">return</span> cut(p, p.size(), r);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">cut</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; p,<span class="keyword">int</span> n,<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;r)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> q=<span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">if</span>(r[n]&gt;=<span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> r[n];</span><br><span class="line">        <span class="keyword">if</span>(n==<span class="number">0</span>)</span><br><span class="line">            q=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">                q=max(q, cut(p, n-i,r)+p[i<span class="number">-1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">        r[n]=q;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> q;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>备忘录方法就是在递归的时候记录下已经调用过的子函数的值。</p>
-<h2 id="3自底向上"><a class="markdownIt-Anchor" href="#3自底向上"></a> ③自底向上</h2>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">buttom_up_cut</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; p)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> r[p.size()];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;p.size();i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> q=<span class="number">-1</span>;</span><br><span class="line">            <span class="comment">//①</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;=i;j++)</span><br><span class="line">                q=Math.max(q, p[j<span class="number">-1</span>]+r[i-j]);</span><br><span class="line">            r[i]=q;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> r[p.size()<span class="number">-1</span>];</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
+          <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/03/26/dynamic-programing/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
