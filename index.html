@@ -371,6 +371,328 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/31/namespace-cgroup/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王谱越"/>
+      <meta itemprop="description" content=""/>
+      <meta itemprop="image" content="/images/myavatar.jpg"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Norton's Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/03/31/namespace-cgroup/" class="post-title-link" itemprop="url">Linux namespace与Cgroup简述</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-31 19:54:27 / 修改时间：20:28:48" itemprop="dateCreated datePublished" datetime="2019-03-31T19:54:27+08:00">2019-03-31</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Linux-基础/" itemprop="url" rel="index"><span itemprop="name">Linux 基础</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">3k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">3 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="namespace-概述"><a class="markdownIt-Anchor" href="#namespace-概述"></a> NameSpace 概述</h1>
+<p>Namespace 用于不同进程组之间的资源隔离，其目的是将某个特定的全局系统资源（global system resource）通过抽象方法使得namespace 中的进程看起来拥有它们自己的隔离的全局系统资源实例。</p>
+<p>Linux 内核中实现了六种 namespace，按照引入的先后顺序，列表如下：</p>
+<table>
+<thead>
+<tr>
+<th>namespace</th>
+<th>引入的相关内核版本</th>
+<th>被隔离的全局系统资源</th>
+<th>在容器语境下的隔离效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Mount namespaces</strong></td>
+<td><a href="http://lwn.net/2001/0301/a/namespaces.php3" target="_blank" rel="noopener">Linux 2.4.19</a></td>
+<td>文件系统挂接点</td>
+<td>每个容器能看到不同的文件系统层次结构</td>
+</tr>
+<tr>
+<td><strong>UTS namespaces</strong></td>
+<td><a href="http://lwn.net/Articles/179345/" target="_blank" rel="noopener">Linux 2.6.19</a></td>
+<td>nodename 和 domainname</td>
+<td>每个容器可以有自己的 hostname 和 domainame</td>
+</tr>
+<tr>
+<td><strong>PID namespaces</strong></td>
+<td><a href="http://lwn.net/Articles/259217/" target="_blank" rel="noopener">Linux 2.6.24</a></td>
+<td>进程 ID 数字空间 （process ID number space）</td>
+<td>每个 PID namespace 中的进程可以有其独立的 PID； 每个容器可以有其 PID 为 1 的root 进程；也使得容器可以在不同的 host 之间迁移，因为 namespace 中的进程 ID 和 host 无关了。这也使得容器中的每个进程有两个PID：容器中的 PID 和 host 上的 PID。</td>
+</tr>
+<tr>
+<td><strong>IPC namespaces</strong></td>
+<td><a href="http://lwn.net/Articles/187274/" target="_blank" rel="noopener">Linux 2.6.19</a></td>
+<td>特定的进程间通信资源，包括<a href="http://www.kernel.org/doc/man-pages/online/pages/man7/svipc.7.html" target="_blank" rel="noopener">System V IPC</a> 和  <a href="http://www.kernel.org/doc/man-pages/online/pages/man7/mq_overview.7.html" target="_blank" rel="noopener">POSIX message queues</a></td>
+<td>每个容器有其自己的 System V IPC 和 POSIX 消息队列文件系统，因此，只有在同一个 IPC namespace 的进程之间才能互相通信</td>
+</tr>
+<tr>
+<td><strong>Network namespaces</strong></td>
+<td><a href="http://lwn.net/Articles/219794/" target="_blank" rel="noopener">始于Linux 2.6.24 完成于 Linux 2.6.29</a></td>
+<td>网络相关的系统资源</td>
+<td>每个容器用有其独立的网络设备，IP 地址，IP 路由表，/proc/net 目录，端口号等等。这也使得一个 host 上多个容器内的同一个应用都绑定到各自容器的 80 端口上。</td>
+</tr>
+<tr>
+<td><strong>User namespaces</strong></td>
+<td><a href="http://lwn.net/Articles/528078/" target="_blank" rel="noopener">始于 Linux 2.6.23 完成于 Linux 3.8)</a></td>
+<td>用户和组 ID 空间</td>
+<td>在 user namespace 中的进程的用户和组 ID 可以和在 host 上不同； 每个 container 可以有不同的 user 和 group id；一个 host 上的非特权用户可以成为 user namespace 中的特权用户；</td>
+</tr>
+</tbody>
+</table>
+<h1 id="cgroup概述"><a class="markdownIt-Anchor" href="#cgroup概述"></a> Cgroup概述</h1>
+<p>在Linux里，一直以来就有对进程进行分组的概念和需求，比如<a href="https://www.win.tue.nl/~aeb/linux/lk/lk-10.html" target="_blank" rel="noopener">session group， progress group</a>等，后来随着人们对这方面的需求越来越多，比如需要追踪一组进程的内存和IO使用情况等，于是出现了cgroup,主要有两大用途:</p>
+<ul>
+<li>用来统一将进程进行分组。</li>
+<li>在分组的基础上对进程进行监控和资源控制管理等。</li>
+</ul>
+<p>cgroup是Linux下的一种将进程按组进行管理的机制，在用户层看来，cgroup技术就是把系统中的所有进程组织成一颗一颗独立的树，每棵树都包含系统的所有进程，树的每个节点是一个进程组，而每颗树又和一个或者多个subsystem关联，树的作用是将进程分组，而subsystem的作用就是对这些组进行操作。cgroup主要包括下面两部分：</p>
+<ul>
+<li><strong>subsystem</strong> 一个subsystem就是一个内核模块，他被关联到一颗cgroup树之后，就会在树的每个节点（进程组）上做具体的操作。subsystem经常被称作&quot;resource controller&quot;，因为它主要被用来<strong>调度或者限制每个进程组的资源</strong>，但是这个说法不完全准确，因为有时我们将进程分组只是为了做一些监控，观察一下他们的状态，比如perf_event subsystem。</li>
+<li><strong>hierarchy</strong> 一个hierarchy可以理解为一棵cgroup树，树的每个节点就是一个进程组，每棵树都会与零到多个subsystem关联。在一颗树里面，会包含Linux系统中的所有进程，但每个进程只能属于一个节点（进程组）。系统中可以有很多颗cgroup树，每棵树都和不同的subsystem关联，一个进程可以属于多颗树，即<strong>一个进程可以属于多个进程组，只是这些进程组和不同的subsystem关联</strong>。目前Linux支持12种subsystem，如果不考虑不与任何subsystem关联的情况（systemd就属于这种情况），Linux里面最多可以建12颗cgroup树，每棵树关联一个subsystem，当然也可以只建一棵树，然后让这棵树关联所有的subsystem。当一颗cgroup树不和任何subsystem关联的时候，意味着这棵树只是将进程进行分组，至于要在分组的基础上做些什么，将由应用程序自己决定，systemd就是一个这样的例子。</li>
+</ul>
+<p>到目前为止，Linux支持12种subsystem，比如限制CPU的使用时间，限制使用的内存，统计CPU的使用情况，冻结和恢复一组进程等。</p>
+<table>
+<thead>
+<tr>
+<th>subsystemID</th>
+<th>引入的相关内核版本</th>
+<th>提供效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://www.kernel.org/doc/Documentation/scheduler/sched-bwc.txt" target="_blank" rel="noopener">cpu</a></td>
+<td>Linux 2.6.24; CONFIG_CGROUP_SCHED</td>
+<td>用来限制cgroup的CPU使</td>
+</tr>
+<tr>
+<td><a href="https://www.kernel.org/doc/Documentation/cgroup-v1/cpuacct.txt" target="_blank" rel="noopener">cpuacct</a></td>
+<td>Linux 2.6.24; CONFIG_CGROUP_CPUACCT</td>
+<td>统计cgroup的CPU的使用率。</td>
+</tr>
+<tr>
+<td><a href="https://www.kernel.org/doc/Documentation/cgroup-v1/cpusets.txt" target="_blank" rel="noopener">cpuset</a></td>
+<td>Linux 2.6.24; CONFIG_CPUSETS</td>
+<td>绑定cgroup到指定CPUs和NUMA节点。</td>
+</tr>
+<tr>
+<td><a href="https://www.kernel.org/doc/Documentation/cgroup-v1/memory.txt" target="_blank" rel="noopener">memory</a></td>
+<td>Linux 2.6.25; CONFIG_MEMCG</td>
+<td>统计和限制cgroup的内存的使用率，包括process memory, kernel memory, 和swap。</td>
+</tr>
+<tr>
+<td><a href="https://www.kernel.org/doc/Documentation/cgroup-v1/devices.txt" target="_blank" rel="noopener">devices</a></td>
+<td>Linux 2.6.26; CONFIG_CGROUP_DEVICE</td>
+<td>限制cgroup创建(mknod)和访问设备的权限。</td>
+</tr>
+<tr>
+<td><a href="https://www.kernel.org/doc/Documentation/cgroup-v1/freezer-subsystem.txt" target="_blank" rel="noopener">freezer</a></td>
+<td>Linux 2.6.28; CONFIG_CGROUP_FREEZER</td>
+<td>suspend和restore一个cgroup中的所有进程。</td>
+</tr>
+<tr>
+<td><a href="https://www.kernel.org/doc/Documentation/cgroup-v1/net_cls.txt" target="_blank" rel="noopener">net_cls</a></td>
+<td>Linux 2.6.29; CONFIG_CGROUP_NET_CLASSID</td>
+<td>将一个cgroup中进程创建的所有网络包加上一个classid标记，用于<a href="http://man7.org/linux/man-pages/man8/tc.8.html" target="_blank" rel="noopener">tc</a>和iptables。 只对发出去的网络包生效，对收到的网络包不起作用。</td>
+</tr>
+<tr>
+<td><a href="https://www.kernel.org/doc/Documentation/cgroup-v1/blkio-controller.txt" target="_blank" rel="noopener">blkio</a></td>
+<td>Linux 2.6.33; CONFIG_BLK_CGROUP</td>
+<td>限制cgroup访问块设备的IO速度。</td>
+</tr>
+<tr>
+<td><a href="https://www.kernel.org/doc/Documentation/perf-record.txt" target="_blank" rel="noopener">perf_event</a></td>
+<td>Linux 2.6.39; CONFIG_CGROUP_PERF</td>
+<td>对cgroup进行性能监控</td>
+</tr>
+<tr>
+<td><a href="https://www.kernel.org/doc/Documentation/cgroup-v1/net_prio.txt" target="_blank" rel="noopener">net_prio</a></td>
+<td>Linux 3.3; CONFIG_CGROUP_NET_PRIO</td>
+<td>针对每个网络接口设置cgroup的访问优先级。</td>
+</tr>
+<tr>
+<td><a href="https://www.kernel.org/doc/Documentation/cgroup-v1/hugetlb.txt" target="_blank" rel="noopener">hugetlb</a></td>
+<td>Linux 3.5; CONFIG_CGROUP_HUGETLB</td>
+<td>限制cgroup的huge pages的使用量。</td>
+</tr>
+<tr>
+<td><a href="https://www.kernel.org/doc/Documentation/cgroup-v1/pids.txt" target="_blank" rel="noopener">pids</a></td>
+<td>Linux 4.3; CONFIG_CGROUP_PIDS</td>
+<td>限制一个cgroup及其子孙cgroup中的总进程数。</td>
+</tr>
+</tbody>
+</table>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/31/c-trivial/"/>
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1246,209 +1568,6 @@ inline描述符由命名空间的设计者放置，即<strong>命名空间的作
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/25/c-classmemory/"/>
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="王谱越"/>
-      <meta itemprop="description" content=""/>
-      <meta itemprop="image" content="/images/myavatar.jpg"/>
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Norton's Blog"/>
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/03/25/c-classmemory/" class="post-title-link" itemprop="url">C++类内存结构</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-03-25 20:54:07" itemprop="dateCreated datePublished" datetime="2019-03-25T20:54:07+08:00">2019-03-25</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-03-28 16:38:40" itemprop="dateModified" datetime="2019-03-28T16:38:40+08:00">2019-03-28</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C-基础/" itemprop="url" rel="index"><span itemprop="name">C++基础</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">7</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><img src="http://wpy-blog.oss-cn-shanghai.aliyuncs.com/classmemory-1.jpg/wpy-blog" alt=""></p>
-<p><img src="http://wpy-blog.oss-cn-shanghai.aliyuncs.com/classmemory-2.png/wpy-blog" alt=""></p>
-<p><a href="https://blog.csdn.net/yinhe0330/article/details/81186284" target="_blank" rel="noopener">原文地址</a></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1499,7 +1618,7 @@ inline描述符由命名空间的设计者放置，即<strong>命名空间的作
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">26</span>
+                    <span class="site-state-item-count">27</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1538,7 +1657,9 @@ inline描述符由命名空间的设计者放置，即<strong>命名空间的作
                     
                       
                     
-                    <span class="site-state-item-count">13</span>
+                      
+                    
+                    <span class="site-state-item-count">14</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -1583,7 +1704,11 @@ inline描述符由命名空间的设计者放置，即<strong>命名空间的作
                     
                       
                     
-                    <span class="site-state-item-count">16</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">18</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1672,7 +1797,7 @@ inline描述符由命名空间的设计者放置，即<strong>命名空间的作
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">67k</span>
+    <span title="站点总字数">70k</span>
   
 
   
@@ -1681,7 +1806,7 @@ inline描述符由命名空间的设计者放置，即<strong>命名空间的作
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">1:01</span>
+    <span title="站点阅读时长">1:03</span>
   
 </div>
 
