@@ -371,6 +371,267 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/02/array/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王谱越"/>
+      <meta itemprop="description" content=""/>
+      <meta itemprop="image" content="/images/myavatar.jpg"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Norton's Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/03/02/array/" class="post-title-link" itemprop="url">[LeetCode]数组类问题心得小结</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-02 10:54:02 / 修改时间：13:06:43" itemprop="dateCreated datePublished" datetime="2019-03-02T10:54:02+08:00">2019-03-02</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/LeetCode-Summary/" itemprop="url" rel="index"><span itemprop="name">LeetCode Summary</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">1.5k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="常用方法与函数"><a class="markdownIt-Anchor" href="#常用方法与函数"></a> 常用方法与函数</h1>
+<p>在C++中，常用vector来作为数组容器。因此我们只讨论vector的相关方法与函数。</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>a.empty()</td>
+<td>判断a是否为空，空则返回ture,不空则返回false</td>
+</tr>
+<tr>
+<td>a.erase(a.begin()+1,a.begin()+3)</td>
+<td>删除a中第1个（从第0个算起）到第2个元素，也就是说删除的元素从a.begin()+1算起（包括它）一直到a.begin()+ 3（不包括它）</td>
+</tr>
+<tr>
+<td>a.size()</td>
+<td>返回a中元素的个数</td>
+</tr>
+<tr>
+<td>a.resize(10,2)</td>
+<td>将a的现有元素个数调至10个，多则删，少则补，其值为2</td>
+</tr>
+<tr>
+<td>a.swap(b)</td>
+<td>b为向量，将a中的元素和b中的元素进行整体性交换</td>
+</tr>
+<tr>
+<td>a.insert(a.begin()+1,3,5)</td>
+<td>在a的第1个元素（从第0个算起）的位置插入3个数，其值都为5</td>
+</tr>
+<tr>
+<td>a.insert(a.begin()+1,5)</td>
+<td>在a的第1个元素（从第0个算起）的位置插入数值5，如a为1,2,3,4，插入元素后为1,5,2,3,4</td>
+</tr>
+</tbody>
+</table>
+<p>C++算法库中提供了许多算法函数可以对vector进行操作，使用时要包含头文件<code>#include&lt;algorithm&gt;</code></p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sort(a.begin(),a.end())</td>
+<td>对a中的从a.begin()（包括它）到a.end()（不包括它）的元素进行从小到大排列</td>
+</tr>
+<tr>
+<td>reverse(a.begin(),a.end());</td>
+<td>对a中的从a.begin()（包括它）到a.end()（不包括它）的元素倒置，但不排列，如a中元素为1,3,2,4,倒置后为4,2,3,1</td>
+</tr>
+<tr>
+<td>copy(a.begin(),a.end(),b.begin()+1)</td>
+<td>把a中的从a.begin()（包括它）到a.end()（不包括它）的元素复制到b中，从b.begin()+1的位置（包括它）开始复制，覆盖掉原有元素</td>
+</tr>
+<tr>
+<td>find(a.begin(),a.end(),10)</td>
+<td>在a中的从a.begin()（包括它）到a.end()（不包括它）的元素中查找10，若存在返回其在向量中的位置</td>
+</tr>
+</tbody>
+</table>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/03/02/array/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/28/Leetcode-array/"/>
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1231,227 +1492,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/21/LeetCode-401/"/>
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="王谱越"/>
-      <meta itemprop="description" content=""/>
-      <meta itemprop="image" content="/images/myavatar.jpg"/>
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Norton's Blog"/>
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/01/21/LeetCode-401/" class="post-title-link" itemprop="url">[LeetCode] #401 二进制手表</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-01-21 22:28:51" itemprop="dateCreated datePublished" datetime="2019-01-21T22:28:51+08:00">2019-01-21</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-02-25 09:59:25" itemprop="dateModified" datetime="2019-02-25T09:59:25+08:00">2019-02-25</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/LeetCode/" itemprop="url" rel="index"><span itemprop="name">LeetCode</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">3.2k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">3 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="leetcode-401-binary-watch"><a class="markdownIt-Anchor" href="#leetcode-401-binary-watch"></a> [LeetCode] 401 Binary Watch</h1>
-<p>A binary watch has 4 LEDs on the top which represent the hours (0-11), and the 6 LEDs on the bottom represent the minutes (0-59).</p>
-<blockquote>
-<p>Each LED represents a zero or one, with the least significant bit on the right. For example, the above binary watch reads “3:25”.</p>
-<p>Given a non-negative integer n which represents the number of LEDs that are currently on, return all possible times the watch could represent.</p>
-<p>Example:</p>
-<p>Input: n = 1<br>
-Return: [“1:00”, “2:00”, “4:00”, “8:00”, “0:01”, “0:02”, “0:04”, “0:08”, “0:16”, “0:32”]<br>
-1<br>
-2<br>
-Note:</p>
-<p>The order of output does not matter.输出顺序不影响<br>
-The hour must not contain a leading zero, for example “01:00” is not valid, it should be “1:00”.<br>
-The minute must be consist of two digits and may contain a leading zero, for example “10:2” is not valid, it should be “10:02”.</p>
-</blockquote>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/01/21/LeetCode-401/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1502,7 +1542,7 @@ The minute must be consist of two digits and may contain a leading zero, for exa
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">27</span>
+                    <span class="site-state-item-count">28</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1543,7 +1583,9 @@ The minute must be consist of two digits and may contain a leading zero, for exa
                     
                       
                     
-                    <span class="site-state-item-count">14</span>
+                      
+                    
+                    <span class="site-state-item-count">15</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -1592,7 +1634,9 @@ The minute must be consist of two digits and may contain a leading zero, for exa
                     
                       
                     
-                    <span class="site-state-item-count">18</span>
+                      
+                    
+                    <span class="site-state-item-count">19</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>

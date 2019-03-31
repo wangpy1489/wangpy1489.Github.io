@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[OSIsample]]></title>
+    <url>%2F2019%2F03%2F31%2FOSIsample%2F</url>
+    <content type="text"><![CDATA[OSI七层结构示意图]]></content>
+      <categories>
+        <category>网络基础</category>
+      </categories>
+      <tags>
+        <tag>OSI七层结构</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Linux namespace与Cgroup简述]]></title>
     <url>%2F2019%2F03%2F31%2Fnamespace-cgroup%2F</url>
     <content type="text"><![CDATA[NameSpace 概述 Namespace 用于不同进程组之间的资源隔离，其目的是将某个特定的全局系统资源（global system resource）通过抽象方法使得namespace 中的进程看起来拥有它们自己的隔离的全局系统资源实例。 Linux 内核中实现了六种 namespace，按照引入的先后顺序，列表如下： namespace 引入的相关内核版本 被隔离的全局系统资源 在容器语境下的隔离效果 Mount namespaces Linux 2.4.19 文件系统挂接点 每个容器能看到不同的文件系统层次结构 UTS namespaces Linux 2.6.19 nodename 和 domainname 每个容器可以有自己的 hostname 和 domainame PID namespaces Linux 2.6.24 进程 ID 数字空间 （process ID number space） 每个 PID namespace 中的进程可以有其独立的 PID； 每个容器可以有其 PID 为 1 的root 进程；也使得容器可以在不同的 host 之间迁移，因为 namespace 中的进程 ID 和 host 无关了。这也使得容器中的每个进程有两个PID：容器中的 PID 和 host 上的 PID。 IPC namespaces Linux 2.6.19 特定的进程间通信资源，包括System V IPC 和 POSIX message queues 每个容器有其自己的 System V IPC 和 POSIX 消息队列文件系统，因此，只有在同一个 IPC namespace 的进程之间才能互相通信 Network namespaces 始于Linux 2.6.24 完成于 Linux 2.6.29 网络相关的系统资源 每个容器用有其独立的网络设备，IP 地址，IP 路由表，/proc/net 目录，端口号等等。这也使得一个 host 上多个容器内的同一个应用都绑定到各自容器的 80 端口上。 User namespaces 始于 Linux 2.6.23 完成于 Linux 3.8) 用户和组 ID 空间 在 user namespace 中的进程的用户和组 ID 可以和在 host 上不同； 每个 container 可以有不同的 user 和 group id；一个 host 上的非特权用户可以成为 user namespace 中的特权用户； Cgroup概述 在Linux里，一直以来就有对进程进行分组的概念和需求，比如session group， progress group等，后来随着人们对这方面的需求越来越多，比如需要追踪一组进程的内存和IO使用情况等，于是出现了cgroup,主要有两大用途: 用来统一将进程进行分组。 在分组的基础上对进程进行监控和资源控制管理等。 cgroup是Linux下的一种将进程按组进行管理的机制，在用户层看来，cgroup技术就是把系统中的所有进程组织成一颗一颗独立的树，每棵树都包含系统的所有进程，树的每个节点是一个进程组，而每颗树又和一个或者多个subsystem关联，树的作用是将进程分组，而subsystem的作用就是对这些组进行操作。cgroup主要包括下面两部分： subsystem 一个subsystem就是一个内核模块，他被关联到一颗cgroup树之后，就会在树的每个节点（进程组）上做具体的操作。subsystem经常被称作&quot;resource controller&quot;，因为它主要被用来调度或者限制每个进程组的资源，但是这个说法不完全准确，因为有时我们将进程分组只是为了做一些监控，观察一下他们的状态，比如perf_event subsystem。 hierarchy 一个hierarchy可以理解为一棵cgroup树，树的每个节点就是一个进程组，每棵树都会与零到多个subsystem关联。在一颗树里面，会包含Linux系统中的所有进程，但每个进程只能属于一个节点（进程组）。系统中可以有很多颗cgroup树，每棵树都和不同的subsystem关联，一个进程可以属于多颗树，即一个进程可以属于多个进程组，只是这些进程组和不同的subsystem关联。目前Linux支持12种subsystem，如果不考虑不与任何subsystem关联的情况（systemd就属于这种情况），Linux里面最多可以建12颗cgroup树，每棵树关联一个subsystem，当然也可以只建一棵树，然后让这棵树关联所有的subsystem。当一颗cgroup树不和任何subsystem关联的时候，意味着这棵树只是将进程进行分组，至于要在分组的基础上做些什么，将由应用程序自己决定，systemd就是一个这样的例子。 到目前为止，Linux支持12种subsystem，比如限制CPU的使用时间，限制使用的内存，统计CPU的使用情况，冻结和恢复一组进程等。 subsystemID 引入的相关内核版本 提供效果 cpu Linux 2.6.24; CONFIG_CGROUP_SCHED 用来限制cgroup的CPU使 cpuacct Linux 2.6.24; CONFIG_CGROUP_CPUACCT 统计cgroup的CPU的使用率。 cpuset Linux 2.6.24; CONFIG_CPUSETS 绑定cgroup到指定CPUs和NUMA节点。 memory Linux 2.6.25; CONFIG_MEMCG 统计和限制cgroup的内存的使用率，包括process memory, kernel memory, 和swap。 devices Linux 2.6.26; CONFIG_CGROUP_DEVICE 限制cgroup创建(mknod)和访问设备的权限。 freezer Linux 2.6.28; CONFIG_CGROUP_FREEZER suspend和restore一个cgroup中的所有进程。 net_cls Linux 2.6.29; CONFIG_CGROUP_NET_CLASSID 将一个cgroup中进程创建的所有网络包加上一个classid标记，用于tc和iptables。 只对发出去的网络包生效，对收到的网络包不起作用。 blkio Linux 2.6.33; CONFIG_BLK_CGROUP 限制cgroup访问块设备的IO速度。 perf_event Linux 2.6.39; CONFIG_CGROUP_PERF 对cgroup进行性能监控 net_prio Linux 3.3; CONFIG_CGROUP_NET_PRIO 针对每个网络接口设置cgroup的访问优先级。 hugetlb Linux 3.5; CONFIG_CGROUP_HUGETLB 限制cgroup的huge pages的使用量。 pids Linux 4.3; CONFIG_CGROUP_PIDS 限制一个cgroup及其子孙cgroup中的总进程数。]]></content>
