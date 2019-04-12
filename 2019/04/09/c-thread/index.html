@@ -96,18 +96,18 @@
 
 
 
-  <meta name="description" content="thread 类 &amp;lt;thread&amp;gt;：头文件主要声明了 std::thread 类，另外 std::this_thread 命名空间也在这个头文件中。  std::thread 构造函数 **(1)默认构造函数：**创建一个空的 thread 执行对象。 **(2) 初始化构造函数：**创建一个 thread对象，该 thread对象可被 joinable，新产生的线程会调用 fn 函">
+  <meta name="description" content="thread 类 &amp;lt;thread&amp;gt;：头文件主要声明了 std::thread 类，另外 std::this_thread 命名空间也在这个头文件中。  std::thread 构造函数 (1)默认构造函数：创建一个空的 thread 执行对象。 (2) 初始化构造函数：创建一个 thread对象，该 thread对象可被 joinable，新产生的线程会调用 fn 函数，该函数的参数">
 <meta name="keywords" content="C++">
 <meta property="og:type" content="article">
 <meta property="og:title" content="c++多线程">
 <meta property="og:url" content="http://yoursite.com/2019/04/09/c-thread/index.html">
 <meta property="og:site_name" content="Norton&#39;s Blog">
-<meta property="og:description" content="thread 类 &amp;lt;thread&amp;gt;：头文件主要声明了 std::thread 类，另外 std::this_thread 命名空间也在这个头文件中。  std::thread 构造函数 **(1)默认构造函数：**创建一个空的 thread 执行对象。 **(2) 初始化构造函数：**创建一个 thread对象，该 thread对象可被 joinable，新产生的线程会调用 fn 函">
+<meta property="og:description" content="thread 类 &amp;lt;thread&amp;gt;：头文件主要声明了 std::thread 类，另外 std::this_thread 命名空间也在这个头文件中。  std::thread 构造函数 (1)默认构造函数：创建一个空的 thread 执行对象。 (2) 初始化构造函数：创建一个 thread对象，该 thread对象可被 joinable，新产生的线程会调用 fn 函数，该函数的参数">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-10T03:10:50.712Z">
+<meta property="og:updated_time" content="2019-04-12T15:56:31.485Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="c++多线程">
-<meta name="twitter:description" content="thread 类 &amp;lt;thread&amp;gt;：头文件主要声明了 std::thread 类，另外 std::this_thread 命名空间也在这个头文件中。  std::thread 构造函数 **(1)默认构造函数：**创建一个空的 thread 执行对象。 **(2) 初始化构造函数：**创建一个 thread对象，该 thread对象可被 joinable，新产生的线程会调用 fn 函">
+<meta name="twitter:description" content="thread 类 &amp;lt;thread&amp;gt;：头文件主要声明了 std::thread 类，另外 std::this_thread 命名空间也在这个头文件中。  std::thread 构造函数 (1)默认构造函数：创建一个空的 thread 执行对象。 (2) 初始化构造函数：创建一个 thread对象，该 thread对象可被 joinable，新产生的线程会调用 fn 函数，该函数的参数">
 
 
 
@@ -435,7 +435,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-04-10 11:10:50" itemprop="dateModified" datetime="2019-04-10T11:10:50+08:00">2019-04-10</time>
+                <time title="修改时间：2019-04-12 23:56:31" itemprop="dateModified" datetime="2019-04-12T23:56:31+08:00">2019-04-12</time>
               
             
           </span>
@@ -489,7 +489,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">6.2k</span>
+                <span title="本文字数">7.7k</span>
               
 
               
@@ -503,7 +503,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">6 分钟</span>
+                <span title="阅读时长">7 分钟</span>
               
             </div>
           
@@ -526,9 +526,9 @@
         <h1 id="thread-类"><a class="markdownIt-Anchor" href="#thread-类"></a> thread 类</h1>
 <p><code>&lt;thread&gt;：</code>头文件主要声明了 std::thread 类，另外 std::this_thread 命名空间也在这个头文件中。</p>
 <h2 id="stdthread-构造函数"><a class="markdownIt-Anchor" href="#stdthread-构造函数"></a> std::thread 构造函数</h2>
-<p>**(1)默认构造函数：**创建一个空的 thread 执行对象。</p>
-<p>**(2) 初始化构造函数：**创建一个 thread对象，该 thread对象可被 joinable，新产生的线程会调用 fn 函数，该函数的参数由 args 给出。</p>
-<p>**(3)拷贝构造函数(被禁用)：**意味着 thread 不可被拷贝构造。</p>
+<p><strong>(1)默认构造函数</strong>：创建一个空的 thread 执行对象。</p>
+<p><strong>(2) 初始化构造函数</strong>：创建一个 thread对象，该 thread对象可被 joinable，新产生的线程会调用 fn 函数，该函数的参数由 args 给出。</p>
+<p><strong>(3)拷贝构造函数(被禁用)</strong>：意味着 thread 不可被拷贝构造。</p>
 <p><strong>(4)move 构造函数，move 构造函数</strong>：调用成功之后 x 不代表任何 thread 执行对象。</p>
 <a id="more"></a>
 <h2 id="joinable-thread"><a class="markdownIt-Anchor" href="#joinable-thread"></a> joinable thread</h2>
@@ -616,6 +616,47 @@ lock_guard 对象管理 Mutex 对象 m，并在构造时对 m 进行上锁（调
 <li><strong>移动(move)构造</strong> 新创建的 unique_lock 对象获得了由 x 所管理的 Mutex 对象的所有权(包括当前 Mutex 的状态)。调用 move 构造之后， x 对象如同通过默认构造函数所创建的，就不再管理任何 Mutex 对象了。</li>
 </ol>
 <p>综上所述，由 (2) 和 (5) 创建的 unique_lock 对象通常拥有 Mutex 对象的锁。而通过 (1) 和 (4) 创建的则不会拥有锁。通过 (3)，(6) 和 (7) 创建的 unique_lock 对象，则在 lock 成功时获得锁。</p>
+<h1 id="atomic"><a class="markdownIt-Anchor" href="#atomic"></a> atomic</h1>
+<h2 id="stdatomic"><a class="markdownIt-Anchor" href="#stdatomic"></a> std::atomic</h2>
+<p>std::atomic对int, char, bool等数据结构进行原子性封装，在多线程环境中，对std::atomic对象的访问不会造成竞争-冒险。利用std::atomic可实现数据结构的无锁设计。</p>
+<p><strong>构造函数</strong></p>
+<ol>
+<li><strong>默认构造函数</strong>	<code>atomic() noexcept = default</code>;</li>
+<li><strong>初始化构造函数</strong>  <code>constexpr atomic (T val) noexcept</code>;</li>
+<li><strong>拷贝构造函数</strong>	<code>atomic (const atomic&amp;) = delete</code>。可以看出atomic对象是不可复制的。</li>
+</ol>
+<p>由上可知，atomic对象可以用其内部存储类型赋值，但是atomic本身是不能进行赋值拷贝的。</p>
+<p>atomic经常用的函数有store和load，如下：</p>
+<p><strong>store函数</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">store</span> <span class="params">(T val, memory_order sync = memory_order_seq_cst)</span> <span class="keyword">volatile</span> <span class="keyword">noexcept</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">store</span> <span class="params">(T val, memory_order sync = memory_order_seq_cst)</span> <span class="keyword">noexcept</span></span>;</span><br></pre></td></tr></table></figure>
+<p>其实就是用val替换内部保存的值。内部替换的时候其实是加了线程同步的，所以不用担心多线程访问的问题。</p>
+<p><strong>load函数</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">T <span class="title">load</span> <span class="params">(memory_order sync = memory_order_seq_cst)</span> <span class="keyword">const</span> <span class="keyword">volatile</span> <span class="keyword">noexcept</span></span>;</span><br><span class="line"><span class="function">T <span class="title">load</span> <span class="params">(memory_order sync = memory_order_seq_cst)</span> <span class="keyword">const</span> <span class="keyword">noexcept</span></span>;</span><br></pre></td></tr></table></figure>
+<p>返回内部保存的值，其实就是访问内部值。</p>
+<h2 id="stdatomic_flag"><a class="markdownIt-Anchor" href="#stdatomic_flag"></a> std::atomic_flag</h2>
+<p>atomic_flag是一个原子布尔类型。不同于std::atomic的所有专门化，它保证是lock_free。不像std::stomic&lt; bool &gt;，std::atomic_flag不提供负载或存储操作。</p>
+<p><strong>构造函数</strong></p>
+<ul>
+<li>
+<p>atomic_flag在构建(或设置或清除)上处于一个未指定的状态，除非它被显式地初始化为ATOMIC_FLAG_INIT。</p>
+</li>
+<li>
+<p>atomic_flag值不能复制/移动。</p>
+</li>
+</ul>
+<p><strong>成员函数：test_and_set</strong></p>
+<p><code>bool test_and_set (memory_order sync = memory_order_seq_cst) volatile noexcept; bool test_and_set (memory_order sync = memory_order_seq_cst) noexcept;。</code></p>
+<ul>
+<li>设置atomic_flag并返回是否在调用之前已经设置的。</li>
+<li>整个操作是原子的(一个原子的读-修改-写操作):当在这个函数被修改的时候,读取的(返回)值被读取，值不受其他线程的影响。</li>
+</ul>
+<p><strong>成员函数:atomic_flag_clear</strong></p>
+<p><code>void clear (memory_order sync = memory_order_seq_cst) volatile noexcept;</code></p>
+<p><code>void clear (memory_order sync = memory_order_seq_cst) noexcept;</code></p>
+<ul>
+<li>清除atomic_flag(即把atomic_flag 设为假)。清除atomic_flag使下一次调用成员atomic_flag::test_and_set对象返回false。</li>
+<li>操作是原子的，按照sync所指定的内存顺序。</li>
+</ul>
 
       
     </div>
@@ -900,7 +941,7 @@ lock_guard 对象管理 Mutex 对象 m，并在构造时对 m 进行上锁（调
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#thread-类"><span class="nav-text"> thread 类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#stdthread-构造函数"><span class="nav-text"> std::thread 构造函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#joinable-thread"><span class="nav-text"> joinable thread</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#join-and-detach"><span class="nav-text"> join and detach</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#move-and-swap"><span class="nav-text"> move and swap</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#yeild-and-sleep"><span class="nav-text"> yeild and sleep</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mutex"><span class="nav-text"> mutex</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#stdmutex用法"><span class="nav-text"> std::mutex用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#stdrecursive_mutex"><span class="nav-text"> std::recursive_mutex</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#stdtime_mutex"><span class="nav-text"> std::time_mutex</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lock类"><span class="nav-text"> lock类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#stdlock_guard"><span class="nav-text"> std::lock_guard</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#stdunique_lock"><span class="nav-text"> std::unique_lock</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#thread-类"><span class="nav-text"> thread 类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#stdthread-构造函数"><span class="nav-text"> std::thread 构造函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#joinable-thread"><span class="nav-text"> joinable thread</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#join-and-detach"><span class="nav-text"> join and detach</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#move-and-swap"><span class="nav-text"> move and swap</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#yeild-and-sleep"><span class="nav-text"> yeild and sleep</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mutex"><span class="nav-text"> mutex</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#stdmutex用法"><span class="nav-text"> std::mutex用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#stdrecursive_mutex"><span class="nav-text"> std::recursive_mutex</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#stdtime_mutex"><span class="nav-text"> std::time_mutex</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lock类"><span class="nav-text"> lock类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#stdlock_guard"><span class="nav-text"> std::lock_guard</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#stdunique_lock"><span class="nav-text"> std::unique_lock</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#atomic"><span class="nav-text"> atomic</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#stdatomic"><span class="nav-text"> std::atomic</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#stdatomic_flag"><span class="nav-text"> std::atomic_flag</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -933,7 +974,7 @@ lock_guard 对象管理 Mutex 对象 m，并在构造时对 m 进行上锁（调
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">76k</span>
+    <span title="站点总字数">77k</span>
   
 
   
@@ -942,7 +983,7 @@ lock_guard 对象管理 Mutex 对象 m，并在构造时对 m 进行上锁（调
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">1:09</span>
+    <span title="站点阅读时长">1:10</span>
   
 </div>
 
