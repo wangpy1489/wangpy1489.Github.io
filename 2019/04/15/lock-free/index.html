@@ -96,21 +96,21 @@
 
 
 
-  <meta name="description" content="Lock-Free  编程 Lock-Free 编程描述了代码所表述的性质，而没有限定或要求代码该如何编写。一般理解来讲即尽量少的使用LOCK或MUTEX等互斥量或锁，以降低线程间的相互阻塞。可以通过以下框图来判断是否符合lock-free.  从这个意义上来说，Lock-Free 中的 “Lock” 并没有直接涉及 Mutex 或 Lock 等互斥量结构，而是描述了应用程序因某种原因被阻塞的可">
+  <meta name="description" content="Lock-Free  编程 Lock-Free 编程描述了代码所表述的性质，而没有限定或要求代码该如何编写。一般理解来讲即尽量少的使用LOCK或MUTEX等互斥量或锁，以降低线程间的相互阻塞。可以通过以下框图来判断是否符合lock-free.">
 <meta name="keywords" content="并发编程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Lock-Free 编程">
 <meta property="og:url" content="http://yoursite.com/2019/04/15/lock-free/index.html">
 <meta property="og:site_name" content="Norton&#39;s Blog">
-<meta property="og:description" content="Lock-Free  编程 Lock-Free 编程描述了代码所表述的性质，而没有限定或要求代码该如何编写。一般理解来讲即尽量少的使用LOCK或MUTEX等互斥量或锁，以降低线程间的相互阻塞。可以通过以下框图来判断是否符合lock-free.  从这个意义上来说，Lock-Free 中的 “Lock” 并没有直接涉及 Mutex 或 Lock 等互斥量结构，而是描述了应用程序因某种原因被阻塞的可">
+<meta property="og:description" content="Lock-Free  编程 Lock-Free 编程描述了代码所表述的性质，而没有限定或要求代码该如何编写。一般理解来讲即尽量少的使用LOCK或MUTEX等互斥量或锁，以降低线程间的相互阻塞。可以通过以下框图来判断是否符合lock-free.">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://images0.cnblogs.com/blog/175043/201410/231017024496623.png">
 <meta property="og:image" content="https://images0.cnblogs.com/blog/175043/201410/231028206521362.png">
 <meta property="og:image" content="https://images0.cnblogs.com/blog/175043/201410/231100493083369.jpg">
-<meta property="og:updated_time" content="2019-04-15T06:41:08.071Z">
+<meta property="og:updated_time" content="2019-04-15T07:19:37.527Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Lock-Free 编程">
-<meta name="twitter:description" content="Lock-Free  编程 Lock-Free 编程描述了代码所表述的性质，而没有限定或要求代码该如何编写。一般理解来讲即尽量少的使用LOCK或MUTEX等互斥量或锁，以降低线程间的相互阻塞。可以通过以下框图来判断是否符合lock-free.  从这个意义上来说，Lock-Free 中的 “Lock” 并没有直接涉及 Mutex 或 Lock 等互斥量结构，而是描述了应用程序因某种原因被阻塞的可">
+<meta name="twitter:description" content="Lock-Free  编程 Lock-Free 编程描述了代码所表述的性质，而没有限定或要求代码该如何编写。一般理解来讲即尽量少的使用LOCK或MUTEX等互斥量或锁，以降低线程间的相互阻塞。可以通过以下框图来判断是否符合lock-free.">
 <meta name="twitter:image" content="https://images0.cnblogs.com/blog/175043/201410/231017024496623.png">
 
 
@@ -422,7 +422,7 @@
                 
               
 
-              <time title="创建时间：2019-04-15 10:33:31 / 修改时间：14:41:08" itemprop="dateCreated datePublished" datetime="2019-04-15T10:33:31+08:00">2019-04-15</time>
+              <time title="创建时间：2019-04-15 10:33:31 / 修改时间：15:19:37" itemprop="dateCreated datePublished" datetime="2019-04-15T10:33:31+08:00">2019-04-15</time>
             
 
             
@@ -518,6 +518,7 @@
         <h1 id="lock-free-编程"><a class="markdownIt-Anchor" href="#lock-free-编程"></a> Lock-Free  编程</h1>
 <p>Lock-Free 编程描述了代码所表述的性质，而没有限定或要求代码该如何编写。一般理解来讲即尽量少的使用LOCK或MUTEX等互斥量或锁，以降低线程间的相互阻塞。可以通过以下框图来判断是否符合lock-free.</p>
 <p><img src="https://images0.cnblogs.com/blog/175043/201410/231017024496623.png" alt=""></p>
+<a id="more"></a>
 <p>从这个意义上来说，Lock-Free 中的 “Lock” 并没有直接涉及 Mutex 或 Lock 等互斥量结构，而是描述了应用程序因某种原因被阻塞的可能性，例如可能因为死锁（DeadLock）、活锁（LiveLock）或线程调度（Thread Scheduling）导致优先级被抢占等。</p>
 <p>Lock-Free 编程的一个重要效果就是，在一系列访问 Lock-Free 操作的线程中，如果某一个线程被挂起，那么其绝对不会阻止其他线程继续运行（Non-Blocking）。</p>
 <p>通常，应该没有人会期待一个大型的应用程序中全部采用 Lock-Free 技术，应是在有特定需求的类的设计上采用 Lock-Free 技术。例如，如果需要一个 Stack 类应对多线程并发访问的场景，可以使用 Lock-Free 相关技术实现 ConcurrentStack 类，在其 Push 和 Pop 操作中进行具体的实现。在使用 Lock-Free 技术前，需要预先考虑一些软件工程方面的成本：</p>

@@ -416,7 +416,7 @@
                 
               
 
-              <time title="创建时间：2019-04-15 10:33:31 / 修改时间：14:41:08" itemprop="dateCreated datePublished" datetime="2019-04-15T10:33:31+08:00">2019-04-15</time>
+              <time title="创建时间：2019-04-15 10:33:31 / 修改时间：15:19:37" itemprop="dateCreated datePublished" datetime="2019-04-15T10:33:31+08:00">2019-04-15</time>
             
 
             
@@ -502,56 +502,18 @@
 
       
         
-          
-            <h1 id="lock-free-编程"><a class="markdownIt-Anchor" href="#lock-free-编程"></a> Lock-Free  编程</h1>
+          <h1 id="lock-free-编程"><a class="markdownIt-Anchor" href="#lock-free-编程"></a> Lock-Free  编程</h1>
 <p>Lock-Free 编程描述了代码所表述的性质，而没有限定或要求代码该如何编写。一般理解来讲即尽量少的使用LOCK或MUTEX等互斥量或锁，以降低线程间的相互阻塞。可以通过以下框图来判断是否符合lock-free.</p>
 <p><img src="https://images0.cnblogs.com/blog/175043/201410/231017024496623.png" alt=""></p>
-<p>从这个意义上来说，Lock-Free 中的 “Lock” 并没有直接涉及 Mutex 或 Lock 等互斥量结构，而是描述了应用程序因某种原因被阻塞的可能性，例如可能因为死锁（DeadLock）、活锁（LiveLock）或线程调度（Thread Scheduling）导致优先级被抢占等。</p>
-<p>Lock-Free 编程的一个重要效果就是，在一系列访问 Lock-Free 操作的线程中，如果某一个线程被挂起，那么其绝对不会阻止其他线程继续运行（Non-Blocking）。</p>
-<p>通常，应该没有人会期待一个大型的应用程序中全部采用 Lock-Free 技术，应是在有特定需求的类的设计上采用 Lock-Free 技术。例如，如果需要一个 Stack 类应对多线程并发访问的场景，可以使用 Lock-Free 相关技术实现 ConcurrentStack 类，在其 Push 和 Pop 操作中进行具体的实现。在使用 Lock-Free 技术前，需要预先考虑一些软件工程方面的成本：</p>
-<ul>
-<li>Lock-Free 技术很容易被错误的使用，代码后期的维护中也不容易意识到，所以非常容易引入 Bug，而且这样的 Bug 还非常难定位。</li>
-<li>Lock-Free 技术的细节上依赖于内存系统模型、编译器优化、CPU架构等，而这在使用 Lock 机制时是不相关的，所以也增加了理解和维护的难度。</li>
-</ul>
-<h1 id="lock-free-实现技术"><a class="markdownIt-Anchor" href="#lock-free-实现技术"></a> Lock-Free 实现技术</h1>
-<p>我们要满足 Lock-Free 编程中的非阻塞条件时，有一系列的技术和方法可供使用，如原子操作（Atomic Operations）、内存栅栏（Memory Barrier）、避免 ABA 问题（Avoiding ABA Problem）等。下图提供了一些判断依据：</p>
-<p><img src="https://images0.cnblogs.com/blog/175043/201410/231028206521362.png" alt=""></p>
-<h2 id="原子操作atomic-operations"><a class="markdownIt-Anchor" href="#原子操作atomic-operations"></a> 原子操作(Atomic Operations)</h2>
-<p>原子操作（Atomic Operations）在操作内存时可以被看做是不可分割的（Indivisible），其他线程不会打断该操作，没有操作只被完成一部分之说。在现代的 CPU 处理器上，很多操作已经被设计为原子的，例如对齐读（Aligned Read）和对齐写（Aligned Write）等。</p>
-<p>在C++中可以通过引入<atomic>来进行原子操作。</atomic></p>
-<p>RMW 操作在不同的 CPU 家族中是通过不同的方式来支持的。</p>
-<ul>
-<li>x86/64 和 Itanium 架构通过 Compare-And-Swap (CAS)方式来实现；</li>
-<li>PowerPC、MIPS 和 ARM 架构通过Load-Link/Store-Conditional (LL/SC) 方式来实现；</li>
-</ul>
-<h2 id="compare-and-swap-循环cas-loops"><a class="markdownIt-Anchor" href="#compare-and-swap-循环cas-loops"></a> Compare-And-Swap 循环（CAS Loops）</h2>
-<p>CAS是由CPU提供的原子操作。</p>
-<p>通常开发人员会设计在一个循环中重复地执行 CAS 操作以试图完成一个事务操作。这个过程分为 3 步：</p>
-<ol>
-<li>从指定的内存位置读取原始的值；</li>
-<li>根据读取到的原始的值计算出新的值；</li>
-<li>检测如果内存位置仍然是原始的值时，则将新值写入该内存位置；</li>
-</ol>
-<h2 id="aba-问题aba-problem"><a class="markdownIt-Anchor" href="#aba-问题aba-problem"></a> ABA 问题（ABA Problem）</h2>
-<p>在实现 CAS Loops 时，当存在多个线程交错地对共享的内存地址进行处理时，如果实现设计的不正确，将有可能遭遇 <a href="http://en.wikipedia.org/wiki/ABA_problem" target="_blank" rel="noopener">ABA 问题</a>。</p>
-<p>若线程对同一内存地址进行了两次读操作，而两次读操作得到了相同的值，通过判断 “值相同” 来判定 “值没变”。然而，在这两次读操作的时间间隔之内，另外的线程可能已经修改了该值，这样就相当于欺骗了前面的线程，使其认为 “值没变”，实际上值已经被篡改了。</p>
-<p>下面是 ABA 问题发生的过程：</p>
-<ol>
-<li>T1 线程从共享的内存地址读取值 A；</li>
-<li>T1 线程被抢占，线程 T2 开始运行；</li>
-<li>T2 线程将共享的内存地址中的值由 A 修改成 B，然后又修改回 A；</li>
-<li>T1 线程继续执行，读取共享的内存地址中的值仍为 A，认为没有改变然后继续执行；</li>
-</ol>
-<p>由于 T1 并不知道在两次读取的值 A 已经被 “隐性” 的修改过，所以可能产生无法预期的结果。</p>
-<p>例如，使用 List 来存放 Item，如果将一个 Item 从 List 中移除并释放了其内存地址，然后重新创建一个新的 Item，并将其添加至 List 中，由于优化等因素，有可能新创建的 Item 的内存地址与前面删除的 Item 的内存地址是相同的，导致指向新的 Item 的指针因此也等同于指向旧的 Item 的指针，这将引发 ABA 问题。</p>
-<p><img src="https://images0.cnblogs.com/blog/175043/201410/231100493083369.jpg" alt=""></p>
-<h2 id="内存模型"><a class="markdownIt-Anchor" href="#内存模型"></a> 内存模型</h2>
-<p>在多线程系统中，当多个线程同时访问共享的内存时，就需要一个规范来约束不同的线程该如何与内存交互，这个规范就称之为内存模型（Memory Model）。</p>
-<p>在传统的C中，需要通过内存栅栏(memory barrier)的方式，在指令间插入内存栅栏来保证内存访问和修改的执行顺序。</p>
-<p>在C++11中提供了memoryorder的支持来支持跨平台内存模型规范。详见另一篇博文。</p>
-<h1 id=""><a class="markdownIt-Anchor" href="#"></a> </h1>
-
+          <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/04/15/lock-free/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
