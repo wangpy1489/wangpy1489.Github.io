@@ -371,6 +371,228 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/31/c-trivial/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王谱越"/>
+      <meta itemprop="description" content=""/>
+      <meta itemprop="image" content="/images/myavatar.jpg"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Norton's Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/03/31/c-trivial/" class="post-title-link" itemprop="url">C++ trivial类型</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-31 13:46:54" itemprop="dateCreated datePublished" datetime="2019-03-31T13:46:54+08:00">2019-03-31</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-04-09 22:48:21" itemprop="dateModified" datetime="2019-04-09T22:48:21+08:00">2019-04-09</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C-进阶/" itemprop="url" rel="index"><span itemprop="name">C++进阶</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">1.1k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="trival类型"><a class="markdownIt-Anchor" href="#trival类型"></a> Trival类型</h1>
+<p>最近在看《STL源码剖析》时看到对于Trival和POD类型，模板会有相应的特化，对于Trival类型的操作不需逐个调用构造函数和析构函数。但是不清楚Trival的含义，因此查了一下。</p>
+<blockquote>
+<p>A trivially copyable class is a class that:<br>
+— has no non-trivial copy constructors (12.8),<br>
+— has no non-trivial move constructors (12.8),<br>
+— has no non-trivial copy assignment operators (13.5.3, 12.8),<br>
+— has no non-trivial move assignment operators (13.5.3, 12.8), and<br>
+— has a trivial destructor (12.4).</p>
+<p>A trivial class is a class that has a trivial default constructor (12.1) and is trivially copyable.</p>
+<h2 id="note-in-particular-a-trivially-copyable-or-trivial-class-does-not-have-virtual-functions-or-virtual-base-classesend-note"><a class="markdownIt-Anchor" href="#note-in-particular-a-trivially-copyable-or-trivial-class-does-not-have-virtual-functions-or-virtual-base-classesend-note"></a> [ Note: In particular, a trivially copyable or trivial class does not have virtual functions or virtual base classes.—end note ]</h2>
+<p>其他要求：</p>
+<p>①没有虚成员（不含虚函数以及虚基类）</p>
+<p>②没有类内初始化的非静态数据成员</p>
+<p>③如果它拥有基类或者非静态成员，它们也应该是trivial的</p>
+</blockquote>
+<h2 id="trivial-constructor-and-trivial-destructor"><a class="markdownIt-Anchor" href="#trivial-constructor-and-trivial-destructor"></a> trivial  constructor and trivial destructor</h2>
+<p>trivial构造函数即构造函数“什么都不干”。<strong>通常情况下，不定义类的构造函数，编译器就会为我们生成一个平凡的默认构造函数</strong>。但如果该类含有虚函数或者数据成员没有默认构造函数，编译器是不会为我们生成trivial的默认构造函数的。析构函数也是一样的道理。</p>
+<h2 id="trivial-copy-constructor-and-trivial-copy-constructor"><a class="markdownIt-Anchor" href="#trivial-copy-constructor-and-trivial-copy-constructor"></a> trivial copy constructor and trivial copy constructor</h2>
+<p>trivial 拷贝构造函数基本上等同于memcpy进行类型的构造。同trivial 构造函数一样，编译器在用户不提供的情况下，通常会提供trivial 拷贝构造函数。</p>
+<p>trivial 移动构造函数执行的操作与trivial 拷贝构造函数相同，都是bytewise的拷贝，只是用于移动语义。</p>
+<p><a href="https://www.cnblogs.com/shuaihanhungry/p/5764019.html" target="_blank" rel="noopener">详细请看</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/27/copy-move-constractor/"/>
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1198,222 +1420,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/25/styleguide-note/"/>
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="王谱越"/>
-      <meta itemprop="description" content=""/>
-      <meta itemprop="image" content="/images/myavatar.jpg"/>
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Norton's Blog"/>
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/03/25/styleguide-note/" class="post-title-link" itemprop="url">goole styleguide 学习笔记</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-03-25 20:49:20" itemprop="dateCreated datePublished" datetime="2019-03-25T20:49:20+08:00">2019-03-25</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-03-29 17:54:12" itemprop="dateModified" datetime="2019-03-29T17:54:12+08:00">2019-03-29</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/学习笔记/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">16k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">14 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p><img src="http://wpy-blog.oss-cn-shanghai.aliyuncs.com/GoogleCppStyleGuide.png/wpy-blog" alt=""></p>
-<h1 id="一-头文件"><a class="markdownIt-Anchor" href="#一-头文件"></a> 一、头文件</h1>
-<h2 id="11-self-contained-头文件"><a class="markdownIt-Anchor" href="#11-self-contained-头文件"></a> 1.1. Self-contained 头文件</h2>
-<p>所有<code>.h</code>头文件要能够自给自足。换言之，用户和重构工具不需要为特别场合而包含额外的头文件。</p>
-<p>不过有一个例外，即一个文件并不是 self-contained 的，而是作为文本插入到代码某处。或者，文件内容实际上是其它头文件的特定平台（platform-specific）扩展部分。这些文件就要用 <code>.inc</code> 文件扩展名。</p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/03/25/styleguide-note/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1459,7 +1470,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">30</span>
+                    <span class="site-state-item-count">31</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1555,7 +1566,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">20</span>
+                      
+                    
+                    <span class="site-state-item-count">21</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1644,7 +1657,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">82k</span>
+    <span title="站点总字数">83k</span>
   
 
   
@@ -1653,7 +1666,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">1:14</span>
+    <span title="站点阅读时长">1:16</span>
   
 </div>
 

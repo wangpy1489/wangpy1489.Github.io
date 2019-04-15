@@ -96,20 +96,25 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Norton&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/categories/网络基础/index.html">
+  <meta name="description" content="问题引入  乱序 说到内存模型，首先需要明确一个普遍存在，但却未必人人都注意到的事实：程序通常并不是总按着照源码中的顺序一一执行，此谓之乱序，乱序产生的原因可能有好几种：  编译器出于优化的目的，在编译阶段将源码的顺序进行交换。 程序执行期间，指令流水被 cpu 乱序执行。 inherent cache 的分层及刷新策略使得有时候某些写读操作的从效果上看，顺序被重排。">
+<meta name="keywords" content="c++">
+<meta property="og:type" content="article">
+<meta property="og:title" content="c++内存模型">
+<meta property="og:url" content="http://yoursite.com/2019/04/15/c-mamorymodel/index.html">
 <meta property="og:site_name" content="Norton&#39;s Blog">
+<meta property="og:description" content="问题引入  乱序 说到内存模型，首先需要明确一个普遍存在，但却未必人人都注意到的事实：程序通常并不是总按着照源码中的顺序一一执行，此谓之乱序，乱序产生的原因可能有好几种：  编译器出于优化的目的，在编译阶段将源码的顺序进行交换。 程序执行期间，指令流水被 cpu 乱序执行。 inherent cache 的分层及刷新策略使得有时候某些写读操作的从效果上看，顺序被重排。">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-15T10:32:44.183Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Norton&#39;s Blog">
+<meta name="twitter:title" content="c++内存模型">
+<meta name="twitter:description" content="问题引入  乱序 说到内存模型，首先需要明确一个普遍存在，但却未必人人都注意到的事实：程序通常并不是总按着照源码中的顺序一一执行，此谓之乱序，乱序产生的原因可能有好几种：  编译器出于优化的目的，在编译阶段将源码的顺序进行交换。 程序执行期间，指令流水被 cpu 乱序执行。 inherent cache 的分层及刷新策略使得有时候某些写读操作的从效果上看，顺序被重排。">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/categories/网络基础/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/04/15/c-mamorymodel/"/>
 
 
 
@@ -119,7 +124,7 @@
   };
 </script>
 
-  <title>分类: 网络基础 | Norton's Blog</title>
+  <title>c++内存模型 | Norton's Blog</title>
   
 
 
@@ -167,7 +172,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -260,7 +265,7 @@
         
         
           
-          <li class="menu-item menu-item-categories menu-item-active">
+          <li class="menu-item menu-item-categories">
 
     
     
@@ -306,28 +311,6 @@
 
   
     
-
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
 
   
 
@@ -376,59 +359,266 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block category">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>网络基础<small>分类</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
+
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/15/c-mamorymodel/"/>
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王谱越"/>
+      <meta itemprop="description" content=""/>
+      <meta itemprop="image" content="/images/myavatar.jpg"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Norton's Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
         
-          <a class="post-title-link" href="/2019/03/31/OSIsample/" itemprop="url">
-            
-              <span itemprop="name">OSIsample</span>
-            
-          </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">c++内存模型
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-03-31T20:44:24+08:00"
-              content="2019-03-31">
-          03-31
-        </time>
-      </div>
+              
+            
+          </h1>
+        
 
-    </header>
-  </article>
+        <div class="post-meta">
+          <span class="post-time">
 
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-04-15 15:23:27 / 修改时间：18:32:44" itemprop="dateCreated datePublished" datetime="2019-04-15T15:23:27+08:00">2019-04-15</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C-进阶/" itemprop="url" rel="index"><span itemprop="name">C++进阶</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">1.8k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">2 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="问题引入"><a class="markdownIt-Anchor" href="#问题引入"></a> 问题引入</h1>
+<h2 id="乱序"><a class="markdownIt-Anchor" href="#乱序"></a> 乱序</h2>
+<p>说到内存模型，首先需要明确一个普遍存在，但却未必人人都注意到的事实：程序通常并不是总按着照源码中的顺序一一执行，此谓之乱序，乱序产生的原因可能有好几种：</p>
+<ol>
+<li>编译器出于优化的目的，在编译阶段将源码的顺序进行交换。</li>
+<li>程序执行期间，指令流水被 cpu 乱序执行。</li>
+<li>inherent cache 的分层及刷新策略使得有时候某些写读操作的从效果上看，顺序被重排。</li>
+</ol>
+<a id="more"></a>
+<p>从乱序的种类来看分为以下四类：</p>
+<ol>
+<li>写写乱序(store store), 前面的写操作被放到了后面的操作之后，比如：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a = 3;</span><br><span class="line">b = 4;</span><br><span class="line">被乱序为：</span><br><span class="line">b = 4;</span><br><span class="line">a = 3;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>写读乱序(store load)，前面的写操作被放到了后面的读操作之后，比如：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a = 3;</span><br><span class="line">load(b);</span><br><span class="line">被乱序为</span><br><span class="line">load(b);</span><br><span class="line">a = 3;</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>读读乱序(load load)， 前面的读操作被放到了后一个读操作之后，比如：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">load(a);</span><br><span class="line">load(b);</span><br><span class="line">被乱序为：</span><br><span class="line">load(b);</span><br><span class="line">load(a);</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>读写乱序(load store), 前面的读操作被放到了后一个写操作之后，比如：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">load(a);</span><br><span class="line">b = 4;</span><br><span class="line">被乱序为：</span><br><span class="line">b = 4;</span><br><span class="line">load(a);</span><br></pre></td></tr></table></figure>
+<p>程序的乱序在单线程的世界里多数时候并没有引起太多引人注意的问题，但在多线程的世界里，这些乱序就制造了特别的麻烦，究其原因，最主要的有2个：</p>
+<ol>
+<li>并发不能保证修改和访问共享变量的操作原子性，使得一些中间状态暴露了出去，因此像 mutex，各种 lock 之类的东西在写多线程时被频繁地使用。</li>
+<li>变量被修改后，该修改未必能被另一个线程及时观察到，因此需要“同步”。</li>
+</ol>
+<p>解决同步问题就需要确定内存模型，也就是需要确定线程间应该怎么通过共享内存来进行交互(<a href="http://en.wikipedia.org/wiki/Memory_model_(programming)" target="_blank" rel="noopener">查看维基百科</a>).</p>
+<h1 id="memory-model"><a class="markdownIt-Anchor" href="#memory-model"></a> memory model</h1>
+<p>内存模型所要表达的内容主要是怎么描述一个内存操作的效果，在各个线程间的可见性的问题。修改操作的效果不能及时被别的线程看见的原因有很多，比较明显的一个是，对计算机来说，通常内存的写操作相对于读操作是昂贵很多很多的，因此对写操作的优化是提升性能的关键，而这些对写操作的种种优化，导致了一个很普遍的现象出现：写操作通常会在 CPU 内部的 cache 中缓存起来。这就导致了在一个 CPU 里执行一个写操作之后，该操作导致的内存变化却不一定会马上就被另一个 CPU 所看到，这从另一个角度讲，效果上其实就是读写乱序了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cpu1 执行如下：</span><br><span class="line">a = 3;</span><br><span class="line">cpu2 执行如下：</span><br><span class="line">load(a);</span><br></pre></td></tr></table></figure>
+<p>对如上代码，假设 a 的初始值是 0, 然后 cpu1 先执行，之后 cpu2 再执行，假设其中读写都是原子的，那么最后 cpu2 如果读到 a = 0 也其实不是什么奇怪事情。很显然，这种在某个线程里成功修改了全局变量，居然在另一个线程里看不到效果的后果是很严重的。</p>
+<p>因此必须要有必要的手段对这种修改公共变量的行为进行同步。</p>
+<p>c++11 中的 atomic library 中定义了以下6种语义来对内存操作的行为进行约定，这些语义分别规定了不同的内存操作在其它线程中的可见性问题：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> memory_order &#123;</span><br><span class="line">    memory_order_relaxed, <span class="comment">//对其它读写操作没有同步，只保证本操作是原子的</span></span><br><span class="line">    memory_order_consume, <span class="comment">//load操作，当前线程依赖该原子变量的访存操作不能reorder到该指令之前，对其他线程store操作(release)可见</span></span><br><span class="line">    memory_order_acquire, <span class="comment">//load操作，当前线程所有访存操作不能reorder到该指令之前，对其他线程store操作(release)可见</span></span><br><span class="line">    memory_order_release, <span class="comment">//store操作，当前线程所有访存操作不能reorder到该指令之后，对其他线程load操作(consume)可见</span></span><br><span class="line">    memory_order_acq_rel, <span class="comment">//load/store操作，memory_order_acquire + memory_order_release</span></span><br><span class="line">    memory_order_seq_cst <span class="comment">//memory_order_acq_rel + 顺序一致性(sequential consisten)</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
       
     </div>
 
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/c/" rel="tag"># c++</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/15/lock-free/" rel="next" title="Lock-Free 编程">
+                <i class="fa fa-chevron-left"></i> Lock-Free 编程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -448,8 +638,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -629,6 +828,23 @@
       </div>
 
       
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#问题引入"><span class="nav-text"> 问题引入</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#乱序"><span class="nav-text"> 乱序</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#memory-model"><span class="nav-text"> memory model</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
 
       
 
@@ -796,6 +1012,10 @@
 
 
   
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
 
   
 
@@ -806,6 +1026,8 @@
   
   
 
+
+  
 
 
   
