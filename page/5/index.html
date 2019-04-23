@@ -371,6 +371,741 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/18/malocandnew/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王谱越"/>
+      <meta itemprop="description" content=""/>
+      <meta itemprop="image" content="/images/myavatar.jpg"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Norton's Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/03/18/malocandnew/" class="post-title-link" itemprop="url">malloc 和new</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-18 00:03:00" itemprop="dateCreated datePublished" datetime="2019-03-18T00:03:00+08:00">2019-03-18</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-03-21 23:18:24" itemprop="dateModified" datetime="2019-03-21T23:18:24+08:00">2019-03-21</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/知识辨析/" itemprop="url" rel="index"><span itemprop="name">知识辨析</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">1.3k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>​	malloc() 与 free()相对应，new/new[]与delete/delete[]相对应，都应配对使用。</p>
+<ol>
+<li>
+<p><strong>申请内存位置不同</strong></p>
+<p>new操作符可以从其他位置上分配内存，不一定局限于堆。</p>
+<p>malloc函数从堆上动态分配内存。</p>
+</li>
+<li>
+<p><strong>返回类型安全性</strong><br>
+new操作符返回的是对象类型的指针，类型匹配，故类型安全。</p>
+<p>malloc函数分配成功返回void*，需要进行强制类型转换。</p>
+</li>
+<li>
+<p><strong>内存分配失败时的返回值</strong><br>
+new分配失败会抛出<code>bac_alloc</code>异常。malloc分配内存失败时返回NULL。</p>
+</li>
+<li>
+<p><strong>空间大小指定方式不同</strong><br>
+new 会根据类型推断需要分配的内存的大小。malloc需要自行计算指出内存大小。</p>
+</li>
+<li>
+<p><strong>分配行为不同</strong><br>
+new分配内存会有3个步骤：</p>
+</li>
+</ol>
+<ul>
+<li>
+<p>第一步：调用operator new 函数（对于数组是operator new[]）分配一块足够大的，原始的，未命名的内存空间以便存储特定类型的对象。</p>
+</li>
+<li>
+<p>第二步：编译器运行相应的构造函数以构造对象，并为其传入初值。</p>
+</li>
+<li>
+<p>第三步：对象构造完成后，返回一个指向该对象的指针。</p>
+<p>malloc 只会开辟空间。</p>
+</li>
+</ul>
+<ol start="6">
+<li>
+<p><strong>对数组的处理</strong><br>
+C++提供了new[]与delete[]来专门处理数组类型: <code>A * ptr = new A[10];//分配10个A对象</code><br>
+使用new[]分配的内存必须使用delete[]进行释放：<code>delete [] ptr;</code><br>
+new对数组的支持体现在它会分别调用构造函数函数初始化每一个数组元素，释放对象时为每个对象调用析构函数。注意delete[]要与new[]配套使用，不然会找出数组对象部分释放的现象，造成内存泄漏。</p>
+<p>而malloc，它并不知道你在这块内存上要放的数组还是别的东西，反正它就给你一块原始的内存，在给你个内存的地址就完事。所以如果要动态分配一个数组的内存，还需要我们手动自定数组的大小：</p>
+</li>
+<li>
+<p><strong>是否可以被重载</strong></p>
+<p>opeartor new /operator delete可以被重载</p>
+<p>而malloc/free并不允许重载。</p>
+</li>
+<li>
+<p><strong>能否直观地重新分配内存</strong></p>
+<p>使用malloc分配的内存后，如果在使用过程中发现内存不足，可以使用realloc函数进行内存重新分配实现内存的扩充。realloc先判断当前的指针所指内存是否有足够的连续空间，如果有，原地扩大可分配的内存地址，并且返回原来的地址指针；如果空间不够，先按照新指定的大小分配空间，将原有数据从头到尾拷贝到新分配的内存区域，而后释放原来的内存区域。</p>
+<p>new没有。</p>
+</li>
+<li>
+<p><strong>new与malloc是否可以相互调用</strong></p>
+<p>operator new /operator delete的实现可以基于malloc，而malloc的实现不可以去调用new。</p>
+</li>
+<li>
+<p><strong>客户处理内存分配不足</strong></p>
+<p>在operator new抛出异常以反映一个未获得满足的需求之前，它会先调用一个用户指定的错误处理函数。</p>
+<p>对于malloc，客户并不能够去编程决定内存不足以分配时要干什么事，只能看着malloc返回NULL。</p>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/02/array/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王谱越"/>
+      <meta itemprop="description" content=""/>
+      <meta itemprop="image" content="/images/myavatar.jpg"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Norton's Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/03/02/array/" class="post-title-link" itemprop="url">[LeetCode]数组类问题心得小结</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-02 10:54:02 / 修改时间：13:06:43" itemprop="dateCreated datePublished" datetime="2019-03-02T10:54:02+08:00">2019-03-02</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/LeetCode-Summary/" itemprop="url" rel="index"><span itemprop="name">LeetCode Summary</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">1.5k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="常用方法与函数"><a class="markdownIt-Anchor" href="#常用方法与函数"></a> 常用方法与函数</h1>
+<p>在C++中，常用vector来作为数组容器。因此我们只讨论vector的相关方法与函数。</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>a.empty()</td>
+<td>判断a是否为空，空则返回ture,不空则返回false</td>
+</tr>
+<tr>
+<td>a.erase(a.begin()+1,a.begin()+3)</td>
+<td>删除a中第1个（从第0个算起）到第2个元素，也就是说删除的元素从a.begin()+1算起（包括它）一直到a.begin()+ 3（不包括它）</td>
+</tr>
+<tr>
+<td>a.size()</td>
+<td>返回a中元素的个数</td>
+</tr>
+<tr>
+<td>a.resize(10,2)</td>
+<td>将a的现有元素个数调至10个，多则删，少则补，其值为2</td>
+</tr>
+<tr>
+<td>a.swap(b)</td>
+<td>b为向量，将a中的元素和b中的元素进行整体性交换</td>
+</tr>
+<tr>
+<td>a.insert(a.begin()+1,3,5)</td>
+<td>在a的第1个元素（从第0个算起）的位置插入3个数，其值都为5</td>
+</tr>
+<tr>
+<td>a.insert(a.begin()+1,5)</td>
+<td>在a的第1个元素（从第0个算起）的位置插入数值5，如a为1,2,3,4，插入元素后为1,5,2,3,4</td>
+</tr>
+</tbody>
+</table>
+<p>C++算法库中提供了许多算法函数可以对vector进行操作，使用时要包含头文件<code>#include&lt;algorithm&gt;</code></p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sort(a.begin(),a.end())</td>
+<td>对a中的从a.begin()（包括它）到a.end()（不包括它）的元素进行从小到大排列</td>
+</tr>
+<tr>
+<td>reverse(a.begin(),a.end());</td>
+<td>对a中的从a.begin()（包括它）到a.end()（不包括它）的元素倒置，但不排列，如a中元素为1,3,2,4,倒置后为4,2,3,1</td>
+</tr>
+<tr>
+<td>copy(a.begin(),a.end(),b.begin()+1)</td>
+<td>把a中的从a.begin()（包括它）到a.end()（不包括它）的元素复制到b中，从b.begin()+1的位置（包括它）开始复制，覆盖掉原有元素</td>
+</tr>
+<tr>
+<td>find(a.begin(),a.end(),10)</td>
+<td>在a中的从a.begin()（包括它）到a.end()（不包括它）的元素中查找10，若存在返回其在向量中的位置</td>
+</tr>
+</tbody>
+</table>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/03/02/array/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/28/Leetcode-array/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王谱越"/>
+      <meta itemprop="description" content=""/>
+      <meta itemprop="image" content="/images/myavatar.jpg"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Norton's Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/02/28/Leetcode-array/" class="post-title-link" itemprop="url">【LeetCode】初级算法——数组</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-02-28 16:02:10 / 修改时间：21:38:21" itemprop="dateCreated datePublished" datetime="2019-02-28T16:02:10+08:00">2019-02-28</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/LeetCode/" itemprop="url" rel="index"><span itemprop="name">LeetCode</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">16k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">15 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="leetcode-217-存在重复元素"><a class="markdownIt-Anchor" href="#leetcode-217-存在重复元素"></a> [LeetCode]# 217 存在重复元素</h1>
+<blockquote>
+<p>给定一个整数数组，判断是否存在重复元素。</p>
+<p>如果任何值在数组中出现至少两次，函数返回 true。如果数组中每个元素都不相同，则返回 false。</p>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; 输入: [1,2,3,1]</span><br><span class="line">&gt; 输出: true</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p><strong>示例 2:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; 输入: [1,2,3,4]</span><br><span class="line">&gt; 输出: false</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p><strong>示例 3:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; 输入: [1,1,1,3,3,4,3,2,4,2]</span><br><span class="line">&gt; 输出: true</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/02/28/Leetcode-array/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/26/bash-变量与表达式/"/>
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -797,653 +1532,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/23/LeetCode-73/"/>
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="王谱越"/>
-      <meta itemprop="description" content=""/>
-      <meta itemprop="image" content="/images/myavatar.jpg"/>
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Norton's Blog"/>
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/01/23/LeetCode-73/" class="post-title-link" itemprop="url">[LeetCode]#73 矩阵置零</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-01-23 22:46:34" itemprop="dateCreated datePublished" datetime="2019-01-23T22:46:34+08:00">2019-01-23</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-02-25 09:59:25" itemprop="dateModified" datetime="2019-02-25T09:59:25+08:00">2019-02-25</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/LeetCode/" itemprop="url" rel="index"><span itemprop="name">LeetCode</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">2.2k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">2 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="leetcode-73-矩阵置零"><a class="markdownIt-Anchor" href="#leetcode-73-矩阵置零"></a> [LeetCode] #73 矩阵置零</h1>
-<p><a href="https://leetcode-cn.com/problems/set-matrix-zeroes/" target="_blank" rel="noopener">矩阵置零</a></p>
-<blockquote>
-<p>给定一个 <em>m</em> x <em>n</em> 的矩阵，如果一个元素为 0，则将其所在行和列的所有元素都设为 0。请使用<strong>原地</strong>算法**。**</p>
-<p><strong>示例 1:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&gt; 输入: </span><br><span class="line">&gt; [</span><br><span class="line">&gt;   [1,1,1],</span><br><span class="line">&gt;   [1,0,1],</span><br><span class="line">&gt;   [1,1,1]</span><br><span class="line">&gt; ]</span><br><span class="line">&gt; 输出: </span><br><span class="line">&gt; [</span><br><span class="line">&gt;   [1,0,1],</span><br><span class="line">&gt;   [0,0,0],</span><br><span class="line">&gt;   [1,0,1]</span><br><span class="line">&gt; ]</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<blockquote>
-<p><strong>示例 2:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&gt; 输入: </span><br><span class="line">&gt; [</span><br><span class="line">&gt;   [0,1,2,0],</span><br><span class="line">&gt;   [3,4,5,2],</span><br><span class="line">&gt;   [1,3,1,5]</span><br><span class="line">&gt; ]</span><br><span class="line">&gt; 输出: </span><br><span class="line">&gt; [</span><br><span class="line">&gt;   [0,0,0,0],</span><br><span class="line">&gt;   [0,4,5,0],</span><br><span class="line">&gt;   [0,3,1,0]</span><br><span class="line">&gt; ]</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<blockquote>
-<p><strong>进阶:</strong></p>
-<ul>
-<li>一个直接的解决方案是使用  O(<em>m**n</em>) 的额外空间，但这并不是一个好的解决方案。</li>
-<li>一个简单的改进方案是使用 O(<em>m</em> + <em>n</em>) 的额外空间，但这仍然不是最好的解决方案。</li>
-<li>你能想出一个常数空间的解决方案吗？</li>
-</ul>
-</blockquote>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/01/23/LeetCode-73/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/21/LeetCode-401/"/>
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="王谱越"/>
-      <meta itemprop="description" content=""/>
-      <meta itemprop="image" content="/images/myavatar.jpg"/>
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Norton's Blog"/>
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/01/21/LeetCode-401/" class="post-title-link" itemprop="url">[LeetCode] #401 二进制手表</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-01-21 22:28:51" itemprop="dateCreated datePublished" datetime="2019-01-21T22:28:51+08:00">2019-01-21</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-02-25 09:59:25" itemprop="dateModified" datetime="2019-02-25T09:59:25+08:00">2019-02-25</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/LeetCode/" itemprop="url" rel="index"><span itemprop="name">LeetCode</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">3.2k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">3 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="leetcode-401-binary-watch"><a class="markdownIt-Anchor" href="#leetcode-401-binary-watch"></a> [LeetCode] 401 Binary Watch</h1>
-<p>A binary watch has 4 LEDs on the top which represent the hours (0-11), and the 6 LEDs on the bottom represent the minutes (0-59).</p>
-<blockquote>
-<p>Each LED represents a zero or one, with the least significant bit on the right. For example, the above binary watch reads “3:25”.</p>
-<p>Given a non-negative integer n which represents the number of LEDs that are currently on, return all possible times the watch could represent.</p>
-<p>Example:</p>
-<p>Input: n = 1<br>
-Return: [“1:00”, “2:00”, “4:00”, “8:00”, “0:01”, “0:02”, “0:04”, “0:08”, “0:16”, “0:32”]<br>
-1<br>
-2<br>
-Note:</p>
-<p>The order of output does not matter.输出顺序不影响<br>
-The hour must not contain a leading zero, for example “01:00” is not valid, it should be “1:00”.<br>
-The minute must be consist of two digits and may contain a leading zero, for example “10:2” is not valid, it should be “10:02”.</p>
-</blockquote>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/01/21/LeetCode-401/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/15/video-avatar/"/>
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="王谱越"/>
-      <meta itemprop="description" content=""/>
-      <meta itemprop="image" content="/images/myavatar.jpg"/>
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Norton's Blog"/>
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/01/15/video-avatar/" class="post-title-link" itemprop="url">个性化Video_avatars</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-01-15 16:55:16 / 修改时间：17:08:12" itemprop="dateCreated datePublished" datetime="2019-01-15T16:55:16+08:00">2019-01-15</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/计算机视觉/" itemprop="url" rel="index"><span itemprop="name">计算机视觉</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">2.2k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">2 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="video_avatars"><a class="markdownIt-Anchor" href="#video_avatars"></a> Video_avatars</h1>
-<p>这个项目来自马普所的一篇论文<em>Video Based Reconstruction of 3D People Models</em> ，日前，研究人员公布了他们的实现以及数据集。</p>
-<ul>
-<li>Website:<a href="https://graphics.tu-bs.de/people-snapshot" target="_blank" rel="noopener">https://graphics.tu-bs.de/people-snapshot</a></li>
-<li>Github: <a href="https://github.com/thmoa/videoavatars" target="_blank" rel="noopener">https://github.com/thmoa/videoavatars</a></li>
-</ul>
-<p>由于其文档比较匮乏，使用它的代码对自己的数据进行复现并不容易，经过几天努力，成功的完成了整个建模过程，故记录如下。相关代码以上传到了我的<a href="https://github.com/wangpy1489/videoavatars_custom" target="_blank" rel="noopener">Github</a>上。</p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/01/15/video-avatar/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1494,7 +1582,7 @@ The minute must be consist of two digits and may contain a leading zero, for exa
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">31</span>
+                    <span class="site-state-item-count">34</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1537,7 +1625,11 @@ The minute must be consist of two digits and may contain a leading zero, for exa
                     
                       
                     
-                    <span class="site-state-item-count">15</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">17</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -1592,7 +1684,11 @@ The minute must be consist of two digits and may contain a leading zero, for exa
                     
                       
                     
-                    <span class="site-state-item-count">21</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">23</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1681,7 +1777,7 @@ The minute must be consist of two digits and may contain a leading zero, for exa
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">83k</span>
+    <span title="站点总字数">88k</span>
   
 
   
@@ -1690,7 +1786,7 @@ The minute must be consist of two digits and may contain a leading zero, for exa
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">1:16</span>
+    <span title="站点阅读时长">1:20</span>
   
 </div>
 

@@ -371,6 +371,629 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/26/dynamic-programing/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王谱越"/>
+      <meta itemprop="description" content=""/>
+      <meta itemprop="image" content="/images/myavatar.jpg"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Norton's Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/03/26/dynamic-programing/" class="post-title-link" itemprop="url">动态规划总结</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-26 23:39:57" itemprop="dateCreated datePublished" datetime="2019-03-26T23:39:57+08:00">2019-03-26</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-03-31 21:59:06" itemprop="dateModified" datetime="2019-03-31T21:59:06+08:00">2019-03-31</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/知识总结/" itemprop="url" rel="index"><span itemprop="name">知识总结</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">1.9k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">2 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="动态规划的两大原则"><a class="markdownIt-Anchor" href="#动态规划的两大原则"></a> 动态规划的两大原则</h1>
+<h2 id="最优子结构"><a class="markdownIt-Anchor" href="#最优子结构"></a> 最优子结构</h2>
+<p>用动态规划求解最优化问题的第一步就是刻画最优解的结构，如果一个问题的解结构包含其子问题的最优解，就称此问题具有最优子结构性质。因此，某个问题是否适合应用动态规划算法，它是否具有最优子结构性质是一个很好的线索。使用动态规划算法时，用子问题的最优解来构造原问题的最优解。因此必须考查最优解中用到的所有子问题。</p>
+<h2 id="重叠子问题"><a class="markdownIt-Anchor" href="#重叠子问题"></a> <strong>重叠子问题</strong></h2>
+<p>在斐波拉契数列求解中，可以看到大量的重叠子问题，比如说在求fib（6）的时候，fib（2）被调用了5次。如果使用递归算法的时候会反复的求解相同的子问题，不停的调用函数，而不是生成新的子问题。如果递归算法反复求解相同的子问题，就称为具有重叠子问题（overlapping subproblems）性质。在动态规划算法中使用数组来保存子问题的解，这样子问题多次求解的时候可以直接查表不用调用函数递归。</p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/03/26/dynamic-programing/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/25/c-namespace/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王谱越"/>
+      <meta itemprop="description" content=""/>
+      <meta itemprop="image" content="/images/myavatar.jpg"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Norton's Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/03/25/c-namespace/" class="post-title-link" itemprop="url">c++命名空间</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-25 22:00:49" itemprop="dateCreated datePublished" datetime="2019-03-25T22:00:49+08:00">2019-03-25</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-03-31 22:00:02" itemprop="dateModified" datetime="2019-03-31T22:00:02+08:00">2019-03-31</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C-基础/" itemprop="url" rel="index"><span itemprop="name">C++ 基础</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">1.4k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="一-命名空间"><a class="markdownIt-Anchor" href="#一-命名空间"></a> 一、命名空间</h1>
+<p>**命名空间:**实际上就是一个由程序设计者命名的内存区域，程序设计者可以根据需要指定一些有名字的空间域，把一些全局实体分别放在各个命名空间中，从而与其他全局实体分隔开来。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> n1&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/03/25/c-namespace/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/25/c-classmemory/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王谱越"/>
+      <meta itemprop="description" content=""/>
+      <meta itemprop="image" content="/images/myavatar.jpg"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Norton's Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/03/25/c-classmemory/" class="post-title-link" itemprop="url">C++类内存结构</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-25 20:54:07" itemprop="dateCreated datePublished" datetime="2019-03-25T20:54:07+08:00">2019-03-25</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-03-28 16:38:40" itemprop="dateModified" datetime="2019-03-28T16:38:40+08:00">2019-03-28</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C-基础/" itemprop="url" rel="index"><span itemprop="name">C++基础</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">7</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><img src="http://wpy-blog.oss-cn-shanghai.aliyuncs.com/classmemory-1.jpg/wpy-blog" alt=""></p>
+<p><img src="http://wpy-blog.oss-cn-shanghai.aliyuncs.com/classmemory-2.png/wpy-blog" alt=""></p>
+<p><a href="https://blog.csdn.net/yinhe0330/article/details/81186284" target="_blank" rel="noopener">原文地址</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/25/styleguide-note/"/>
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -756,683 +1379,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/25/tempelte-specialize/"/>
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="王谱越"/>
-      <meta itemprop="description" content=""/>
-      <meta itemprop="image" content="/images/myavatar.jpg"/>
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Norton's Blog"/>
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/03/25/tempelte-specialize/" class="post-title-link" itemprop="url">tempelte_specialize</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-03-25 07:56:04 / 修改时间：09:09:24" itemprop="dateCreated datePublished" datetime="2019-03-25T07:56:04+08:00">2019-03-25</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C-基础/" itemprop="url" rel="index"><span itemprop="name">C++基础</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">1.7k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">2 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="函数模板具体化"><a class="markdownIt-Anchor" href="#函数模板具体化"></a> 函数模板具体化</h1>
-<p>C<ins>中允许使用模板来进行泛型编程，在C</ins>中模板原型如下所示：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(T &amp;a, T &amp;b)</span></span></span><br></pre></td></tr></table></figure>
-<p>模板原型不提供函数声明和定义，需要经过模板具体化过程生成相应声明和定义。</p>
-<h2 id="1-隐式实例化"><a class="markdownIt-Anchor" href="#1-隐式实例化"></a> 1. 隐式实例化</h2>
-<p>最初，编译器只能通过隐式实例化，通过对参数列表的类型推断，来使用模板生成对应函数定义，这也是我们最常用的方法；如可以像下面这样使用上面定义的函数模板：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">short</span> a, b;</span><br><span class="line">swap(a, b); <span class="comment">// T 为 short 类型</span></span><br><span class="line"><span class="keyword">int</span> c, d;</span><br><span class="line">swap(c, d); <span class="comment">// T 为 int 类型</span></span><br></pre></td></tr></table></figure>
-<h2 id="2-显式实例化"><a class="markdownIt-Anchor" href="#2-显式实例化"></a> 2. 显式实例化</h2>
-<p>现在C++还允许显式实例化(explicit instrantiation)。这意味着可以直接命令编译器创建特定的实例，其语法有两种形式：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> <span class="keyword">void</span> swap&lt;<span class="keyword">int</span>&gt;(<span class="keyword">int</span>, <span class="keyword">int</span>); <span class="comment">//显式实例化声明</span></span><br><span class="line"><span class="keyword">or</span></span><br><span class="line">swap&lt;<span class="keyword">int</span>&gt;(a,b) <span class="comment">//直接在程序中调用</span></span><br></pre></td></tr></table></figure>
-<p>显示实例化可以省去编译器的类型推断过程。</p>
-<h2 id="3显式具体化"><a class="markdownIt-Anchor" href="#3显式具体化"></a> 3.显式具体化</h2>
-<p>显式实例化和显式具体化区别在于：这些声明的意思是“不要使用swap()模板来生成函数定义，而应使用专门为int类型显式地定义的函数定义。”这些原型必须有自己的函数定义。显式具体化声明在关键字template后包含&lt;&gt;，而显式实例化没有。</p>
-<p>显式具体化有两种等价声明：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;&gt; <span class="keyword">void</span> swap&lt;<span class="keyword">int</span>&gt; (<span class="keyword">int</span> &amp;, <span class="keyword">int</span> &amp;);     <span class="comment">//explicit specialization</span></span><br><span class="line"><span class="keyword">template</span> &lt;&gt; <span class="function"><span class="keyword">void</span> <span class="title">swap</span> <span class="params">(<span class="keyword">int</span> &amp;, <span class="keyword">int</span> &amp;)</span></span>;     <span class="comment">//根据参数列表的具体化</span></span><br></pre></td></tr></table></figure>
-<p>警告：试图在同一个文件中(或转换单元)中使用同一种类型的显式实例化和显式具体化 将出错。</p>
-<p><strong>常规模板，具体化模板，非模板函数的优先调用顺序：</strong></p>
-<p><strong>非模板函数（普通函数）&gt; 具体化模板函数 &gt; 常规模板</strong></p>
-<h1 id="类模板具体化"><a class="markdownIt-Anchor" href="#类模板具体化"></a> 类模板具体化</h1>
-<p>使用类模板可以通过类模板自动生成多个类，其模板定义如下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T1, <span class="keyword">typename</span> T2&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Point</span> &#123;</span></span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="1隐式实例化"><a class="markdownIt-Anchor" href="#1隐式实例化"></a> 1.隐式实例化</h2>
-<h2 id="2显式实例化"><a class="markdownIt-Anchor" href="#2显式实例化"></a> 2.显式实例化</h2>
-<p>这两个部分的实例化语法，类模板和函数模板没有太大的区别。</p>
-<h2 id="3显示具体化"><a class="markdownIt-Anchor" href="#3显示具体化"></a> 3.显示具体化</h2>
-<p>类模板的显示具体化语法如下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Point</span>&lt;char *, char *&gt; &#123;</span></span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>其中模板类方法的实现的具体化语法和函数模板有所区别，不需要带模板头template&lt;&gt;：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> Point&lt;<span class="keyword">char</span>*, <span class="keyword">char</span>*&gt;::display() <span class="keyword">const</span> &#123;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">"x="</span>&lt;&lt;m_x&lt;&lt;<span class="string">", y="</span>&lt;&lt;m_y&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="4-部分显式具体化"><a class="markdownIt-Anchor" href="#4-部分显式具体化"></a> 4. 部分显式具体化</h2>
-<p>类模板还支持部分显式具体化，即只具体化部分模板参数类型：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T2&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Point</span>&lt;char*, T2&gt; &#123;</span></span><br><span class="line">	...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 部分显式具体化还是需要加上模板头</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T2&gt;</span><br><span class="line"><span class="keyword">void</span> Point&lt;<span class="keyword">char</span>*,T2&gt;::display() <span class="keyword">const</span> &#123;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">"x="</span>&lt;&lt;m_x&lt;&lt;<span class="string">" | y="</span>&lt;&lt;m_y&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>部分显式具体化只能用于类模板，不能用于函数模板。</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/22/C-cast/"/>
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="王谱越"/>
-      <meta itemprop="description" content=""/>
-      <meta itemprop="image" content="/images/myavatar.jpg"/>
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Norton's Blog"/>
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/03/22/C-cast/" class="post-title-link" itemprop="url">C++类型转换符</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-03-22 21:38:59 / 修改时间：22:15:21" itemprop="dateCreated datePublished" datetime="2019-03-22T21:38:59+08:00">2019-03-22</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C-基础/" itemprop="url" rel="index"><span itemprop="name">C++基础</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">1.5k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="四种类型转换运算符"><a class="markdownIt-Anchor" href="#四种类型转换运算符"></a> 四种类型转换运算符</h1>
-<ul>
-<li><code>dynamic_cast</code> 用于多态类型的转换</li>
-<li><code>static_cast</code> 用于非多态类型的转换</li>
-<li><code>const_cast</code> 用于删除<code>const</code> ,<code>volatile</code> 和 <code>__unaligned</code> 属性</li>
-<li><code>reinterpret_cast</code> 用于位的简单重新解释</li>
-</ul>
-<h2 id="dynamic_cast"><a class="markdownIt-Anchor" href="#dynamic_cast"></a> dynamic_cast</h2>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">dynamic_cast</span>&lt;type&gt;(expression);</span><br></pre></td></tr></table></figure>
-<p>将expression转换为type类型,在运行期间转换，且会执行运行时检查，性能有相应消耗。</p>
-<ol>
-<li><em><em>转换类型必须是一个指针、引用或者void</em>，用于将基类的指针或引用安全地转换成派生类的指针或引用；</em>*</li>
-<li><strong>dynamic_cast在运行期间强制转换，运行时进行类型转换检查；</strong></li>
-<li><strong>对指针进行转换，失败返回null，成功返回type类型的对象指针，对于引用的转换，失败抛出一个bad_cast ，成功返回type类型的引用；</strong></li>
-<li><strong>dynamic_cast不能用于内置类型的转换；</strong></li>
-<li><strong>用于类的转换，基类中一定要有virtual定义的虚函数（保证多态性），不然会编译错误。</strong></li>
-<li><strong>可以在整个类层次结构中移动指针，包括向上转换、向下转换</strong></li>
-</ol>
-<h2 id="static_cast"><a class="markdownIt-Anchor" href="#static_cast"></a> static_cast</h2>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static_cast</span>&lt;type&gt;(expression);</span><br></pre></td></tr></table></figure>
-<p>将expression转换为type类型，在编译过程中完成。有下几个应用场景：</p>
-<ol>
-<li>用于非多态类型的转换</li>
-<li>**内置类型转换：**转换过程中的精度损失由开发者负责，除非无法完成类型转化，否则编译器不会警告或报错。</li>
-<li><strong>把void*转化为目标类型指针</strong></li>
-<li><strong>把任意类型转化为void</strong></li>
-<li><strong>基类与派生类之间指针或引用的转换</strong>：由于不会进行类型检查，所以向上转换时安全的，向下转换是不安全的。</li>
-</ol>
-<p>需要注意static_cast无法转换expression的const/volitale/__unaligned属性（会报编译时错误）。</p>
-<h2 id="const_cast"><a class="markdownIt-Anchor" href="#const_cast"></a> const_cast</h2>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const_cast</span>&lt;type&gt;(expression);</span><br></pre></td></tr></table></figure>
-<p>可以提供一个移除expression的const/volitale/__unaligned属性的指针，但只限同类型间转换。</p>
-<ol>
-<li><strong>const_cast不能执行其他任何类型转换，只能用于同类型之间不同const/volitale属性的移除。否则会报编译时错误。</strong></li>
-<li><strong>需要注意的是，const_cast通常对指针和引用进行转换，而无法直接移除内置类型的const/volitale属性，换言之，这种语法直接提供了一个具有写权限的指针或引用，可以通过间接访问的方式，修改常量。</strong></li>
-</ol>
-<h2 id="reinterpret_cast"><a class="markdownIt-Anchor" href="#reinterpret_cast"></a> reinterpret_cast</h2>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">reinterpret_cast</span>&lt;type&gt;(expression);</span><br></pre></td></tr></table></figure>
-<p><code>reinterpret_cast</code> 允许将任何指针转换为任何其他指针类型。 也允许将任何整数类型转换为任何指针类型以及反向转换。</p>
-<ul>
-<li><strong>用于位的简单重新解释,本质作用是重新定义内存数据的解释方式，而不进行任何二进制转换.</strong></li>
-<li><strong>滥用 reinterpret_cast 运算符可能很容易带来风险。 除非所需转换本身是低级别的，否则应使用其他强制转换运算符之一。</strong></li>
-<li><strong>允许将任何指针转换为任何其他指针类型（如 <code>char*</code> 到 <code>int*</code> 或 <code>One_class*</code> 到 <code>Unrelated_class*</code> 之类的转换，但其本身并不安全）</strong></li>
-<li><strong>也允许将任何整数类型转换为任何指针类型以及反向转换。</strong></li>
-<li><strong>reinterpret_cast 运算符不能丢掉 const、volatile 或 __unaligned 特性。</strong></li>
-<li><strong>reinterpret_cast 的一个实际用途是在哈希函数中，即，通过让两个不同的值几乎不以相同的索引结尾的方式将值映射到索引。</strong></li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/22/pyrhon-valve-reference/"/>
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="王谱越"/>
-      <meta itemprop="description" content=""/>
-      <meta itemprop="image" content="/images/myavatar.jpg"/>
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Norton's Blog"/>
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/03/22/pyrhon-valve-reference/" class="post-title-link" itemprop="url">python传值与传引用</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-03-22 20:28:46" itemprop="dateCreated datePublished" datetime="2019-03-22T20:28:46+08:00">2019-03-22</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-03-28 10:18:44" itemprop="dateModified" datetime="2019-03-28T10:18:44+08:00">2019-03-28</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/知识辨析/" itemprop="url" rel="index"><span itemprop="name">知识辨析</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">527</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="可变对象与不可变对象"><a class="markdownIt-Anchor" href="#可变对象与不可变对象"></a> 可变对象与不可变对象</h1>
-<p>要明白python在参数传递和赋值过程中的行为，首先要明白python中的两类对象：可变对象与不可变对象。</p>
-<ul>
-<li>**不可变对象，该对象所指向的内存中的值不能被改变。**对于这样的对象解释器会采取COW的策略，即当改变某个变量时候，会把把原来的值复制一份后再改变，这会开辟一个新的地址，变量再指向这个新的地址。</li>
-</ul>
-<p><img src="http://upload-images.jianshu.io/upload_images/266795-84511d8863300c40.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="不可变对象"></p>
-<ul>
-<li><strong>可变对象，该对象所指向的内存中的值可以被改变。<strong>变量（准确的说是引用）改变后，实际上是其所指的值直接发生改变，并没有发生复制行为，也没有开辟新的出地址，通俗点说就是</strong>原地改变</strong>。</li>
-</ul>
-<p><img src="http://upload-images.jianshu.io/upload_images/266795-6ef05eaaed4d6c2b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="可变对象"></p>
-<h1 id="python-的参数传递与赋值"><a class="markdownIt-Anchor" href="#python-的参数传递与赋值"></a> Python 的参数传递与赋值</h1>
-<p>python的函数传参以及赋值是以一种“传对象引用”的方式完成的，但是由于对象类型不同，在修改时，会有不同的结果。</p>
-<ul>
-<li>
-<p>如果函数收到的是一个可变对象（比如字典或者列表）的引用，就能修改对象的原始值**－－相当于通过“传引用”来传递对象。**</p>
-</li>
-<li>
-<p>如果函数收到的是一个不可变对象（比如数值类型、字符或者元组）的引用，就不能直接修改原始对象**－－相当于通过“传值’来传递对象。**</p>
-</li>
-</ul>
-<p>另外需要注意的一点，不可变的属性是由外至内的，也即如果一个元组内有多个数组，则这些数组作为元组内的元素，也是不可变的。</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1483,7 +1429,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">31</span>
+                    <span class="site-state-item-count">34</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1526,7 +1472,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">15</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">17</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -1581,7 +1531,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">21</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">23</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1670,7 +1624,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">83k</span>
+    <span title="站点总字数">88k</span>
   
 
   
@@ -1679,7 +1633,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">1:16</span>
+    <span title="站点阅读时长">1:20</span>
   
 </div>
 

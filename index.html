@@ -371,6 +371,908 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/23/shared-memory/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王谱越"/>
+      <meta itemprop="description" content=""/>
+      <meta itemprop="image" content="/images/myavatar.jpg"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Norton's Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/04/23/shared-memory/" class="post-title-link" itemprop="url">shared_memory</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-04-23 13:00:03 / 修改时间：13:00:58" itemprop="dateCreated datePublished" datetime="2019-04-23T13:00:03+08:00">2019-04-23</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Linux-进阶/" itemprop="url" rel="index"><span itemprop="name">Linux 进阶</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">1.1k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="cc经典案例linux难点分析之共享内存shm和mmap的比较"><a class="markdownIt-Anchor" href="#cc经典案例linux难点分析之共享内存shm和mmap的比较"></a> C/C++经典案例：Linux难点分析之共享内存shm和mmap的比较</h1>
+<p>共享内存允许两个或多个进程共享一给定的存储区，因为数据不需要来回复制，所以是最快的一种进程间通信机制。共享内存可以通过mmap()映射普通文件(特殊情况下还可以采用匿名映射)机制实现，也可以通过系统V共享内存机制实现。应用接口和原理很简单，内部机制复杂。为了实现更安全通信，往往还与信号灯等同步机制共同使用。</p>
+<p><strong>1. mmap的机制如：就是在磁盘上建立一个文件，每个进程存储器里面，单独开辟一个空间来进行映射。如果多进程的话，那么不会对实际的物理存储器(主存)消耗太大。</strong></p>
+<p><strong>2. shm的机制：每个进程的共享内存都直接映射到实际物理存储器里面。</strong></p>
+<p>mmap函数是unix/linux下的系统调用，来看《Unix Netword programming》卷二12.2节有详细介绍。</p>
+<p>mmap系统调用并不是完全为了用于共享内存而设计的。它本身提供了不同于一般对普通文件的访问方式，进程可以像读写内存一样对普通文件的操作。而Posix或系统V的共享内存IPC则纯粹用于共享目的，当然mmap()实现共享内存也是其主要应用之一。</p>
+<p>mmap系统调用使得进程之间通过映射同一个普通文件实现共享内存。普通文件被映射到进程地址空间后，进程可以像访问普通内存一样对文件进行访问，不必再 调用read()，write()等操作。mmap并不分配空间, 只是将文件映射到调用进程的地址空间里, 然后你就可以用memcpy等操作写文件, 而不用write()了.写完后用msync()同步一下, 你所写的内容就保存到文件里了. 不过这种方式没办法增加文件的长度, 因为要映射的长度在调用mmap()的时候就决定了.</p>
+<p>简单说就是把一个文件的内容在内存里面做一个映像，内存比磁盘快些。</p>
+<p><strong>总结：</strong></p>
+<p>1、mmap有两种方式，一种是映射内存，它把普通文件映射为实际物理内存页，访问它就和访问物理内存一样(这也就和shm的功能一样了)(同时不用刷新到文件)</p>
+<p>2、mmap可以映射文件，不确定会不会像windows“内存映射文件”一样的功能，如果是，那么他就能映射好几G甚至好几百G的内存数据，对大数据处理将提供强大功能了。</p>
+<p>3、shm只做内存映射，和mmap第一个功能一样!只不过不是普通文件而已，但都是物理内存。</p>
+<p>本文版权归黑马程序员C/C++学院所有，欢迎转载，转载请注明作者出处。谢谢！</p>
+<p>作者：黑马程序员C/C++培训学院</p>
+<p>首发：<a href="http://c.itheima.com/" target="_blank" rel="noopener">http://c.itheima.com/</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/17/optimize-program/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王谱越"/>
+      <meta itemprop="description" content=""/>
+      <meta itemprop="image" content="/images/myavatar.jpg"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Norton's Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/04/17/optimize-program/" class="post-title-link" itemprop="url">optimize_program</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-04-17 19:49:31 / 修改时间：20:28:39" itemprop="dateCreated datePublished" datetime="2019-04-17T19:49:31+08:00">2019-04-17</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/知识整理/" itemprop="url" rel="index"><span itemprop="name">知识整理</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">432</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="tips-for-program-optimization"><a class="markdownIt-Anchor" href="#tips-for-program-optimization"></a> Tips for program optimization</h1>
+<h2 id="编码优化"><a class="markdownIt-Anchor" href="#编码优化"></a> 编码优化</h2>
+<ul>
+<li>恰当的使用 inline来减少函数调用造成的开销。</li>
+<li>消除连续的重复调用，将结果固定的重复计算移出循环体。如：数组的size()</li>
+<li>消除不必要的内存访问，如:将结果存在一个临时变量中，结果计算完成后一次性写入到内存</li>
+</ul>
+<h2 id="结构化优化"><a class="markdownIt-Anchor" href="#结构化优化"></a> 结构化优化</h2>
+<ul>
+<li>通过交换、组合或分配等方式，减少耗时操作(如：乘除法)的计算次数。</li>
+<li>采用循环展开(loop unrolling)技术，循环展开在2方面提升了程序性能：
+<ol>
+<li>减少条件判断和循环计数计算的操作数量</li>
+<li>可以合并一些相关操作，减少关键路径上的操作数量。</li>
+</ol>
+</li>
+<li>利用处理器流水线特性，分离操作，使其能够在流水线中并行。</li>
+<li>在分支语句中使用特性，并尽量使得判断条件在大多数情况下成立，减少分支预测错误带来的惩罚。</li>
+<li>保持你的代码cache friendly,例：尽管查找树等数据结构算法复杂度更低，但考虑到cache的存在，数组等顺序储存结构的整体性能可能会更高。</li>
+</ul>
+<h2 id="并发优化"><a class="markdownIt-Anchor" href="#并发优化"></a> 并发优化</h2>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/16/interview-points/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王谱越"/>
+      <meta itemprop="description" content=""/>
+      <meta itemprop="image" content="/images/myavatar.jpg"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Norton's Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/04/16/interview-points/" class="post-title-link" itemprop="url">一些琐碎的知识点</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-04-16 20:11:06" itemprop="dateCreated datePublished" datetime="2019-04-16T20:11:06+08:00">2019-04-16</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-04-17 11:17:14" itemprop="dateModified" datetime="2019-04-17T11:17:14+08:00">2019-04-17</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/知识整理/" itemprop="url" rel="index"><span itemprop="name">知识整理</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">3.2k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">3 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="计算机网络"><a class="markdownIt-Anchor" href="#计算机网络"></a> 计算机网络</h1>
+<h2 id="子网掩码"><a class="markdownIt-Anchor" href="#子网掩码"></a> 子网掩码</h2>
+<p>子网划分是通过借用IP地址中若干位主机地址来充当子网的网络地址，从而将原网络划分为若干子网。</p>
+<p>划分子网时，随着子网地址借用主机位数的增多，子网的数目随之增加，但每个子网中的可用主机数逐渐减少。</p>
+<p><strong>IP 地址分类：</strong></p>
+<ul>
+<li><code>IP 地址 ::= {&lt;网络号&gt;,&lt;主机号&gt;}</code></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>IP 地址类别</th>
+<th>网络号</th>
+<th>网络范围</th>
+<th>主机号</th>
+<th>IP 地址范围</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A 类</td>
+<td>8bit，第一位固定为 0</td>
+<td>0 —— 127</td>
+<td>24bit</td>
+<td>1.0.0.0 —— 127.255.255.255</td>
+</tr>
+<tr>
+<td>B 类</td>
+<td>16bit，前两位固定为 10</td>
+<td>128.0 —— 191.255</td>
+<td>16bit</td>
+<td>128.0.0.0 —— 191.255.255.255</td>
+</tr>
+<tr>
+<td>C 类</td>
+<td>24bit，前三位固定为 110</td>
+<td>192.0.0 —— 223.255.255</td>
+<td>8bit</td>
+<td>192.0.0.0 —— 223.255.255.255</td>
+</tr>
+<tr>
+<td>D 类</td>
+<td>前四位固定为 1110，后面为多播地址</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>E 类</td>
+<td>前五位固定为 11110，后面保留为今后所用</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>例：如果借用 C 类 IP 地址中的 4 位主机号划分子网，那么子网掩码应该为：</strong></p>
+<p>C类地址，原有8位主机位，2^8-2即254个主机地址，默认子网掩码255.255.255.0。(全0或全1不可用）</p>
+<p>借用1位主机位，产生2<sup>1-2=0个子网，每个子网有2</sup>7个主机地址，每个子网有2^7-2个主机数；</p>
+<p>借用2位主机位，产生2<sup>2-2=2个子网，每个子网有2</sup>6个主机地址，</p>
+<p>每个子网有2^6-2个主机数</p>
+<p>;</p>
+<p>……</p>
+<p>所以，该题目为4位主机号，所以产生2<sup>4-2=14个子网，每个子网有有2</sup>4-2个主机数；</p>
+<p>所以此子网掩码的二进制表示为11111111.11111111.11111111.11110000</p>
+<p>转换成十进制为：255.255.255.240</p>
+<h2 id="tcp"><a class="markdownIt-Anchor" href="#tcp"></a> TCP</h2>
+<p><strong>三次握手</strong></p>
+<p><img src="https://github.com/huihut/interview/blob/master/images/TCP%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E5%BB%BA%E7%AB%8B%E8%BF%9E%E6%8E%A5.png" alt=""></p>
+<h1 id="操作系统"><a class="markdownIt-Anchor" href="#操作系统"></a> 操作系统</h1>
+<h2 id="pv信号量操作"><a class="markdownIt-Anchor" href="#pv信号量操作"></a> PV信号量操作</h2>
+<p>设信号量的当前值为x。</p>
+<ol>
+<li>信号量的值如果为负数， 那么等待的进程数为-x个。</li>
+<li>信号量的值如果为正数， 那么空闲的资源数为x个。</li>
+</ol>
+<h4 id="进程之间私有和共享的资源"><a class="markdownIt-Anchor" href="#进程之间私有和共享的资源"></a> 进程之间私有和共享的资源</h4>
+<ul>
+<li>私有：地址空间、堆、全局变量、栈、寄存器</li>
+<li>共享：代码段，公共数据，进程目录，进程 ID</li>
+</ul>
+<h4 id="线程之间私有和共享的资源"><a class="markdownIt-Anchor" href="#线程之间私有和共享的资源"></a> 线程之间私有和共享的资源</h4>
+<ul>
+<li>私有：线程栈，寄存器，程序寄存器</li>
+<li>共享：堆，地址空间，全局变量，静态变量</li>
+</ul>
+<p><strong>1.</strong>      <strong>进程间通讯（IPC）有哪些实现方法</strong></p>
+<ul>
+<li>
+<p>管道：通常指无名管道，是UNIX系统IPC最古老的形式</p>
+<p>它是半双工的（即<strong>数据只能在一个方向上流动）</strong>，具有固定的读端和端。它只能用于具有<strong>亲缘关系的进程</strong>之间的通信（也是父子进程或者兄弟进程之间）。</p>
+<p>它可以看成是一种特殊的文件，对于它的读写也可以使用普通的read、write 等函数。但是它不是普通的文件，并不属于其他任何文件系统，并且只存在于内存中。</p>
+</li>
+<li>
+<p>FIFO，也成为命名管道，是一种文件类型</p>
+<p>FIFO可以在<strong>无关的进程</strong>之间交换数据，与无名管道不同。</p>
+<p>FIFO有路径名与之相关联，它以一种特殊设备文件形式存在于文件系统中。</p>
+</li>
+<li>
+<p>消息队列：是消息的链列表，存放在内核中，一个消息队列由一个标识符（即队列ID）来标识</p>
+<p>消息队列是<strong>面向记录</strong>的，其中的消息具有<strong>特定的格式以及特定的优先级</strong>。</p>
+<p>消息队列<strong>独立于发送与接收进程</strong>。进程终止时，消息队列及其内容并不会被删除。</p>
+<p>消息队列可以实现消息的<strong>随机查询</strong>,消息不一定要以先进先出的次序读取,也可以按消息的类型读取。</p>
+</li>
+<li>
+<p>信号量，与已经介绍过的 IPC 结构不同，它是一个计数器。信号量用于<strong>实现进程间的互斥与同步</strong>，而不是用于存储进程间通信数据。</p>
+<p>信号量用于进程间同步，若要在进程间传递数据需要结合共享内存。</p>
+<p>信号量基于<strong>操作系统的 PV 操作</strong>，程序对信号量的操作都是原子操作。</p>
+<p>每次对信号量的 PV 操作不仅限于对信号量值加 1 或减 1，而且可以加减任意正整数。支持信号量组。</p>
+</li>
+<li>
+<p>共享内存，指两个或多个进程共享一个给定的存储区</p>
+<p>共享内存是最快的一种 IPC，因为进程是直接对内存进行存取。因为多个进程可以同时操作，所以<strong>需要进行同步</strong>。信号量+共享内存通常结合在一起使用，信号量用来同步对共享内存的访问。</p>
+</li>
+</ul>
+<h1 id="数据结构"><a class="markdownIt-Anchor" href="#数据结构"></a> 数据结构</h1>
+<h2 id="二叉树"><a class="markdownIt-Anchor" href="#二叉树"></a> 二叉树</h2>
+<p><img src="https://uploadfiles.nowcoder.com/images/20181127/488035187_1543310665042_73D7A8D454E18AD76F7E1C8A1092F185" alt=""></p>
+<h1 id="编程"><a class="markdownIt-Anchor" href="#编程"></a> 编程</h1>
+<h2 id="临界区"><a class="markdownIt-Anchor" href="#临界区"></a> 临界区</h2>
+<p>每个进程中访问临界资源的那段代码称为临界区（Critical Section）（临界资源是一次仅允许一个进程使用的共享资源）。</p>
+<p>每次只准许一个进程进入临界区，进入后不允许其他进程进入。不论是硬件临界资源，还是软件临界资源，多个进程必须互斥地对它进行访问。</p>
+<p>任一时刻只有一个线程可以拥有临界区对象，拥有临界区的线程可以访问被保护起来的资源或代码段，其他希望进入临界区的线程将被挂起等待，直到拥有临界区的线程放弃临界区时为止，这样就保证了不会在同一时刻出现多个线程访问共享资源。</p>
+<h2 id="stl容器"><a class="markdownIt-Anchor" href="#stl容器"></a> STL容器</h2>
+<table>
+<thead>
+<tr>
+<th>容器</th>
+<th>底层数据结构</th>
+<th>时间复杂度</th>
+<th>有无序</th>
+<th>可不可重复</th>
+<th></th>
+<th>其他</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/huihut/interview/tree/master/STL#array" target="_blank" rel="noopener">array</a></td>
+<td>数组</td>
+<td>随机读改 O(1)</td>
+<td>无序</td>
+<td>可重复</td>
+<td>Random Access Iterator</td>
+<td>支持快速随机访问</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://github.com/huihut/interview/tree/master/STL#vector" target="_blank" rel="noopener">vector</a></td>
+<td>数组</td>
+<td>随机读改、尾部插入、尾部删除 O(1) 头部插入、头部删除 O(n)</td>
+<td>无序</td>
+<td>可重复</td>
+<td>Random Access Iterator</td>
+<td>支持快速随机访问</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://github.com/huihut/interview/tree/master/STL#list" target="_blank" rel="noopener">list</a></td>
+<td>双向链表</td>
+<td>插入、删除 O(1) 随机读改 O(n)</td>
+<td>无序</td>
+<td>可重复</td>
+<td>Bidirectional Iterator</td>
+<td>支持快速增删</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://github.com/huihut/interview/tree/master/STL#deque" target="_blank" rel="noopener">deque</a></td>
+<td>双端队列</td>
+<td>头尾插入、头尾删除 O(1)</td>
+<td>无序</td>
+<td>可重复</td>
+<td>Random Access Iterator</td>
+<td>一个中央控制器 + 多个缓冲区，支持首尾快速增删，支持随机访问</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://github.com/huihut/interview/tree/master/STL#stack" target="_blank" rel="noopener">stack</a></td>
+<td>deque / list</td>
+<td>顶部插入、顶部删除 O(1)</td>
+<td>无序</td>
+<td>可重复</td>
+<td>没有迭代器</td>
+<td>deque 或 list 封闭头端开口，不用 vector 的原因应该是容量大小有限制，扩容耗时</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://github.com/huihut/interview/tree/master/STL#queue" target="_blank" rel="noopener">queue</a></td>
+<td>deque / list</td>
+<td>尾部插入、头部删除 O(1)</td>
+<td>无序</td>
+<td>可重复</td>
+<td>没有迭代器</td>
+<td>deque 或 list 封闭头端开口，不用 vector 的原因应该是容量大小有限制，扩容耗时</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://github.com/huihut/interview/tree/master/STL#priority_queue" target="_blank" rel="noopener">priority_queue</a></td>
+<td>vector + max-heap</td>
+<td>插入、删除 O(log2n)</td>
+<td>有序</td>
+<td>可重复</td>
+<td>没有迭代器</td>
+<td>vector容器+heap处理规则</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://github.com/huihut/interview/tree/master/STL#set" target="_blank" rel="noopener">set</a></td>
+<td>红黑树</td>
+<td>插入、删除、查找 O(log2n)</td>
+<td>有序</td>
+<td>不可重复</td>
+<td>Bidirectional Iterator</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://github.com/huihut/interview/tree/master/STL#multiset" target="_blank" rel="noopener">multiset</a></td>
+<td>红黑树</td>
+<td>插入、删除、查找 O(log2n)</td>
+<td>有序</td>
+<td>可重复</td>
+<td>Bidirectional Iterator</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://github.com/huihut/interview/tree/master/STL#map" target="_blank" rel="noopener">map</a></td>
+<td>红黑树</td>
+<td>插入、删除、查找 O(log2n)</td>
+<td>有序</td>
+<td>不可重复</td>
+<td>Bidirectional Iterator</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="https://github.com/huihut/interview/tree/master/STL#multimap" target="_blank" rel="noopener">multimap</a></td>
+<td>红黑树</td>
+<td>插入、删除、查找 O(log2n)</td>
+<td>有序</td>
+<td>可重复</td>
+<td>Bidirectional Iterator</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>hash_set</td>
+<td>hash_table</td>
+<td>插入、删除、查找 O(1) 最差 O(n)</td>
+<td>无序</td>
+<td>不可重复</td>
+<td>Forward Iterator</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>hash_multiset</td>
+<td>hash_table</td>
+<td>插入、删除、查找 O(1) 最差 O(n)</td>
+<td>无序</td>
+<td>可重复</td>
+<td>Forward Iterator</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>hash_map</td>
+<td>hash_table</td>
+<td>插入、删除、查找 O(1) 最差 O(n)</td>
+<td>无序</td>
+<td>不可重复</td>
+<td>Forward Iterator</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>hash_multimap</td>
+<td>hash_table</td>
+<td>插入、删除、查找 O(1) 最差 O(n)</td>
+<td>无序</td>
+<td>可重复</td>
+<td>Forward Iterator</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/15/c-mamorymodel/"/>
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -755,605 +1657,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/09/c-thread/"/>
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="王谱越"/>
-      <meta itemprop="description" content=""/>
-      <meta itemprop="image" content="/images/myavatar.jpg"/>
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Norton's Blog"/>
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/04/09/c-thread/" class="post-title-link" itemprop="url">c++多线程</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-04-09 22:46:35" itemprop="dateCreated datePublished" datetime="2019-04-09T22:46:35+08:00">2019-04-09</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-04-15 10:35:14" itemprop="dateModified" datetime="2019-04-15T10:35:14+08:00">2019-04-15</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C-进阶/" itemprop="url" rel="index"><span itemprop="name">C++进阶</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">9.6k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">9 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="thread-类"><a class="markdownIt-Anchor" href="#thread-类"></a> thread 类</h1>
-<p><code>&lt;thread&gt;：</code>头文件主要声明了 std::thread 类，另外 std::this_thread 命名空间也在这个头文件中。</p>
-<h2 id="stdthread-构造函数"><a class="markdownIt-Anchor" href="#stdthread-构造函数"></a> std::thread 构造函数</h2>
-<p><strong>(1)默认构造函数</strong>：创建一个空的 thread 执行对象。</p>
-<p><strong>(2) 初始化构造函数</strong>：创建一个 thread对象，该 thread对象可被 joinable，新产生的线程会调用 fn 函数，该函数的参数由 args 给出。</p>
-<p><strong>(3)拷贝构造函数(被禁用)</strong>：意味着 thread 不可被拷贝构造。</p>
-<p><strong>(4)move 构造函数，move 构造函数</strong>：调用成功之后 x 不代表任何 thread 执行对象。</p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/04/09/c-thread/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/31/OSIsample/"/>
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="王谱越"/>
-      <meta itemprop="description" content=""/>
-      <meta itemprop="image" content="/images/myavatar.jpg"/>
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Norton's Blog"/>
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/03/31/OSIsample/" class="post-title-link" itemprop="url">OSIsample</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-03-31 20:44:24 / 修改时间：20:48:12" itemprop="dateCreated datePublished" datetime="2019-03-31T20:44:24+08:00">2019-03-31</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/网络基础/" itemprop="url" rel="index"><span itemprop="name">网络基础</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">13</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="osi七层结构示意图"><a class="markdownIt-Anchor" href="#osi七层结构示意图"></a> OSI七层结构示意图</h1>
-<p><img src="http://wpy-blog.oss-cn-shanghai.aliyuncs.com/%E7%BD%91%E7%BB%9C%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84.jpg/wpy-blog" alt=""></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/31/namespace-cgroup/"/>
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="王谱越"/>
-      <meta itemprop="description" content=""/>
-      <meta itemprop="image" content="/images/myavatar.jpg"/>
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Norton's Blog"/>
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/03/31/namespace-cgroup/" class="post-title-link" itemprop="url">Linux namespace与Cgroup简述</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-03-31 19:54:27 / 修改时间：21:58:37" itemprop="dateCreated datePublished" datetime="2019-03-31T19:54:27+08:00">2019-03-31</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Linux-基础/" itemprop="url" rel="index"><span itemprop="name">Linux 基础</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">3k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">3 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="namespace-概述"><a class="markdownIt-Anchor" href="#namespace-概述"></a> NameSpace 概述</h1>
-<p>Namespace 用于不同进程组之间的资源隔离，其目的是将某个特定的全局系统资源（global system resource）通过抽象方法使得namespace 中的进程看起来拥有它们自己的隔离的全局系统资源实例。</p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/03/31/namespace-cgroup/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1404,7 +1707,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">31</span>
+                    <span class="site-state-item-count">34</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1447,7 +1750,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">15</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">17</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -1502,7 +1809,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">21</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">23</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1591,7 +1902,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">83k</span>
+    <span title="站点总字数">88k</span>
   
 
   
@@ -1600,7 +1911,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">1:16</span>
+    <span title="站点阅读时长">1:20</span>
   
 </div>
 

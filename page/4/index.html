@@ -371,6 +371,683 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/25/tempelte-specialize/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王谱越"/>
+      <meta itemprop="description" content=""/>
+      <meta itemprop="image" content="/images/myavatar.jpg"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Norton's Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/03/25/tempelte-specialize/" class="post-title-link" itemprop="url">tempelte_specialize</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-25 07:56:04 / 修改时间：09:09:24" itemprop="dateCreated datePublished" datetime="2019-03-25T07:56:04+08:00">2019-03-25</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C-基础/" itemprop="url" rel="index"><span itemprop="name">C++基础</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">1.7k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">2 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="函数模板具体化"><a class="markdownIt-Anchor" href="#函数模板具体化"></a> 函数模板具体化</h1>
+<p>C<ins>中允许使用模板来进行泛型编程，在C</ins>中模板原型如下所示：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(T &amp;a, T &amp;b)</span></span></span><br></pre></td></tr></table></figure>
+<p>模板原型不提供函数声明和定义，需要经过模板具体化过程生成相应声明和定义。</p>
+<h2 id="1-隐式实例化"><a class="markdownIt-Anchor" href="#1-隐式实例化"></a> 1. 隐式实例化</h2>
+<p>最初，编译器只能通过隐式实例化，通过对参数列表的类型推断，来使用模板生成对应函数定义，这也是我们最常用的方法；如可以像下面这样使用上面定义的函数模板：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">short</span> a, b;</span><br><span class="line">swap(a, b); <span class="comment">// T 为 short 类型</span></span><br><span class="line"><span class="keyword">int</span> c, d;</span><br><span class="line">swap(c, d); <span class="comment">// T 为 int 类型</span></span><br></pre></td></tr></table></figure>
+<h2 id="2-显式实例化"><a class="markdownIt-Anchor" href="#2-显式实例化"></a> 2. 显式实例化</h2>
+<p>现在C++还允许显式实例化(explicit instrantiation)。这意味着可以直接命令编译器创建特定的实例，其语法有两种形式：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> <span class="keyword">void</span> swap&lt;<span class="keyword">int</span>&gt;(<span class="keyword">int</span>, <span class="keyword">int</span>); <span class="comment">//显式实例化声明</span></span><br><span class="line"><span class="keyword">or</span></span><br><span class="line">swap&lt;<span class="keyword">int</span>&gt;(a,b) <span class="comment">//直接在程序中调用</span></span><br></pre></td></tr></table></figure>
+<p>显示实例化可以省去编译器的类型推断过程。</p>
+<h2 id="3显式具体化"><a class="markdownIt-Anchor" href="#3显式具体化"></a> 3.显式具体化</h2>
+<p>显式实例化和显式具体化区别在于：这些声明的意思是“不要使用swap()模板来生成函数定义，而应使用专门为int类型显式地定义的函数定义。”这些原型必须有自己的函数定义。显式具体化声明在关键字template后包含&lt;&gt;，而显式实例化没有。</p>
+<p>显式具体化有两种等价声明：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;&gt; <span class="keyword">void</span> swap&lt;<span class="keyword">int</span>&gt; (<span class="keyword">int</span> &amp;, <span class="keyword">int</span> &amp;);     <span class="comment">//explicit specialization</span></span><br><span class="line"><span class="keyword">template</span> &lt;&gt; <span class="function"><span class="keyword">void</span> <span class="title">swap</span> <span class="params">(<span class="keyword">int</span> &amp;, <span class="keyword">int</span> &amp;)</span></span>;     <span class="comment">//根据参数列表的具体化</span></span><br></pre></td></tr></table></figure>
+<p>警告：试图在同一个文件中(或转换单元)中使用同一种类型的显式实例化和显式具体化 将出错。</p>
+<p><strong>常规模板，具体化模板，非模板函数的优先调用顺序：</strong></p>
+<p><strong>非模板函数（普通函数）&gt; 具体化模板函数 &gt; 常规模板</strong></p>
+<h1 id="类模板具体化"><a class="markdownIt-Anchor" href="#类模板具体化"></a> 类模板具体化</h1>
+<p>使用类模板可以通过类模板自动生成多个类，其模板定义如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T1, <span class="keyword">typename</span> T2&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Point</span> &#123;</span></span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="1隐式实例化"><a class="markdownIt-Anchor" href="#1隐式实例化"></a> 1.隐式实例化</h2>
+<h2 id="2显式实例化"><a class="markdownIt-Anchor" href="#2显式实例化"></a> 2.显式实例化</h2>
+<p>这两个部分的实例化语法，类模板和函数模板没有太大的区别。</p>
+<h2 id="3显示具体化"><a class="markdownIt-Anchor" href="#3显示具体化"></a> 3.显示具体化</h2>
+<p>类模板的显示具体化语法如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Point</span>&lt;char *, char *&gt; &#123;</span></span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其中模板类方法的实现的具体化语法和函数模板有所区别，不需要带模板头template&lt;&gt;：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> Point&lt;<span class="keyword">char</span>*, <span class="keyword">char</span>*&gt;::display() <span class="keyword">const</span> &#123;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">"x="</span>&lt;&lt;m_x&lt;&lt;<span class="string">", y="</span>&lt;&lt;m_y&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="4-部分显式具体化"><a class="markdownIt-Anchor" href="#4-部分显式具体化"></a> 4. 部分显式具体化</h2>
+<p>类模板还支持部分显式具体化，即只具体化部分模板参数类型：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T2&gt;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Point</span>&lt;char*, T2&gt; &#123;</span></span><br><span class="line">	...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 部分显式具体化还是需要加上模板头</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T2&gt;</span><br><span class="line"><span class="keyword">void</span> Point&lt;<span class="keyword">char</span>*,T2&gt;::display() <span class="keyword">const</span> &#123;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">"x="</span>&lt;&lt;m_x&lt;&lt;<span class="string">" | y="</span>&lt;&lt;m_y&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>部分显式具体化只能用于类模板，不能用于函数模板。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/22/C-cast/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王谱越"/>
+      <meta itemprop="description" content=""/>
+      <meta itemprop="image" content="/images/myavatar.jpg"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Norton's Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/03/22/C-cast/" class="post-title-link" itemprop="url">C++类型转换符</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-22 21:38:59 / 修改时间：22:15:21" itemprop="dateCreated datePublished" datetime="2019-03-22T21:38:59+08:00">2019-03-22</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C-基础/" itemprop="url" rel="index"><span itemprop="name">C++基础</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">1.5k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="四种类型转换运算符"><a class="markdownIt-Anchor" href="#四种类型转换运算符"></a> 四种类型转换运算符</h1>
+<ul>
+<li><code>dynamic_cast</code> 用于多态类型的转换</li>
+<li><code>static_cast</code> 用于非多态类型的转换</li>
+<li><code>const_cast</code> 用于删除<code>const</code> ,<code>volatile</code> 和 <code>__unaligned</code> 属性</li>
+<li><code>reinterpret_cast</code> 用于位的简单重新解释</li>
+</ul>
+<h2 id="dynamic_cast"><a class="markdownIt-Anchor" href="#dynamic_cast"></a> dynamic_cast</h2>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">dynamic_cast</span>&lt;type&gt;(expression);</span><br></pre></td></tr></table></figure>
+<p>将expression转换为type类型,在运行期间转换，且会执行运行时检查，性能有相应消耗。</p>
+<ol>
+<li><em><em>转换类型必须是一个指针、引用或者void</em>，用于将基类的指针或引用安全地转换成派生类的指针或引用；</em>*</li>
+<li><strong>dynamic_cast在运行期间强制转换，运行时进行类型转换检查；</strong></li>
+<li><strong>对指针进行转换，失败返回null，成功返回type类型的对象指针，对于引用的转换，失败抛出一个bad_cast ，成功返回type类型的引用；</strong></li>
+<li><strong>dynamic_cast不能用于内置类型的转换；</strong></li>
+<li><strong>用于类的转换，基类中一定要有virtual定义的虚函数（保证多态性），不然会编译错误。</strong></li>
+<li><strong>可以在整个类层次结构中移动指针，包括向上转换、向下转换</strong></li>
+</ol>
+<h2 id="static_cast"><a class="markdownIt-Anchor" href="#static_cast"></a> static_cast</h2>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static_cast</span>&lt;type&gt;(expression);</span><br></pre></td></tr></table></figure>
+<p>将expression转换为type类型，在编译过程中完成。有下几个应用场景：</p>
+<ol>
+<li>用于非多态类型的转换</li>
+<li>**内置类型转换：**转换过程中的精度损失由开发者负责，除非无法完成类型转化，否则编译器不会警告或报错。</li>
+<li><strong>把void*转化为目标类型指针</strong></li>
+<li><strong>把任意类型转化为void</strong></li>
+<li><strong>基类与派生类之间指针或引用的转换</strong>：由于不会进行类型检查，所以向上转换时安全的，向下转换是不安全的。</li>
+</ol>
+<p>需要注意static_cast无法转换expression的const/volitale/__unaligned属性（会报编译时错误）。</p>
+<h2 id="const_cast"><a class="markdownIt-Anchor" href="#const_cast"></a> const_cast</h2>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const_cast</span>&lt;type&gt;(expression);</span><br></pre></td></tr></table></figure>
+<p>可以提供一个移除expression的const/volitale/__unaligned属性的指针，但只限同类型间转换。</p>
+<ol>
+<li><strong>const_cast不能执行其他任何类型转换，只能用于同类型之间不同const/volitale属性的移除。否则会报编译时错误。</strong></li>
+<li><strong>需要注意的是，const_cast通常对指针和引用进行转换，而无法直接移除内置类型的const/volitale属性，换言之，这种语法直接提供了一个具有写权限的指针或引用，可以通过间接访问的方式，修改常量。</strong></li>
+</ol>
+<h2 id="reinterpret_cast"><a class="markdownIt-Anchor" href="#reinterpret_cast"></a> reinterpret_cast</h2>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">reinterpret_cast</span>&lt;type&gt;(expression);</span><br></pre></td></tr></table></figure>
+<p><code>reinterpret_cast</code> 允许将任何指针转换为任何其他指针类型。 也允许将任何整数类型转换为任何指针类型以及反向转换。</p>
+<ul>
+<li><strong>用于位的简单重新解释,本质作用是重新定义内存数据的解释方式，而不进行任何二进制转换.</strong></li>
+<li><strong>滥用 reinterpret_cast 运算符可能很容易带来风险。 除非所需转换本身是低级别的，否则应使用其他强制转换运算符之一。</strong></li>
+<li><strong>允许将任何指针转换为任何其他指针类型（如 <code>char*</code> 到 <code>int*</code> 或 <code>One_class*</code> 到 <code>Unrelated_class*</code> 之类的转换，但其本身并不安全）</strong></li>
+<li><strong>也允许将任何整数类型转换为任何指针类型以及反向转换。</strong></li>
+<li><strong>reinterpret_cast 运算符不能丢掉 const、volatile 或 __unaligned 特性。</strong></li>
+<li><strong>reinterpret_cast 的一个实际用途是在哈希函数中，即，通过让两个不同的值几乎不以相同的索引结尾的方式将值映射到索引。</strong></li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/22/pyrhon-valve-reference/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王谱越"/>
+      <meta itemprop="description" content=""/>
+      <meta itemprop="image" content="/images/myavatar.jpg"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Norton's Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/03/22/pyrhon-valve-reference/" class="post-title-link" itemprop="url">python传值与传引用</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-22 20:28:46" itemprop="dateCreated datePublished" datetime="2019-03-22T20:28:46+08:00">2019-03-22</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-03-28 10:18:44" itemprop="dateModified" datetime="2019-03-28T10:18:44+08:00">2019-03-28</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/知识辨析/" itemprop="url" rel="index"><span itemprop="name">知识辨析</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">527</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="可变对象与不可变对象"><a class="markdownIt-Anchor" href="#可变对象与不可变对象"></a> 可变对象与不可变对象</h1>
+<p>要明白python在参数传递和赋值过程中的行为，首先要明白python中的两类对象：可变对象与不可变对象。</p>
+<ul>
+<li>**不可变对象，该对象所指向的内存中的值不能被改变。**对于这样的对象解释器会采取COW的策略，即当改变某个变量时候，会把把原来的值复制一份后再改变，这会开辟一个新的地址，变量再指向这个新的地址。</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/266795-84511d8863300c40.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="不可变对象"></p>
+<ul>
+<li><strong>可变对象，该对象所指向的内存中的值可以被改变。<strong>变量（准确的说是引用）改变后，实际上是其所指的值直接发生改变，并没有发生复制行为，也没有开辟新的出地址，通俗点说就是</strong>原地改变</strong>。</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/266795-6ef05eaaed4d6c2b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="可变对象"></p>
+<h1 id="python-的参数传递与赋值"><a class="markdownIt-Anchor" href="#python-的参数传递与赋值"></a> Python 的参数传递与赋值</h1>
+<p>python的函数传参以及赋值是以一种“传对象引用”的方式完成的，但是由于对象类型不同，在修改时，会有不同的结果。</p>
+<ul>
+<li>
+<p>如果函数收到的是一个可变对象（比如字典或者列表）的引用，就能修改对象的原始值**－－相当于通过“传引用”来传递对象。**</p>
+</li>
+<li>
+<p>如果函数收到的是一个不可变对象（比如数值类型、字符或者元组）的引用，就不能直接修改原始对象**－－相当于通过“传值’来传递对象。**</p>
+</li>
+</ul>
+<p>另外需要注意的一点，不可变的属性是由外至内的，也即如果一个元组内有多个数组，则这些数组作为元组内的元素，也是不可变的。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/21/destory-desallocate/"/>
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -771,741 +1448,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/18/malocandnew/"/>
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="王谱越"/>
-      <meta itemprop="description" content=""/>
-      <meta itemprop="image" content="/images/myavatar.jpg"/>
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Norton's Blog"/>
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/03/18/malocandnew/" class="post-title-link" itemprop="url">malloc 和new</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-03-18 00:03:00" itemprop="dateCreated datePublished" datetime="2019-03-18T00:03:00+08:00">2019-03-18</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-03-21 23:18:24" itemprop="dateModified" datetime="2019-03-21T23:18:24+08:00">2019-03-21</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/知识辨析/" itemprop="url" rel="index"><span itemprop="name">知识辨析</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">1.3k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>​	malloc() 与 free()相对应，new/new[]与delete/delete[]相对应，都应配对使用。</p>
-<ol>
-<li>
-<p><strong>申请内存位置不同</strong></p>
-<p>new操作符可以从其他位置上分配内存，不一定局限于堆。</p>
-<p>malloc函数从堆上动态分配内存。</p>
-</li>
-<li>
-<p><strong>返回类型安全性</strong><br>
-new操作符返回的是对象类型的指针，类型匹配，故类型安全。</p>
-<p>malloc函数分配成功返回void*，需要进行强制类型转换。</p>
-</li>
-<li>
-<p><strong>内存分配失败时的返回值</strong><br>
-new分配失败会抛出<code>bac_alloc</code>异常。malloc分配内存失败时返回NULL。</p>
-</li>
-<li>
-<p><strong>空间大小指定方式不同</strong><br>
-new 会根据类型推断需要分配的内存的大小。malloc需要自行计算指出内存大小。</p>
-</li>
-<li>
-<p><strong>分配行为不同</strong><br>
-new分配内存会有3个步骤：</p>
-</li>
-</ol>
-<ul>
-<li>
-<p>第一步：调用operator new 函数（对于数组是operator new[]）分配一块足够大的，原始的，未命名的内存空间以便存储特定类型的对象。</p>
-</li>
-<li>
-<p>第二步：编译器运行相应的构造函数以构造对象，并为其传入初值。</p>
-</li>
-<li>
-<p>第三步：对象构造完成后，返回一个指向该对象的指针。</p>
-<p>malloc 只会开辟空间。</p>
-</li>
-</ul>
-<ol start="6">
-<li>
-<p><strong>对数组的处理</strong><br>
-C++提供了new[]与delete[]来专门处理数组类型: <code>A * ptr = new A[10];//分配10个A对象</code><br>
-使用new[]分配的内存必须使用delete[]进行释放：<code>delete [] ptr;</code><br>
-new对数组的支持体现在它会分别调用构造函数函数初始化每一个数组元素，释放对象时为每个对象调用析构函数。注意delete[]要与new[]配套使用，不然会找出数组对象部分释放的现象，造成内存泄漏。</p>
-<p>而malloc，它并不知道你在这块内存上要放的数组还是别的东西，反正它就给你一块原始的内存，在给你个内存的地址就完事。所以如果要动态分配一个数组的内存，还需要我们手动自定数组的大小：</p>
-</li>
-<li>
-<p><strong>是否可以被重载</strong></p>
-<p>opeartor new /operator delete可以被重载</p>
-<p>而malloc/free并不允许重载。</p>
-</li>
-<li>
-<p><strong>能否直观地重新分配内存</strong></p>
-<p>使用malloc分配的内存后，如果在使用过程中发现内存不足，可以使用realloc函数进行内存重新分配实现内存的扩充。realloc先判断当前的指针所指内存是否有足够的连续空间，如果有，原地扩大可分配的内存地址，并且返回原来的地址指针；如果空间不够，先按照新指定的大小分配空间，将原有数据从头到尾拷贝到新分配的内存区域，而后释放原来的内存区域。</p>
-<p>new没有。</p>
-</li>
-<li>
-<p><strong>new与malloc是否可以相互调用</strong></p>
-<p>operator new /operator delete的实现可以基于malloc，而malloc的实现不可以去调用new。</p>
-</li>
-<li>
-<p><strong>客户处理内存分配不足</strong></p>
-<p>在operator new抛出异常以反映一个未获得满足的需求之前，它会先调用一个用户指定的错误处理函数。</p>
-<p>对于malloc，客户并不能够去编程决定内存不足以分配时要干什么事，只能看着malloc返回NULL。</p>
-</li>
-</ol>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/02/array/"/>
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="王谱越"/>
-      <meta itemprop="description" content=""/>
-      <meta itemprop="image" content="/images/myavatar.jpg"/>
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Norton's Blog"/>
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/03/02/array/" class="post-title-link" itemprop="url">[LeetCode]数组类问题心得小结</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-03-02 10:54:02 / 修改时间：13:06:43" itemprop="dateCreated datePublished" datetime="2019-03-02T10:54:02+08:00">2019-03-02</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/LeetCode-Summary/" itemprop="url" rel="index"><span itemprop="name">LeetCode Summary</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">1.5k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="常用方法与函数"><a class="markdownIt-Anchor" href="#常用方法与函数"></a> 常用方法与函数</h1>
-<p>在C++中，常用vector来作为数组容器。因此我们只讨论vector的相关方法与函数。</p>
-<table>
-<thead>
-<tr>
-<th>方法</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>a.empty()</td>
-<td>判断a是否为空，空则返回ture,不空则返回false</td>
-</tr>
-<tr>
-<td>a.erase(a.begin()+1,a.begin()+3)</td>
-<td>删除a中第1个（从第0个算起）到第2个元素，也就是说删除的元素从a.begin()+1算起（包括它）一直到a.begin()+ 3（不包括它）</td>
-</tr>
-<tr>
-<td>a.size()</td>
-<td>返回a中元素的个数</td>
-</tr>
-<tr>
-<td>a.resize(10,2)</td>
-<td>将a的现有元素个数调至10个，多则删，少则补，其值为2</td>
-</tr>
-<tr>
-<td>a.swap(b)</td>
-<td>b为向量，将a中的元素和b中的元素进行整体性交换</td>
-</tr>
-<tr>
-<td>a.insert(a.begin()+1,3,5)</td>
-<td>在a的第1个元素（从第0个算起）的位置插入3个数，其值都为5</td>
-</tr>
-<tr>
-<td>a.insert(a.begin()+1,5)</td>
-<td>在a的第1个元素（从第0个算起）的位置插入数值5，如a为1,2,3,4，插入元素后为1,5,2,3,4</td>
-</tr>
-</tbody>
-</table>
-<p>C++算法库中提供了许多算法函数可以对vector进行操作，使用时要包含头文件<code>#include&lt;algorithm&gt;</code></p>
-<table>
-<thead>
-<tr>
-<th>函数</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>sort(a.begin(),a.end())</td>
-<td>对a中的从a.begin()（包括它）到a.end()（不包括它）的元素进行从小到大排列</td>
-</tr>
-<tr>
-<td>reverse(a.begin(),a.end());</td>
-<td>对a中的从a.begin()（包括它）到a.end()（不包括它）的元素倒置，但不排列，如a中元素为1,3,2,4,倒置后为4,2,3,1</td>
-</tr>
-<tr>
-<td>copy(a.begin(),a.end(),b.begin()+1)</td>
-<td>把a中的从a.begin()（包括它）到a.end()（不包括它）的元素复制到b中，从b.begin()+1的位置（包括它）开始复制，覆盖掉原有元素</td>
-</tr>
-<tr>
-<td>find(a.begin(),a.end(),10)</td>
-<td>在a中的从a.begin()（包括它）到a.end()（不包括它）的元素中查找10，若存在返回其在向量中的位置</td>
-</tr>
-</tbody>
-</table>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/03/02/array/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/28/Leetcode-array/"/>
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="王谱越"/>
-      <meta itemprop="description" content=""/>
-      <meta itemprop="image" content="/images/myavatar.jpg"/>
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Norton's Blog"/>
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/02/28/Leetcode-array/" class="post-title-link" itemprop="url">【LeetCode】初级算法——数组</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-02-28 16:02:10 / 修改时间：21:38:21" itemprop="dateCreated datePublished" datetime="2019-02-28T16:02:10+08:00">2019-02-28</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/LeetCode/" itemprop="url" rel="index"><span itemprop="name">LeetCode</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">16k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">15 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="leetcode-217-存在重复元素"><a class="markdownIt-Anchor" href="#leetcode-217-存在重复元素"></a> [LeetCode]# 217 存在重复元素</h1>
-<blockquote>
-<p>给定一个整数数组，判断是否存在重复元素。</p>
-<p>如果任何值在数组中出现至少两次，函数返回 true。如果数组中每个元素都不相同，则返回 false。</p>
-<p><strong>示例 1:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; 输入: [1,2,3,1]</span><br><span class="line">&gt; 输出: true</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<blockquote>
-<p><strong>示例 2:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; 输入: [1,2,3,4]</span><br><span class="line">&gt; 输出: false</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<blockquote>
-<p><strong>示例 3:</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; 输入: [1,1,1,3,3,4,3,2,4,2]</span><br><span class="line">&gt; 输出: true</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/02/28/Leetcode-array/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1556,7 +1498,7 @@ new对数组的支持体现在它会分别调用构造函数函数初始化每�
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">31</span>
+                    <span class="site-state-item-count">34</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1599,7 +1541,11 @@ new对数组的支持体现在它会分别调用构造函数函数初始化每�
                     
                       
                     
-                    <span class="site-state-item-count">15</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">17</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -1654,7 +1600,11 @@ new对数组的支持体现在它会分别调用构造函数函数初始化每�
                     
                       
                     
-                    <span class="site-state-item-count">21</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">23</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1743,7 +1693,7 @@ new对数组的支持体现在它会分别调用构造函数函数初始化每�
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">83k</span>
+    <span title="站点总字数">88k</span>
   
 
   
@@ -1752,7 +1702,7 @@ new对数组的支持体现在它会分别调用构造函数函数初始化每�
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">1:16</span>
+    <span title="站点阅读时长">1:20</span>
   
 </div>
 
