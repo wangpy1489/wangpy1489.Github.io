@@ -96,20 +96,25 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Norton&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/archives/2019/page/3/index.html">
+  <meta name="description" content="消息队列  消息队列的用途  解耦： 将关联的模块之间解耦，用通知代替处理， 无需等待结果。  流量削峰： 通过将短时内突然剧增的消息在消息队列中持久化，之后逐步处理，可以避免短时的高并发导致系统雪崩。  日志收集： 消息队列可以将日志收集与服务分离，引入消息队列可以快速接收日志消息，避免阻塞和访问延迟。  事务最终一致性： 当有多个分布式组件时，通过事件表和消息队列可以帮助多个组件完成事务的最">
+<meta name="keywords" content="消息中间件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《分布式消息中间件事件》笔记">
+<meta property="og:url" content="http://yoursite.com/2019/05/15/MessageMiddleware/index.html">
 <meta property="og:site_name" content="Norton&#39;s Blog">
+<meta property="og:description" content="消息队列  消息队列的用途  解耦： 将关联的模块之间解耦，用通知代替处理， 无需等待结果。  流量削峰： 通过将短时内突然剧增的消息在消息队列中持久化，之后逐步处理，可以避免短时的高并发导致系统雪崩。  日志收集： 消息队列可以将日志收集与服务分离，引入消息队列可以快速接收日志消息，避免阻塞和访问延迟。  事务最终一致性： 当有多个分布式组件时，通过事件表和消息队列可以帮助多个组件完成事务的最">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-15T14:23:33.616Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Norton&#39;s Blog">
+<meta name="twitter:title" content="《分布式消息中间件事件》笔记">
+<meta name="twitter:description" content="消息队列  消息队列的用途  解耦： 将关联的模块之间解耦，用通知代替处理， 无需等待结果。  流量削峰： 通过将短时内突然剧增的消息在消息队列中持久化，之后逐步处理，可以避免短时的高并发导致系统雪崩。  日志收集： 消息队列可以将日志收集与服务分离，引入消息队列可以快速接收日志消息，避免阻塞和访问延迟。  事务最终一致性： 当有多个分布式组件时，通过事件表和消息队列可以帮助多个组件完成事务的最">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/archives/2019/page/3/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/05/15/MessageMiddleware/"/>
 
 
 
@@ -119,7 +124,7 @@
   };
 </script>
 
-  <title>归档 | Norton's Blog</title>
+  <title>《分布式消息中间件事件》笔记 | Norton's Blog</title>
   
 
 
@@ -167,7 +172,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -277,7 +282,7 @@
         
         
           
-          <li class="menu-item menu-item-archives menu-item-active">
+          <li class="menu-item menu-item-archives">
 
     
     
@@ -306,28 +311,6 @@
 
   
     
-
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
 
   
 
@@ -376,231 +359,249 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
 
-      
-      <span class="archive-page-counter">
-        
-        
-         
-        
-        还行! 目前共计 35 篇日志。 继续努力。
-      </span>
-      
+  
 
-      
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/15/MessageMiddleware/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王谱越"/>
+      <meta itemprop="description" content=""/>
+      <meta itemprop="image" content="/images/myavatar.jpg"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Norton's Blog"/>
+    </span>
+
+    
+      <header class="post-header">
 
         
         
+          <h1 class="post-title" itemprop="name headline">《分布式消息中间件事件》笔记
+
+              
+            
+          </h1>
         
 
-        
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-05-15 19:17:40 / 修改时间：22:23:33" itemprop="dateCreated datePublished" datetime="2019-05-15T19:17:40+08:00">2019-05-15</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2019">2019</h1>
-          </div>
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/03/27/copy-move-constractor/" itemprop="url">
+            <span class="post-category">
             
-              <span itemprop="name">copy_move_constractor</span>
+              <span class="post-meta-divider">|</span>
             
-          </a>
-        
-      </h2>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/读书笔记/" itemprop="url" rel="index"><span itemprop="name">读书笔记</span></a></span>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-03-27T23:56:18+08:00"
-              content="2019-03-27">
-          03-27
-        </time>
-      </div>
+                
+                
+              
+            </span>
+          
 
-    </header>
-  </article>
+          
+            
+            
+          
 
+          
+          
 
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">364</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/03/26/dynamic-programing/" itemprop="url">
-            
-              <span itemprop="name">动态规划总结</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-03-26T23:39:57+08:00"
-              content="2019-03-26">
-          03-26
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/03/25/c-namespace/" itemprop="url">
-            
-              <span itemprop="name">c++命名空间</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-03-25T22:00:49+08:00"
-              content="2019-03-25">
-          03-25
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+      
+        <h1 id="消息队列"><a class="markdownIt-Anchor" href="#消息队列"></a> 消息队列</h1>
+<h2 id="消息队列的用途"><a class="markdownIt-Anchor" href="#消息队列的用途"></a> 消息队列的用途</h2>
+<h3 id="解耦"><a class="markdownIt-Anchor" href="#解耦"></a> 解耦：</h3>
+<p>将关联的模块之间解耦，用<strong>通知</strong>代替<strong>处理</strong>， 无需等待结果。</p>
+<h3 id="流量削峰"><a class="markdownIt-Anchor" href="#流量削峰"></a> 流量削峰：</h3>
+<p>通过将短时内突然剧增的<strong>消息在消息队列中持久化</strong>，之后逐步处理，可以避免短时的高并发导致系统雪崩。</p>
+<h3 id="日志收集"><a class="markdownIt-Anchor" href="#日志收集"></a> 日志收集：</h3>
+<p>消息队列可以将日志收集与服务分离，引入消息队列可以<strong>快速接收日志</strong>消息，避免阻塞和访问延迟。</p>
+<h3 id="事务最终一致性"><a class="markdownIt-Anchor" href="#事务最终一致性"></a> 事务最终一致性：</h3>
+<p>当有多个分布式组件时，通过事件表和消息队列可以帮助多个组件完成事务的最终一致性。</p>
+<a id="more"></a>
+<h2 id="功能特点"><a class="markdownIt-Anchor" href="#功能特点"></a> 功能特点</h2>
+<h3 id="消息堆积"><a class="markdownIt-Anchor" href="#消息堆积"></a> 消息堆积</h3>
+<p>消息队列要能够处理由于生产者和消费者消息处理速度不一样引起的消息堆积。</p>
+<h3 id="消息持久化"><a class="markdownIt-Anchor" href="#消息持久化"></a> 消息持久化</h3>
+<p>消息到达消息队列后，消息队列应该将消息暂存，在合适的时候投递给消费者。</p>
+<h3 id="可靠投递"><a class="markdownIt-Anchor" href="#可靠投递"></a> 可靠投递</h3>
+<p>消息队列要保证消息在任何情况下正确投递。</p>
+<h3 id="严格有序"><a class="markdownIt-Anchor" href="#严格有序"></a> 严格有序</h3>
+<p>消息队列需要保证消息的顺序。</p>
+<h1 id="kafka"><a class="markdownIt-Anchor" href="#kafka"></a> Kafka</h1>
+<h1 id="rocket-mq"><a class="markdownIt-Anchor" href="#rocket-mq"></a> Rocket MQ</h1>
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/03/25/c-classmemory/" itemprop="url">
-            
-              <span itemprop="name">C++类内存结构</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-03-25T20:54:07+08:00"
-              content="2019-03-25">
-          03-25
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/03/25/styleguide-note/" itemprop="url">
-            
-              <span itemprop="name">goole styleguide 学习笔记</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-03-25T20:49:20+08:00"
-              content="2019-03-25">
-          03-25
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/消息中间件/" rel="tag"># 消息中间件</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/23/shared-memory/" rel="next" title="shared_memory">
+                <i class="fa fa-chevron-left"></i> shared_memory
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/2019/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/archives/2019/">1</a><a class="page-number" href="/archives/2019/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/archives/2019/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2019/page/6/">6</a><a class="extend next" rel="next" href="/archives/2019/page/4/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
-  </nav>
+  </article>
 
 
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -620,8 +621,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -811,6 +821,23 @@
       </div>
 
       
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#消息队列"><span class="nav-text"> 消息队列</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#消息队列的用途"><span class="nav-text"> 消息队列的用途</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解耦"><span class="nav-text"> 解耦：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#流量削峰"><span class="nav-text"> 流量削峰：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#日志收集"><span class="nav-text"> 日志收集：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事务最终一致性"><span class="nav-text"> 事务最终一致性：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#功能特点"><span class="nav-text"> 功能特点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#消息堆积"><span class="nav-text"> 消息堆积</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#消息持久化"><span class="nav-text"> 消息持久化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可靠投递"><span class="nav-text"> 可靠投递</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#严格有序"><span class="nav-text"> 严格有序</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#kafka"><span class="nav-text"> Kafka</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#rocket-mq"><span class="nav-text"> Rocket MQ</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
 
       
 
@@ -978,6 +1005,10 @@
 
 
   
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
 
   
 
@@ -988,6 +1019,8 @@
   
   
 
+
+  
 
 
   
