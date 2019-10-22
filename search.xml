@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[k8s-servicedns]]></title>
+    <url>%2F2019%2F07%2F07%2Fk8s-servicedns%2F</url>
+    <content type="text"><![CDATA[在集群NODE中解析Kuebernetes service域名 只要将core DNS的cluster IP加入到/etc/resolv.conf 即可。但注意，重启系统会根据网卡重写/etc/resolv.conf]]></content>
+      <categories>
+        <category>运维</category>
+      </categories>
+      <tags>
+        <tag>kubernetes</tag>
+        <tag>Network</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[《分布式消息中间件事件》笔记]]></title>
     <url>%2F2019%2F05%2F15%2FMessageMiddleware%2F</url>
     <content type="text"><![CDATA[消息队列 消息队列的用途 解耦： 将关联的模块之间解耦，用通知代替处理， 无需等待结果。 流量削峰： 通过将短时内突然剧增的消息在消息队列中持久化，之后逐步处理，可以避免短时的高并发导致系统雪崩。 日志收集： 消息队列可以将日志收集与服务分离，引入消息队列可以快速接收日志消息，避免阻塞和访问延迟。 事务最终一致性： 当有多个分布式组件时，通过事件表和消息队列可以帮助多个组件完成事务的最终一致性。 功能特点 消息堆积 消息队列要能够处理由于生产者和消费者消息处理速度不一样引起的消息堆积。 消息持久化 消息到达消息队列后，消息队列应该将消息暂存，在合适的时候投递给消费者。 可靠投递 消息队列要保证消息在任何情况下正确投递。 严格有序 消息队列需要保证消息的顺序。 Kafka Rocket MQ]]></content>
