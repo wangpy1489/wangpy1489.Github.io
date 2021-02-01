@@ -1,0 +1,1658 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2"/>
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1"/>
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/dog_128.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/dog_32.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/dog_16.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/dog.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="日志  日志是什么？ 日志，维基百科的定义是记录服务器等电脑设备或软件的运作。 日志文件提供精确的系统记录，根据日志最终定位到错误详情和根源。日志的特点是，它描述一些离散的（不连续的）事件。 例如：应用通过一个滚动的文件输出 INFO 或 ERROR 信息，并通过日志收集系统，存储到一些存储引擎（Elasticsearch）中方便查询。">
+<meta name="keywords" content="日志">
+<meta property="og:type" content="article">
+<meta property="og:title" content="转-日志规范">
+<meta property="og:url" content="http://yoursite.com/2020/12/12/Programing/转-日志规范/index.html">
+<meta property="og:site_name" content="Norton&#39;s Blog">
+<meta property="og:description" content="日志  日志是什么？ 日志，维基百科的定义是记录服务器等电脑设备或软件的运作。 日志文件提供精确的系统记录，根据日志最终定位到错误详情和根源。日志的特点是，它描述一些离散的（不连续的）事件。 例如：应用通过一个滚动的文件输出 INFO 或 ERROR 信息，并通过日志收集系统，存储到一些存储引擎（Elasticsearch）中方便查询。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2021-01-31T07:07:12.037Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="转-日志规范">
+<meta name="twitter:description" content="日志  日志是什么？ 日志，维基百科的定义是记录服务器等电脑设备或软件的运作。 日志文件提供精确的系统记录，根据日志最终定位到错误详情和根源。日志的特点是，它描述一些离散的（不连续的）事件。 例如：应用通过一个滚动的文件输出 INFO 或 ERROR 信息，并通过日志收集系统，存储到一些存储引擎（Elasticsearch）中方便查询。">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/12/12/Programing/转-日志规范/"/>
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>转-日志规范 | Norton's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Norton's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">You miss 100% of the shot you do not take.</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br/>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br/>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br/>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br/>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br/>归档</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br/>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/12/Programing/转-日志规范/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王谱越"/>
+      <meta itemprop="description" content=""/>
+      <meta itemprop="image" content="/images/myavatar.jpg"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Norton's Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">转-日志规范
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-12-12 22:55:54" itemprop="dateCreated datePublished" datetime="2020-12-12T22:55:54+08:00">2020-12-12</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2021-01-31 15:07:12" itemprop="dateModified" datetime="2021-01-31T15:07:12+08:00">2021-01-31</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/开发规范/" itemprop="url" rel="index"><span itemprop="name">开发规范</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">12k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">11 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="日志"><a class="markdownIt-Anchor" href="#日志"></a> 日志</h1>
+<h2 id="日志是什么"><a class="markdownIt-Anchor" href="#日志是什么"></a> 日志是什么？</h2>
+<p>日志，维基百科的定义是记录服务器等电脑设备或软件的运作。</p>
+<p>日志文件提供精确的系统记录，根据日志最终定位到错误详情和根源。日志的特点是，它描述一些离散的（不连续的）事件。 例如：应用通过一个滚动的文件输出 INFO 或 ERROR 信息，并通过日志收集系统，存储到一些存储引擎（Elasticsearch）中方便查询。</p>
+<a id="more"></a>
+<h2 id="日志有什么用"><a class="markdownIt-Anchor" href="#日志有什么用"></a> 日志有什么用？</h2>
+<ul>
+<li>在上文中我们解释了日志的作用是提供精准的系统记录方便根因分析。那么具体在哪些具体方面它可以发挥作用？</li>
+<li><strong>打印调试</strong>：即可以用日志来记录变量或者某一段逻辑。记录程序运行的流程，即程序运行了哪些代码，方便排查逻辑问题。</li>
+<li><strong>问题定位</strong>：程序出异常或者出故障时快速的定位问题，方便后期解决问题。因为线上生产环境无法 debug，在测试环境去模拟一套生产环境，费时费力。所以依靠日志记录的信息定位问题，这点非常重要。还可以记录流量，后期可以通过 ELK（包括 EFK 进行流量统计）。</li>
+<li><strong>用户行为日志</strong>：记录用户的操作行为，用于大数据分析，比如监控、风控、推荐等等。这种日志，一般是给其他团队分析使用，而且可能是多个团队，因此一般会有一定的格式要求，开发者应该按照这个格式来记录，便于其他团队的使用。当然，要记录哪些行为、操作，一般也是约定好的，因此，开发者主要是执行的角色。</li>
+<li><strong>根因分析（甩锅必备）</strong>：即在关键地方记录日志。方便在和各个终端定位问题时，别人说时你的程序问题，你可以理直气壮的拿出你的日志说，看，我这里运行了，状态也是对的。这样，对方就会乖乖去定位他的代码，而不是互相推脱。</li>
+</ul>
+<h2 id="什么时候记录日志"><a class="markdownIt-Anchor" href="#什么时候记录日志"></a> 什么时候记录日志？</h2>
+<p>上文说了日志的重要性，那么什么时候需要记录日志。</p>
+<ul>
+<li><strong>系统初始化</strong>：系统或者服务的启动参数。核心模块或者组件初始化过程中往往依赖一些关键配置，根据参数不同会提供不一样的服务。务必在这里记录 INFO 日志，打印出参数以及启动完成态服务表述。</li>
+<li><strong>编程语言提示异常</strong>：如今各类主流的编程语言都包括异常机制，业务相关的流行框架有完整的异常模块。这类捕获的异常是系统告知开发人员需要加以关注的，是质量非常高的报错。应当适当记录日志，根据实际结合业务的情况使用 WARN 或者 ERROR 级别。</li>
+<li><strong>业务流程预期不符</strong>：除开平台以及编程语言异常之外，项目代码中结果与期望不符时也是日志场景之一，简单来说所有流程分支都可以加入考虑。取决于开发人员判断能否容忍情形发生。常见的合适场景包括外部参数不正确，数据处理问题导致返回码不在合理范围内等等。</li>
+<li><strong>系统核心角色，组件关键动作</strong>：系统中核心角色触发的业务动作是需要多加关注的，是衡量系统正常运行的重要指标，建议记录 INFO 级别日志，比如电商系统用户从登录到下单的整个流程；微服务各服务节点交互；核心数据表增删改；核心组件运行等等，如果日志频度高或者打印量特别大，可以提炼关键点 INFO 记录，其余酌情考虑 DEBUG 级别。</li>
+<li><strong>第三方服务远程调用</strong>：微服务架构体系中有一个重要的点就是第三方永远不可信，对于第三方服务远程调用建议打印请求和响应的参数，方便在和各个终端定位问题，不会因为第三方服务日志的缺失变得手足无措。</li>
+</ul>
+<h1 id="日志打印"><a class="markdownIt-Anchor" href="#日志打印"></a> 日志打印</h1>
+<h2 id="slf4j-logback"><a class="markdownIt-Anchor" href="#slf4j-logback"></a> Slf4j &amp; Logback</h2>
+<p>Slf4j 英文全称为 “ Simple Logging Facade for Java ”，为 Java 提供的简单日志门面。Facade 门面，更底层一点说就是接口。它允许用户以自己的喜好，在工程中通过 Slf4j 接入不同的日志系统。</p>
+<p>Logback 是 Slf4j 的原生实现框架，同样也是出自 Log4j 一个人之手，但拥有比 Log4j 更多的优点、特性和更做强的性能，Logback 相对于 Log4j 拥有更快的执行速度。基于我们先前在 Log4j 上的工作，Logback 重写了内部的实现，在某些特定的场景上面，甚至可以比之前的速度快上 10 倍。在保证 Logback 的组件更加快速的同时，同时所需的内存更加少。</p>
+<h2 id="日志文件"><a class="markdownIt-Anchor" href="#日志文件"></a> 日志文件</h2>
+<p>日志文件放置于固定的目录中，按照一定的模板进行命名，推荐的日志文件名称：</p>
+<p>Plain Text收起</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">当前正在写入的日志文件名：&lt;应用名&gt;[-&lt;功能名&gt;].log</span><br><span class="line">如：example-server-book-service-access.log</span><br><span class="line">已经滚入历史的日志文件名：&lt;应用名&gt;[-&lt;功能名&gt;].yyyy-MM-dd-hh.[滚动号].log</span><br></pre></td></tr></table></figure>
+<p>如：example-server-book-service-access.2019-12-01-10.1.log</p>
+<h2 id="日志变量定义"><a class="markdownIt-Anchor" href="#日志变量定义"></a> 日志变量定义</h2>
+<p>推荐使用 lombok（代码生成器） 注解 @lombok.extern.slf4j.Slf4j 来生成日志变量实例。</p>
+<p>代码示例</p>
+<p>Java收起</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">import lombok.extern.slf4j.Slf4j;</span><br><span class="line"> </span><br><span class="line">@Slf4j</span><br><span class="line">public class LogTest &#123;</span><br><span class="line"> </span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        log.info(&quot;this is log test&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="日志配置"><a class="markdownIt-Anchor" href="#日志配置"></a> 日志配置</h2>
+<p>日志记录采用分级记录，级别与日志文件名相对应，不同级别的日志信息记录到不同的日志文件中。如有特殊格式日志，如 access log，单独使用一个文件，请注意避免重复打印（可使用 <strong>additivity</strong>**=“false”** 避免 ）。</p>
+<h2 id="参数占位格式"><a class="markdownIt-Anchor" href="#参数占位格式"></a> 参数占位格式</h2>
+<p>使用参数化形式 {} 占位，[] 进行参数隔离，这样的好处是可读性更高，而且只有真正准备打印的时候才会处理参数。</p>
+<p>Java收起</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 正确示例，必须使用参数化信息的方式</span><br><span class="line">log.debug(&quot;order is paying with userId:[&#123;&#125;] and orderId : [&#123;&#125;]&quot;,userId, orderId);</span><br><span class="line">// 错误示例，不要进行字符串拼接,那样会产生很多 String 对象，占用空间，影响性能。及日志级别高于此级别也会进行字符串拼接逻辑。</span><br><span class="line">log.debug(&quot;order is paying with userId: &quot; + userId + &quot; and orderId: &quot; + orderId);</span><br></pre></td></tr></table></figure>
+<h2 id="日志的基本格式"><a class="markdownIt-Anchor" href="#日志的基本格式"></a> 日志的基本格式</h2>
+<h3 id="日志时间"><a class="markdownIt-Anchor" href="#日志时间"></a> 日志时间</h3>
+<p>作为日志产生的日期和时间，这个数据非常重要，一般精确到毫秒。</p>
+<p>Plain Text</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yyyy-MM-dd HH:mm:ss.SSS</span><br></pre></td></tr></table></figure>
+<h3 id="日志级别"><a class="markdownIt-Anchor" href="#日志级别"></a> 日志级别</h3>
+<p>日志的输出都是分级别的，不同的设置不同的场合打印不同的日志。</p>
+<p>主要使用如下的四个级别：</p>
+<ul>
+<li>DEBUG：DEUBG 级别的主要输出调试性质的内容，该级别日志主要用于在开发、测试阶段输出。该级别的日志应尽可能地详尽，开发人员可以将各类详细信息记录到 DEBUG 里，起到调试的作用，包括参数信息，调试细节信息，返回值信息等等，便于在开发、测试阶段出现问题或者异常时，对其进行分析。</li>
+<li>INFO：INFO 级别的主要记录系统关键信息，旨在保留系统<strong>正常工作期间关键运行指标</strong>，开发人员可以将初始化系统配置、业务状态变化信息，或者用户业务流程中的核心处理记录到INFO日志中，方便日常运维工作以及错误回溯时上下文场景复现。建议在项目完成后，在测试环境将日志级别调成 INFO，然后通过 INFO 级别的信息看看是否能了解这个应用的运用情况，如果出现问题后是否这些日志能否提供有用的排查问题的信息。</li>
+<li>WARN：WARN 级别的主要输出警告性质的内容，这些内容是可以预知且是有规划的，比如，某个方法入参为空或者该参数的值不满足运行该方法的条件时。<strong>在 WARN 级别的时应输出较为详尽的信息，以便于事后对日志进行分析</strong>。</li>
+<li>ERROR：ERROR 级别主要针对于一些不可预知的信息，诸如：错误、异常等，比如，在 catch 块中抓获的网络通信、数据库连接等异常，若异常对系统的整个流程影响不大，可以使用 WARN 级别日志输出。在输出 ERROR 级别的日志时，<strong>尽量多地输出方法入参数、方法执行过程中产生的对象等数据，在带有错误、异常对象的数据时，需要将该对象一并输出</strong>。</li>
+</ul>
+<p><strong>DEBUG / INFO 的选择</strong></p>
+<p>DEBUG 级别比 INFO 低，包含调试时更详细的了解系统运行状态的东西，比如变量的值等等，都可以输出到 DEBUG 日志里。 INFO 是在线日志默认的输出级别，反馈系统的当前状态给最终用户看的。输出的信息，应该对最终用户具有实际意义的。从功能角度上说，INFO 输出的信息可以看作是软件产品的一部分，所以需要谨慎对待，不可随便输出。如果这条日志会被频繁打印或者大部分时间对于纠错起不到作用，就应当考虑下调为 DEBUG 级别。</p>
+<ul>
+<li>由于 DEBUG 日志打印量远大于 INFO，出于前文日志性能的考虑，如果代码为核心代码，执行频率非常高，务必推敲日志设计是否合理，是否需要下调为 DEBUG 级别日志。</li>
+<li>注意日志的可读性，不妨在写完代码 review 这条日志是否通顺，能否提供真正有意义的信息。</li>
+<li>日志输出是多线程公用的，如果有另外一个线程正在输出日志，上面的记录就会被打断，最终显示输出和预想的就会不一致。</li>
+</ul>
+<p><strong>WARN / ERROR 的选择</strong></p>
+<p>当方法或者功能处理过程中产生不符合预期结果或者有框架报错时可以考虑使用，常见问题处理方法包括：</p>
+<ul>
+<li>增加判断处理逻辑，尝试本地解决：增加逻辑判断吞掉报警永远是最优选择抛出异常，交给上层逻辑解决</li>
+<li>抛出异常，交给上层逻辑解决</li>
+<li>记录日志，报警提醒</li>
+<li>使用返回码包装错误做返回</li>
+</ul>
+<p>一般来说，WARN 级别不会短信报警，ERROR 级别则会短信报警甚至电话报警，ERROR 级别的日志意味着系统中发生了非常严重的问题，必须有人马上处理，比如数据库不可用，系统的关键业务流程走不下去等等。错误的使用反而带来严重的后果，不区分问题的重要程度，只要有问题就error记录下来，其实这样是非常不负责任的，因为对于成熟的系统，都会有一套完整的报错机制，那这个错误信息什么时候需要发出来，很多都是依据单位时间内 ERROR 日志的数量来确定的。</p>
+<p><strong>强调ERROR报警</strong></p>
+<ul>
+<li>ERROR 级别的日志打印通常伴随报警通知。ERROR的报出应该伴随着业务功能受损，即上面提到的系统中发生了非常严重的问题，必须有人马上处理。</li>
+</ul>
+<p>ERROR日志目标</p>
+<ul>
+<li>给处理者直接准确的信息：ERROR 信息形成自身闭环。</li>
+</ul>
+<p>问题定位：</p>
+<ul>
+<li>发生了什么问题，哪些功能受到影响</li>
+<li>获取帮助信息：直接帮助信息或帮助信息的存储位置</li>
+<li>通过报警知道解决方案或者找何人解决</li>
+</ul>
+<h3 id="线程名称"><a class="markdownIt-Anchor" href="#线程名称"></a> 线程名称</h3>
+<p>输出该日志的线程名称，一般在一个应用中一个同步请求由同一线程完成，输出线程名称可以在各个请求产生的日志中进行分类，便于分清当前请求上下文的日志。</p>
+<h3 id="opentracing-标识"><a class="markdownIt-Anchor" href="#opentracing-标识"></a> opentracing 标识</h3>
+<p>在分布式应用中，用户的一个请求会调用若干个服务完成，这些服务可能还是嵌套调用的，因此完成一个请求的日志并不在一个应用的日志文件，而是分散在不同服务器上不同应用节点的日志文件中。该标识是为了串联一个请求在整个系统中的调用日志。</p>
+<ul>
+<li>唯一字符串（trace id）</li>
+<li>调用层级（span id）</li>
+</ul>
+<p>通过搜索 trace id 就可以查到这个 trace id 标识的请求在整个系统中流转（处理）过程中产生的所有日志。</p>
+<h3 id="biz-标识"><a class="markdownIt-Anchor" href="#biz-标识"></a> biz 标识</h3>
+<p>在业务开发中，我们的日志都是和业务相关联的，有时候是需要根据用户或者业务做聚类的，因此一次请求如果可以通过某项标识做聚类的时候，可以将聚类标识打印到日志中。</p>
+<ul>
+<li>用户标识（user id）</li>
+<li>业务标识（biz id）</li>
+</ul>
+<h3 id="日志记录器名称"><a class="markdownIt-Anchor" href="#日志记录器名称"></a> 日志记录器名称</h3>
+<p>日志记录器名称一般使用类名，日志文件中可以输出简单的类名即可，看实际情况是否需要使用包名和行号等信息。主要用于看到日志后到哪个类中去找这个日志输出，便于定位问题所在。</p>
+<h3 id="日志内容"><a class="markdownIt-Anchor" href="#日志内容"></a> 日志内容</h3>
+<p>禁用 System.out.println 和 System.err.println</p>
+<p>变参替换日志拼接</p>
+<p>输出日志的对象，应在其类中实现快速的 toString 方法，以便于在日志输出时仅输出这个对象类名和 hashCode</p>
+<p>预防空指针:不要在日志中调用对象的方法获取值，除非确保该对象肯定不为 null，否则很有可能会因为日志的问题而导致应用产生空指针异常。</p>
+<h3 id="异常堆栈"><a class="markdownIt-Anchor" href="#异常堆栈"></a> 异常堆栈</h3>
+<p>异常堆栈一般会出现在 ERROR 或者 WARN 级别的日志中，异常堆栈含有方法调用链的系统，以及异常产生的根源。异常堆栈的日志属于上一行日志的，在日志收集时需要将其划至上一行中。</p>
+<h2 id="最佳实践"><a class="markdownIt-Anchor" href="#最佳实践"></a> 最佳实践</h2>
+<h3 id="日志格式"><a class="markdownIt-Anchor" href="#日志格式"></a> 日志格式</h3>
+<p>Bash</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2019-12-01 00:00:00.000|pid|log-level|[svc-name,trace-id,span-id,user-id,biz-id]|thread-name|package-name.class-name : log message</span><br></pre></td></tr></table></figure>
+<ul>
+<li>时间</li>
+<li>pid，pid</li>
+<li>log-level，日志级别</li>
+<li>svc-name，应用名称</li>
+<li>trace-id，调用链标识</li>
+<li>span-id，调用层级标识</li>
+<li>user-id，用户标识</li>
+<li>biz-id，业务标识</li>
+<li>thread-name，线程名称</li>
+<li>package-name.class-name，日志记录器名称</li>
+<li>log message，日志消息体</li>
+</ul>
+<h3 id="日志模块扩展"><a class="markdownIt-Anchor" href="#日志模块扩展"></a> 日志模块扩展</h3>
+<p>日志模块是基于以下技术点做扩展的。</p>
+<ul>
+<li>Slf4j MDC 实现原理（暂不开展详解，如有兴趣私下沟通）</li>
+<li>Opentracing Scope 原理（暂不开展详解，如有兴趣私下沟通）</li>
+</ul>
+<p>在每个 tracing 链路中，将 Opentracing Scope 中的上下文信息放置 MDC 中，根据 Spring Boot Logging 扩展接口扩展的取值逻辑 **logging.pattern.level **的取值逻辑。</p>
+<p>相关源码参考</p>
+<p>[Spring Cloud Sleuth]<a href="https://github.com/spring-cloud/spring-cloud-sleuth/blob/master/spring-cloud-sleuth-core/src/main/java/org/springframework/cloud/sleuth/log/Slf4jCurrentTraceContext.java" target="_blank" rel="noopener">github.com/spring-clou…</a></p>
+<p>修改 logback 配置文件中每个 appender 的 pattern 为以下默认值即可实现标准化。</p>
+<p>Bash</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%d&#123;$&#123;LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS&#125;&#125;|$&#123;PID:- &#125;|%level|$&#123;LOG_LEVEL_PATTERN:-%5p&#125;|%t|%-40.40logger&#123;39&#125;: %msg%n</span><br></pre></td></tr></table></figure>
+<p>logback.xml 节选</p>
+<p>XML收起</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">&lt;property name=&quot;LOG_PATH&quot;</span><br><span class="line">          value=&quot;$&#123;LOG_PATH:-$&#123;LOG_TEMP:-$&#123;java.io.tmpdir:-/tmp&#125;&#125;&#125;&quot;/&gt;</span><br><span class="line"> </span><br><span class="line">&lt;springProperty scope=&quot;context&quot; name=&quot;APP_NAME&quot;</span><br><span class="line">                source=&quot;spring.application.name&quot; defaultValue=&quot;spring-boot-fusion&quot;&quot;LOG_PATTERN&quot;</span><br><span class="line">          value=&quot;%d&#123;$&#123;LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS&#125;&#125;|$&#123;PID:- &#125;|%level|$&#123;LOG_LEVEL_PATTERN:-%5p&#125;|%t|%-40.40logger&#123;39&#125;: %msg%n&quot;&quot;fileInfo&quot; class=&quot;ch.qos.logback.core.rolling.RollingFileAppender&quot;$&#123;LOG_PATH&#125;/$&#123;APP_NAME&#125;&quot;ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy&quot;$&#123;LOG_PATH&#125;/$&#123;APP_NAME&#125;&quot;ch.qos.logback.classic.PatternLayout&quot;&gt;</span><br><span class="line">        &lt;pattern&gt;$&#123;LOG_PATTERN&#125;&quot;ch.qos.logback.classic.filter.LevelFilter&quot;复制代码</span><br></pre></td></tr></table></figure>
+<p>代码使用示例：</p>
+<p>Plain Text收起</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">public Result&lt;PagingObject&lt;SimpleResponse&gt;&gt; page(@RequestParam(value = &quot;page-num&quot;, defaultValue = &quot;1&quot;) int pageNum,</span><br><span class="line">                                                 @RequestParam(value = &quot;page-size&quot;, defaultValue = &quot;10&quot;) int pageSize) &#123;</span><br><span class="line">    LogStandardUtils.putUserId(&quot;userId123&quot;);</span><br><span class="line">    LogStandardUtils.putBizId(&quot;bizId321&quot;);</span><br><span class="line">    producerService.sendMsg(&quot;xxx&quot;);</span><br><span class="line">    simpleClient.page(pageNum, pageSize);</span><br><span class="line">    return new Result&lt;&gt;(simpleService.page(pageNum, pageSize));</span><br><span class="line">&#125;</span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+<p>日志记录</p>
+<p>Bash收起</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">2019-12-04 16:29:08.223|43546|INFO|[example-server-book-service,ac613cff04bac8b1,4a9adc10fdf0eb5,userId123,bizId321]|XNIO-1 task-4|c.n.u.concurrent.ShutdownEnabledTimer   : Shutdown hook installed for: NFLoadBalancer-PingTimer-example-server-order-service</span><br><span class="line">2019-12-04 16:29:08.224|43546|INFO|[example-server-book-service,ac613cff04bac8b1,4a9adc10fdf0eb5,userId123,bizId321]|XNIO-1 task-4|c.netflix.loadbalancer.BaseLoadBalancer : Client: example-server-order-service instantiated a LoadBalancer: DynamicServerListLoadBalancer:&#123;NFLoadBalancer:name=example-server-order-service,current list of Servers=[],Load balancer stats=Zone stats: &#123;&#125;,Server stats: []&#125;ServerList:null</span><br><span class="line">2019-12-04 16:29:08.234|43546|INFO|[example-server-book-service,ac613cff04bac8b1,4a9adc10fdf0eb5,userId123,bizId321]|XNIO-1 task-4|c.n.l.DynamicServerListLoadBalancer     : Using serverListUpdater PollingServerListUpdater</span><br><span class="line">2019-12-04 16:29:08.247|43546|INFO|[example-server-book-service,ac613cff04bac8b1,4a9adc10fdf0eb5,userId123,bizId321]|XNIO-1 task-4|c.n.l.DynamicServerListLoadBalancer     : DynamicServerListLoadBalancer for client example-server-order-service initialized: DynamicServerListLoadBalancer:&#123;NFLoadBalancer:name=example-server-order-service,current list of Servers=[],Load balancer stats=Zone stats: &#123;&#125;,Server stats: []&#125;ServerList:ConsulServerList&#123;serviceId=&apos;example-server-order-service&apos;, tag=null&#125;</span><br><span class="line">2019-12-04 16:29:08.329|43546|WARN|[example-server-book-service,ac613cff04bac8b1,4a9adc10fdf0eb5,userId123,bizId321]|XNIO-1 task-4|c.p.f.l.ctl.common.rule.StrategyRule    : No up servers available from load balancer: DynamicServerListLoadBalancer:&#123;NFLoadBalancer:name=example-server-order-service,current list of Servers=[],Load balancer stats=Zone stats: &#123;&#125;,Server stats: []&#125;ServerList:ConsulServerList&#123;serviceId=&apos;example-server-order-service&apos;, tag=null&#125;</span><br><span class="line">2019-12-04 16:29:08.334|43546|WARN|[example-server-book-service,ac613cff04bac8b1,4a9adc10fdf0eb5,userId123,bizId321]|XNIO-1 task-4|c.p.f.l.ctl.common.rule.StrategyRule    : No up servers available from load balancer: DynamicServerListLoadBalancer:&#123;NFLoadBalancer:name=example-server-order-service,current list of Servers=[],Load balancer stats=Zone stats: &#123;&#125;,Server stats: []&#125;ServerList:ConsulServerList&#123;serviceId=&apos;example-server-order-service&apos;, tag=null&#125;</span><br><span class="line">2019-12-04 16:29:08.342|43546|ERROR|[example-server-book-service,ac613cff04bac8b1,4a9adc10fdf0eb5,userId123,bizId321]|XNIO-1 task-4|c.p.f.w.c.advice.ExceptionHandlerAdvice : 当前程序进入到异常捕获器，出错的 url 为：[ http://127.0.0.1:10011/simples ]，出错的参数为：[ &#123;&quot;querystring&quot;:&quot;&#123;&#125;&quot;,&quot;payload&quot;:&quot;&quot;&#125; ]</span><br><span class="line">java.lang.RuntimeException: com.netflix.client.ClientException: Load balancer does not have available server for client: example-server-order-service</span><br></pre></td></tr></table></figure>
+<h1 id="实践说明"><a class="markdownIt-Anchor" href="#实践说明"></a> 实践说明</h1>
+<h2 id="普通格式日志"><a class="markdownIt-Anchor" href="#普通格式日志"></a> 普通格式日志</h2>
+<p>Bash</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2019-11-26 15:01:03.332|1543|INFO|[example-server-book-service,28f019d57b8336ab,630697c7f34ca4fa,105,45982043|XNIO-1 task-42]|c.p.f.w.pay.PayServiceImpl     : order is paying with userId: 105 and orderId: 45982043</span><br></pre></td></tr></table></figure>
+<p>普通日志前缀是固定的，可以固定分词索引，方便更快的查询分析。</p>
+<h2 id="特定格式日志"><a class="markdownIt-Anchor" href="#特定格式日志"></a> 特定格式日志</h2>
+<p>以 access 日志为例</p>
+<p>Bash收起</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">2019-11-26 15:01:03.332|1543|INFO|[example-server-book-service,28f019d57b8336ab,630697c7f34ca4fa,105,45982043|XNIO-1 task-42]|c.p.f.w.logging.AccessLoggingFilter     : </span><br><span class="line">&gt; url: http://liweichao.com:10011/actuator/health</span><br><span class="line">&gt; http-method: GET</span><br><span class="line">&gt; request-header: [Accept:&quot;text/plain, text/*, */*&quot;, Connection:&quot;close&quot;, User-Agent:&quot;Consul Health Check&quot;, Host:&quot;liweichao.com:10011&quot;, Accept-Encoding:&quot;gzip&quot;]</span><br><span class="line">&gt; request-time: 2019-11-26 15:01:03.309</span><br><span class="line">&gt; querystring: -</span><br><span class="line">&gt; payload: -</span><br><span class="line">&gt; extra-param: -</span><br><span class="line"> </span><br><span class="line">&lt; response-time: 2019-11-26 15:01:03.332</span><br><span class="line">&lt; take-time: 23</span><br><span class="line">&lt; http-status: 200</span><br><span class="line">&lt; response-header: [content-type:&quot;application/vnd.spring-boot.actuator.v2+json;charset=UTF-8&quot;, content-size:&quot;15&quot;]</span><br><span class="line">&lt; response-data: &#123;&quot;status&quot;:&quot;UP&quot;&#125;</span><br></pre></td></tr></table></figure>
+<p>特定格式日志可按格式创建索引更方便聚焦查询分析和告警，如根据 take-time，http-status，biz-code 等值。</p>
+<p>作者：猿天地</p>
+<p>链接：<a href="https://juejin.im/post/6844904030330683405" target="_blank" rel="noopener">https://juejin.im/post/6844904030330683405</a></p>
+<p>来源：掘金</p>
+<p>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/日志/" rel="tag"># 日志</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/12/12/Java杂记/" rel="next" title="Java杂记">
+                <i class="fa fa-chevron-left"></i> Java杂记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/12/12/Programing/转-如何写代码注释/" rel="prev" title="转-如何写代码注释">
+                转-如何写代码注释 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/myavatar.jpg"
+                alt="王谱越"/>
+            
+              <p class="site-author-name" itemprop="name">王谱越</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">46</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">43</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/wangpy1489" title="GitHub &rarr; https://github.com/wangpy1489" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:wangpy1489@sjtu.edu.cn" title="E-Mail &rarr; mailto:wangpy1489@sjtu.edu.cn" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.instagram.com/norton_yue/" title="Instagram &rarr; https://www.instagram.com/norton_yue/" rel="noopener" target="_blank"><i class="fa fa-fw fa-instagram"></i>Instagram</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#日志"><span class="nav-text"> 日志</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#日志是什么"><span class="nav-text"> 日志是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#日志有什么用"><span class="nav-text"> 日志有什么用？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什么时候记录日志"><span class="nav-text"> 什么时候记录日志？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#日志打印"><span class="nav-text"> 日志打印</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#slf4j-logback"><span class="nav-text"> Slf4j &amp; Logback</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#日志文件"><span class="nav-text"> 日志文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#日志变量定义"><span class="nav-text"> 日志变量定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#日志配置"><span class="nav-text"> 日志配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参数占位格式"><span class="nav-text"> 参数占位格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#日志的基本格式"><span class="nav-text"> 日志的基本格式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#日志时间"><span class="nav-text"> 日志时间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#日志级别"><span class="nav-text"> 日志级别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程名称"><span class="nav-text"> 线程名称</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#opentracing-标识"><span class="nav-text"> opentracing 标识</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#biz-标识"><span class="nav-text"> biz 标识</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#日志记录器名称"><span class="nav-text"> 日志记录器名称</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#日志内容"><span class="nav-text"> 日志内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#异常堆栈"><span class="nav-text"> 异常堆栈</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最佳实践"><span class="nav-text"> 最佳实践</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#日志格式"><span class="nav-text"> 日志格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#日志模块扩展"><span class="nav-text"> 日志模块扩展</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实践说明"><span class="nav-text"> 实践说明</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#普通格式日志"><span class="nav-text"> 普通格式日志</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#特定格式日志"><span class="nav-text"> 特定格式日志</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">  <a href="http://beian.miit.gov.cn" rel="noopener" target="_blank">蒙ICP备18004819号-1 </a>&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">王谱越</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">120k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">1:49</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.0.1</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/schemes/muse.js?v=7.0.1"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.1"></script>
+
+
+  
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      
+        background-color: #eee;
+        background-image: linear-gradient(#fcfcfc, #eee);
+        border: 1px solid #d5d5d5;
+        border-radius: 3px;
+      
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      
+        right: 4px;
+        top: 8px;
+      
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1;
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function(i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap');
+      $(e).after($wrap);
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function(e) {
+        var code = $(this).parent().find('.code').find('.line').map(function(i, e) {
+          return $(e).text();
+        }).toArray().join('\n');
+        var ta = document.createElement('textarea');
+        var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+        ta.style.top = yPosition + 'px'; // Prevent page scroll
+        ta.style.position = 'absolute';
+        ta.style.opacity = '0';
+        ta.readOnly = true;
+        ta.value = code;
+        document.body.appendChild(ta);
+        ta.select();
+        ta.setSelectionRange(0, code.length);
+        ta.readOnly = false;
+        var result = document.execCommand('copy');
+        
+        ta.blur(); // For iOS
+        $(this).blur();
+      })).on('mouseleave', function(e) {
+        var $b = $(this).find('.copy-btn');
+        setTimeout(function() {
+          $b.text('复制');
+        }, 300);
+      }).append(e);
+    })
+  </script>
+
+
+</body>
+</html>

@@ -1,0 +1,1674 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2"/>
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1"/>
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/dog_128.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/dog_32.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/dog_16.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/dog.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="thread 类 &amp;lt;thread&amp;gt;：头文件主要声明了 std::thread 类，另外 std::this_thread 命名空间也在这个头文件中。  std::thread 构造函数 (1)默认构造函数：创建一个空的 thread 执行对象。 (2) 初始化构造函数：创建一个 thread对象，该 thread对象可被 joinable，新产生的线程会调用 fn 函数，该函数的参数">
+<meta name="keywords" content="C++进阶,并发编程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="c++多线程">
+<meta property="og:url" content="http://yoursite.com/2019/04/09/C++/c-thread/index.html">
+<meta property="og:site_name" content="Norton&#39;s Blog">
+<meta property="og:description" content="thread 类 &amp;lt;thread&amp;gt;：头文件主要声明了 std::thread 类，另外 std::this_thread 命名空间也在这个头文件中。  std::thread 构造函数 (1)默认构造函数：创建一个空的 thread 执行对象。 (2) 初始化构造函数：创建一个 thread对象，该 thread对象可被 joinable，新产生的线程会调用 fn 函数，该函数的参数">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-12-12T11:59:48.091Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="c++多线程">
+<meta name="twitter:description" content="thread 类 &amp;lt;thread&amp;gt;：头文件主要声明了 std::thread 类，另外 std::this_thread 命名空间也在这个头文件中。  std::thread 构造函数 (1)默认构造函数：创建一个空的 thread 执行对象。 (2) 初始化构造函数：创建一个 thread对象，该 thread对象可被 joinable，新产生的线程会调用 fn 函数，该函数的参数">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/04/09/C++/c-thread/"/>
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>c++多线程 | Norton's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Norton's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">You miss 100% of the shot you do not take.</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br/>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br/>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br/>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br/>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br/>归档</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br/>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/09/C++/c-thread/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王谱越"/>
+      <meta itemprop="description" content=""/>
+      <meta itemprop="image" content="/images/myavatar.jpg"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Norton's Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">c++多线程
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-04-09 22:46:35" itemprop="dateCreated datePublished" datetime="2019-04-09T22:46:35+08:00">2019-04-09</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-12-12 19:59:48" itemprop="dateModified" datetime="2020-12-12T19:59:48+08:00">2020-12-12</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">9.6k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">9 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="thread-类"><a class="markdownIt-Anchor" href="#thread-类"></a> thread 类</h1>
+<p><code>&lt;thread&gt;：</code>头文件主要声明了 std::thread 类，另外 std::this_thread 命名空间也在这个头文件中。</p>
+<h2 id="stdthread-构造函数"><a class="markdownIt-Anchor" href="#stdthread-构造函数"></a> std::thread 构造函数</h2>
+<p><strong>(1)默认构造函数</strong>：创建一个空的 thread 执行对象。</p>
+<p><strong>(2) 初始化构造函数</strong>：创建一个 thread对象，该 thread对象可被 joinable，新产生的线程会调用 fn 函数，该函数的参数由 args 给出。</p>
+<p><strong>(3)拷贝构造函数(被禁用)</strong>：意味着 thread 不可被拷贝构造。</p>
+<p><strong>(4)move 构造函数，move 构造函数</strong>：调用成功之后 x 不代表任何 thread 执行对象。</p>
+<a id="more"></a>
+<h2 id="joinable-thread"><a class="markdownIt-Anchor" href="#joinable-thread"></a> joinable thread</h2>
+<p>thread 类中提供了一个成员函数<code>bool jionable()</code>  用于检测线程是否joinable</p>
+<p><strong>joinable ：</strong> 代表该线程是可结合的线程。如果线程处于joinable状态，则只能只能被创建他的线程等待终止。</p>
+<p>**not-joinable ：**通常一下几种情况会导致线程成为not-joinable</p>
+<ol>
+<li>由thread的缺省构造函数构造而成(thread()没有参数)。</li>
+<li>该thread被move过（包括move构造和move赋值, 原thread被销毁)</li>
+<li>该线程调用过join或者detach</li>
+</ol>
+<h2 id="join-and-detach"><a class="markdownIt-Anchor" href="#join-and-detach"></a> join and detach</h2>
+<p>创建一个线程之后，我们还需要考虑一个问题：该如何处理这个线程的结束？</p>
+<p>一种方式是等待这个线程结束，在一个合适的地方调用 thread 实例的 join() 方法，调用者线程将会一直等待着目标线程的结束，当目标线程结束之后调用者线程继续运行；</p>
+<p>另一个方式是将这个线程分离，由其自己结束，通过调用 thread 实例的 detach() 方法将目标线程置于分离模式。</p>
+<h2 id="move-and-swap"><a class="markdownIt-Anchor" href="#move-and-swap"></a> move and swap</h2>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;thread&gt;  </span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;  </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="function">thread <span class="title">t1</span><span class="params">([]()</span>  </span></span><br><span class="line"><span class="function">    </span>&#123;  </span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"thread1"</span> &lt;&lt; <span class="built_in">endl</span>;  </span><br><span class="line">    &#125;);  </span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"thread1' id is "</span> &lt;&lt; t1.get_id() &lt;&lt; <span class="built_in">endl</span>;  </span><br><span class="line">    thread t2 = move(t1);;  </span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"thread2' id is "</span> &lt;&lt; t2.get_id() &lt;&lt; <span class="built_in">endl</span>;  </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;  </span><br><span class="line">&#125;  </span><br><span class="line">运行结果:  </span><br><span class="line">thread1  </span><br><span class="line">thread1' id is <span class="number">5620</span>  </span><br><span class="line">thread2' id is <span class="number">5620</span></span><br></pre></td></tr></table></figure>
+<p>可以看到，线程t2可以通过 move 移动 t1 来获取 t1 的全部属性，而 t1 却销毁了。</p>
+<p>使用swap也有同样移动的效果：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;thread&gt;  </span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;  </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="function">thread <span class="title">t1</span><span class="params">([]()</span>  </span></span><br><span class="line"><span class="function">    </span>&#123;  </span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"thread1"</span> &lt;&lt; <span class="built_in">endl</span>;  </span><br><span class="line">    &#125;);  </span><br><span class="line">    <span class="function">thread <span class="title">t2</span><span class="params">([]()</span>  </span></span><br><span class="line"><span class="function">    </span>&#123;  </span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"thread2"</span> &lt;&lt; <span class="built_in">endl</span>;  </span><br><span class="line">    &#125;);  </span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"thread1' id is "</span> &lt;&lt; t1.get_id() &lt;&lt; <span class="built_in">endl</span>;  </span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"thread2' id is "</span> &lt;&lt; t2.get_id() &lt;&lt; <span class="built_in">endl</span>;  </span><br><span class="line"></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"swap after:"</span> &lt;&lt; <span class="built_in">endl</span>;  </span><br><span class="line">    swap(t1, t2);<span class="comment">//线程交换  </span></span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"thread1' id is "</span> &lt;&lt; t1.get_id() &lt;&lt; <span class="built_in">endl</span>;  </span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"thread2' id is "</span> &lt;&lt; t2.get_id() &lt;&lt; <span class="built_in">endl</span>;  </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;  </span><br><span class="line">&#125;  </span><br><span class="line">运行结果:  </span><br><span class="line">thread1  </span><br><span class="line">thread2  </span><br><span class="line">thread1' id is <span class="number">4836</span>  </span><br><span class="line">thread2' id is <span class="number">4724</span>  </span><br><span class="line">swap after:  </span><br><span class="line">thread1' id is <span class="number">4724</span>  </span><br><span class="line">thread2' id is <span class="number">4836</span></span><br></pre></td></tr></table></figure>
+<p>这两种的不同是swap仅仅进行实例（以 id 作标识）的互换，而<strong>move则在进行实例标识的互换之前，还进行了转移目的实例（如之前的t2）的清理</strong>（通过调用<code>std::terminate()</code>）。</p>
+<h2 id="yeild-and-sleep"><a class="markdownIt-Anchor" href="#yeild-and-sleep"></a> yeild and sleep</h2>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//让线程等待3秒  </span></span><br><span class="line">this_thread::sleep_for(chrono::seconds(<span class="number">3</span>));  </span><br><span class="line"><span class="comment">//让线程等待直到到达指定时间</span></span><br><span class="line">this_thread::sleep_until (time);</span><br><span class="line"><span class="comment">//让cpu执行其他空闲的线程  </span></span><br><span class="line">this_thread::yield();</span><br></pre></td></tr></table></figure>
+<h1 id="mutex"><a class="markdownIt-Anchor" href="#mutex"></a> mutex</h1>
+<p>Mutex 又称互斥量，C++ 11中与 Mutex 相关的类（包括锁类型）和函数都声明在 <code>&lt;mutex&gt;</code> 头文件中。</p>
+<h2 id="stdmutex用法"><a class="markdownIt-Anchor" href="#stdmutex用法"></a> std::mutex用法</h2>
+<ol>
+<li><strong>构造函数:</strong><code>std::mutex</code>不允许拷贝构造，也不允许 move 拷贝，最初产生的 mutex 对象是处于 unlocked 状态的。</li>
+<li><code>lock():</code>调用线程将锁住该互斥量。线程调用该函数会发生下面 3 种情况：</li>
+<li>如果该互斥量当前没有被锁住，则调用线程将该互斥量锁住，直到调用 unlock之前，该线程一直拥有该锁。</li>
+<li>如果当前互斥量被其他线程锁住，则当前的调用线程被阻塞住。</li>
+<li>如果当前互斥量被当前调用线程锁住，则会产生死锁(deadlock)。</li>
+<li><code>unlock()</code> 解锁，释放对互斥量的所有权。</li>
+<li><code>try_lock()</code> 尝试锁住互斥量，如果互斥量被其他线程占有，则当前线程也不会被阻塞。线程调用该函数也会出现下面 3 种情况:
+<ol>
+<li>如果当前互斥量没有被其他线程占有，则该线程锁住互斥量，直到该线程调用 unlock 释放互斥量。</li>
+<li>如果当前互斥量被其他线程锁住，则当前调用线程返回 false，而并不会被阻塞掉。</li>
+<li>如果当前互斥量被当前调用线程锁住，则会产生死锁(deadlock)。</li>
+</ol>
+</li>
+</ol>
+<h2 id="stdrecursive_mutex"><a class="markdownIt-Anchor" href="#stdrecursive_mutex"></a> std::recursive_mutex</h2>
+<p><code>recursive_mutex</code> 与 <code>mutex</code>相同，唯一不同的是**<code>std::recursive_mutex</code> 允许同一个线程对互斥量多次上锁（即递归上锁），来获得对互斥量对象的多层所有权，相对应的<code>std::recursive_mutex</code> 释放互斥量时需要调用与该锁层次深度相同次数的 <code>unlock()</code>。**</p>
+<h2 id="stdtime_mutex"><a class="markdownIt-Anchor" href="#stdtime_mutex"></a> std::time_mutex</h2>
+<p><code>time_mutex</code>相较于<code>mutex</code>提供了2个新的方法来进行时间相关的上锁：</p>
+<ul>
+<li>
+<p><code>try_lock_for</code> 函数接受一个时间范围，表示在这一段时间范围之内线程如果没有获得锁则被阻塞住（与 std::mutex 的 try_lock() 不同，try_lock 如果被调用时没有获得锁则直接返回 false），如果在此期间其他线程释放了锁，则该线程可以获得对互斥量的锁，如果超时（即在指定时间内还是没有获得锁），则返回 false。</p>
+</li>
+<li>
+<p><code>try_lock_until</code> 函数则接受一个时间点作为参数，在指定时间点未到来之前线程如果没有获得锁则被阻塞住，如果在此期间其他线程释放了锁，则该线程可以获得对互斥量的锁，如果超时（即在指定时间内还是没有获得锁），则返回 false。</p>
+</li>
+</ul>
+<p>同样的也有对应的<code>recursive_timed_mutex</code>来提供递归上锁。</p>
+<h1 id="lock类"><a class="markdownIt-Anchor" href="#lock类"></a> lock类</h1>
+<h2 id="stdlock_guard"><a class="markdownIt-Anchor" href="#stdlock_guard"></a> std::lock_guard</h2>
+<p>std::lock_gurad 是 C++11 中定义的模板类。定义如下：</p>
+<p>​              <code>template &lt;class Mutex&gt; class lock_guard;</code></p>
+<p>lock_guard 对象通常用于管理某个锁(Lock)对象，与 Mutex RAII 相关，方便线程对互斥量上锁，即在某个 lock_guard 对象的声明周期内，它所管理的锁对象会一直保持上锁状态；而 lock_guard 的生命周期结束之后，它所管理的锁对象会被解锁(注：类似 shared_ptr 等智能指针管理动态分配的内存资源)。</p>
+<p>模板参数 Mutex 代表互斥量类型，例如 <code>std::mutex</code> 类型，它应该是一个基本的 <code>BasicLockable</code> 类型，标准库中定义几种基本的 <code>BasicLockable</code> 类型，分别 <code>std::mutex</code>, <code>std::recursive_mutex</code>, <code>std::timed_mutex</code>，<code>std::recursive_timed_mutex</code>以及 <code>std::unique_lock</code>。</p>
+<p>在 lock_guard 对象构造时，传入的 Mutex 对象(即它所管理的 Mutex 对象)会被当前线程锁住。在lock_guard 对象被析构时，它所管理的 Mutex 对象会自动解锁，由于不需要程序员手动调用 lock 和 unlock 对 Mutex 进行上锁和解锁操作，因此这也是最简单安全的上锁和解锁方式，尤其是在程序抛出异常后先前已被上锁的 Mutex 对象可以正确进行解锁操作，极大地简化了程序员编写与 Mutex 相关的异常处理代码。</p>
+<p>构造函数：</p>
+<ol>
+<li><strong>locking 初始化 :</strong><code>std::lock_guard&lt;std::mutex&gt; lck(mtx);</code><br>
+lock_guard 对象管理 Mutex 对象 m，并在构造时对 m 进行上锁（调用 m.lock()）。</li>
+<li><strong>adopting初始化:</strong><code>std::lock_guard&lt;std::mutex&gt; lck(mtx, std::adopt_lock);</code> lock_guard 对象管理 Mutex 对象 m，与 locking 初始化不同的是， Mutex 对象 m 已被当前线程锁住。</li>
+<li><strong>拷贝构造:</strong> lock_guard对象的拷贝构造和移动构造(move construction)均被禁用，因此 lock_guard 对象不可被拷贝构造或移动构造</li>
+</ol>
+<h2 id="stdunique_lock"><a class="markdownIt-Anchor" href="#stdunique_lock"></a> std::unique_lock</h2>
+<p>C++11 标准中定义了另外一个与 Mutex RAII 相关类 <code>unique_lock</code>，该类与 <code>lock_guard</code> 类相似，也很方便线程对互斥量上锁，但它提供了更好的上锁和解锁控制。</p>
+<p>unique_lock 对象以独占所有权的方式（ unique owership）管理 mutex 对象的上锁和解锁操作，所谓独占所有权，就是没有其他的 unique_lock 对象同时拥有某个 mutex 对象的所有权。</p>
+<p>在构造(或移动(move)赋值)时，unique_lock 对象需要传递一个 Mutex 对象作为它的参数，新创建的 unique_lock 对象负责传入的 Mutex 对象的上锁和解锁操作。        std::unique_lock 对象也能保证在其自身析构时它所管理的 Mutex 对象能够被正确地解锁（即使没有显式地调用 unlock 函数）</p>
+<p>值得注意的是，unique_lock 对象同样也不负责管理 Mutex 对象的生命周期,在某个 unique_lock 对象的声明周期内，它所管理的锁对象会一直保持上锁状态；而 unique_lock 的生命周期结束之后，它所管理的锁对象会被解锁，这一点和 lock_guard 类似，但 unique_lock 给程序员提供了更多的自由。</p>
+<p>另外，与 lock_guard 一样，模板参数 Mutex 代表互斥量类型，例如 std::mutex 类型，它应该是一个基本的 BasicLockable 类型。</p>
+<p><strong>构造函数：</strong></p>
+<ol>
+<li><strong>默认构造函数</strong> 新创建的 unique_lock 对象不管理任何 Mutex 对象。</li>
+<li><strong>locking 初始化</strong> 新创建的 unique_lock 对象管理 Mutex 对象 m，并尝试调用 m.lock() 对 Mutex 对象进行上锁，如果此时另外某个 unique_lock 对象已经管理了该 Mutex 对象 m，则当前线程将会被阻塞。</li>
+<li><strong>try-locking 初始化</strong> 新创建的 unique_lock 对象管理 Mutex 对象 m，并尝试调用 m.try_lock() 对 Mutex 对象进行上锁，但如果上锁不成功，并不会阻塞当前线程。</li>
+<li><strong>deferred 初始化</strong> 新创建的 unique_lock 对象管理 Mutex 对象 m，但是在初始化的时候并不锁住 Mutex 对象。 m 应该是一个没有当前线程锁住的 Mutex 对象。</li>
+<li><strong>adopting 初始化</strong> 新创建的 unique_lock 对象管理 Mutex 对象 m， m 应该是一个已经被当前线程锁住的 Mutex 对象。(并且当前新创建的 unique_lock 对象拥有对锁(Lock)的所有权)。</li>
+<li><strong>locking 一段时间(duration)</strong> 新创建的 unique_lock 对象管理 Mutex 对象 m，并试图通过调用 m.try_lock_for(rel_time) 来锁住 Mutex 对象一段时间(rel_time)。</li>
+<li><strong>locking 直到某个时间点(time point)</strong> 新创建的 unique_lock 对象管理 Mutex 对象m，并试图通过调用 m.try_lock_until(abs_time) 来在某个时间点(abs_time)之前锁住 Mutex 对象。</li>
+<li><strong>拷贝构造 [被禁用]</strong> unique_lock 对象不能被拷贝构造。</li>
+<li><strong>移动(move)构造</strong> 新创建的 unique_lock 对象获得了由 x 所管理的 Mutex 对象的所有权(包括当前 Mutex 的状态)。调用 move 构造之后， x 对象如同通过默认构造函数所创建的，就不再管理任何 Mutex 对象了。</li>
+</ol>
+<p>综上所述，由 (2) 和 (5) 创建的 unique_lock 对象通常拥有 Mutex 对象的锁。而通过 (1) 和 (4) 创建的则不会拥有锁。通过 (3)，(6) 和 (7) 创建的 unique_lock 对象，则在 lock 成功时获得锁。</p>
+<h1 id="atomic"><a class="markdownIt-Anchor" href="#atomic"></a> atomic</h1>
+<h2 id="stdatomic"><a class="markdownIt-Anchor" href="#stdatomic"></a> std::atomic</h2>
+<p>std::atomic对int, char, bool等数据结构进行原子性封装，在多线程环境中，对std::atomic对象的访问不会造成竞争-冒险。利用std::atomic可实现数据结构的无锁设计。</p>
+<p><strong>构造函数</strong></p>
+<ol>
+<li><strong>默认构造函数</strong>	<code>atomic() noexcept = default</code>;</li>
+<li><strong>初始化构造函数</strong>  <code>constexpr atomic (T val) noexcept</code>;</li>
+<li><strong>拷贝构造函数</strong>	<code>atomic (const atomic&amp;) = delete</code>。可以看出atomic对象是不可复制的。</li>
+</ol>
+<p>由上可知，atomic对象可以用其内部存储类型赋值，但是atomic本身是不能进行赋值拷贝的。</p>
+<p>atomic经常用的函数有store和load，如下：</p>
+<p><strong>store函数</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">store</span> <span class="params">(T val, memory_order sync = memory_order_seq_cst)</span> <span class="keyword">volatile</span> <span class="keyword">noexcept</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">store</span> <span class="params">(T val, memory_order sync = memory_order_seq_cst)</span> <span class="keyword">noexcept</span></span>;</span><br></pre></td></tr></table></figure>
+<p>其实就是用val替换内部保存的值。内部替换的时候其实是加了线程同步的，所以不用担心多线程访问的问题。</p>
+<p><strong>load函数</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">T <span class="title">load</span> <span class="params">(memory_order sync = memory_order_seq_cst)</span> <span class="keyword">const</span> <span class="keyword">volatile</span> <span class="keyword">noexcept</span></span>;</span><br><span class="line"><span class="function">T <span class="title">load</span> <span class="params">(memory_order sync = memory_order_seq_cst)</span> <span class="keyword">const</span> <span class="keyword">noexcept</span></span>;</span><br></pre></td></tr></table></figure>
+<p>返回内部保存的值，其实就是访问内部值。</p>
+<h2 id="stdatomic_flag"><a class="markdownIt-Anchor" href="#stdatomic_flag"></a> std::atomic_flag</h2>
+<p>atomic_flag是一个原子布尔类型。不同于std::atomic的所有专门化，它保证是lock_free。不像std::stomic&lt; bool &gt;，std::atomic_flag不提供负载或存储操作。</p>
+<p><strong>构造函数</strong></p>
+<ul>
+<li>
+<p>atomic_flag在构建(或设置或清除)上处于一个未指定的状态，除非它被显式地初始化为ATOMIC_FLAG_INIT。</p>
+</li>
+<li>
+<p>atomic_flag值不能复制/移动。</p>
+</li>
+</ul>
+<p><strong>成员函数：test_and_set</strong></p>
+<p><code>bool test_and_set (memory_order sync = memory_order_seq_cst) volatile noexcept; bool test_and_set (memory_order sync = memory_order_seq_cst) noexcept;。</code></p>
+<ul>
+<li>设置atomic_flag并返回是否在调用之前已经设置的。</li>
+<li>整个操作是原子的(一个原子的读-修改-写操作):当在这个函数被修改的时候,读取的(返回)值被读取，值不受其他线程的影响。</li>
+</ul>
+<p><strong>成员函数:atomic_flag_clear</strong></p>
+<p><code>void clear (memory_order sync = memory_order_seq_cst) volatile noexcept;</code></p>
+<p><code>void clear (memory_order sync = memory_order_seq_cst) noexcept;</code></p>
+<ul>
+<li>清除atomic_flag(即把atomic_flag 设为假)。清除atomic_flag使下一次调用成员atomic_flag::test_and_set对象返回false。</li>
+<li>操作是原子的，按照sync所指定的内存顺序。</li>
+</ul>
+<h1 id="future"><a class="markdownIt-Anchor" href="#future"></a> future</h1>
+<h2 id="stdpromise"><a class="markdownIt-Anchor" href="#stdpromise"></a> std::promise</h2>
+<p>promise 对象可以保存某一类型T值，该值可被 future 对象读取（可能在另外一个线程中）， promise 提供了一种线程同步的手段。</p>
+<p>在 promise 对象构造时可以和一个共享状态（通常是std::future）相关联，并可以在相关联的共享状态(std::future)上保存一个类型为 T 的值。</p>
+<p>可以通过 get_future 来获取与该 promise 对象相关联的 future 对象，调用该函数之后，两个对象共享相同的共享状态(shared state)</p>
+<p>promise 对象是异步 Provider，它可以在某一时刻设置共享状态的值。</p>
+<p>future 对象可以异步返回共享状态的值，或者在必要的情况下阻塞调用者并等待共享状态标志变为 ready，然后才能获取共享状态的值。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// promise example  </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;       // std::cout  </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;functional&gt;     // std::ref  </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;thread&gt;         // std::thread  </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;future&gt;         // std::promise, std::future  </span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print_int</span><span class="params">(<span class="built_in">std</span>::future&lt;<span class="keyword">int</span>&gt;&amp; fut)</span>   </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">int</span> x = fut.get();  </span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"value: "</span> &lt;&lt; x &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;  </span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="built_in">std</span>::promise&lt;<span class="keyword">int</span>&gt; prom;                      <span class="comment">// create promise  </span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">std</span>::future&lt;<span class="keyword">int</span>&gt; fut = prom.get_future();    <span class="comment">// engagement with future  </span></span><br><span class="line"></span><br><span class="line">    std::thread th1(print_int, std::ref(fut));  // send future to new thread  </span><br><span class="line"></span><br><span class="line">    prom.set_value(<span class="number">10</span>);                         <span class="comment">// fulfill promise  </span></span><br><span class="line">    <span class="comment">// (synchronizes with getting the future)  </span></span><br><span class="line">    th1.join();  </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p><strong>promise 只有移动语义没有拷贝语义。</strong></p>
+</li>
+<li>
+<p><code>std::promise::get_future</code>：返回一个与promise共享状态相关联的future对象</p>
+</li>
+<li>
+<p><code>std::promise::set_value</code>：设置共享状态的值，此后promise共享状态标识变为ready</p>
+</li>
+<li>
+<p><code>std::promise::set_exception</code>：为promise设置异常，此后promise的共享状态标识变为ready</p>
+</li>
+<li>
+<p><code>std::promise::set_value_at_thread_exit</code>：设置共享状态的值，但是不将共享状态的标志设置为 ready，当线程退出时该 promise 对象会自动设置为 ready（注意：该线程已设置promise的值，如果在线程结束之后有其他修改共享状态值的操作，会抛出future_error(promise_already_satisfied)异常）</p>
+</li>
+<li>
+<p><code>std::promise::swap</code>：交换 promise 的共享状态</p>
+</li>
+</ul>
+<h2 id="stdfuture"><a class="markdownIt-Anchor" href="#stdfuture"></a> std::future</h2>
+<p>简单来说，std::future提供了一种访问异步操作结果的机制。</p>
+<p>从字面意思看，它表示未来。通常一个异步操作我们是不能马上就获取操作结果的，只能在未来某个时候获取。我们可以以同步等待的方式来获取结果，可以通过查询future的状态（future_status）来获取异步操作的结果。future_status有三种状态：</p>
+<ul>
+<li><strong>deferred</strong>：异步操作还没开始</li>
+<li><strong>ready</strong>：异步操作已经完成</li>
+<li><strong>timeout</strong>：异步操作超时</li>
+</ul>
+<p>获取future结果有三种方式：<code>get</code>、<code>wait</code>、<code>wait_for</code>:</p>
+<ul>
+<li><code>get</code>  等待异步操作结束(ready)并返回结果</li>
+<li><code>wait</code> 只是等待异步操作完成，没有返回值</li>
+<li><code>wait_for</code> 是超时等待返回结果。</li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/C-进阶/" rel="tag"># C++进阶</a>
+          
+            <a href="/tags/并发编程/" rel="tag"># 并发编程</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/31/OSIsample/" rel="next" title="OSIsample">
+                <i class="fa fa-chevron-left"></i> OSIsample
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/15/Programing/lock-free/" rel="prev" title="Lock-Free 编程">
+                Lock-Free 编程 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/myavatar.jpg"
+                alt="王谱越"/>
+            
+              <p class="site-author-name" itemprop="name">王谱越</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">46</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">43</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/wangpy1489" title="GitHub &rarr; https://github.com/wangpy1489" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:wangpy1489@sjtu.edu.cn" title="E-Mail &rarr; mailto:wangpy1489@sjtu.edu.cn" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.instagram.com/norton_yue/" title="Instagram &rarr; https://www.instagram.com/norton_yue/" rel="noopener" target="_blank"><i class="fa fa-fw fa-instagram"></i>Instagram</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#thread-类"><span class="nav-text"> thread 类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#stdthread-构造函数"><span class="nav-text"> std::thread 构造函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#joinable-thread"><span class="nav-text"> joinable thread</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#join-and-detach"><span class="nav-text"> join and detach</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#move-and-swap"><span class="nav-text"> move and swap</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#yeild-and-sleep"><span class="nav-text"> yeild and sleep</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mutex"><span class="nav-text"> mutex</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#stdmutex用法"><span class="nav-text"> std::mutex用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#stdrecursive_mutex"><span class="nav-text"> std::recursive_mutex</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#stdtime_mutex"><span class="nav-text"> std::time_mutex</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lock类"><span class="nav-text"> lock类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#stdlock_guard"><span class="nav-text"> std::lock_guard</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#stdunique_lock"><span class="nav-text"> std::unique_lock</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#atomic"><span class="nav-text"> atomic</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#stdatomic"><span class="nav-text"> std::atomic</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#stdatomic_flag"><span class="nav-text"> std::atomic_flag</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#future"><span class="nav-text"> future</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#stdpromise"><span class="nav-text"> std::promise</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#stdfuture"><span class="nav-text"> std::future</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">  <a href="http://beian.miit.gov.cn" rel="noopener" target="_blank">蒙ICP备18004819号-1 </a>&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">王谱越</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">120k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">1:49</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.0.1</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/schemes/muse.js?v=7.0.1"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.1"></script>
+
+
+  
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      
+        background-color: #eee;
+        background-image: linear-gradient(#fcfcfc, #eee);
+        border: 1px solid #d5d5d5;
+        border-radius: 3px;
+      
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      
+        right: 4px;
+        top: 8px;
+      
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1;
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function(i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap');
+      $(e).after($wrap);
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function(e) {
+        var code = $(this).parent().find('.code').find('.line').map(function(i, e) {
+          return $(e).text();
+        }).toArray().join('\n');
+        var ta = document.createElement('textarea');
+        var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+        ta.style.top = yPosition + 'px'; // Prevent page scroll
+        ta.style.position = 'absolute';
+        ta.style.opacity = '0';
+        ta.readOnly = true;
+        ta.value = code;
+        document.body.appendChild(ta);
+        ta.select();
+        ta.setSelectionRange(0, code.length);
+        ta.readOnly = false;
+        var result = document.execCommand('copy');
+        
+        ta.blur(); // For iOS
+        $(this).blur();
+      })).on('mouseleave', function(e) {
+        var $b = $(this).find('.copy-btn');
+        setTimeout(function() {
+          $b.text('复制');
+        }, 300);
+      }).append(e);
+    })
+  </script>
+
+
+</body>
+</html>

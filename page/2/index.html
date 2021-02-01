@@ -371,7 +371,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/15/c-mamorymodel/"/>
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/12/Linux/磁盘空间不足的排查方法/"/>
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="王谱越"/>
@@ -391,7 +391,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/04/15/c-mamorymodel/" class="post-title-link" itemprop="url">c++内存模型</a>
+                <a href="/2020/12/12/Linux/磁盘空间不足的排查方法/" class="post-title-link" itemprop="url">磁盘空间不足的排查方法</a>
               
             
           </h1>
@@ -416,7 +416,7 @@
                 
               
 
-              <time title="创建时间：2019-04-15 15:23:27 / 修改时间：18:32:44" itemprop="dateCreated datePublished" datetime="2019-04-15T15:23:27+08:00">2019-04-15</time>
+              <time title="创建时间：2020-12-12 22:17:57 / 修改时间：22:20:26" itemprop="dateCreated datePublished" datetime="2020-12-12T22:17:57+08:00">2020-12-12</time>
             
 
             
@@ -438,7 +438,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C-进阶/" itemprop="url" rel="index"><span itemprop="name">C++进阶</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
 
                 
                 
@@ -467,619 +467,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">1.8k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">2 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="问题引入"><a class="markdownIt-Anchor" href="#问题引入"></a> 问题引入</h1>
-<h2 id="乱序"><a class="markdownIt-Anchor" href="#乱序"></a> 乱序</h2>
-<p>说到内存模型，首先需要明确一个普遍存在，但却未必人人都注意到的事实：程序通常并不是总按着照源码中的顺序一一执行，此谓之乱序，乱序产生的原因可能有好几种：</p>
-<ol>
-<li>编译器出于优化的目的，在编译阶段将源码的顺序进行交换。</li>
-<li>程序执行期间，指令流水被 cpu 乱序执行。</li>
-<li>inherent cache 的分层及刷新策略使得有时候某些写读操作的从效果上看，顺序被重排。</li>
-</ol>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/04/15/c-mamorymodel/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/15/lock-free/"/>
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="王谱越"/>
-      <meta itemprop="description" content=""/>
-      <meta itemprop="image" content="/images/myavatar.jpg"/>
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Norton's Blog"/>
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/04/15/lock-free/" class="post-title-link" itemprop="url">Lock-Free 编程</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-04-15 10:33:31 / 修改时间：15:19:37" itemprop="dateCreated datePublished" datetime="2019-04-15T10:33:31+08:00">2019-04-15</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C-进阶/" itemprop="url" rel="index"><span itemprop="name">C++进阶</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">2.1k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">2 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="lock-free-编程"><a class="markdownIt-Anchor" href="#lock-free-编程"></a> Lock-Free  编程</h1>
-<p>Lock-Free 编程描述了代码所表述的性质，而没有限定或要求代码该如何编写。一般理解来讲即尽量少的使用LOCK或MUTEX等互斥量或锁，以降低线程间的相互阻塞。可以通过以下框图来判断是否符合lock-free.</p>
-<p><img src="https://images0.cnblogs.com/blog/175043/201410/231017024496623.png" alt=""></p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/04/15/lock-free/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/09/c-thread/"/>
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="王谱越"/>
-      <meta itemprop="description" content=""/>
-      <meta itemprop="image" content="/images/myavatar.jpg"/>
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Norton's Blog"/>
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/04/09/c-thread/" class="post-title-link" itemprop="url">c++多线程</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-04-09 22:46:35" itemprop="dateCreated datePublished" datetime="2019-04-09T22:46:35+08:00">2019-04-09</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-04-15 10:35:14" itemprop="dateModified" datetime="2019-04-15T10:35:14+08:00">2019-04-15</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C-进阶/" itemprop="url" rel="index"><span itemprop="name">C++进阶</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">9.6k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">9 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="thread-类"><a class="markdownIt-Anchor" href="#thread-类"></a> thread 类</h1>
-<p><code>&lt;thread&gt;：</code>头文件主要声明了 std::thread 类，另外 std::this_thread 命名空间也在这个头文件中。</p>
-<h2 id="stdthread-构造函数"><a class="markdownIt-Anchor" href="#stdthread-构造函数"></a> std::thread 构造函数</h2>
-<p><strong>(1)默认构造函数</strong>：创建一个空的 thread 执行对象。</p>
-<p><strong>(2) 初始化构造函数</strong>：创建一个 thread对象，该 thread对象可被 joinable，新产生的线程会调用 fn 函数，该函数的参数由 args 给出。</p>
-<p><strong>(3)拷贝构造函数(被禁用)</strong>：意味着 thread 不可被拷贝构造。</p>
-<p><strong>(4)move 构造函数，move 构造函数</strong>：调用成功之后 x 不代表任何 thread 执行对象。</p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/04/09/c-thread/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/31/OSIsample/"/>
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="王谱越"/>
-      <meta itemprop="description" content=""/>
-      <meta itemprop="image" content="/images/myavatar.jpg"/>
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Norton's Blog"/>
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/03/31/OSIsample/" class="post-title-link" itemprop="url">OSIsample</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-03-31 20:44:24 / 修改时间：20:48:12" itemprop="dateCreated datePublished" datetime="2019-03-31T20:44:24+08:00">2019-03-31</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/网络基础/" itemprop="url" rel="index"><span itemprop="name">网络基础</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">13</span>
+                <span title="本文字数">147</span>
               
 
               
@@ -1115,8 +503,23 @@
       
         
           
-            <h1 id="osi七层结构示意图"><a class="markdownIt-Anchor" href="#osi七层结构示意图"></a> OSI七层结构示意图</h1>
-<p><img src="http://wpy-blog.oss-cn-shanghai.aliyuncs.com/%E7%BD%91%E7%BB%9C%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84.jpg/wpy-blog" alt=""></p>
+            <h1 id="磁盘空间不足原因及排查方法"><a class="markdownIt-Anchor" href="#磁盘空间不足原因及排查方法"></a> 磁盘空间不足原因及排查方法</h1>
+<p><a href="https://blog.csdn.net/jiedao_liyk/article/details/78497625" target="_blank" rel="noopener">https://blog.csdn.net/jiedao_liyk/article/details/78497625</a></p>
+<p>不足原因：</p>
+<ul>
+<li>
+<p>block满</p>
+<p><code>df -h</code></p>
+</li>
+<li>
+<p>inode满</p>
+<p><code>df -i</code></p>
+</li>
+<li>
+<p>文件被占用一直没被彻底删除</p>
+<p><code>lsof |grep deleted</code></p>
+</li>
+</ul>
 
           
         
@@ -1173,7 +576,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/31/namespace-cgroup/"/>
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/12/C++/C-Include路径顺序/"/>
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="王谱越"/>
@@ -1193,7 +596,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/03/31/namespace-cgroup/" class="post-title-link" itemprop="url">Linux namespace与Cgroup简述</a>
+                <a href="/2020/12/12/C++/C-Include路径顺序/" class="post-title-link" itemprop="url">C++Include路径顺序</a>
               
             
           </h1>
@@ -1218,7 +621,7 @@
                 
               
 
-              <time title="创建时间：2019-03-31 19:54:27 / 修改时间：21:58:37" itemprop="dateCreated datePublished" datetime="2019-03-31T19:54:27+08:00">2019-03-31</time>
+              <time title="创建时间：2020-12-12 22:11:13 / 修改时间：22:47:54" itemprop="dateCreated datePublished" datetime="2020-12-12T22:11:13+08:00">2020-12-12</time>
             
 
             
@@ -1240,7 +643,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Linux-基础/" itemprop="url" rel="index"><span itemprop="name">Linux 基础</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a></span>
 
                 
                 
@@ -1269,7 +672,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">3k</span>
+                <span title="本文字数">975</span>
               
 
               
@@ -1283,7 +686,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">3 分钟</span>
+                <span title="阅读时长">1 分钟</span>
               
             </div>
           
@@ -1304,12 +707,1696 @@
 
       
         
-          <h1 id="namespace-概述"><a class="markdownIt-Anchor" href="#namespace-概述"></a> NameSpace 概述</h1>
-<p>Namespace 用于不同进程组之间的资源隔离，其目的是将某个特定的全局系统资源（global system resource）通过抽象方法使得namespace 中的进程看起来拥有它们自己的隔离的全局系统资源实例。</p>
+          <h1 id="c-include"><a class="markdownIt-Anchor" href="#c-include"></a> C++ Include</h1>
+<h2 id="c-中include头文件时与的区别"><a class="markdownIt-Anchor" href="#c-中include头文件时与的区别"></a> C++ 中include头文件时&lt;&gt;与&quot;&quot;的区别</h2>
+<ol>
+<li>#include &lt;&gt;格式：引用标准库头文件，编译器从标准库目录(IncludePath)开始搜索</li>
+<li>#incluce &quot;&quot;格式：引用非标准库的头文件，编译器从用户的工作目录开始搜索，然后再在标准位置寻找文件。</li>
+</ol>
+<h2 id="include-搜索过程"><a class="markdownIt-Anchor" href="#include-搜索过程"></a> Include 搜索过程</h2>
+<ol>
+<li>#include “headfile.h”引用头文件的搜索顺序为：
+<ul>
+<li>先搜索当前目录</li>
+<li>然后搜索-I指定的目录</li>
+<li>再搜索gcc的环境变量CPLUS_INCLUDE_PATH（C程序使用的是C_INCLUDE_PATH）</li>
+<li>最后搜索gcc的内定目录：/usr/include，/usr/local/include，/usr/lib/gcc/x86_64-redhat-linux/4.1.1/include各目录存在相同文件时，先找到哪个使用哪个。</li>
+</ul>
+</li>
+<li>#include &lt;headfile.h&gt;引用头文件的搜索顺序为：
+<ul>
+<li>先搜索-I指定的目录</li>
+<li>然后搜索gcc的环境变量CPLUS_INCLUDE_PATH</li>
+<li>最后搜索gcc的内定目录：/usr/include，/usr/local/include，/usr/lib/gcc/x86_64-redhat-linux/4.1.1/include</li>
+</ul>
+</li>
+</ol>
+<p>各目录存在相同文件时，先找到哪个使用哪个。</p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/03/31/namespace-cgroup/#more" rel="contents">
+              <a class="btn" href="/2020/12/12/C++/C-Include路径顺序/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/12/C++/pthread-barrier-t/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王谱越"/>
+      <meta itemprop="description" content=""/>
+      <meta itemprop="image" content="/images/myavatar.jpg"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Norton's Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2020/12/12/C++/pthread-barrier-t/" class="post-title-link" itemprop="url">pthread_barrier_t</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-12-12 22:06:31 / 修改时间：22:46:18" itemprop="dateCreated datePublished" datetime="2020-12-12T22:06:31+08:00">2020-12-12</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">1k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="pthread_barrier_t"><a class="markdownIt-Anchor" href="#pthread_barrier_t"></a> pthread_barrier_t</h1>
+<h2 id="概念"><a class="markdownIt-Anchor" href="#概念"></a> 概念</h2>
+<p>barrier是用户协调多个线程并行工作的同步机制</p>
+<p>原理：屏障允许每个线程等待，直到<strong>所有的合作线程</strong>都到达某一点（屏障），然后从该点继续执行工作</p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2020/12/12/C++/pthread-barrier-t/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/12/C++/c-杂记/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王谱越"/>
+      <meta itemprop="description" content=""/>
+      <meta itemprop="image" content="/images/myavatar.jpg"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Norton's Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2020/12/12/C++/c-杂记/" class="post-title-link" itemprop="url">c++拾遗</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-12-12 21:05:16" itemprop="dateCreated datePublished" datetime="2020-12-12T21:05:16+08:00">2020-12-12</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2021-01-12 20:07:12" itemprop="dateModified" datetime="2021-01-12T20:07:12+08:00">2021-01-12</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">2.2k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">2 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="constexpt使用"><a class="markdownIt-Anchor" href="#constexpt使用"></a> constexpt使用</h1>
+<p><a href="https://www.cnblogs.com/DswCnblog/p/6513310.html" target="_blank" rel="noopener">https://www.cnblogs.com/DswCnblog/p/6513310.html</a></p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2020/12/12/C++/c-杂记/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/12/Docker内使用SSH-Key/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王谱越"/>
+      <meta itemprop="description" content=""/>
+      <meta itemprop="image" content="/images/myavatar.jpg"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Norton's Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2020/12/12/Docker内使用SSH-Key/" class="post-title-link" itemprop="url">Docker内使用SSH-Key</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-12-12 21:03:53" itemprop="dateCreated datePublished" datetime="2020-12-12T21:03:53+08:00">2020-12-12</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2021-01-31 13:49:59" itemprop="dateModified" datetime="2021-01-31T13:49:59+08:00">2021-01-31</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/k8s-docker/" itemprop="url" rel="index"><span itemprop="name">k8s/docker</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">592</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="docker内使用ssh-key"><a class="markdownIt-Anchor" href="#docker内使用ssh-key"></a> Docker内使用SSH Key</h1>
+<p>DockerFile：</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ARG</span> SSH_KEY</span><br><span class="line"><span class="keyword">ARG</span> SSH_KEY_PASSPHRASE</span><br><span class="line"><span class="comment"># Authorize SSH Host</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> mkdir -p /root/.ssh &amp;&amp; \</span></span><br><span class="line"><span class="bash">    chmod 0700 /root/.ssh &amp;&amp; \</span></span><br><span class="line"><span class="bash">    ssh-keyscan github.com &gt; /root/.ssh/known_hosts</span></span><br><span class="line"><span class="bash"> </span></span><br><span class="line"><span class="bash"><span class="comment"># Add the keys and set permissions</span></span></span><br><span class="line"><span class="bash">RUN <span class="built_in">echo</span> <span class="string">"<span class="variable">$ssh_prv_key</span>"</span> &gt; /root/.ssh/id_rsa &amp;&amp; \</span></span><br><span class="line"><span class="bash">    <span class="built_in">echo</span> <span class="string">"<span class="variable">$ssh_pub_key</span>"</span> &gt; /root/.ssh/id_rsa.pub &amp;&amp; \</span></span><br><span class="line"><span class="bash">    chmod 600 /root/.ssh/id_rsa &amp;&amp; \</span></span><br><span class="line"><span class="bash">    chmod 600 /root/.ssh/id_rsa.pub</span></span><br></pre></td></tr></table></figure>
+<p>构建命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker build -t example --build-arg ssh_prv_key=<span class="string">"<span class="variable">$(cat ~/.ssh/id_rsa)</span>"</span> --build-arg ssh_pub_key=<span class="string">"<span class="variable">$(cat ~/.ssh/id_rsa.pub)</span>"</span></span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/12/C++/C-中Static/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王谱越"/>
+      <meta itemprop="description" content=""/>
+      <meta itemprop="image" content="/images/myavatar.jpg"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Norton's Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2020/12/12/C++/C-中Static/" class="post-title-link" itemprop="url">C++中Static</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-12-12 20:53:18 / 修改时间：22:45:32" itemprop="dateCreated datePublished" datetime="2020-12-12T20:53:18+08:00">2020-12-12</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">844</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="c中static用途"><a class="markdownIt-Anchor" href="#c中static用途"></a> C++中static用途</h1>
+<p>从两方面来分析：</p>
+<ol>
+<li>作用域</li>
+<li>生存期</li>
+</ol>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2020/12/12/C++/C-中Static/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/12/C++/NanoLog-纳秒级C-日志/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王谱越"/>
+      <meta itemprop="description" content=""/>
+      <meta itemprop="image" content="/images/myavatar.jpg"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Norton's Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2020/12/12/C++/NanoLog-纳秒级C-日志/" class="post-title-link" itemprop="url">NanoLog-纳秒级C++日志</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-12-12 20:32:20 / 修改时间：22:48:43" itemprop="dateCreated datePublished" datetime="2020-12-12T20:32:20+08:00">2020-12-12</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">1.2k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="nanolog"><a class="markdownIt-Anchor" href="#nanolog"></a> NanoLog</h1>
+<h2 id="背景"><a class="markdownIt-Anchor" href="#背景"></a> 背景</h2>
+<h3 id="现有日志系统缺陷"><a class="markdownIt-Anchor" href="#现有日志系统缺陷"></a> 现有日志系统缺陷</h3>
+<ol>
+<li>同步写日志——慢</li>
+<li>放到后台线程写，仍有代价。且为了不被卡住，要减少产生日志量：
+<ol>
+<li>设置日志等级</li>
+<li>随机采样log</li>
+</ol>
+</li>
+</ol>
+<h3 id="观察"><a class="markdownIt-Anchor" href="#观察"></a> 观察</h3>
+<ol>
+<li>人可读懂的Log不是必须在应用中产生。</li>
+<li>日志信息存在广泛的重复，大部分内容是静态内容。</li>
+</ol>
+<h2 id="设计"><a class="markdownIt-Anchor" href="#设计"></a> 设计</h2>
+<h3 id="思想"><a class="markdownIt-Anchor" href="#思想"></a> 思想</h3>
+<ol>
+<li>在编译阶段提取log信息中的重复的静态部分，用字典ID代替字符串</li>
+<li>将format工作推迟到离线任务。</li>
+<li>压缩日志中的动态变量，减少IO。</li>
+</ol>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2020/12/12/C++/NanoLog-纳秒级C-日志/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/12/TechnicalDigest/2020-09-技术文摘/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王谱越"/>
+      <meta itemprop="description" content=""/>
+      <meta itemprop="image" content="/images/myavatar.jpg"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Norton's Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2020/12/12/TechnicalDigest/2020-09-技术文摘/" class="post-title-link" itemprop="url">2020-09-技术文摘</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-12-12 20:14:17" itemprop="dateCreated datePublished" datetime="2020-12-12T20:14:17+08:00">2020-12-12</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2021-01-31 16:42:40" itemprop="dateModified" datetime="2021-01-31T16:42:40+08:00">2021-01-31</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/技术文摘/" itemprop="url" rel="index"><span itemprop="name">技术文摘</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">1.1k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="今日头条品质优化图文详情页秒开实践"><a class="markdownIt-Anchor" href="#今日头条品质优化图文详情页秒开实践"></a> <a href="https://www.infoq.cn/article/jqzxGCc15zjwv7Iw9IHh" target="_blank" rel="noopener">今日头条品质优化：图文详情页秒开实践</a></h1>
+<blockquote>
+<p>我们把 WebView 截图的图片进行缩小到原图的 1/6，遍历检测图片的像素点，当非白色的像素点大于 5% 的时候我们就认为是非白屏的情况，可以相对高效检测准确得出详情页是否发生了白屏。</p>
+<p>可以看到，通过线上页面加载用户每次进入详情页都要通过多次网络加载，极容易受网络波动的影响，这种情况下，也无法保证页面加载的时长和成功率，极大的影响了用户体验。</p>
+<p>于是在头条中，我们将新闻中标题和正文内容进行拆分，把头条详情页的公共样式 CSS 和 逻辑 JS 都抽离出来，形成一个独立而完备的详情页模板，这样我们就可以把模板直接内置在客户端中。<br>
+快速动态超时策略<br>
+单次请求 CDN 的超时时间，根据上次成功请求 CDN 的值计算，因子 1.5（z 值）。且最小为 1s（x 值），最大为 4s（y 值）。超过这一时间不取消，直接请求下个 CDN。<br>
+单次请求 CDN 有一个硬性超时时间 4s（w 值，w 需 &gt;=y），超过这一时间请求取消。n 个 CDN 的请求全部取消后反馈用户失败。</p>
+</blockquote>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2020/12/12/TechnicalDigest/2020-09-技术文摘/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/07/k8s-servicedns/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王谱越"/>
+      <meta itemprop="description" content=""/>
+      <meta itemprop="image" content="/images/myavatar.jpg"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Norton's Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/07/07/k8s-servicedns/" class="post-title-link" itemprop="url">k8s-servicedns</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-07-07 10:45:59" itemprop="dateCreated datePublished" datetime="2019-07-07T10:45:59+08:00">2019-07-07</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2021-01-31 13:49:47" itemprop="dateModified" datetime="2021-01-31T13:49:47+08:00">2021-01-31</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/k8s-docker/" itemprop="url" rel="index"><span itemprop="name">k8s/docker</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">110</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="在集群node中解析kuebernetes-service域名"><a class="markdownIt-Anchor" href="#在集群node中解析kuebernetes-service域名"></a> 在集群NODE中解析Kuebernetes service域名</h1>
+<p>只要将core DNS的cluster IP加入到<code>/etc/resolv.conf</code> 即可。但注意，重启系统会根据网卡重写<code>/etc/resolv.conf</code></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/15/NoteBook/MessageMiddleware/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王谱越"/>
+      <meta itemprop="description" content=""/>
+      <meta itemprop="image" content="/images/myavatar.jpg"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Norton's Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/05/15/NoteBook/MessageMiddleware/" class="post-title-link" itemprop="url">《分布式消息中间件事件》笔记</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-05-15 19:17:40" itemprop="dateCreated datePublished" datetime="2019-05-15T19:17:40+08:00">2019-05-15</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-12-12 19:55:08" itemprop="dateModified" datetime="2020-12-12T19:55:08+08:00">2020-12-12</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/学习笔记/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">364</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="消息队列"><a class="markdownIt-Anchor" href="#消息队列"></a> 消息队列</h1>
+<h2 id="消息队列的用途"><a class="markdownIt-Anchor" href="#消息队列的用途"></a> 消息队列的用途</h2>
+<h3 id="解耦"><a class="markdownIt-Anchor" href="#解耦"></a> 解耦：</h3>
+<p>将关联的模块之间解耦，用<strong>通知</strong>代替<strong>处理</strong>， 无需等待结果。</p>
+<h3 id="流量削峰"><a class="markdownIt-Anchor" href="#流量削峰"></a> 流量削峰：</h3>
+<p>通过将短时内突然剧增的<strong>消息在消息队列中持久化</strong>，之后逐步处理，可以避免短时的高并发导致系统雪崩。</p>
+<h3 id="日志收集"><a class="markdownIt-Anchor" href="#日志收集"></a> 日志收集：</h3>
+<p>消息队列可以将日志收集与服务分离，引入消息队列可以<strong>快速接收日志</strong>消息，避免阻塞和访问延迟。</p>
+<h3 id="事务最终一致性"><a class="markdownIt-Anchor" href="#事务最终一致性"></a> 事务最终一致性：</h3>
+<p>当有多个分布式组件时，通过事件表和消息队列可以帮助多个组件完成事务的最终一致性。</p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/05/15/NoteBook/MessageMiddleware/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1358,7 +2445,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1404,7 +2491,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">36</span>
+                    <span class="site-state-item-count">46</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1449,13 +2536,7 @@
                     
                       
                     
-                      
-                    
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">18</span>
+                    <span class="site-state-item-count">15</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -1524,7 +2605,45 @@
                     
                       
                     
-                    <span class="site-state-item-count">26</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">43</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1601,7 +2720,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">  <a href="http://beian.miit.gov.cn" rel="noopener" target="_blank">蒙ICP备18004819号-1 </a>&copy; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">  <a href="http://beian.miit.gov.cn" rel="noopener" target="_blank">蒙ICP备18004819号-1 </a>&copy; <span itemprop="copyrightYear">2021</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
@@ -1613,7 +2732,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">89k</span>
+    <span title="站点总字数">120k</span>
   
 
   
@@ -1622,7 +2741,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">1:20</span>
+    <span title="站点阅读时长">1:49</span>
   
 </div>
 
@@ -2100,6 +3219,16 @@
 
   
   
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
     
       
     

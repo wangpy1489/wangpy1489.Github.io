@@ -1,0 +1,1591 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2"/>
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1"/>
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/dog_128.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/dog_32.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/dog_16.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/dog.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="软件研发中的信任链问题  当系统被划分为多层时，不同层面的人思考关注的问题不一样，并且这种不同有时甚至造成误解。   报警的哲学   报警的（电话，短信）触达应当是紧急的，重要的，可行动的，真实的。 规则应当表示是你的服务处于过程中或者即将发生的问题。 为了保持报警项的精确，有效；宁可过度移除报警噪音。因为过度监控比监控不足更难解决 你应该总是能够将问题分为以下几种：基本功能的可用性问题；延迟；">
+<meta name="keywords" content="技术文摘">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2020-12-技术文摘">
+<meta property="og:url" content="http://yoursite.com/2020/12/15/TechnicalDigest/2020-12-技术文摘/index.html">
+<meta property="og:site_name" content="Norton&#39;s Blog">
+<meta property="og:description" content="软件研发中的信任链问题  当系统被划分为多层时，不同层面的人思考关注的问题不一样，并且这种不同有时甚至造成误解。   报警的哲学   报警的（电话，短信）触达应当是紧急的，重要的，可行动的，真实的。 规则应当表示是你的服务处于过程中或者即将发生的问题。 为了保持报警项的精确，有效；宁可过度移除报警噪音。因为过度监控比监控不足更难解决 你应该总是能够将问题分为以下几种：基本功能的可用性问题；延迟；">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-12-25T03:16:26.085Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2020-12-技术文摘">
+<meta name="twitter:description" content="软件研发中的信任链问题  当系统被划分为多层时，不同层面的人思考关注的问题不一样，并且这种不同有时甚至造成误解。   报警的哲学   报警的（电话，短信）触达应当是紧急的，重要的，可行动的，真实的。 规则应当表示是你的服务处于过程中或者即将发生的问题。 为了保持报警项的精确，有效；宁可过度移除报警噪音。因为过度监控比监控不足更难解决 你应该总是能够将问题分为以下几种：基本功能的可用性问题；延迟；">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/12/15/TechnicalDigest/2020-12-技术文摘/"/>
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>2020-12-技术文摘 | Norton's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Norton's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">You miss 100% of the shot you do not take.</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br/>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br/>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br/>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br/>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br/>归档</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br/>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/15/TechnicalDigest/2020-12-技术文摘/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王谱越"/>
+      <meta itemprop="description" content=""/>
+      <meta itemprop="image" content="/images/myavatar.jpg"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Norton's Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">2020-12-技术文摘
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-12-15 11:12:43" itemprop="dateCreated datePublished" datetime="2020-12-15T11:12:43+08:00">2020-12-15</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-12-25 11:16:26" itemprop="dateModified" datetime="2020-12-25T11:16:26+08:00">2020-12-25</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/技术文摘/" itemprop="url" rel="index"><span itemprop="name">技术文摘</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">5.8k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">5 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="软件研发中的信任链问题"><a class="markdownIt-Anchor" href="#软件研发中的信任链问题"></a> <a href="http://thomaslau.xyz/2020/11/10/2020-11-10-on_chain_of_trust/" target="_blank" rel="noopener">软件研发中的信任链问题</a></h1>
+<blockquote>
+<p>当系统被划分为多层时，不同层面的人思考关注的问题不一样，并且这种不同有时甚至造成误解。</p>
+</blockquote>
+<h1 id="报警的哲学"><a class="markdownIt-Anchor" href="#报警的哲学"></a> <a href="https://mp.weixin.qq.com/s/lJRPt7I0SeUwZ4HhVZn8AQ" target="_blank" rel="noopener">报警的哲学</a></h1>
+<blockquote>
+<ul>
+<li>报警的（电话，短信）触达应当是紧急的，重要的，可行动的，真实的。</li>
+<li>规则应当表示是你的服务处于过程中或者即将发生的问题。</li>
+<li>为了保持报警项的精确，有效；宁可过度移除报警噪音。因为过度监控比监控不足更难解决</li>
+<li>你应该总是能够将问题分为以下几种：基本功能的可用性问题；延迟；正确性（数据的完整性、新鲜性和持久性）；以及特定功能问题。</li>
+<li>规则描述症狀是更好的方法，可以更轻松，更全面，更可靠地捕获更多的问题。</li>
+<li>在基于症状的页面或仪表板中包含基于原因的信息，但要避免直接针对原因发出警报。</li>
+<li>报警越往上层的服务走，在一个报警规则中可以抓住的明显问题就越多。但不要走得太远，你无法充分区分发生了什么。</li>
+<li>如果你想在值班时，报警系统保持安静, 那么需要有一套系统和标准化的流程能够自动处理那些需要被尽快处理，但不至于让你半夜三点钟爬起来上线的事件。</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>基于症状的报警：</p>
+<ul>
+<li>基本的可用性和正确性。</li>
+<li>延迟，系统响应要足够快。</li>
+<li>完整性/新鲜度/持久性。你的用户数据应该是安全的，应该在你要求的时候回来，搜索索引应该是最新的。</li>
+<li>功能。你的用户关心的是服务的所有功能是否正常工作–你应该监控任何对你的服务很重要的方面，即使它不是核心功能/可用性（例如，计算器和股票行情显示在搜索结果中）。</li>
+</ul>
+</blockquote>
+<h1 id="谈谈ops"><a class="markdownIt-Anchor" href="#谈谈ops"></a> <a href="https://www.raychase.net/5348" target="_blank" rel="noopener">谈谈OPS</a></h1>
+<blockquote>
+<p>为此我写了很多 shell 脚本，来帮助提高工作效率，当时觉得很自豪。可是后来才慢慢感受到，真正优秀的 Ops 流程，是不需要自己现场去手写这些脚本的，工具应该帮我们干了几乎所有的事情。手动脚本是介于手动命令和工具之间的手段，但总体来说依然是一个容易犯错而且缺乏延续性的做法。一个成熟的运维流程，应该把这些犯错的可能减到最小。</p>
+<p>其原因之一就是，工程师的成本。招聘运维团队的工程师，其实并不容易，而如果能够用尽量少的研发工程师团队，“顺便” 去把运维的事情做了，这无疑是很节约成本的事情。从这个角度说，资源的限制才能促进创新和发展</p>
+<p>让研发工程师去做运维，能做好吗？不是应该让专业的人去做专门的事情吗？这个观点是两说的，如果不具备合适的工具，那一定是个灾难，但如果具备，情况就不同了。运维技能的缺乏可以通过优秀的运维工具来缓解；而另一方面，每多一种 “专业的人”，就意味着整个工作系统中，多了一个角色，就多了多个需要沟通的环节，这些都是内耗</p>
+<p>在我曾经的一个团队中，在项目发布以前的最后阶段，有限的时间里面（一般都是一个晚上），需要把最重要和最核心功能过一遍，这个功能清单叫做 checklist。为什么不把所有的测试案例都覆盖了？因为时间有限。这就是一个很简单也很容易执行的流程。但是，随着时间推演，问题变得很多。比如产品发布了以后，发现有一个比较大的问题，于是研发团队就要回溯问题，发现问题以后，为了杜绝问题的再次发生，就打算采取某些措施。（到目前为止做法上面都没有什么问题，可接下去就有争议了。）于是一条用于检测这个问题的识别项被加到这个 checklist 当中。这里面有很多检查项事实上在问题修复以后是不会再出现的了，也有一些检查项明显是用于覆盖位于边角的 corner case，而不是主要的 case，但是既然出过问题，为了保险起见，还是都加进去了。就这样，随着时间和版本的演进，这个 checklist 变得越来越长，某些验证项的执行难度颇为复杂，在几年以后，已经到了几个小时都无法过完这个 checklist 的地步，于是这个流程就变成了一个越来越难以执行的累赘。</p>
+<p>造成这一问题的原因是什么，就是流程太简便了，太有效了，以至于这些聪明人不再思考应该采用什么样的方式来从根本上彻底地解决问题。</p>
+<p>流程更多地，是用来在效率损失可以接受的情况下，控制风险，从而导向正向的影响力。对于一些服务更 critical 的团队来说，风险控制相对地，更为重要，因而流程的比重可以适当增加；反之，流程需要简化，保证效率在一个高标准之上。</p>
+<p>一个健康的研发体系，绝大多数 Ops 的工作，就应该交给普通的软件工程师来完成。</p>
+<p>而这一类真正可以委托给 Ops 团队做的事情，恰恰有一个共同的特点——都是简单劳动，而且可以自动化。换言之，缺少的是充分和有效的工具。</p>
+<p>长远来说，多数情况下，投入到工具开发的成本，和让开发人员来做 Ops 的成本，最终会小于聘用 Ops 团队的成本。</p>
+<p>除了开发人员自己做 Ops，没有任何一种组织结构能够提供这样没有回馈损耗的反哺机制，没有任何一种方式能让开发人员 “吃自己的狗食”</p>
+<p>和其它软件工程的问题一样，Ops 没有银弹。</p>
+<p>单元测试要求易于执行，由于需要反复执行和根据结果修改代码，快速的反馈是非常重要的，几十秒内必须得到结果。我见过有一些团队的单元测试跑一遍要十分钟以上，那么这种情况就要保证能够跑增量的测试，换言之，改动了什么内容，能够重跑改动的那一部分，而不是所有的测试集合。</p>
+</blockquote>
+<blockquote>
+<p>有一些实践在我看来，是非常糟糕的，它们包括：</p>
+<ul>
+<li>SSH+命令/脚本。这大概是最糟糕的了，尤其是线上的运维，在实际操作中，一定是最好更相信工具，而不是人。如果没有工具，只能手工操作，只能使用命令+脚本来解决问题，于是各种吓人的误操作就成了催命符。你可以看看 <a href="https://www.raychase.net/3039" target="_blank" rel="noopener">《手滑的故事》</a>，我相信很多人都经历过。最好的避免这样事情发生的方式是什么？限制权限？层层审批？都不是，最好的方式是自动化。人工命令和脚本的依赖程度和 Ops 的成熟度成逆相关。</li>
+<li>流程至上。这里我不是否认流程的作用，我的观点在<a href="https://www.raychase.net/5086" target="_blank" rel="noopener">这篇文章</a>中已经说过了。其中一个最典型的操作就是堆人，发现问题了，就靠加人，增加一环审批来企图避免问题。</li>
+<li>英雄主义。这是很多公司的通病，一个写优质代码的工程师不会起眼，只有埋 bug 造灾难，再挺身而出力挽狂澜，从而拯救线上产品的 “英雄” 才受人景仰。正所谓，没有困难制造困难也要上。</li>
+<li>背锅侠。这和上面的英雄主义正好相反，却又相辅相成。找运维不规范操作背锅（可事实呢，考虑到复杂性、枯燥性等原因，几乎没法 “规范” 操作，人都是有偷懒和走捷径的本性的），找开发埋地雷，测试漏覆盖背锅。当场批评，事后追责。</li>
+<li>用户投诉驱动开发，线上事故驱动开发。这一系列通过糟糕的结果来反向推动的运维反馈开发的方式（其它各种奇葩的驱动开发方式，看<a href="https://www.raychase.net/1169" target="_blank" rel="noopener">这里</a>）。</li>
+<li>把研发的时间精力投入 ops。这是恶性循环最本质的一条，没时间做好需求分析，没时间做好设计，没时间做好测试，没时间写好代码，什么都没时间，因为全都去 Ops 解线上问题去了。结果呢，糟糕的上游造就了更糟糕的下游，问题频出，于是更多的人花更多的人去 ops。如此恶性循环……</li>
+</ul>
+</blockquote>
+<h1 id="rust-半小时教程"><a class="markdownIt-Anchor" href="#rust-半小时教程"></a> Rust 半小时教程</h1>
+<p><a href="https://colobu.com/2020/03/05/A-half-hour-to-learn-Rust/" target="_blank" rel="noopener">https://colobu.com/2020/03/05/A-half-hour-to-learn-Rust/</a></p>
+<h1 id="c服务编译耗时优化原理及实践"><a class="markdownIt-Anchor" href="#c服务编译耗时优化原理及实践"></a> <a href="https://tech.meituan.com/2020/12/10/apache-kylin-practice-in-meituan.html" target="_blank" rel="noopener">C++服务编译耗时优化原理及实践</a></h1>
+<blockquote>
+<h3 id="22-c编译特点"><a class="markdownIt-Anchor" href="#22-c编译特点"></a> 2.2 C++编译特点</h3>
+<p>（1）每个源文件独立编译</p>
+<p>C/C<ins>的编译系统和其他高级语言存在很大的差异，其他高级语言中，编译单元是整个Module，即Module下所有源码，会在同一个编译任务中执行。而在C/C</ins>中，编译单元是以文件为单位。每个.c/.cc/.cxx/.cpp源文件是一个独立的编译单元，导致编译优化时只能基于本文件内容进行优化，很难跨编译单元提供代码优化。</p>
+<p>（2）每个编译单元，都需要独立解析所有包含的头文件</p>
+<p>如果N个源文件引用到了同一个头文件，则这个头文件需要解析N次（对于Thrift文件或者Boost头文件这类动辄几千上万行的头文件来说，简直就是“鬼故事”）。</p>
+<p>如果头文件中有模板（STL/Boost），则该模板在每个cpp文件中使用时都会做一次实例化，N个源文件中的std::vector会实例化N次。</p>
+<p>（3）模板函数实例化</p>
+<p>在C++ 98语言标准中，对于源代码中出现的每一处模板实例化，编译器都需要去做实例化的工作；而在链接时，链接器还需要移除重复的实例化代码。显然编译器遇到一个模板定义时，每次都去进行重复的实例化工作，进行重复的编译工作。此时，如果能够让编译器避免此类重复的实例化工作，那么可以大大提高编译器的工作效率。在C++ 0x标准中一个新的语言特性 – 外部模板的引入解决了这个问题。</p>
+<p>在C++ 98中，已经有一个叫做显式实例化（Explicit Instantiation）的语言特性，它的目的是指示编译器立即进行模板实例化操作（即强制实例化）。而外部模板语法就是在显式实例化指令的语法基础上进行修改得到的，通过在显式实例化指令前添加前缀extern，从而得到外部模板的语法。</p>
+<p>① 显式实例化语法：template class vector。 ② 外部模板语法：extern template class vector。</p>
+<p>一旦在一个编译单元中使用了外部模板声明，那么编译器在编译该编译单元时，会跳过与该外部模板声明匹配的模板实例化。</p>
+<p>（4）虚函数</p>
+<p>编译器处理虚函数的方法是：给每个对象添加一个指针，存放了指向虚函数表的地址，虚函数表存储了该类（包括继承自基类）的虚函数地址。如果派生类重写了虚函数的新定义，该虚函数表将保存新函数的地址，如果派生类没有重新定义虚函数，该虚函数表将保存函数原始版本的地址。如果派生类定义了新的虚函数，则该函数的地址将被添加到虚函数表中。</p>
+<p>调用虚函数时，程序将查看存储在对象中的虚函数表地址，转向相应的虚函数表，使用类声明中定义的第几个虚函数，程序就使用数组的第几个函数地址，并执行该函数。</p>
+<p>使用虚函数后的变化：</p>
+<p>① 对象将增加一个存储地址的空间（32位系统为4字节，64位为8字节）。 ② 每个类编译器都创建一个虚函数地址表。 ③ 对每个函数调用都需要增加在表中查找地址的操作。</p>
+<p>（5）编译优化</p>
+<p>GCC提供了为了满足用户不同程度的的优化需要，提供了近百种优化选项，用来对编译时间，目标文件长度，执行效率这个三维模型进行不同的取舍和平衡。优化的方法不一而足，总体上将有以下几类：</p>
+<p>① 精简操作指令。 ② 尽量满足CPU的流水操作。 ③ 通过对程序行为地猜测，重新调整代码的执行顺序。 ④ 充分使用寄存器。 ⑤ 对简单的调用进行展开等等。</p>
+<p>如果全部了解这些编译选项，对代码针对性的优化还是一项复杂的工作，幸运的是GCC提供了从O0-O3以及Os这几种不同的优化级别供大家选择，在这些选项中，包含了大部分有效的编译优化选项，并且可以在这个基础上，对某些选项进行屏蔽或添加，从而大大降低了使用的难度。</p>
+<ul>
+<li>O0：不做任何优化，这是默认的编译选项。</li>
+<li>O和O1：对程序做部分编译优化，编译器会尝试减小生成代码的尺寸，以及缩短执行时间，但并不执行需要占用大量编译时间的优化。</li>
+<li>O2：是比O1更高级的选项，进行更多的优化。GCC将执行几乎所有的不包含时间和空间折中的优化。当设置O2选项时，编译器并不进行循环展开以及函数内联优化。与O1比较而言，O2优化增加了编译时间的基础上，提高了生成代码的执行效率。</li>
+<li>O3：在O2的基础上进行更多的优化，例如使用伪寄存器网络，普通函数的内联，以及针对循环的更多优化。</li>
+<li>Os：主要是对代码大小的优化， 通常各种优化都会打乱程序的结构，让调试工作变得无从着手。并且会打乱执行顺序，依赖内存操作顺序的程序需要做相关处理才能确保程序的正确性。</li>
+</ul>
+<p>编译优化有可能带来的问题：</p>
+<p>① <strong>调试问题</strong>：正如上面所提到的，任何级别的优化都将带来代码结构的改变。例如：对分支的合并和消除，对公用子表达式的消除，对循环内load/store操作的替换和更改等，都将会使目标代码的执行顺序变得面目全非，导致调试信息严重不足。</p>
+<p>② <strong>内存操作顺序改变问题</strong>：在O2优化后，编译器会对影响内存操作的执行顺序。例如：-fschedule-insns允许数据处理时先完成其他的指令；-fforce-mem有可能导致内存与寄存器之间的数据产生类似脏数据的不一致等。对于某些依赖内存操作顺序而进行的逻辑，需要做严格的处理后才能进行优化。例如，采用Volatile关键字限制变量的操作方式，或者利用Barrier迫使CPU严格按照指令序执行。</p>
+<p>(6)C/C++ 跨编译单元的优化只能交给链接器</p>
+<p>当链接器进行链接的时候，首先决定各个目标文件在最终可执行文件里的位置。然后访问所有目标文件的地址重定义表，对其中记录的地址进行重定向（加上一个偏移量，即该编译单元在可执行文件上的起始地址）。然后遍历所有目标文件的未解决符号表，并且在所有的导出符号表里查找匹配的符号，并在未解决符号表中所记录的位置上填写实现地址，最后把所有的目标文件的内容写在各自的位置上，就生成一个可执行文件。链接的细节比较复杂，链接阶段是单进程，无法并行加速，导致大项目链接极慢。</p>
+<p>编译耗时分段统计是从结果上看各个文件的编译耗时以及各个编译阶段的耗时情况，这个是直观的一个结果，正常情况下，是和文件展开大小以及头文件引用个数是正相关的，cmake通过指定环境变量能打印出编译和链接阶段的耗时情况，通过这个数据能直观的分析出耗时情况。</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="keyword">set_property</span>(GLOBAL PROPERTY RULE_LAUNCH_COMPILE <span class="string">"$&#123;CMAKE_COMMAND&#125; -E time"</span>)</span><br><span class="line">&gt; <span class="keyword">set_property</span>(GLOBAL PROPERTY RULE_LAUNCH_LINK <span class="string">"$&#123;CMAKE_COMMAND&#125; -E time"</span>)</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h1 id="git-change-log"><a class="markdownIt-Anchor" href="#git-change-log"></a> <a href="https://www.freecodecamp.org/news/a-beginners-guide-to-git-what-is-a-changelog-and-how-to-generate-it/" target="_blank" rel="noopener">Git Change Log</a></h1>
+<blockquote>
+<p>Some websites such as <a href="https://keepachangelog.com/" target="_blank" rel="noopener">Keep A Changelog</a> explain that you shouldn’t make a changelog only by copying and pasting your git commits (refer to the simple way). Indeed, I recommend trying to avoid this way if you are working on a professional product.</p>
+</blockquote>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/技术文摘/" rel="tag"># 技术文摘</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/12/12/Programing/转-如何写代码注释/" rel="next" title="转-如何写代码注释">
+                <i class="fa fa-chevron-left"></i> 转-如何写代码注释
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/01/03/TechnicalDigest/2021-01-技术文摘/" rel="prev" title="2021-01-技术文摘">
+                2021-01-技术文摘 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/myavatar.jpg"
+                alt="王谱越"/>
+            
+              <p class="site-author-name" itemprop="name">王谱越</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">46</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">15</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">43</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/wangpy1489" title="GitHub &rarr; https://github.com/wangpy1489" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:wangpy1489@sjtu.edu.cn" title="E-Mail &rarr; mailto:wangpy1489@sjtu.edu.cn" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.instagram.com/norton_yue/" title="Instagram &rarr; https://www.instagram.com/norton_yue/" rel="noopener" target="_blank"><i class="fa fa-fw fa-instagram"></i>Instagram</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#软件研发中的信任链问题"><span class="nav-text"> 软件研发中的信任链问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#报警的哲学"><span class="nav-text"> 报警的哲学</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#谈谈ops"><span class="nav-text"> 谈谈OPS</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#rust-半小时教程"><span class="nav-text"> Rust 半小时教程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#c服务编译耗时优化原理及实践"><span class="nav-text"> C++服务编译耗时优化原理及实践</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#22-c编译特点"><span class="nav-text"> 2.2 C++编译特点</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#git-change-log"><span class="nav-text"> Git Change Log</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">  <a href="http://beian.miit.gov.cn" rel="noopener" target="_blank">蒙ICP备18004819号-1 </a>&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">王谱越</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">120k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">1:49</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.0.1</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/schemes/muse.js?v=7.0.1"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.1"></script>
+
+
+  
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      
+        background-color: #eee;
+        background-image: linear-gradient(#fcfcfc, #eee);
+        border: 1px solid #d5d5d5;
+        border-radius: 3px;
+      
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      
+        right: 4px;
+        top: 8px;
+      
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1;
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function(i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap');
+      $(e).after($wrap);
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function(e) {
+        var code = $(this).parent().find('.code').find('.line').map(function(i, e) {
+          return $(e).text();
+        }).toArray().join('\n');
+        var ta = document.createElement('textarea');
+        var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+        ta.style.top = yPosition + 'px'; // Prevent page scroll
+        ta.style.position = 'absolute';
+        ta.style.opacity = '0';
+        ta.readOnly = true;
+        ta.value = code;
+        document.body.appendChild(ta);
+        ta.select();
+        ta.setSelectionRange(0, code.length);
+        ta.readOnly = false;
+        var result = document.execCommand('copy');
+        
+        ta.blur(); // For iOS
+        $(this).blur();
+      })).on('mouseleave', function(e) {
+        var $b = $(this).find('.copy-btn');
+        setTimeout(function() {
+          $b.text('复制');
+        }, 300);
+      }).append(e);
+    })
+  </script>
+
+
+</body>
+</html>
