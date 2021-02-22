@@ -96,18 +96,18 @@
 
 
 
-  <meta name="description" content="刨根问底，kafka 到底会不会丢消息  Kafka有三次消息传递的过程：  生产者发消息给Kafka Broker。 Kafka Broker 消息同步和持久化 Kafka Broker 将消息传递给消费者。  在这三步中每一步都有可能会丢失消息，下面详细分析为什么会丢消息，如何最大限度避免丢失消息。 … Kafka通过配置request.required.acks属性来确认消息的生产：  0">
+  <meta name="description" content="刨根问底，kafka 到底会不会丢消息  Kafka有三次消息传递的过程：  生产者发消息给Kafka Broker。 Kafka Broker 消息同步和持久化 Kafka Broker 将消息传递给消费者。 在这三步中每一步都有可能会丢失消息，下面详细分析为什么会丢消息，如何最大限度避免丢失消息。  … Kafka通过配置request.required.acks属性来确认消息的生产：  0">
 <meta name="keywords" content="技术文摘">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2021-01-技术文摘">
 <meta property="og:url" content="http://yoursite.com/2021/01/03/TechnicalDigest/2021-01-技术文摘/index.html">
 <meta property="og:site_name" content="Norton&#39;s Blog">
-<meta property="og:description" content="刨根问底，kafka 到底会不会丢消息  Kafka有三次消息传递的过程：  生产者发消息给Kafka Broker。 Kafka Broker 消息同步和持久化 Kafka Broker 将消息传递给消费者。  在这三步中每一步都有可能会丢失消息，下面详细分析为什么会丢消息，如何最大限度避免丢失消息。 … Kafka通过配置request.required.acks属性来确认消息的生产：  0">
+<meta property="og:description" content="刨根问底，kafka 到底会不会丢消息  Kafka有三次消息传递的过程：  生产者发消息给Kafka Broker。 Kafka Broker 消息同步和持久化 Kafka Broker 将消息传递给消费者。 在这三步中每一步都有可能会丢失消息，下面详细分析为什么会丢消息，如何最大限度避免丢失消息。  … Kafka通过配置request.required.acks属性来确认消息的生产：  0">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-02-08T02:44:52.627Z">
+<meta property="og:updated_time" content="2021-02-22T06:04:57.266Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2021-01-技术文摘">
-<meta name="twitter:description" content="刨根问底，kafka 到底会不会丢消息  Kafka有三次消息传递的过程：  生产者发消息给Kafka Broker。 Kafka Broker 消息同步和持久化 Kafka Broker 将消息传递给消费者。  在这三步中每一步都有可能会丢失消息，下面详细分析为什么会丢消息，如何最大限度避免丢失消息。 … Kafka通过配置request.required.acks属性来确认消息的生产：  0">
+<meta name="twitter:description" content="刨根问底，kafka 到底会不会丢消息  Kafka有三次消息传递的过程：  生产者发消息给Kafka Broker。 Kafka Broker 消息同步和持久化 Kafka Broker 将消息传递给消费者。 在这三步中每一步都有可能会丢失消息，下面详细分析为什么会丢消息，如何最大限度避免丢失消息。  … Kafka通过配置request.required.acks属性来确认消息的生产：  0">
 
 
 
@@ -435,7 +435,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2021-02-08 10:44:52" itemprop="dateModified" datetime="2021-02-08T10:44:52+08:00">2021-02-08</time>
+                <time title="修改时间：2021-02-22 14:04:57" itemprop="dateModified" datetime="2021-02-22T14:04:57+08:00">2021-02-22</time>
               
             
           </span>
@@ -530,8 +530,8 @@
 <li>生产者发消息给Kafka Broker。</li>
 <li>Kafka Broker 消息同步和持久化</li>
 <li>Kafka Broker 将消息传递给消费者。</li>
+<li>在这三步中每一步都有可能会丢失消息，下面详细分析为什么会丢消息，如何最大限度避免丢失消息。</li>
 </ol>
-<p>在这三步中每一步都有可能会丢失消息，下面详细分析为什么会丢消息，如何最大限度避免丢失消息。</p>
 <p>…</p>
 <p>Kafka通过配置request.required.acks属性来确认消息的生产：</p>
 <ul>
