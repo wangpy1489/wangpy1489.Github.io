@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[2021-02-技术文摘]]></title>
     <url>%2F2021%2F02%2F01%2FTechnicalDigest%2F2021-02-%E6%8A%80%E6%9C%AF%E6%96%87%E6%91%98%2F</url>
-    <content type="text"><![CDATA[6w字搞定Linux基本操作，建议收藏 https://juejin.cn/post/6917096816118857736 很齐全 值得翻一翻 程序员职场经验 https://juejin.cn/post/6924205515191320589 真正有价值的社交其实都是弱社交。也就是那些和你不太熟悉的人，比如前同事，校友，不怎么来往的同学等等。经营人脉其实并没有太多东西，就是就只有一点，就是管理好外界对我们的看法和认知，维持住“人设”。简单来说，就是我们要注意羽毛和口碑，说不定什么时候它就起到了作用。 在职场当中真正好机会是很稀缺的，很多机会只有局内人才能接触到。 Linux 堆内存管理 Linux堆内存管理深入分析（上） Linux堆内存管理深入分析（下） brk 和 mmap 计算和储存分离 https://juejin.cn/post/6844904055840440333 https://juicefs.com/blog/cn/posts/why-disaggregated-compute-and-storage-is-future/ 这个时候谷歌摒弃了之前的观念“移动存储到计算”，采取了“移动计算到存储的观念”，将计算和存储耦合了，因为当时的网络速度对比现在来说慢了几百倍，网络速度跟不上我们的需要。在在典型的MapReduce部署中计算和存储都在同一个集群中进行，比如后续的hadoop。这里其实也就是用本地IO速度来替换网络传输速度。 随着技术的进步，我们的网络速度也越来越快，我们的瓶颈不再是网络速度，但是我们的磁盘I/O速度却没有明显的速度增长，计算和存储融合的架构缺点也再逐渐暴露： 作者：咖啡拿铁 链接：https://juejin.cn/post/6844904055840440333 来源：掘金 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。 Swig 封装C++接口 https://www.cnblogs.com/terencezhou/p/10059156.html CPU分支预测 http://djs66256.github.io/2019/01/29/2019-01-29-CPU分支预测/ 介绍了几种分支预测的算法 Varint编码 https://segmentfault.com/a/1190000020500985 Varint是一种使用一个或多个字节序列化整数的方法，会把整数编码为变长字节。对于32位整型数据经过Varint编码后需要15个字节，小的数字使用1个byte，大的数字使用5个bytes。64位整型数据编码后占用110个字节。在实际场景中小数字的使用率远远多于大数字，因此通过Varint编码对于大部分场景都可以起到很好的压缩效果。 Perf – Linux下的系统性能调优工具 Perf 是用来进行软件性能分析的工具。 通过它，应用程序可以利用 PMU，tracepoint 和内核中的特殊计数器来进行性能统计。它不但可以分析指定应用程序的性能问题 (per thread)，也可以用来分析内核的性能问题，当然也可以同时分析应用代码和内核，从而全面理解应用程序中的性能瓶颈。]]></content>
+    <content type="text"><![CDATA[6w字搞定Linux基本操作，建议收藏 https://juejin.cn/post/6917096816118857736 很齐全 值得翻一翻 程序员职场经验 https://juejin.cn/post/6924205515191320589 真正有价值的社交其实都是弱社交。也就是那些和你不太熟悉的人，比如前同事，校友，不怎么来往的同学等等。经营人脉其实并没有太多东西，就是就只有一点，就是管理好外界对我们的看法和认知，维持住“人设”。简单来说，就是我们要注意羽毛和口碑，说不定什么时候它就起到了作用。 在职场当中真正好机会是很稀缺的，很多机会只有局内人才能接触到。 Linux 堆内存管理 Linux堆内存管理深入分析（上） Linux堆内存管理深入分析（下） brk 和 mmap 计算和储存分离 https://juejin.cn/post/6844904055840440333 https://juicefs.com/blog/cn/posts/why-disaggregated-compute-and-storage-is-future/ 这个时候谷歌摒弃了之前的观念“移动存储到计算”，采取了“移动计算到存储的观念”，将计算和存储耦合了，因为当时的网络速度对比现在来说慢了几百倍，网络速度跟不上我们的需要。在在典型的MapReduce部署中计算和存储都在同一个集群中进行，比如后续的hadoop。这里其实也就是用本地IO速度来替换网络传输速度。 随着技术的进步，我们的网络速度也越来越快，我们的瓶颈不再是网络速度，但是我们的磁盘I/O速度却没有明显的速度增长，计算和存储融合的架构缺点也再逐渐暴露： 作者：咖啡拿铁 链接：https://juejin.cn/post/6844904055840440333 来源：掘金 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。 Swig 封装C++接口 https://www.cnblogs.com/terencezhou/p/10059156.html CPU分支预测 http://djs66256.github.io/2019/01/29/2019-01-29-CPU分支预测/ 介绍了几种分支预测的算法 Varint编码 https://segmentfault.com/a/1190000020500985 Varint是一种使用一个或多个字节序列化整数的方法，会把整数编码为变长字节。对于32位整型数据经过Varint编码后需要15个字节，小的数字使用1个byte，大的数字使用5个bytes。64位整型数据编码后占用110个字节。在实际场景中小数字的使用率远远多于大数字，因此通过Varint编码对于大部分场景都可以起到很好的压缩效果。 Perf – Linux下的系统性能调优工具 Perf 是用来进行软件性能分析的工具。 通过它，应用程序可以利用 PMU，tracepoint 和内核中的特殊计数器来进行性能统计。它不但可以分析指定应用程序的性能问题 (per thread)，也可以用来分析内核的性能问题，当然也可以同时分析应用代码和内核，从而全面理解应用程序中的性能瓶颈。 eBPF技术 https://blog.fleeto.us/post/what-is-ebpf/ 概念和基本原理的介绍文章 https://qmonnet.github.io/whirl-offload/2016/09/01/dive-into-bpf/ 一个全面的ebpf学习路线]]></content>
       <categories>
         <category>技术文摘</category>
       </categories>
@@ -14,12 +14,12 @@
   <entry>
     <title><![CDATA[灵光一闪]]></title>
     <url>%2F2021%2F01%2F21%2F%E7%81%B5%E5%85%89%E4%B8%80%E9%97%AA%2F</url>
-    <content type="text"><![CDATA[记录一下平时突然想到的一些好的 idea。 产品的第一步或冷增长应当是社交(爆款或裂变)为佳，机器推荐提供的是产品黏性。]]></content>
+    <content type="text"><![CDATA[记录一下平时突然想到的一些好的 idea。 产品的第一步或冷增长应当是社交(爆款或裂变)为佳，机器推荐提供的是产品黏性。 服务业的服务价格取决于当地消费者的收入水平（机会成本）。如：服务业中的剪发、按摩、中介等。 可行性验证应当从最难的部分开始，而不是从简单可实现的部分开始下手。 优质资产是相对概念在同一资产类目中排名靠前的资产即为优质资产。而排名考虑的是两点：α（超额收益）和β（系统风险系数） 新技术提供的是更多的可选项，而不是应该要使用。技术发展带来的是自由而不是“最新方案“的约束。 由于物质和能量守恒，所以物质财富是取之不竭的。其区别在于多少能够被人类所利用。 确定概率的不确定性——偶然不确定性。 不确定概率的不确定性——认知（系统）不确定性。 利润来源于系统不确定性。 风口不属于投机者，而是属于那些原本就在行业中深耕的人。 2020年中国零售消费市场 39万亿元]]></content>
   </entry>
   <entry>
     <title><![CDATA[工具杂记]]></title>
     <url>%2F2021%2F01%2F07%2F%E5%B7%A5%E5%85%B7%E6%9D%82%E8%AE%B0%2F</url>
-    <content type="text"><![CDATA[VScode 21个Vscode快捷键 https://juejin.cn/post/6844903894305210381 VScode教程 这个教程还是很全的，只是找起来不太方便 https://geek-docs.com/vscode/vscode-tutorials/what-is-vscode.html CPP 使用ccls：C++ language server https://zhuanlan.zhihu.com/p/31672451 Git Git 中大文件清理 https://rtyley.github.io/bfg-repo-cleaner/]]></content>
+    <content type="text"><![CDATA[VScode 21个Vscode快捷键 https://juejin.cn/post/6844903894305210381 VScode教程 这个教程还是很全的，只是找起来不太方便 https://geek-docs.com/vscode/vscode-tutorials/what-is-vscode.html CPP 使用ccls：C++ language server https://zhuanlan.zhihu.com/p/31672451 Git Git 中大文件清理 https://rtyley.github.io/bfg-repo-cleaner/ Docker Docker多阶段构建（多个 From） https://segmentfault.com/a/1190000016137548 Docker 17.05版本以后，新增了Dockerfile多阶段构建。所谓多阶段构建，实际上是允许一个Dockerfile 中出现多个 FROM 指令。]]></content>
       <categories>
         <category>开发工具</category>
       </categories>
@@ -430,9 +430,9 @@
         <category>C++</category>
       </categories>
       <tags>
+        <tag>知识辨析</tag>
         <tag>内存管理</tag>
         <tag>malloc</tag>
-        <tag>知识辨析</tag>
       </tags>
   </entry>
   <entry>
@@ -443,9 +443,9 @@
         <category>C++</category>
       </categories>
       <tags>
+        <tag>知识辨析</tag>
         <tag>内存管理</tag>
         <tag>malloc</tag>
-        <tag>知识辨析</tag>
       </tags>
   </entry>
   <entry>
@@ -467,8 +467,8 @@
         <category>LeetCode</category>
       </categories>
       <tags>
-        <tag>LeetCode Summary</tag>
         <tag>数组</tag>
+        <tag>LeetCode Summary</tag>
       </tags>
   </entry>
   <entry>
