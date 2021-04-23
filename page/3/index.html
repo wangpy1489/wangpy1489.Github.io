@@ -371,7 +371,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/15/NoteBook/MessageMiddleware/"/>
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/12/C++/NanoLog-纳秒级C-日志/"/>
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="王谱越"/>
@@ -391,7 +391,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/05/15/NoteBook/MessageMiddleware/" class="post-title-link" itemprop="url">《分布式消息中间件事件》笔记</a>
+                <a href="/2020/12/12/C++/NanoLog-纳秒级C-日志/" class="post-title-link" itemprop="url">NanoLog-纳秒级C++日志</a>
               
             
           </h1>
@@ -416,24 +416,12 @@
                 
               
 
-              <time title="创建时间：2019-05-15 19:17:40" itemprop="dateCreated datePublished" datetime="2019-05-15T19:17:40+08:00">2019-05-15</time>
+              <time title="创建时间：2020-12-12 20:32:20 / 修改时间：22:48:43" itemprop="dateCreated datePublished" datetime="2020-12-12T20:32:20+08:00">2020-12-12</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2020-12-12 19:55:08" itemprop="dateModified" datetime="2020-12-12T19:55:08+08:00">2020-12-12</time>
               
             
           </span>
@@ -450,7 +438,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/学习笔记/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a></span>
 
                 
                 
@@ -479,7 +467,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">364</span>
+                <span title="本文字数">1.2k</span>
               
 
               
@@ -514,25 +502,456 @@
 
       
         
-          <h1 id="消息队列"><a class="markdownIt-Anchor" href="#消息队列"></a> 消息队列</h1>
-<h2 id="消息队列的用途"><a class="markdownIt-Anchor" href="#消息队列的用途"></a> 消息队列的用途</h2>
-<h3 id="解耦"><a class="markdownIt-Anchor" href="#解耦"></a> 解耦：</h3>
-<p>将关联的模块之间解耦，用<strong>通知</strong>代替<strong>处理</strong>， 无需等待结果。</p>
-<h3 id="流量削峰"><a class="markdownIt-Anchor" href="#流量削峰"></a> 流量削峰：</h3>
-<p>通过将短时内突然剧增的<strong>消息在消息队列中持久化</strong>，之后逐步处理，可以避免短时的高并发导致系统雪崩。</p>
-<h3 id="日志收集"><a class="markdownIt-Anchor" href="#日志收集"></a> 日志收集：</h3>
-<p>消息队列可以将日志收集与服务分离，引入消息队列可以<strong>快速接收日志</strong>消息，避免阻塞和访问延迟。</p>
-<h3 id="事务最终一致性"><a class="markdownIt-Anchor" href="#事务最终一致性"></a> 事务最终一致性：</h3>
-<p>当有多个分布式组件时，通过事件表和消息队列可以帮助多个组件完成事务的最终一致性。</p>
+          <h1 id="nanolog"><a class="markdownIt-Anchor" href="#nanolog"></a> NanoLog</h1>
+<h2 id="背景"><a class="markdownIt-Anchor" href="#背景"></a> 背景</h2>
+<h3 id="现有日志系统缺陷"><a class="markdownIt-Anchor" href="#现有日志系统缺陷"></a> 现有日志系统缺陷</h3>
+<ol>
+<li>同步写日志——慢</li>
+<li>放到后台线程写，仍有代价。且为了不被卡住，要减少产生日志量：
+<ol>
+<li>设置日志等级</li>
+<li>随机采样log</li>
+</ol>
+</li>
+</ol>
+<h3 id="观察"><a class="markdownIt-Anchor" href="#观察"></a> 观察</h3>
+<ol>
+<li>人可读懂的Log不是必须在应用中产生。</li>
+<li>日志信息存在广泛的重复，大部分内容是静态内容。</li>
+</ol>
+<h2 id="设计"><a class="markdownIt-Anchor" href="#设计"></a> 设计</h2>
+<h3 id="思想"><a class="markdownIt-Anchor" href="#思想"></a> 思想</h3>
+<ol>
+<li>在编译阶段提取log信息中的重复的静态部分，用字典ID代替字符串</li>
+<li>将format工作推迟到离线任务。</li>
+<li>压缩日志中的动态变量，减少IO。</li>
+</ol>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/05/15/NoteBook/MessageMiddleware/#more" rel="contents">
+              <a class="btn" href="/2020/12/12/C++/NanoLog-纳秒级C-日志/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
           
           <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/12/TechnicalDigest/2020-09-技术文摘/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王谱越"/>
+      <meta itemprop="description" content=""/>
+      <meta itemprop="image" content="/images/myavatar.jpg"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Norton's Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2020/12/12/TechnicalDigest/2020-09-技术文摘/" class="post-title-link" itemprop="url">2020-09-技术文摘</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-12-12 20:14:17" itemprop="dateCreated datePublished" datetime="2020-12-12T20:14:17+08:00">2020-12-12</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2021-01-31 16:42:40" itemprop="dateModified" datetime="2021-01-31T16:42:40+08:00">2021-01-31</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/技术文摘/" itemprop="url" rel="index"><span itemprop="name">技术文摘</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">1.1k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="今日头条品质优化图文详情页秒开实践"><a class="markdownIt-Anchor" href="#今日头条品质优化图文详情页秒开实践"></a> <a href="https://www.infoq.cn/article/jqzxGCc15zjwv7Iw9IHh" target="_blank" rel="noopener">今日头条品质优化：图文详情页秒开实践</a></h1>
+<blockquote>
+<p>我们把 WebView 截图的图片进行缩小到原图的 1/6，遍历检测图片的像素点，当非白色的像素点大于 5% 的时候我们就认为是非白屏的情况，可以相对高效检测准确得出详情页是否发生了白屏。</p>
+<p>可以看到，通过线上页面加载用户每次进入详情页都要通过多次网络加载，极容易受网络波动的影响，这种情况下，也无法保证页面加载的时长和成功率，极大的影响了用户体验。</p>
+<p>于是在头条中，我们将新闻中标题和正文内容进行拆分，把头条详情页的公共样式 CSS 和 逻辑 JS 都抽离出来，形成一个独立而完备的详情页模板，这样我们就可以把模板直接内置在客户端中。<br>
+快速动态超时策略<br>
+单次请求 CDN 的超时时间，根据上次成功请求 CDN 的值计算，因子 1.5（z 值）。且最小为 1s（x 值），最大为 4s（y 值）。超过这一时间不取消，直接请求下个 CDN。<br>
+单次请求 CDN 有一个硬性超时时间 4s（w 值，w 需 &gt;=y），超过这一时间请求取消。n 个 CDN 的请求全部取消后反馈用户失败。</p>
+</blockquote>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2020/12/12/TechnicalDigest/2020-09-技术文摘/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/07/k8s-servicedns/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王谱越"/>
+      <meta itemprop="description" content=""/>
+      <meta itemprop="image" content="/images/myavatar.jpg"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Norton's Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/07/07/k8s-servicedns/" class="post-title-link" itemprop="url">k8s-servicedns</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-07-07 10:45:59" itemprop="dateCreated datePublished" datetime="2019-07-07T10:45:59+08:00">2019-07-07</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2021-01-31 13:49:47" itemprop="dateModified" datetime="2021-01-31T13:49:47+08:00">2021-01-31</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/k8s-docker/" itemprop="url" rel="index"><span itemprop="name">k8s/docker</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">110</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="在集群node中解析kuebernetes-service域名"><a class="markdownIt-Anchor" href="#在集群node中解析kuebernetes-service域名"></a> 在集群NODE中解析Kuebernetes service域名</h1>
+<p>只要将core DNS的cluster IP加入到<code>/etc/resolv.conf</code> 即可。但注意，重启系统会根据网卡重写<code>/etc/resolv.conf</code></p>
+
+          
         
       
     </div>
@@ -2051,436 +2470,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/31/Linux/namespace-cgroup/"/>
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="王谱越"/>
-      <meta itemprop="description" content=""/>
-      <meta itemprop="image" content="/images/myavatar.jpg"/>
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Norton's Blog"/>
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/03/31/Linux/namespace-cgroup/" class="post-title-link" itemprop="url">Linux namespace与Cgroup简述</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-03-31 19:54:27" itemprop="dateCreated datePublished" datetime="2019-03-31T19:54:27+08:00">2019-03-31</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2020-12-12 19:59:00" itemprop="dateModified" datetime="2020-12-12T19:59:00+08:00">2020-12-12</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">3k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">3 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="namespace-概述"><a class="markdownIt-Anchor" href="#namespace-概述"></a> NameSpace 概述</h1>
-<p>Namespace 用于不同进程组之间的资源隔离，其目的是将某个特定的全局系统资源（global system resource）通过抽象方法使得namespace 中的进程看起来拥有它们自己的隔离的全局系统资源实例。</p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/03/31/Linux/namespace-cgroup/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/31/C++/c-trivial/"/>
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="王谱越"/>
-      <meta itemprop="description" content=""/>
-      <meta itemprop="image" content="/images/myavatar.jpg"/>
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Norton's Blog"/>
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/03/31/C++/c-trivial/" class="post-title-link" itemprop="url">C++ trivial类型</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-03-31 13:46:54" itemprop="dateCreated datePublished" datetime="2019-03-31T13:46:54+08:00">2019-03-31</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2020-12-12 20:00:00" itemprop="dateModified" datetime="2020-12-12T20:00:00+08:00">2020-12-12</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">1.1k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="trival类型"><a class="markdownIt-Anchor" href="#trival类型"></a> Trival类型</h1>
-<p>最近在看《STL源码剖析》时看到对于Trival和POD类型，模板会有相应的特化，对于Trival类型的操作不需逐个调用构造函数和析构函数。但是不清楚Trival的含义，因此查了一下。</p>
-<blockquote>
-<p>A trivially copyable class is a class that:<br>
-— has no non-trivial copy constructors (12.8),<br>
-— has no non-trivial move constructors (12.8),<br>
-— has no non-trivial copy assignment operators (13.5.3, 12.8),<br>
-— has no non-trivial move assignment operators (13.5.3, 12.8), and<br>
-— has a trivial destructor (12.4).</p>
-<p>A trivial class is a class that has a trivial default constructor (12.1) and is trivially copyable.</p>
-<h2 id="note-in-particular-a-trivially-copyable-or-trivial-class-does-not-have-virtual-functions-or-virtual-base-classesend-note"><a class="markdownIt-Anchor" href="#note-in-particular-a-trivially-copyable-or-trivial-class-does-not-have-virtual-functions-or-virtual-base-classesend-note"></a> [ Note: In particular, a trivially copyable or trivial class does not have virtual functions or virtual base classes.—end note ]</h2>
-<p>其他要求：</p>
-<p>①没有虚成员（不含虚函数以及虚基类）</p>
-<p>②没有类内初始化的非静态数据成员</p>
-<p>③如果它拥有基类或者非静态成员，它们也应该是trivial的</p>
-</blockquote>
-<h2 id="trivial-constructor-and-trivial-destructor"><a class="markdownIt-Anchor" href="#trivial-constructor-and-trivial-destructor"></a> trivial  constructor and trivial destructor</h2>
-<p>trivial构造函数即构造函数“什么都不干”。<strong>通常情况下，不定义类的构造函数，编译器就会为我们生成一个平凡的默认构造函数</strong>。但如果该类含有虚函数或者数据成员没有默认构造函数，编译器是不会为我们生成trivial的默认构造函数的。析构函数也是一样的道理。</p>
-<h2 id="trivial-copy-constructor-and-trivial-copy-constructor"><a class="markdownIt-Anchor" href="#trivial-copy-constructor-and-trivial-copy-constructor"></a> trivial copy constructor and trivial copy constructor</h2>
-<p>trivial 拷贝构造函数基本上等同于memcpy进行类型的构造。同trivial 构造函数一样，编译器在用户不提供的情况下，通常会提供trivial 拷贝构造函数。</p>
-<p>trivial 移动构造函数执行的操作与trivial 拷贝构造函数相同，都是bytewise的拷贝，只是用于移动语义。</p>
-<p><a href="https://www.cnblogs.com/shuaihanhungry/p/5764019.html" target="_blank" rel="noopener">详细请看</a></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2531,7 +2520,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">47</span>
+                    <span class="site-state-item-count">49</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2576,7 +2565,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">15</span>
+                      
+                    
+                    <span class="site-state-item-count">16</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -2772,7 +2763,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">122k</span>
+    <span title="站点总字数">123k</span>
   
 
   
@@ -2781,7 +2772,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">1:51</span>
+    <span title="站点阅读时长">1:52</span>
   
 </div>
 

@@ -1,6 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[数学文摘]]></title>
+    <url>%2F2021%2F04%2F13%2F%E6%95%B0%E5%AD%A6%E6%96%87%E6%91%98%2F</url>
+    <content type="text"><![CDATA[贝叶斯方法 http://mindhacks.cn/2008/09/21/the-magical-bayesian-method/ 但也绝对不是两眼一抹黑瞎蒙——具体地说，我们需要做两件事情：1. 算出各种不同猜测的可能性大小。2. 算出最靠谱的猜测是什么。第一个就是计算特定猜测的后验概率，对于连续的猜测空间则是计算猜测的概率密度函数。第二个则是所谓的模型比较，模型比较如果不考虑先验概率的话就是最大似然方法。]]></content>
+      <categories>
+        <category>数学文摘</category>
+      </categories>
+      <tags>
+        <tag>数学文摘</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[2021-04-技术文摘]]></title>
+    <url>%2F2021%2F04%2F11%2FTechnicalDigest%2F2021-04-%E6%8A%80%E6%9C%AF%E6%96%87%E6%91%98%2F</url>
+    <content type="text"><![CDATA[GDB保存断点 https://blog.csdn.net/weiwangchao_/article/details/45557971]]></content>
+      <categories>
+        <category>技术文摘</category>
+      </categories>
+      <tags>
+        <tag>技术文摘</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[2021-03-技术文摘]]></title>
+    <url>%2F2021%2F03%2F25%2FTechnicalDigest%2F2021-03-%E6%8A%80%E6%9C%AF%E6%96%87%E6%91%98%2F</url>
+    <content type="text"><![CDATA[FOQS 一种可以水平扩缩容 分布式 priority queue https://engineering.fb.com/2021/02/22/production-engineering/foqs-scaling-a-distributed-priority-queue/ 锁性能优化 https://cloud.tencent.com/developer/article/1511694 介绍了java jdk的一些锁优化工作，对其他语言开发思路也有启发]]></content>
+      <categories>
+        <category>技术文摘</category>
+      </categories>
+      <tags>
+        <tag>技术文摘</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[2021-02-技术文摘]]></title>
     <url>%2F2021%2F02%2F01%2FTechnicalDigest%2F2021-02-%E6%8A%80%E6%9C%AF%E6%96%87%E6%91%98%2F</url>
     <content type="text"><![CDATA[6w字搞定Linux基本操作，建议收藏 https://juejin.cn/post/6917096816118857736 很齐全 值得翻一翻 程序员职场经验 https://juejin.cn/post/6924205515191320589 真正有价值的社交其实都是弱社交。也就是那些和你不太熟悉的人，比如前同事，校友，不怎么来往的同学等等。经营人脉其实并没有太多东西，就是就只有一点，就是管理好外界对我们的看法和认知，维持住“人设”。简单来说，就是我们要注意羽毛和口碑，说不定什么时候它就起到了作用。 在职场当中真正好机会是很稀缺的，很多机会只有局内人才能接触到。 Linux 堆内存管理 Linux堆内存管理深入分析（上） Linux堆内存管理深入分析（下） brk 和 mmap 计算和储存分离 https://juejin.cn/post/6844904055840440333 https://juicefs.com/blog/cn/posts/why-disaggregated-compute-and-storage-is-future/ 这个时候谷歌摒弃了之前的观念“移动存储到计算”，采取了“移动计算到存储的观念”，将计算和存储耦合了，因为当时的网络速度对比现在来说慢了几百倍，网络速度跟不上我们的需要。在在典型的MapReduce部署中计算和存储都在同一个集群中进行，比如后续的hadoop。这里其实也就是用本地IO速度来替换网络传输速度。 随着技术的进步，我们的网络速度也越来越快，我们的瓶颈不再是网络速度，但是我们的磁盘I/O速度却没有明显的速度增长，计算和存储融合的架构缺点也再逐渐暴露： 作者：咖啡拿铁 链接：https://juejin.cn/post/6844904055840440333 来源：掘金 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。 Swig 封装C++接口 https://www.cnblogs.com/terencezhou/p/10059156.html CPU分支预测 http://djs66256.github.io/2019/01/29/2019-01-29-CPU分支预测/ 介绍了几种分支预测的算法 Varint编码 https://segmentfault.com/a/1190000020500985 Varint是一种使用一个或多个字节序列化整数的方法，会把整数编码为变长字节。对于32位整型数据经过Varint编码后需要15个字节，小的数字使用1个byte，大的数字使用5个bytes。64位整型数据编码后占用110个字节。在实际场景中小数字的使用率远远多于大数字，因此通过Varint编码对于大部分场景都可以起到很好的压缩效果。 Perf – Linux下的系统性能调优工具 Perf 是用来进行软件性能分析的工具。 通过它，应用程序可以利用 PMU，tracepoint 和内核中的特殊计数器来进行性能统计。它不但可以分析指定应用程序的性能问题 (per thread)，也可以用来分析内核的性能问题，当然也可以同时分析应用代码和内核，从而全面理解应用程序中的性能瓶颈。 eBPF技术 https://blog.fleeto.us/post/what-is-ebpf/ 概念和基本原理的介绍文章 https://qmonnet.github.io/whirl-offload/2016/09/01/dive-into-bpf/ 一个全面的ebpf学习路线]]></content>
@@ -14,12 +47,12 @@
   <entry>
     <title><![CDATA[灵光一闪]]></title>
     <url>%2F2021%2F01%2F21%2F%E7%81%B5%E5%85%89%E4%B8%80%E9%97%AA%2F</url>
-    <content type="text"><![CDATA[记录一下平时突然想到的一些好的 idea。 产品的第一步或冷增长应当是社交(爆款或裂变)为佳，机器推荐提供的是产品黏性。 服务业的服务价格取决于当地消费者的收入水平（机会成本）。如：服务业中的剪发、按摩、中介等。 可行性验证应当从最难的部分开始，而不是从简单可实现的部分开始下手。 优质资产是相对概念在同一资产类目中排名靠前的资产即为优质资产。而排名考虑的是两点：α（超额收益）和β（系统风险系数） 新技术提供的是更多的可选项，而不是应该要使用。技术发展带来的是自由而不是“最新方案“的约束。 由于物质和能量守恒，所以物质财富是取之不竭的。其区别在于多少能够被人类所利用。 确定概率的不确定性——偶然不确定性。 不确定概率的不确定性——认知（系统）不确定性。 利润来源于系统不确定性。 风口不属于投机者，而是属于那些原本就在行业中深耕的人。 2020年中国零售消费市场 39万亿元]]></content>
+    <content type="text"><![CDATA[记录一下平时突然想到的一些好的 idea。 产品的第一步或冷增长应当是社交(爆款或裂变)为佳，机器推荐提供的是产品黏性。 服务业的服务价格取决于当地消费者的收入水平（机会成本）。如：服务业中的剪发、按摩、中介等。 可行性验证应当从最难的部分开始，而不是从简单可实现的部分开始下手。 优质资产是相对概念在同一资产类目中排名靠前的资产即为优质资产。而排名考虑的是两点：α（超额收益）和β（系统风险系数） 新技术提供的是更多的可选项，而不是应该要使用。技术发展带来的是自由而不是“最新方案“的约束。 由于物质和能量守恒，所以物质财富是取之不竭的。其区别在于多少能够被人类所利用。 利润来源于系统不确定性。 确定概率的不确定性——偶然不确定性。 不确定概率的不确定性——认知（系统）不确定性。 风口不属于投机者，而是属于那些原本就在行业中深耕的人。 2020年中国零售消费市场 39万亿元 测试和需求是一致的， 有什么样的需求就会有什么样的测试。 邓宁克鲁格效应 代码的传染性：CodeBase内的代码会被各处copy 先验概率应当被视为是先前经验的结果，而不是超越经验的，因为人的认识是有限主观的。 机器学习中，之前数据的训练结果即可视为一个先验概率，结合新的测试数据，进行最大似然概率的估计。 盈亏同源 办事利索（指思路清晰，行动坚定）可以减少反复沟通造成的注意力损耗，从而更有利于高质量的完成任务。]]></content>
   </entry>
   <entry>
     <title><![CDATA[工具杂记]]></title>
     <url>%2F2021%2F01%2F07%2F%E5%B7%A5%E5%85%B7%E6%9D%82%E8%AE%B0%2F</url>
-    <content type="text"><![CDATA[VScode 21个Vscode快捷键 https://juejin.cn/post/6844903894305210381 VScode教程 这个教程还是很全的，只是找起来不太方便 https://geek-docs.com/vscode/vscode-tutorials/what-is-vscode.html CPP 使用ccls：C++ language server https://zhuanlan.zhihu.com/p/31672451 Git Git 中大文件清理 https://rtyley.github.io/bfg-repo-cleaner/ Docker Docker多阶段构建（多个 From） https://segmentfault.com/a/1190000016137548 Docker 17.05版本以后，新增了Dockerfile多阶段构建。所谓多阶段构建，实际上是允许一个Dockerfile 中出现多个 FROM 指令。]]></content>
+    <content type="text"><![CDATA[VScode 21个Vscode快捷键 https://juejin.cn/post/6844903894305210381 VScode教程 这个教程还是很全的，只是找起来不太方便 https://geek-docs.com/vscode/vscode-tutorials/what-is-vscode.html CPP 使用ccls：C++ language server https://zhuanlan.zhihu.com/p/31672451 Git Git 中大文件清理 https://rtyley.github.io/bfg-repo-cleaner/ Docker Docker多阶段构建（多个 From） https://segmentfault.com/a/1190000016137548 Docker 17.05版本以后，新增了Dockerfile多阶段构建。所谓多阶段构建，实际上是允许一个Dockerfile 中出现多个 FROM 指令。 GDB GDB保存断点 https://blog.csdn.net/weiwangchao_/article/details/45557971 使用save breakpoint命令保存到指定的文件 必须在gdb加载文件的命令中指定断点文件，具体就是使用-x参数。例如，我需要调试fig8.3这个文件，指定刚才保存的断点文件fig8.3.bp。 我使用的是gdb fig8.3 -x fig8.3.bp]]></content>
       <categories>
         <category>开发工具</category>
       </categories>
@@ -152,7 +185,7 @@
   <entry>
     <title><![CDATA[c++拾遗]]></title>
     <url>%2F2020%2F12%2F12%2FC%2B%2B%2Fc-%E6%9D%82%E8%AE%B0%2F</url>
-    <content type="text"><![CDATA[constexpt使用 https://www.cnblogs.com/DswCnblog/p/6513310.html GFlags http://www.yeolar.com/note/2014/12/14/gflags/ sleep、yield、busy Spin的区别 sleep 交出cpu 等待SIGALRM唤醒重新调度 yield 交出CPU时间片 等待下次调度 busy Spin 一直占用cpu时间片 C++ 函数模板——返回值 https://blog.csdn.net/caroline_wendy/article/details/17003679 函数模板的返回值也可以定义为模板参数(template parameter), 但是由于无法推导(deduce), 需要显式(explicit)指定; 由于显式指定的顺序是从左至右, 返回值参数尽量放在左面,其余函数参数可以通过传入实参(argument)进行推导; 【C++】 variant https://www.cnblogs.com/thinkway/p/6743684.html https://en.cppreference.com/w/cpp/utility/variant c++17标准中引入了variant来作为union的类型安全替代品。它可以在任意时间保存模板参数列表中某一类型的值或者空值。 C++ handle 在编程时常常看到Handle这个概念。参照：https://stackoverflow.com/questions/1303123/what-is-a-handle-in-c/1303180#1303180 可以了解到，handle是指向某些resource的索引或者工具。你本身无法从handle中获得资源的信息，但将其传给API后就可以进行很多操作。 还有一类是Opaque handle，这一类handle 你在定义时也不能知道其中的内容信息。见：https://www.geeksforgeeks.org/opaque-pointer/ C++ 类成员函数中访问同类对象的私有成员 https://blog.csdn.net/walle_love_eva/article/details/9151273 C++的访问修饰符的作用是以类为单位，而不是以对象为单位。 类方法是所有该类对象共同使用的，因此不存在每个对象有一组类方法的副本。类方法自然可以访问所有该类对象的私有成员。 模板元编程 https://www.cnblogs.com/liangliangh/p/4219879.html C++11中range-based for loops中&amp;&amp;与&amp;的区别 https://blog.csdn.net/haolexiao/article/details/56842552 GTest 值参数化测试 https://www.cnblogs.com/jycboy/p/6118073.html C++ 函数的类型 123456789101112131415161718// store a call to a member functionstd::function&lt;void(const Foo&amp;, int)&gt; f_add_display = &amp;Foo::print_add;const Foo foo(314159);f_add_display(foo, 1);f_add_display(314159, 1); // store a call to a data member accessorstd::function&lt;int(Foo const&amp;)&gt; f_num = &amp;Foo::num_;std::cout &lt;&lt; "num_: " &lt;&lt; f_num(foo) &lt;&lt; '\n'; // store a call to a member function and objectusing std::placeholders::_1;std::function&lt;void(int)&gt; f_add_display2 = std::bind( &amp;Foo::print_add, foo, _1 );f_add_display2(2); // store a call to a member function and object ptrstd::function&lt;void(int)&gt; f_add_display3 = std::bind( &amp;Foo::print_add, &amp;foo, _1 );f_add_display3(3); C++服务编译耗时优化原理及实践 JeMalloc https://zhuanlan.zhihu.com/p/48957114 C++ ROV RVO是Return Value Optimization的缩写，即返回值优化，NRVO就是具名的返回值优化，为RVO的一个变种，此特性从C++11开始支持。 C++lambda表达式 https://www.jianshu.com/p/d686ad9de817]]></content>
+    <content type="text"><![CDATA[constexpt使用 https://www.cnblogs.com/DswCnblog/p/6513310.html GFlags http://www.yeolar.com/note/2014/12/14/gflags/ sleep、yield、busy Spin的区别 sleep 交出cpu 等待SIGALRM唤醒重新调度 yield 交出CPU时间片 等待下次调度 busy Spin 一直占用cpu时间片 C++ 函数模板——返回值 https://blog.csdn.net/caroline_wendy/article/details/17003679 函数模板的返回值也可以定义为模板参数(template parameter), 但是由于无法推导(deduce), 需要显式(explicit)指定; 由于显式指定的顺序是从左至右, 返回值参数尽量放在左面,其余函数参数可以通过传入实参(argument)进行推导; 【C++】 variant https://www.cnblogs.com/thinkway/p/6743684.html https://en.cppreference.com/w/cpp/utility/variant c++17标准中引入了variant来作为union的类型安全替代品。它可以在任意时间保存模板参数列表中某一类型的值或者空值。 C++ handle 在编程时常常看到Handle这个概念。参照：https://stackoverflow.com/questions/1303123/what-is-a-handle-in-c/1303180#1303180 可以了解到，handle是指向某些resource的索引或者工具。你本身无法从handle中获得资源的信息，但将其传给API后就可以进行很多操作。 还有一类是Opaque handle，这一类handle 你在定义时也不能知道其中的内容信息。见：https://www.geeksforgeeks.org/opaque-pointer/ C++ 类成员函数中访问同类对象的私有成员 https://blog.csdn.net/walle_love_eva/article/details/9151273 C++的访问修饰符的作用是以类为单位，而不是以对象为单位。 类方法是所有该类对象共同使用的，因此不存在每个对象有一组类方法的副本。类方法自然可以访问所有该类对象的私有成员。 模板元编程 https://www.cnblogs.com/liangliangh/p/4219879.html C++11中range-based for loops中&amp;&amp;与&amp;的区别 https://blog.csdn.net/haolexiao/article/details/56842552 GTest 值参数化测试 https://www.cnblogs.com/jycboy/p/6118073.html C++ 函数的类型 123456789101112131415161718// store a call to a member functionstd::function&lt;void(const Foo&amp;, int)&gt; f_add_display = &amp;Foo::print_add;const Foo foo(314159);f_add_display(foo, 1);f_add_display(314159, 1); // store a call to a data member accessorstd::function&lt;int(Foo const&amp;)&gt; f_num = &amp;Foo::num_;std::cout &lt;&lt; "num_: " &lt;&lt; f_num(foo) &lt;&lt; '\n'; // store a call to a member function and objectusing std::placeholders::_1;std::function&lt;void(int)&gt; f_add_display2 = std::bind( &amp;Foo::print_add, foo, _1 );f_add_display2(2); // store a call to a member function and object ptrstd::function&lt;void(int)&gt; f_add_display3 = std::bind( &amp;Foo::print_add, &amp;foo, _1 );f_add_display3(3); C++服务编译耗时优化原理及实践 JeMalloc https://zhuanlan.zhihu.com/p/48957114 C++ ROV RVO是Return Value Optimization的缩写，即返回值优化，NRVO就是具名的返回值优化，为RVO的一个变种，此特性从C++11开始支持。 C++lambda表达式 https://www.jianshu.com/p/d686ad9de817 C++ 完美转发 forward原理 https://www.cnblogs.com/5iedu/p/11324772.html 万能引用 https://www.cnblogs.com/5iedu/p/11378023.html C++ memory order std::atomic_thread_fence https://blog.csdn.net/wxj1992/article/details/103917093 而在C++ 11及之后的标准里，除了利用原子操作指定内存序，还定义了单独使用memory fence（std::atomic_thread_fence）的方式，fence可以和原子操作组合进行同步，也可以fence之间进行同步， GTEST 系列 Guide https://google.github.io/googletest/]]></content>
       <categories>
         <category>C++</category>
       </categories>
@@ -215,17 +248,6 @@
       <tags>
         <tag>kubernetes</tag>
         <tag>Network</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[《分布式消息中间件事件》笔记]]></title>
-    <url>%2F2019%2F05%2F15%2FNoteBook%2FMessageMiddleware%2F</url>
-    <content type="text"><![CDATA[消息队列 消息队列的用途 解耦： 将关联的模块之间解耦，用通知代替处理， 无需等待结果。 流量削峰： 通过将短时内突然剧增的消息在消息队列中持久化，之后逐步处理，可以避免短时的高并发导致系统雪崩。 日志收集： 消息队列可以将日志收集与服务分离，引入消息队列可以快速接收日志消息，避免阻塞和访问延迟。 事务最终一致性： 当有多个分布式组件时，通过事件表和消息队列可以帮助多个组件完成事务的最终一致性。 功能特点 消息堆积 消息队列要能够处理由于生产者和消费者消息处理速度不一样引起的消息堆积。 消息持久化 消息到达消息队列后，消息队列应该将消息暂存，在合适的时候投递给消费者。 可靠投递 消息队列要保证消息在任何情况下正确投递。 严格有序 消息队列需要保证消息的顺序。 Kafka Rocket MQ]]></content>
-      <categories>
-        <category>学习笔记</category>
-      </categories>
-      <tags>
-        <tag>消息中间件</tag>
       </tags>
   </entry>
   <entry>
