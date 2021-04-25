@@ -291,6 +291,23 @@
     <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br/>归档</a>
 
   </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-digest">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/技术文摘" rel="section"><i class="menu-item-icon fa fa-fw fa-newspaper-o"></i> <br/>技术文摘</a>
+
+  </li>
 
       
       
@@ -357,6 +374,8 @@
   <section id="posts" class="posts-expand">
     
       
+        
+          
 
   
 
@@ -573,223 +592,16 @@
   </article>
 
 
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/12/TechnicalDigest/2020-09-技术文摘/"/>
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="王谱越"/>
-      <meta itemprop="description" content=""/>
-      <meta itemprop="image" content="/images/myavatar.jpg"/>
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Norton's Blog"/>
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2020/12/12/TechnicalDigest/2020-09-技术文摘/" class="post-title-link" itemprop="url">2020-09-技术文摘</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2020-12-12 20:14:17" itemprop="dateCreated datePublished" datetime="2020-12-12T20:14:17+08:00">2020-12-12</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2021-01-31 16:42:40" itemprop="dateModified" datetime="2021-01-31T16:42:40+08:00">2021-01-31</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/技术文摘/" itemprop="url" rel="index"><span itemprop="name">技术文摘</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">1.1k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="今日头条品质优化图文详情页秒开实践"><a class="markdownIt-Anchor" href="#今日头条品质优化图文详情页秒开实践"></a> <a href="https://www.infoq.cn/article/jqzxGCc15zjwv7Iw9IHh" target="_blank" rel="noopener">今日头条品质优化：图文详情页秒开实践</a></h1>
-<blockquote>
-<p>我们把 WebView 截图的图片进行缩小到原图的 1/6，遍历检测图片的像素点，当非白色的像素点大于 5% 的时候我们就认为是非白屏的情况，可以相对高效检测准确得出详情页是否发生了白屏。</p>
-<p>可以看到，通过线上页面加载用户每次进入详情页都要通过多次网络加载，极容易受网络波动的影响，这种情况下，也无法保证页面加载的时长和成功率，极大的影响了用户体验。</p>
-<p>于是在头条中，我们将新闻中标题和正文内容进行拆分，把头条详情页的公共样式 CSS 和 逻辑 JS 都抽离出来，形成一个独立而完备的详情页模板，这样我们就可以把模板直接内置在客户端中。<br>
-快速动态超时策略<br>
-单次请求 CDN 的超时时间，根据上次成功请求 CDN 的值计算，因子 1.5（z 值）。且最小为 1s（x 值），最大为 4s（y 值）。超过这一时间不取消，直接请求下个 CDN。<br>
-单次请求 CDN 有一个硬性超时时间 4s（w 值，w 需 &gt;=y），超过这一时间请求取消。n 个 CDN 的请求全部取消后反馈用户失败。</p>
-</blockquote>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2020/12/12/TechnicalDigest/2020-09-技术文摘/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
         
       
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
     
       
-    
-    
-
-    
-
-    <footer class="post-footer">
+        
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
     
       
+        
+          
 
   
 
@@ -990,8 +802,12 @@
   </article>
 
 
+        
+      
     
       
+        
+          
 
   
 
@@ -1200,8 +1016,12 @@
   </article>
 
 
+        
+      
     
       
+        
+          
 
   
 
@@ -1421,8 +1241,12 @@
   </article>
 
 
+        
+      
     
       
+        
+          
 
   
 
@@ -1631,8 +1455,12 @@
   </article>
 
 
+        
+      
     
       
+        
+          
 
   
 
@@ -1845,8 +1673,12 @@
   </article>
 
 
+        
+      
     
       
+        
+          
 
   
 
@@ -2054,8 +1886,12 @@
   </article>
 
 
+        
+      
     
       
+        
+          
 
   
 
@@ -2267,8 +2103,12 @@
   </article>
 
 
+        
+      
     
       
+        
+          
 
   
 
@@ -2469,6 +2309,8 @@
   </article>
 
 
+        
+      
     
   </section>
 
