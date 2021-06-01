@@ -1,6 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[2021-06-技术文摘]]></title>
+    <url>%2F2021%2F06%2F01%2FTechnicalDigest%2F2021-06-%E6%8A%80%E6%9C%AF%E6%96%87%E6%91%98%2F</url>
+    <content type="text"></content>
+      <categories>
+        <category>文摘</category>
+      </categories>
+      <tags>
+        <tag>技术文摘</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[2021-05-技术文摘]]></title>
+    <url>%2F2021%2F05%2F13%2FTechnicalDigest%2F2021-05-%E6%8A%80%E6%9C%AF%E6%96%87%E6%91%98%2F</url>
+    <content type="text"><![CDATA[12要素 https://12factor.net/zh_cn/ https://zhuanlan.zhihu.com/p/243404169 I. 基准代码 一份基准代码，多份部署 II. 依赖 显式声明依赖关系 III. 配置 在环境中存储配置 IV. 后端服务 把后端服务当作附加资源 V. 构建，发布，运行 严格分离构建和运行 VI. 进程 以一个或多个无状态进程运行应用 VII. 端口绑定 通过端口绑定提供服务 VIII. 并发 通过进程模型进行扩展 IX. 易处理 快速启动和优雅终止可最大化健壮性 X. 开发环境与线上环境等价 尽可能的保持开发，预发布，线上环境相同 XI. 日志 把日志当作事件流 XII. 管理进程 后台管理任务当作一次性进程运行 长尾请求 长尾请求一般是指明显高于均值的那部分占比较小的请求 http://accelazh.github.io/storage/Tail-Latency-Study 一种Google 的策略： 树形请求分发 http://highscalability.com/blog/2011/2/1/google-strategy-tree-distribution-of-requests-and-responses.html 大概思想是中间加一层proxy，降低中心压力。 最后的结构会像CDN一样 队头阻塞 https://juejin.cn/post/6844903853985366023 HTTP3的解决方式 https://calendar.perfplanet.com/2020/head-of-line-blocking-in-quic-and-http-3-the-details/ 动态密码算法 https://blog.csdn.net/LVXIANGAN/article/details/79926112]]></content>
+      <categories>
+        <category>文摘</category>
+      </categories>
+      <tags>
+        <tag>技术文摘</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[灵光一闪]]></title>
+    <url>%2F2021%2F04%2F21%2F%E7%81%B5%E5%85%89%E4%B8%80%E9%97%AA%2F</url>
+    <content type="text"><![CDATA[记录一下平时突然想到的一些好的 idea。 产品的第一步或冷增长应当是社交(爆款或裂变)为佳，机器推荐提供的是产品黏性。 服务业的服务价格取决于当地消费者的收入水平（机会成本）。如：服务业中的剪发、按摩、中介等。 可行性验证应当从最难的部分开始，而不是从简单可实现的部分开始下手。 优质资产是相对概念在同一资产类目中排名靠前的资产即为优质资产。而排名考虑的是两点：α（超额收益）和β（系统风险系数） 新技术提供的是更多的可选项，而不是应该要使用。技术发展带来的是自由而不是“最新方案“的约束。 由于物质和能量守恒，所以物质财富是取之不竭的。其区别在于多少能够被人类所利用。 利润来源于系统不确定性。 确定概率的不确定性——偶然不确定性。 不确定概率的不确定性——认知（系统）不确定性。 风口不属于投机者，而是属于那些原本就在行业中深耕的人。 2020年中国零售消费市场 39万亿元 测试和需求是一致的， 有什么样的需求就会有什么样的测试。 邓宁克鲁格效应 代码的传染性：CodeBase内的代码会被各处copy 先验概率应当被视为是先前经验的结果，而不是超越经验的，因为人的认识是有限主观的。 机器学习中，之前数据的训练结果即可视为一个先验概率，结合新的测试数据，进行最大似然概率的估计。 盈亏同源 办事利索（指思路清晰，行动坚定）可以减少反复沟通造成的注意力损耗，从而更有利于高质量的完成任务。 云作为基础设施，未来应当像自来水一样随用可取。同样的云原生应用也应当是随用可取的。 投资的最重要的事 -&gt; 避险 -&gt;控制风险 -&gt; 控制不确定性 特别是系统不确定性 旁观者在研究成功者的成功路径时，看到的是一条合理的确定路径。而成功者在当下，遇到的都是不确定性。 所以关键在于将自己代入情景，认识并学习成功者面对不确定性的方法。]]></content>
+  </entry>
+  <entry>
     <title><![CDATA[数学文摘]]></title>
     <url>%2F2021%2F04%2F13%2F%E6%95%B0%E5%AD%A6%E6%96%87%E6%91%98%2F</url>
     <content type="text"><![CDATA[贝叶斯方法 http://mindhacks.cn/2008/09/21/the-magical-bayesian-method/ 但也绝对不是两眼一抹黑瞎蒙——具体地说，我们需要做两件事情：1. 算出各种不同猜测的可能性大小。2. 算出最靠谱的猜测是什么。第一个就是计算特定猜测的后验概率，对于连续的猜测空间则是计算猜测的概率密度函数。第二个则是所谓的模型比较，模型比较如果不考虑先验概率的话就是最大似然方法。]]></content>
@@ -43,11 +70,6 @@
       <tags>
         <tag>技术文摘</tag>
       </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[灵光一闪]]></title>
-    <url>%2F2021%2F01%2F21%2F%E7%81%B5%E5%85%89%E4%B8%80%E9%97%AA%2F</url>
-    <content type="text"><![CDATA[记录一下平时突然想到的一些好的 idea。 产品的第一步或冷增长应当是社交(爆款或裂变)为佳，机器推荐提供的是产品黏性。 服务业的服务价格取决于当地消费者的收入水平（机会成本）。如：服务业中的剪发、按摩、中介等。 可行性验证应当从最难的部分开始，而不是从简单可实现的部分开始下手。 优质资产是相对概念在同一资产类目中排名靠前的资产即为优质资产。而排名考虑的是两点：α（超额收益）和β（系统风险系数） 新技术提供的是更多的可选项，而不是应该要使用。技术发展带来的是自由而不是“最新方案“的约束。 由于物质和能量守恒，所以物质财富是取之不竭的。其区别在于多少能够被人类所利用。 利润来源于系统不确定性。 确定概率的不确定性——偶然不确定性。 不确定概率的不确定性——认知（系统）不确定性。 风口不属于投机者，而是属于那些原本就在行业中深耕的人。 2020年中国零售消费市场 39万亿元 测试和需求是一致的， 有什么样的需求就会有什么样的测试。 邓宁克鲁格效应 代码的传染性：CodeBase内的代码会被各处copy 先验概率应当被视为是先前经验的结果，而不是超越经验的，因为人的认识是有限主观的。 机器学习中，之前数据的训练结果即可视为一个先验概率，结合新的测试数据，进行最大似然概率的估计。 盈亏同源 办事利索（指思路清晰，行动坚定）可以减少反复沟通造成的注意力损耗，从而更有利于高质量的完成任务。 云作为基础设施，未来应当像自来水一样随用可取。同样的云原生应用也应当是随用可取的。]]></content>
   </entry>
   <entry>
     <title><![CDATA[工具杂记]]></title>
@@ -185,7 +207,7 @@
   <entry>
     <title><![CDATA[c++拾遗]]></title>
     <url>%2F2020%2F12%2F12%2FC%2B%2B%2Fc-%E6%9D%82%E8%AE%B0%2F</url>
-    <content type="text"><![CDATA[constexpt使用 https://www.cnblogs.com/DswCnblog/p/6513310.html GFlags http://www.yeolar.com/note/2014/12/14/gflags/ sleep、yield、busy Spin的区别 sleep 交出cpu 等待SIGALRM唤醒重新调度 yield 交出CPU时间片 等待下次调度 busy Spin 一直占用cpu时间片 C++ 函数模板——返回值 https://blog.csdn.net/caroline_wendy/article/details/17003679 函数模板的返回值也可以定义为模板参数(template parameter), 但是由于无法推导(deduce), 需要显式(explicit)指定; 由于显式指定的顺序是从左至右, 返回值参数尽量放在左面,其余函数参数可以通过传入实参(argument)进行推导; 【C++】 variant https://www.cnblogs.com/thinkway/p/6743684.html https://en.cppreference.com/w/cpp/utility/variant c++17标准中引入了variant来作为union的类型安全替代品。它可以在任意时间保存模板参数列表中某一类型的值或者空值。 C++ handle 在编程时常常看到Handle这个概念。参照：https://stackoverflow.com/questions/1303123/what-is-a-handle-in-c/1303180#1303180 可以了解到，handle是指向某些resource的索引或者工具。你本身无法从handle中获得资源的信息，但将其传给API后就可以进行很多操作。 还有一类是Opaque handle，这一类handle 你在定义时也不能知道其中的内容信息。见：https://www.geeksforgeeks.org/opaque-pointer/ C++ 类成员函数中访问同类对象的私有成员 https://blog.csdn.net/walle_love_eva/article/details/9151273 C++的访问修饰符的作用是以类为单位，而不是以对象为单位。 类方法是所有该类对象共同使用的，因此不存在每个对象有一组类方法的副本。类方法自然可以访问所有该类对象的私有成员。 模板元编程 https://www.cnblogs.com/liangliangh/p/4219879.html C++11中range-based for loops中&amp;&amp;与&amp;的区别 https://blog.csdn.net/haolexiao/article/details/56842552 GTest 值参数化测试 https://www.cnblogs.com/jycboy/p/6118073.html C++ 函数的类型 123456789101112131415161718// store a call to a member functionstd::function&lt;void(const Foo&amp;, int)&gt; f_add_display = &amp;Foo::print_add;const Foo foo(314159);f_add_display(foo, 1);f_add_display(314159, 1); // store a call to a data member accessorstd::function&lt;int(Foo const&amp;)&gt; f_num = &amp;Foo::num_;std::cout &lt;&lt; "num_: " &lt;&lt; f_num(foo) &lt;&lt; '\n'; // store a call to a member function and objectusing std::placeholders::_1;std::function&lt;void(int)&gt; f_add_display2 = std::bind( &amp;Foo::print_add, foo, _1 );f_add_display2(2); // store a call to a member function and object ptrstd::function&lt;void(int)&gt; f_add_display3 = std::bind( &amp;Foo::print_add, &amp;foo, _1 );f_add_display3(3); C++服务编译耗时优化原理及实践 JeMalloc https://zhuanlan.zhihu.com/p/48957114 C++ ROV RVO是Return Value Optimization的缩写，即返回值优化，NRVO就是具名的返回值优化，为RVO的一个变种，此特性从C++11开始支持。 C++lambda表达式 https://www.jianshu.com/p/d686ad9de817 一文读懂C++右值引用和std::move https://zhuanlan.zhihu.com/p/335994370 但事实上std::move移动不了什么，唯一的功能是把左值强制转化为右值，让右值引用可以指向左值。其实现等同于一个类型转换：static_cast&lt;T&amp;&amp;&gt;(lvalue)。 所以，单纯的std::move(xxx)不会有性能提升 除非设计不允许移动，STL类大都支持移动语义函数，即可移动的。 另外，编译器会默认在用户自定义的class和struct中生成移动语义函数，但前提是用户没有主动定义该类的拷贝构造等函数(具体规则自行百度哈)。 因此，可移动对象在&lt;需要拷贝且被拷贝者之后不再被需要&gt;的场景，建议使用std::move触发移动语义，提升性能。 C++ 完美转发 forward原理 https://www.cnblogs.com/5iedu/p/11324772.html 万能引用 https://www.cnblogs.com/5iedu/p/11378023.html C++ memory order std::atomic_thread_fence https://blog.csdn.net/wxj1992/article/details/103917093 而在C++ 11及之后的标准里，除了利用原子操作指定内存序，还定义了单独使用memory fence（std::atomic_thread_fence）的方式，fence可以和原子操作组合进行同步，也可以fence之间进行同步， GTEST 系列 Guide https://google.github.io/googletest/]]></content>
+    <content type="text"><![CDATA[constexpt使用 https://www.cnblogs.com/DswCnblog/p/6513310.html GFlags http://www.yeolar.com/note/2014/12/14/gflags/ sleep、yield、busy Spin的区别 sleep 交出cpu 等待SIGALRM唤醒重新调度 yield 交出CPU时间片 等待下次调度 busy Spin 一直占用cpu时间片 C++ 函数模板——返回值 https://blog.csdn.net/caroline_wendy/article/details/17003679 函数模板的返回值也可以定义为模板参数(template parameter), 但是由于无法推导(deduce), 需要显式(explicit)指定; 由于显式指定的顺序是从左至右, 返回值参数尽量放在左面,其余函数参数可以通过传入实参(argument)进行推导; 【C++】 variant https://www.cnblogs.com/thinkway/p/6743684.html https://en.cppreference.com/w/cpp/utility/variant c++17标准中引入了variant来作为union的类型安全替代品。它可以在任意时间保存模板参数列表中某一类型的值或者空值。 C++ handle 在编程时常常看到Handle这个概念。参照：https://stackoverflow.com/questions/1303123/what-is-a-handle-in-c/1303180#1303180 可以了解到，handle是指向某些resource的索引或者工具。你本身无法从handle中获得资源的信息，但将其传给API后就可以进行很多操作。 还有一类是Opaque handle，这一类handle 你在定义时也不能知道其中的内容信息。见：https://www.geeksforgeeks.org/opaque-pointer/ C++ 类成员函数中访问同类对象的私有成员 https://blog.csdn.net/walle_love_eva/article/details/9151273 C++的访问修饰符的作用是以类为单位，而不是以对象为单位。 类方法是所有该类对象共同使用的，因此不存在每个对象有一组类方法的副本。类方法自然可以访问所有该类对象的私有成员。 模板元编程 https://www.cnblogs.com/liangliangh/p/4219879.html GTest 值参数化测试 https://www.cnblogs.com/jycboy/p/6118073.html C++ 函数的类型 123456789101112131415161718// store a call to a member functionstd::function&lt;void(const Foo&amp;, int)&gt; f_add_display = &amp;Foo::print_add;const Foo foo(314159);f_add_display(foo, 1);f_add_display(314159, 1); // store a call to a data member accessorstd::function&lt;int(Foo const&amp;)&gt; f_num = &amp;Foo::num_;std::cout &lt;&lt; "num_: " &lt;&lt; f_num(foo) &lt;&lt; '\n'; // store a call to a member function and objectusing std::placeholders::_1;std::function&lt;void(int)&gt; f_add_display2 = std::bind( &amp;Foo::print_add, foo, _1 );f_add_display2(2); // store a call to a member function and object ptrstd::function&lt;void(int)&gt; f_add_display3 = std::bind( &amp;Foo::print_add, &amp;foo, _1 );f_add_display3(3); C++服务编译耗时优化原理及实践 JeMalloc https://zhuanlan.zhihu.com/p/48957114 C++ ROV RVO是Return Value Optimization的缩写，即返回值优化，NRVO就是具名的返回值优化，为RVO的一个变种，此特性从C++11开始支持。 C++lambda表达式 https://www.jianshu.com/p/d686ad9de817 一文读懂C++右值引用和std::move https://zhuanlan.zhihu.com/p/335994370 但事实上std::move移动不了什么，唯一的功能是把左值强制转化为右值，让右值引用可以指向左值。其实现等同于一个类型转换：static_cast&lt;T&amp;&amp;&gt;(lvalue)。 所以，单纯的std::move(xxx)不会有性能提升 除非设计不允许移动，STL类大都支持移动语义函数，即可移动的。 另外，编译器会默认在用户自定义的class和struct中生成移动语义函数，但前提是用户没有主动定义该类的拷贝构造等函数(具体规则自行百度哈)。 因此，可移动对象在&lt;需要拷贝且被拷贝者之后不再被需要&gt;的场景，建议使用std::move触发移动语义，提升性能。 C++ 完美转发 forward原理 https://www.cnblogs.com/5iedu/p/11324772.html 万能引用 https://www.cnblogs.com/5iedu/p/11378023.html C++11中range-based for loops中&amp;&amp;与&amp;的区别 https://blog.csdn.net/haolexiao/article/details/56842552 C++ memory order std::atomic_thread_fence https://blog.csdn.net/wxj1992/article/details/103917093 而在C++ 11及之后的标准里，除了利用原子操作指定内存序，还定义了单独使用memory fence（std::atomic_thread_fence）的方式，fence可以和原子操作组合进行同步，也可以fence之间进行同步， GTEST 系列 Guide https://google.github.io/googletest/ 浅析std::ref与reference_wrapper https://blog.csdn.net/u014645632/article/details/78966340 声明于 中的 class std::reference_wrapper&lt;&gt; 主要用来“喂 ” reference 给function template, 后者原本以 by value方式接受参数。对于一个给定类型 T ，这个 class 提供 ref () 用以隐式转换为 T&amp; ，一个 cref () 用以隐式转换为 const T&amp; ，这往往允许 function template 得以操作 reference 而不需要另写特化版本。]]></content>
       <categories>
         <category>文摘</category>
       </categories>
@@ -258,8 +280,8 @@
         <category>Linux</category>
       </categories>
       <tags>
-        <tag>Linux 进阶</tag>
         <tag>并发编程</tag>
+        <tag>Linux 进阶</tag>
       </tags>
   </entry>
   <entry>
@@ -452,9 +474,9 @@
         <category>C++</category>
       </categories>
       <tags>
-        <tag>知识辨析</tag>
         <tag>内存管理</tag>
         <tag>malloc</tag>
+        <tag>知识辨析</tag>
       </tags>
   </entry>
   <entry>
@@ -465,9 +487,9 @@
         <category>C++</category>
       </categories>
       <tags>
-        <tag>知识辨析</tag>
         <tag>内存管理</tag>
         <tag>malloc</tag>
+        <tag>知识辨析</tag>
       </tags>
   </entry>
   <entry>
