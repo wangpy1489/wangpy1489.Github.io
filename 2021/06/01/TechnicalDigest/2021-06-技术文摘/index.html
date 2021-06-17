@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="Norton&#39;s Blog">
 <meta property="og:description" content="压缩算法 https://tech.meituan.com/2021/01/07/pack-gzip-zstd-lz4.html  以构建部署的情景下，介绍了多种压缩算法的效率和压缩比。其中ISA-L Acceleration Version 的加速方法，指令级的优化比较新颖   自适应算法和学习算法 https://zhuanlan.zhihu.com/p/24893109  自适应算法虽然考">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-06-03T09:12:03.729Z">
+<meta property="og:updated_time" content="2021-06-17T14:04:31.381Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2021-06-技术文摘">
 <meta name="twitter:description" content="压缩算法 https://tech.meituan.com/2021/01/07/pack-gzip-zstd-lz4.html  以构建部署的情景下，介绍了多种压缩算法的效率和压缩比。其中ISA-L Acceleration Version 的加速方法，指令级的优化比较新颖   自适应算法和学习算法 https://zhuanlan.zhihu.com/p/24893109  自适应算法虽然考">
@@ -452,7 +452,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2021-06-03 17:12:03" itemprop="dateModified" datetime="2021-06-03T17:12:03+08:00">2021-06-03</time>
+                <time title="修改时间：2021-06-17 22:04:31" itemprop="dateModified" datetime="2021-06-17T22:04:31+08:00">2021-06-17</time>
               
             
           </span>
@@ -506,7 +506,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">501</span>
+                <span title="本文字数">3.4k</span>
               
 
               
@@ -520,7 +520,7 @@
                 
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="阅读时长">1 分钟</span>
+                <span title="阅读时长">3 分钟</span>
               
             </div>
           
@@ -558,6 +558,62 @@
 <a href="http://www.matrix67.com/blog/archives/268" target="_blank" rel="noopener">位运算简介及实用技巧（四）：实战篇</a></p>
 <h2 id="20个位运算实用技巧"><a class="markdownIt-Anchor" href="#20个位运算实用技巧"></a> 20个位运算实用技巧</h2>
 <p><a href="https://blog.csdn.net/zmazon/article/details/8262185" target="_blank" rel="noopener">https://blog.csdn.net/zmazon/article/details/8262185</a></p>
+<h1 id="高性能环形队列实现"><a class="markdownIt-Anchor" href="#高性能环形队列实现"></a> 高性能环形队列实现</h1>
+<p><a href="https://hedzr.com/algorithm/golang/ringbuf-01-intro/" target="_blank" rel="noopener">https://hedzr.com/algorithm/golang/ringbuf-01-intro/</a></p>
+<h1 id="rdma技术详解"><a class="markdownIt-Anchor" href="#rdma技术详解"></a> RDMA技术详解</h1>
+<p>非常详细的系列 能够从原理上理解RDMA的工作方式</p>
+<p><a href="https://zhuanlan.zhihu.com/p/55142557" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/55142557</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/55142547" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/55142547</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/55142568" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/55142568</a></p>
+<blockquote>
+<p>使用RDMA的优势如下：</p>
+<ul>
+<li>零拷贝(Zero-copy) - 应用程序能够直接执行数据传输，在不涉及到网络软件栈的情况下。数据能够被直接发送到缓冲区或者能够直接从缓冲区里接收，而不需要被复制到网络层。</li>
+<li>内核旁路(Kernel bypass) - 应用程序可以直接在用户态执行数据传输，不需要在内核态与用户态之间做上下文切换。</li>
+<li>不需要CPU干预(No CPU involvement) - 应用程序可以访问远程主机内存而不消耗远程主机中的任何CPU。远程主机内存能够被读取而不需要远程主机上的进程（或CPU)参与。远程主机的CPU的缓存(cache)不会被访问的内存内容所填充。</li>
+<li>消息基于事务(Message based transactions) - 数据被处理为离散消息而不是流，消除了应用程序将流切割为不同消息/事务的需求。</li>
+<li>支持分散/聚合条目(Scatter/gather entries support) - RDMA原生态支持分散/聚合。也就是说，读取多个内存缓冲区然后作为一个流发出去或者接收一个流然后写入到多个内存缓冲区里去。</li>
+</ul>
+</blockquote>
+<h1 id="读取配置优先级源码设计"><a class="markdownIt-Anchor" href="#读取配置优先级源码设计"></a> 读取配置优先级源码设计</h1>
+<p><a href="https://www.cnblogs.com/wucy/p/13586003.html" target="_blank" rel="noopener">https://www.cnblogs.com/wucy/p/13586003.html</a></p>
+<blockquote>
+<p>介绍了.Net读取配置的优先级顺序，从源码层面探究了这样的不同配置源的优先级的实现方式，很有借鉴意义。</p>
+</blockquote>
+<h1 id="程序员之路"><a class="markdownIt-Anchor" href="#程序员之路"></a> 程序员之路</h1>
+<p><a href="https://icyfenix.cn/tricks/2021/geekbang.html" target="_blank" rel="noopener">https://icyfenix.cn/tricks/2021/geekbang.html</a></p>
+<blockquote>
+<p>人生苦短，光阴易逝，把有限的时间和精力投入到对自己最有价值的方向上显得尤为关键，多数人都能接受“选择永远比努力更重要”的观点，但进一步问什么才是好的选择时，就只有少数人能对自己学习的知识技能、从事的工作方向做出定量的价值判断。这里我以上面提问为例，拿出自己的判断模型，供你参考：</p>
+<blockquote>
+<p>价值 = (技能收益 + 知识收益) × 提升空间 / 投入成本</p>
+</blockquote>
+<ul>
+<li><strong>技能收益</strong>：问题里“每天都是对着协议研究业务实现”就属于典型的技能，它往往代表着直接收益。一项每天工作都要用到的技能，无论你是否感有趣，都值得花一些时间精力去掌握，它至少对短期利益起到了明确的支撑作用；反之，永远都不会派上用场的屠龙术，再高大上也是水月镜花。<br>
+正视技能收益的意义在于避免自己变得过度浮躁，以“兴趣不合”、“发展不符”为借口去过度挑剔。我也提倡兴趣驱动，提倡快乐工作，但不设前提条件的兴趣驱动就未免太过“凡尔赛”了，首先在社会中务实地生存，不涉及是否快乐，先把本分工作做对做好，再追求兴趣选择和机遇发展，这才是对多数人的最大的公平。</li>
+<li><strong>知识收益</strong>：问题里“架构方面的课程”有不少都属于知识，知识的收益往往是间接的，最终会体现在缩减模型中的“投入成本”因素，即降低<a href="https://en.wikipedia.org/wiki/Cognitive_load" target="_blank" rel="noopener">认知负荷</a>（Cognitive Load）上。世界上鲜有“烟囱式”的专业人才，专才的知识体系基本还是“金字塔式”的，在领域里能够显著超过他人高度的前提条件，往往便是拥有着超过他人的知识广度。具体到软件开发中，像计算机体系结构、编译原理、操作系统原理等原理性的知识，对于不写编译器、不开发操作系统的程序员，在实践中几乎找不到<strong>直接的</strong>应用场景的，但它们毫无疑问是程序员知识体系的基石，是许多实用技能和常见工具溯源的归宿。<br>
+花费一定成本去学习这类知识，目的是要将自己的知识点筑成体系，将大量的不同的零散的知识点、通过内化、存储、整理、归档、输出等方式组合起来，以点成线、以线成面，最终形成系统的、有序的、清晰的脉络结构，这就是知识体系。程序员是需要终身学习的群体，当新的信息输入时，如果能在知识体系中快速找到它应该安放的位置，定位它的问题与解题空间，找到它与其他知识点的关联关系，那你接受新信息的认知负荷就降低了，通俗地讲，你就有了比别人更高的学习效率，更敏锐的技术触觉。</li>
+<li><strong>提升空间</strong>：如果一项工作对你来说是个全新的领域，甚至能称为是一项挑战，那风险的背后往往也蕴含有更高的收益。但我将提升空间归入到价值判断的因素之中，更重要的目的是为了规避舒适区的陷阱。人性会在持续的颓废时发出示警，却容易被无效的努力所欺骗。去做已经完全得心应手的事情，不耗费什么精力，不会觉得痛苦困难，如果把它当作打游戏看电影般的娱乐消遣，放松自己是合适的，但不应该再指望从中追求什么价值。<br>
+没有价值，是因为提升空间是可以下降至零，但投入成本不可能为零，因为成本中不仅包括精力，还包括有时间，花时间重复去做已经完全熟练的事情，相当于计算分子为零的算式，结果必然是没有价值的。</li>
+<li><strong>投入成本</strong>：在这门架构课程中，我经常讲的一个词是“权衡”，经常说的一句话是“凡事不能只讲收益不谈成本”，在我的价值模型里，收益大小也是必须在确定的成本下才有衡量比较的意义。这里的成本，既包括你花费的时间、金钱与机会，也包括你投入的知识、精神与毅力。<br>
+强调投入成本，是希望你不要去钻牛角尖，如果一项知识或技能，你学习起来非常吃力，花费大力气弄懂之后过一段时间却又会迅速遗忘掉，这很可能是因为你既没有实际应用它的场景，知识体系中也没有建立好掌握它的稳固的前置基础。这种就属于你目前还拿不动的东西，不妨趁早放手，先做好减法，才能做好加法；也不必觉得可惜，如果它对你来说是必要的，一定还会再次出现，想躲也躲不掉。</li>
+</ul>
+</blockquote>
+<h1 id="ebpf-kubernetes"><a class="markdownIt-Anchor" href="#ebpf-kubernetes"></a> eBPF + Kubernetes</h1>
+<p><a href="https://arthurchiao.art/blog/ebpf-and-k8s-zh/" target="_blank" rel="noopener">https://arthurchiao.art/blog/ebpf-and-k8s-zh/</a></p>
+<blockquote>
+<p>本文内容的时间跨度有 8 年，覆盖了 eBPF 发展的整个历史，非常值得一读。</p>
+</blockquote>
+<h1 id="网卡中tx和rx的意思"><a class="markdownIt-Anchor" href="#网卡中tx和rx的意思"></a> 网卡中TX和RX的意思</h1>
+<p><a href="https://blog.csdn.net/myweishanli/article/details/25506745?utm_source=blogxgwz0" target="_blank" rel="noopener">https://blog.csdn.net/myweishanli/article/details/25506745?utm_source=blogxgwz0</a></p>
+<blockquote>
+<p>其实正常来解释：<br>
+tx是发送（transport），rx是接收(receive)。</p>
+</blockquote>
+<h1 id="康威定律"><a class="markdownIt-Anchor" href="#康威定律"></a> 康威定律</h1>
+<p><a href="https://zh.wikipedia.org/wiki/%E5%BA%B7%E5%A8%81%E5%AE%9A%E5%BE%8B" target="_blank" rel="noopener">https://zh.wikipedia.org/wiki/康威定律</a></p>
+<blockquote>
+<p>康威定律尝试使用社会学的方法去解释软件研发中的问题，其核心观点是“沟通决定设计”（Communication Dictates Design），如果技术层面紧密联系在一起特性，在组织层面上强行分离开来，那结果会是沟通成本的上升，因为会产生大量的跨组织的沟通；如果技术层面本身没什么联系的特性，在组织层面上强行安放一块，那结果会是管理成本的上升，因为成员越多越不利于一致决策的形成。</p>
+</blockquote>
 
       
     </div>
@@ -898,7 +954,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#压缩算法"><span class="nav-text"> 压缩算法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#自适应算法和学习算法"><span class="nav-text"> 自适应算法和学习算法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#位运算技巧"><span class="nav-text"> 位运算技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#位运算简介及技巧系列"><span class="nav-text"> 位运算简介及技巧系列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#20个位运算实用技巧"><span class="nav-text"> 20个位运算实用技巧</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#压缩算法"><span class="nav-text"> 压缩算法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#自适应算法和学习算法"><span class="nav-text"> 自适应算法和学习算法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#位运算技巧"><span class="nav-text"> 位运算技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#位运算简介及技巧系列"><span class="nav-text"> 位运算简介及技巧系列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#20个位运算实用技巧"><span class="nav-text"> 20个位运算实用技巧</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#高性能环形队列实现"><span class="nav-text"> 高性能环形队列实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#rdma技术详解"><span class="nav-text"> RDMA技术详解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#读取配置优先级源码设计"><span class="nav-text"> 读取配置优先级源码设计</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#程序员之路"><span class="nav-text"> 程序员之路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ebpf-kubernetes"><span class="nav-text"> eBPF + Kubernetes</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#网卡中tx和rx的意思"><span class="nav-text"> 网卡中TX和RX的意思</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#康威定律"><span class="nav-text"> 康威定律</span></a></li></ol></div>
             
 
           </div>
@@ -931,7 +987,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">125k</span>
+    <span title="站点总字数">129k</span>
   
 
   
@@ -940,7 +996,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">1:54</span>
+    <span title="站点阅读时长">1:57</span>
   
 </div>
 
