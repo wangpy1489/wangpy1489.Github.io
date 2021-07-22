@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Google技术写作课——笔记]]></title>
+    <url>%2F2021%2F07%2F22%2FGoogle%E6%8A%80%E6%9C%AF%E5%86%99%E4%BD%9C%E8%AF%BE%E2%80%94%E2%80%94%E7%AC%94%E8%AE%B0%2F</url>
+    <content type="text"><![CDATA[本文是阅读学习google 英文技术写作 课程的笔记。 Courses One Introduction Learning objectives 前后一致的使用术语（包括缩写形式） 能够区分并消除代词的歧义 能够识别被动语态和主动语态，并能将被动语态转换为主动语态 掌握让句子更加简短、表达更加清晰更加吸引人的几种方法。 理解项目符号列表和数字符号列表的区别，能够正确的选用 段落和文档结构上：能在文档开头说明关键点，学会写有效的段首句，每个段落只讲一个主题。 能够明白目标读者已经知道的和你想让他们知道的，避免知识诅咒 避免习语（黑话） 能够将大的话题拆成合适的段落分别说明 正确的使用标点符号 使用Markdown Word Define new or unfamiliar terms 对于目标读者不熟悉的术语： 如果是已经有的术语，给一个好的已有的解释的连接（不要重复造轮子） 如果是你的文档的新术语，给一个清晰的定义。如果很多，给一个术语表 Use tems consistently 前后一致的使用术语，如：不要前边用 Protocol Buffers 后边用 protobufs。 若要使用缩写应当在术语第一次出现时在括号内说明，之后保持一致。如： Protocol Buffers (or protobufs for short) Use acronyms properly 术语第一次出现时要写全称，但之后可以通过使用所写来简化段落。 但是不要出现全称和缩写再次混用。 Use the acronym or the full term 太多的简写读者的脑子里可能要维护一个大的map来存对应关系，因此对于一些术语我们可能不要用简写会好一点。 对于只出现几次的术语不需要定义简写 对同时满足一下情况的术语定义简写 简写要比全称短的多 简写会在文档里出现很多次（读者熟悉的缩写可以尽情使用，如HTML） Disambiguate pronouns 代词很容易出现歧义，在恰当时候使用，尽量重复使用名词来表达。 永远不要在你引入一个名词前就使用代词指代 将代词和它指代的名词放一起（5个单词举例以内——英文标准） 如果在代词和指定代的名词之间有第二个名词，建议直接重复使用名词。= This and That 对于this和 that有几种技巧能够消除歧义 直接将 this和that换成对应的名词 在this 和 that 后边紧跟一个名词 Active voice]]></content>
+      <categories>
+        <category>软技能</category>
+      </categories>
+      <tags>
+        <tag>写作</tag>
+        <tag>英文写作</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[提供价值]]></title>
     <url>%2F2021%2F07%2F14%2F%E6%8F%90%E4%BE%9B%E4%BB%B7%E5%80%BC%2F</url>
     <content type="text"></content>
@@ -549,8 +561,8 @@
         <category>LeetCode</category>
       </categories>
       <tags>
-        <tag>LeetCode Summary</tag>
         <tag>数组</tag>
+        <tag>LeetCode Summary</tag>
       </tags>
   </entry>
   <entry>
