@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="Norton&#39;s Blog">
 <meta property="og:description" content="Socket缓存究竟如何影响TCP的性能？ https://zorrozou.github.io/docs/Socket缓存究竟如何影响TCP的性能.html  所以，选择不同的拥塞控制算法，更多影响的是丢包之后的快速恢复过程和慢启动过程的效果。比如，bbr这种对丢包不敏感的拥塞控制算法，在有丢包的情况下，对窗口的影响比其他拥塞控制算法更小。而如果网络仅仅是延时大，丢包很少的话，选什么拥塞控制算">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-07-21T13:25:18.571Z">
+<meta property="og:updated_time" content="2021-07-29T06:08:33.757Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2021-07-技术文摘">
 <meta name="twitter:description" content="Socket缓存究竟如何影响TCP的性能？ https://zorrozou.github.io/docs/Socket缓存究竟如何影响TCP的性能.html  所以，选择不同的拥塞控制算法，更多影响的是丢包之后的快速恢复过程和慢启动过程的效果。比如，bbr这种对丢包不敏感的拥塞控制算法，在有丢包的情况下，对窗口的影响比其他拥塞控制算法更小。而如果网络仅仅是延时大，丢包很少的话，选什么拥塞控制算">
@@ -452,7 +452,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2021-07-21 21:25:18" itemprop="dateModified" datetime="2021-07-21T21:25:18+08:00">2021-07-21</time>
+                <time title="修改时间：2021-07-29 14:08:33" itemprop="dateModified" datetime="2021-07-29T14:08:33+08:00">2021-07-29</time>
               
             
           </span>
@@ -506,7 +506,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">468</span>
+                <span title="本文字数">758</span>
               
 
               
@@ -553,6 +553,18 @@
 <p><strong>第二阶段</strong>：白屏，自动化运维，以前把脚本做成工具去弄，有什么特征，人push机器去干活，自助运维。</p>
 <p><strong>第三阶段</strong>：用户对运维体感很少，但是运维这个领域是不变的。最重要的是人机交互变少了，无屏虽说是不可能的，非常极端，但是个趋势，少量的人机交互，它有自决策、自驱动。</p>
 </blockquote>
+<h1 id="为什么webassembly中的内存是安全的"><a class="markdownIt-Anchor" href="#为什么webassembly中的内存是安全的"></a> 为什么WebAssembly中的内存是安全的</h1>
+<p><a href="https://segmentfault.com/a/1190000025183711" target="_blank" rel="noopener">https://segmentfault.com/a/1190000025183711</a></p>
+<blockquote>
+<p><strong>内存泄漏</strong></p>
+<p>当附加了内存对象的WebAssembly实例超出范围时，可以对整个内存数组进行垃圾回收。</p>
+<p><strong>内存隔离</strong></p>
+<p>每当WebAssembly中有负载或存储时，引擎都会进行数组边界检查，以确保地址位于WebAssembly实例的内存中。<br>
+如果代码尝试访问越界地址，则引擎将引发异常。这样可以保护其余的内存。</p>
+</blockquote>
+<h1 id="单元测试成神之路c"><a class="markdownIt-Anchor" href="#单元测试成神之路c"></a> 单元测试成神之路——c++</h1>
+<p><a href="https://zhangyuyu.github.io/cpp-unit-test/" target="_blank" rel="noopener">https://zhangyuyu.github.io/cpp-unit-test/</a></p>
+<p>比较清晰，值得翻阅。</p>
 
       
     </div>
@@ -899,7 +911,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#socket缓存究竟如何影响tcp的性能"><span class="nav-text"> Socket缓存究竟如何影响TCP的性能？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#运维平台建设"><span class="nav-text"> 运维平台建设</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#socket缓存究竟如何影响tcp的性能"><span class="nav-text"> Socket缓存究竟如何影响TCP的性能？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#运维平台建设"><span class="nav-text"> 运维平台建设</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#为什么webassembly中的内存是安全的"><span class="nav-text"> 为什么WebAssembly中的内存是安全的</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#单元测试成神之路c"><span class="nav-text"> 单元测试成神之路——c++</span></a></div>
             
 
           </div>
@@ -932,7 +944,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">131k</span>
+    <span title="站点总字数">139k</span>
   
 
   
@@ -941,7 +953,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">1:59</span>
+    <span title="站点阅读时长">2:07</span>
   
 </div>
 
