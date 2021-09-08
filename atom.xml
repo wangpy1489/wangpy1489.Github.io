@@ -1,0 +1,536 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Norton&#39;s Blog</title>
+  <icon>http://yoursite.com/dog_32.png</icon>
+  <subtitle>You miss 100% of the shot you do not take.</subtitle>
+  <link href="http://yoursite.com/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2021-09-06T12:12:51.969Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>王谱越</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>2021-09-技术文摘</title>
+    <link href="http://yoursite.com/2021/09/03/TechnicalDigest/2021-09-%E6%8A%80%E6%9C%AF%E6%96%87%E6%91%98/"/>
+    <id>http://yoursite.com/2021/09/03/TechnicalDigest/2021-09-%E6%8A%80%E6%9C%AF%E6%96%87%E6%91%98/</id>
+    <published>2021-09-03T09:13:01.000Z</published>
+    <updated>2021-09-06T12:12:51.969Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;降低软件复杂性的一般原则和方法&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#降低软件复杂性的一般原则和方法&quot;&gt;&lt;/a&gt; 降低软件复杂性的一般原则和方法&lt;/h1&gt;
+&lt;p&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="文摘" scheme="http://yoursite.com/categories/文摘/"/>
+    
+    
+    <category term="技术文摘" scheme="http://yoursite.com/tags/技术文摘/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>C++编译Warning汇总</title>
+    <link href="http://yoursite.com/2021/08/26/C-%E7%BC%96%E8%AF%91Warning%E6%B1%87%E6%80%BB/"/>
+    <id>http://yoursite.com/2021/08/26/C-%E7%BC%96%E8%AF%91Warning%E6%B1%87%E6%80%BB/</id>
+    <published>2021-08-26T12:52:34.000Z</published>
+    <updated>2021-08-26T13:00:36.362Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;按条目记录平时遇到的编译Error和Warning，避免重复排查&lt;/p&gt;
+&lt;h2 id=&quot;-wpessimizing-move&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#-wpessimizing-move&quot;&gt;&lt;/a&gt;</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="http://yoursite.com/2021/08/20/NoteBook/interview-points/"/>
+    <id>http://yoursite.com/2021/08/20/NoteBook/interview-points/</id>
+    <published>2021-08-20T09:32:56.938Z</published>
+    <updated>2021-08-20T09:32:56.938Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;title: 一些琐碎的知识点&lt;br&gt;
+date: 2019-04-16 20:11:06&lt;br&gt;
+tags:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;基础知识&lt;/li&gt;
+&lt;li&gt;知识杂记&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;categories:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;学习笔记&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&quot;计算机网络&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#计算机网络&quot;&gt;&lt;/a&gt; 计算机网络&lt;/h1&gt;
+&lt;h2 id=&quot;子网掩码&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#子网掩码&quot;&gt;&lt;/a&gt; 子网掩码&lt;/h2&gt;
+&lt;p&gt;子网划分是通过借用IP地址中若干位主机地址来充当子网的网络地址，从而将原网络划分为若干子网。&lt;/p&gt;
+&lt;p&gt;划分子网时，随着子网地址借用主机位数的增多，子网的数目随之增加，但每个子网中的可用主机数逐渐减少。&lt;/p&gt;</summary>
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>2021-08-技术文摘</title>
+    <link href="http://yoursite.com/2021/08/02/TechnicalDigest/2021-08-%E6%8A%80%E6%9C%AF%E6%96%87%E6%91%98/"/>
+    <id>http://yoursite.com/2021/08/02/TechnicalDigest/2021-08-%E6%8A%80%E6%9C%AF%E6%96%87%E6%91%98/</id>
+    <published>2021-08-02T05:46:57.000Z</published>
+    <updated>2021-08-29T13:32:38.850Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;一文解释清楚google-bbr拥塞控制算法原理&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#一文解释清楚google-bbr拥塞控制算法原理&quot;&gt;&lt;/a&gt; 一文解释清楚Google BBR拥塞控制算法原理&lt;/h1&gt;
+&lt;p&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="文摘" scheme="http://yoursite.com/categories/文摘/"/>
+    
+    
+    <category term="技术文摘" scheme="http://yoursite.com/tags/技术文摘/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Google技术写作课——笔记</title>
+    <link href="http://yoursite.com/2021/07/22/Google%E6%8A%80%E6%9C%AF%E5%86%99%E4%BD%9C%E8%AF%BE%E2%80%94%E2%80%94%E7%AC%94%E8%AE%B0/"/>
+    <id>http://yoursite.com/2021/07/22/Google%E6%8A%80%E6%9C%AF%E5%86%99%E4%BD%9C%E8%AF%BE%E2%80%94%E2%80%94%E7%AC%94%E8%AE%B0/</id>
+    <published>2021-07-22T06:15:22.000Z</published>
+    <updated>2021-08-01T12:26:39.657Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;本文是阅读学习&lt;a href=&quot;https://developers.google.com/tech-writing&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;google 英文技术写作&lt;/a&gt; 课程的笔记。&lt;/p&gt;
+&lt;h1 id=&quot;courses-one&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#courses-one&quot;&gt;&lt;/a&gt; Courses One&lt;/h1&gt;
+&lt;h2 id=&quot;introduction&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#introduction&quot;&gt;&lt;/a&gt; Introduction&lt;/h2&gt;
+&lt;h3 id=&quot;learning-objectives&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#learning-objectives&quot;&gt;&lt;/a&gt; Learning objectives&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;前后一致的使用术语（包括缩写形式）&lt;/li&gt;
+&lt;li&gt;能够区分并消除代词的歧义&lt;/li&gt;
+&lt;li&gt;能够识别被动语态和主动语态，并能将被动语态转换为主动语态&lt;/li&gt;
+&lt;li&gt;掌握让句子更加简短、表达更加清晰更加吸引人的几种方法。&lt;/li&gt;
+&lt;li&gt;理解项目符号列表和数字符号列表的区别，能够正确的选用&lt;/li&gt;
+&lt;li&gt;段落和文档结构上：能在文档开头说明关键点，学会写有效的段首句，每个段落只讲一个主题。&lt;/li&gt;
+&lt;li&gt;能够明白目标读者已经知道的和你想让他们知道的，避免知识诅咒&lt;/li&gt;
+&lt;li&gt;避免习语（黑话）&lt;/li&gt;
+&lt;li&gt;能够将大的话题拆成合适的段落分别说明&lt;/li&gt;
+&lt;li&gt;正确的使用标点符号&lt;/li&gt;
+&lt;li&gt;使用Markdown&lt;/li&gt;
+&lt;/ul&gt;</summary>
+    
+    
+    
+    <category term="软技能" scheme="http://yoursite.com/categories/软技能/"/>
+    
+    
+    <category term="写作" scheme="http://yoursite.com/tags/写作/"/>
+    
+    <category term="英文写作" scheme="http://yoursite.com/tags/英文写作/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>2021-07-技术文摘</title>
+    <link href="http://yoursite.com/2021/07/06/TechnicalDigest/2021-07-%E6%8A%80%E6%9C%AF%E6%96%87%E6%91%98/"/>
+    <id>http://yoursite.com/2021/07/06/TechnicalDigest/2021-07-%E6%8A%80%E6%9C%AF%E6%96%87%E6%91%98/</id>
+    <published>2021-07-06T08:47:12.000Z</published>
+    <updated>2021-08-18T13:04:19.026Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;socket缓存究竟如何影响tcp的性能&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#socket缓存究竟如何影响tcp的性能&quot;&gt;&lt;/a&gt; Socket缓存究竟如何影响TCP的性能？&lt;/h2&gt;
+&lt;p&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="文摘" scheme="http://yoursite.com/categories/文摘/"/>
+    
+    
+    <category term="技术文摘" scheme="http://yoursite.com/tags/技术文摘/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>造💩规范</title>
+    <link href="http://yoursite.com/2021/06/02/%E9%80%A0%F0%9F%92%A9%E8%A7%84%E8%8C%83/"/>
+    <id>http://yoursite.com/2021/06/02/%E9%80%A0%F0%9F%92%A9%E8%A7%84%E8%8C%83/</id>
+    <published>2021-06-02T07:55:17.000Z</published>
+    <updated>2021-06-02T07:57:29.321Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;ul&gt;
+&lt;li&gt;类命名： 父类 BaseShi  子类 Shi1</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>2021-06-技术文摘</title>
+    <link href="http://yoursite.com/2021/06/01/TechnicalDigest/2021-06-%E6%8A%80%E6%9C%AF%E6%96%87%E6%91%98/"/>
+    <id>http://yoursite.com/2021/06/01/TechnicalDigest/2021-06-%E6%8A%80%E6%9C%AF%E6%96%87%E6%91%98/</id>
+    <published>2021-06-01T06:26:05.000Z</published>
+    <updated>2021-06-20T06:43:20.256Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;压缩算法&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#压缩算法&quot;&gt;&lt;/a&gt; 压缩算法&lt;/h1&gt;
+&lt;p&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="文摘" scheme="http://yoursite.com/categories/文摘/"/>
+    
+    
+    <category term="技术文摘" scheme="http://yoursite.com/tags/技术文摘/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>2021-05-技术文摘</title>
+    <link href="http://yoursite.com/2021/05/13/TechnicalDigest/2021-05-%E6%8A%80%E6%9C%AF%E6%96%87%E6%91%98/"/>
+    <id>http://yoursite.com/2021/05/13/TechnicalDigest/2021-05-%E6%8A%80%E6%9C%AF%E6%96%87%E6%91%98/</id>
+    <published>2021-05-13T12:41:21.000Z</published>
+    <updated>2021-05-30T13:21:48.919Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;12要素&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#12要素&quot;&gt;&lt;/a&gt; 12要素&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&quot;https://12factor.net/zh_cn/&quot; target=&quot;_blank&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="文摘" scheme="http://yoursite.com/categories/文摘/"/>
+    
+    
+    <category term="技术文摘" scheme="http://yoursite.com/tags/技术文摘/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>灵光一闪</title>
+    <link href="http://yoursite.com/2021/04/21/%E7%81%B5%E5%85%89%E4%B8%80%E9%97%AA/"/>
+    <id>http://yoursite.com/2021/04/21/%E7%81%B5%E5%85%89%E4%B8%80%E9%97%AA/</id>
+    <published>2021-04-21T09:55:43.000Z</published>
+    <updated>2021-08-31T08:51:42.182Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;记录一下平时突然想到的一些好的 idea。&lt;/p&gt;
+&lt;h1 id=&quot;计算机&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#计算机&quot;&gt;&lt;/a&gt; 计算机&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;架构应当解耦，但架构设计的思考过程不能解耦。&lt;/li&gt;
+&lt;li&gt;代码复用性越高，功能可用性就越低（观某难产项目后有感&lt;/li&gt;
+&lt;li&gt;80%的bug出现在设计阶段， 单测是横好的检验方法&lt;/li&gt;
+&lt;li&gt;高并发情境下，CPU以外的内存、磁盘都可能成为并发瓶颈&lt;/li&gt;
+&lt;li&gt;测试和需求是一致的， 有什么样的需求就会有什么样的测试。&lt;/li&gt;
+&lt;li&gt;代码的传染性：CodeBase内的代码会被各处copy&lt;/li&gt;
+&lt;li&gt;云作为基础设施，未来应当像自来水一样随用可取。同样的云原生应用也应当是随用可取的。&lt;/li&gt;
+&lt;/ul&gt;</summary>
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>数学文摘</title>
+    <link href="http://yoursite.com/2021/04/13/%E6%95%B0%E5%AD%A6%E6%96%87%E6%91%98/"/>
+    <id>http://yoursite.com/2021/04/13/%E6%95%B0%E5%AD%A6%E6%96%87%E6%91%98/</id>
+    <published>2021-04-13T12:05:25.000Z</published>
+    <updated>2021-05-05T09:33:24.118Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;贝叶斯方法&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#贝叶斯方法&quot;&gt;&lt;/a&gt; 贝叶斯方法&lt;/h1&gt;
+&lt;p&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="文摘" scheme="http://yoursite.com/categories/文摘/"/>
+    
+    
+    <category term="数学" scheme="http://yoursite.com/tags/数学/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>2021-04-技术文摘</title>
+    <link href="http://yoursite.com/2021/04/11/TechnicalDigest/2021-04-%E6%8A%80%E6%9C%AF%E6%96%87%E6%91%98/"/>
+    <id>http://yoursite.com/2021/04/11/TechnicalDigest/2021-04-%E6%8A%80%E6%9C%AF%E6%96%87%E6%91%98/</id>
+    <published>2021-04-11T03:34:04.000Z</published>
+    <updated>2021-05-05T09:34:26.933Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;gdb保存断点&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#gdb保存断点&quot;&gt;&lt;/a&gt; GDB保存断点&lt;/h1&gt;
+&lt;p&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="文摘" scheme="http://yoursite.com/categories/文摘/"/>
+    
+    
+    <category term="技术文摘" scheme="http://yoursite.com/tags/技术文摘/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>2021-03-技术文摘</title>
+    <link href="http://yoursite.com/2021/03/25/TechnicalDigest/2021-03-%E6%8A%80%E6%9C%AF%E6%96%87%E6%91%98/"/>
+    <id>http://yoursite.com/2021/03/25/TechnicalDigest/2021-03-%E6%8A%80%E6%9C%AF%E6%96%87%E6%91%98/</id>
+    <published>2021-03-25T07:50:05.000Z</published>
+    <updated>2021-05-05T09:34:24.151Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;foqs&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#foqs&quot;&gt;&lt;/a&gt; FOQS&lt;/h1&gt;
+&lt;p&gt;一种可以水平扩缩容 分布式 priority queue&lt;/p&gt;
+&lt;p&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="文摘" scheme="http://yoursite.com/categories/文摘/"/>
+    
+    
+    <category term="技术文摘" scheme="http://yoursite.com/tags/技术文摘/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>2021-02-技术文摘</title>
+    <link href="http://yoursite.com/2021/02/01/TechnicalDigest/2021-02-%E6%8A%80%E6%9C%AF%E6%96%87%E6%91%98/"/>
+    <id>http://yoursite.com/2021/02/01/TechnicalDigest/2021-02-%E6%8A%80%E6%9C%AF%E6%96%87%E6%91%98/</id>
+    <published>2021-02-01T07:03:04.000Z</published>
+    <updated>2021-06-08T09:36:48.491Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;6w字搞定linux基本操作建议收藏&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#6w字搞定linux基本操作建议收藏&quot;&gt;&lt;/a&gt; 6w字搞定Linux基本操作，建议收藏&lt;/h1&gt;
+&lt;p&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="文摘" scheme="http://yoursite.com/categories/文摘/"/>
+    
+    
+    <category term="技术文摘" scheme="http://yoursite.com/tags/技术文摘/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>工具杂记</title>
+    <link href="http://yoursite.com/2021/01/07/%E5%B7%A5%E5%85%B7%E6%9D%82%E8%AE%B0/"/>
+    <id>http://yoursite.com/2021/01/07/%E5%B7%A5%E5%85%B7%E6%9D%82%E8%AE%B0/</id>
+    <published>2021-01-07T03:14:07.000Z</published>
+    <updated>2021-06-07T06:56:40.755Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;vscode&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#vscode&quot;&gt;&lt;/a&gt; VScode&lt;/h1&gt;
+&lt;h2 id=&quot;21个vscode快捷键&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="文摘" scheme="http://yoursite.com/categories/文摘/"/>
+    
+    
+    <category term="开发工具" scheme="http://yoursite.com/tags/开发工具/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>2021-01-技术文摘</title>
+    <link href="http://yoursite.com/2021/01/03/TechnicalDigest/2021-01-%E6%8A%80%E6%9C%AF%E6%96%87%E6%91%98/"/>
+    <id>http://yoursite.com/2021/01/03/TechnicalDigest/2021-01-%E6%8A%80%E6%9C%AF%E6%96%87%E6%91%98/</id>
+    <published>2021-01-03T12:34:59.000Z</published>
+    <updated>2021-06-08T09:36:07.741Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;刨根问底kafka-到底会不会丢消息&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#刨根问底kafka-到底会不会丢消息&quot;&gt;&lt;/a&gt; &lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="文摘" scheme="http://yoursite.com/categories/文摘/"/>
+    
+    
+    <category term="技术文摘" scheme="http://yoursite.com/tags/技术文摘/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>2020-12-技术文摘</title>
+    <link href="http://yoursite.com/2020/12/15/TechnicalDigest/2020-12-%E6%8A%80%E6%9C%AF%E6%96%87%E6%91%98/"/>
+    <id>http://yoursite.com/2020/12/15/TechnicalDigest/2020-12-%E6%8A%80%E6%9C%AF%E6%96%87%E6%91%98/</id>
+    <published>2020-12-15T03:12:43.000Z</published>
+    <updated>2021-06-08T09:36:11.319Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;软件研发中的信任链问题&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#软件研发中的信任链问题&quot;&gt;&lt;/a&gt; &lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="文摘" scheme="http://yoursite.com/categories/文摘/"/>
+    
+    
+    <category term="技术文摘" scheme="http://yoursite.com/tags/技术文摘/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>转-如何写代码注释</title>
+    <link href="http://yoursite.com/2020/12/12/Programing/%E8%BD%AC-%E5%A6%82%E4%BD%95%E5%86%99%E4%BB%A3%E7%A0%81%E6%B3%A8%E9%87%8A/"/>
+    <id>http://yoursite.com/2020/12/12/Programing/%E8%BD%AC-%E5%A6%82%E4%BD%95%E5%86%99%E4%BB%A3%E7%A0%81%E6%B3%A8%E9%87%8A/</id>
+    <published>2020-12-12T14:56:56.000Z</published>
+    <updated>2021-01-31T05:51:46.839Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;许多人认为，如果代码写得足够扎实，注释就没什么用了。在他们看来，当一切都设计妥当时，代码本身会记录其作用，因此代码注释是多余的。我对此持不同意见，主要出于两个原因：&lt;/p&gt;
+&lt;p&gt;\1. 许多注释并未起到解释代码的作用。&lt;/p&gt;
+&lt;p&gt;\2. 注释使读者不必凭空想象太多细枝末节，帮助读者降低认知负担。&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="开发规范" scheme="http://yoursite.com/categories/开发规范/"/>
+    
+    
+    <category term="注释" scheme="http://yoursite.com/tags/注释/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>转-日志规范</title>
+    <link href="http://yoursite.com/2020/12/12/Programing/%E8%BD%AC-%E6%97%A5%E5%BF%97%E8%A7%84%E8%8C%83/"/>
+    <id>http://yoursite.com/2020/12/12/Programing/%E8%BD%AC-%E6%97%A5%E5%BF%97%E8%A7%84%E8%8C%83/</id>
+    <published>2020-12-12T14:55:54.000Z</published>
+    <updated>2021-01-31T07:07:12.037Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;日志&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#日志&quot;&gt;&lt;/a&gt; 日志&lt;/h1&gt;
+&lt;h2 id=&quot;日志是什么&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#日志是什么&quot;&gt;&lt;/a&gt; 日志是什么？&lt;/h2&gt;
+&lt;p&gt;日志，维基百科的定义是记录服务器等电脑设备或软件的运作。&lt;/p&gt;
+&lt;p&gt;日志文件提供精确的系统记录，根据日志最终定位到错误详情和根源。日志的特点是，它描述一些离散的（不连续的）事件。 例如：应用通过一个滚动的文件输出 INFO 或 ERROR 信息，并通过日志收集系统，存储到一些存储引擎（Elasticsearch）中方便查询。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="开发规范" scheme="http://yoursite.com/categories/开发规范/"/>
+    
+    
+    <category term="日志" scheme="http://yoursite.com/tags/日志/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java杂记</title>
+    <link href="http://yoursite.com/2020/12/12/Java%E6%9D%82%E8%AE%B0/"/>
+    <id>http://yoursite.com/2020/12/12/Java%E6%9D%82%E8%AE%B0/</id>
+    <published>2020-12-12T14:38:07.000Z</published>
+    <updated>2021-05-05T09:34:57.705Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;java-proto对象转byte&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#java-proto对象转byte&quot;&gt;&lt;/a&gt; Java Proto对象转byte&lt;/h1&gt;
+&lt;p&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="文摘" scheme="http://yoursite.com/categories/文摘/"/>
+    
+    
+    <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
+    
+  </entry>
+  
+</feed>

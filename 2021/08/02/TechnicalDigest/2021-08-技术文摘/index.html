@@ -104,12 +104,16 @@
 <meta property="og:site_name" content="Norton&#39;s Blog">
 <meta property="og:description" content="一文解释清楚Google BBR拥塞控制算法原理 https://www.taohui.pub/2019/08/07/网络协议/一文解释清楚google-bbr拥塞控制算法原理/  BBR对TCP性能的提升是巨大的，它能更有效的使用当下网络环境，Youtube应用后在吞吐量上有平均4%提升（对于日本这样的网络环境有14%以上的提升）： 报文的往返时延RTT降低了33%，这样如视频这样的大文件传输">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-08-19T11:52:23.946Z">
+<meta property="og:image" content="https://pic2.zhimg.com/50/v2-ab2ee9eefc6628d92ac61905e9f15055_720w.webp?source=1940ef5c">
+<meta property="og:updated_time" content="2021-08-29T13:32:38.850Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2021-08-技术文摘">
 <meta name="twitter:description" content="一文解释清楚Google BBR拥塞控制算法原理 https://www.taohui.pub/2019/08/07/网络协议/一文解释清楚google-bbr拥塞控制算法原理/  BBR对TCP性能的提升是巨大的，它能更有效的使用当下网络环境，Youtube应用后在吞吐量上有平均4%提升（对于日本这样的网络环境有14%以上的提升）： 报文的往返时延RTT降低了33%，这样如视频这样的大文件传输">
+<meta name="twitter:image" content="https://pic2.zhimg.com/50/v2-ab2ee9eefc6628d92ac61905e9f15055_720w.webp?source=1940ef5c">
 
 
+
+  <link rel="alternate" href="/atom.xml" title="Norton's Blog" type="application/atom+xml"/>
 
 
 
@@ -452,7 +456,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2021-08-19 19:52:23" itemprop="dateModified" datetime="2021-08-19T19:52:23+08:00">2021-08-19</time>
+                <time title="修改时间：2021-08-29 21:32:38" itemprop="dateModified" datetime="2021-08-29T21:32:38+08:00">2021-08-29</time>
               
             
           </span>
@@ -506,7 +510,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">3.1k</span>
+                <span title="本文字数">3.6k</span>
               
 
               
@@ -596,6 +600,37 @@
 <p><a href="https://segmentfault.com/a/1190000021369433" target="_blank" rel="noopener">https://segmentfault.com/a/1190000021369433</a></p>
 <h1 id="pingcap工程体系"><a class="markdownIt-Anchor" href="#pingcap工程体系"></a> Pingcap工程体系</h1>
 <p><a href="https://pingcap.com/zh/blog/behind-tidb-5.0-engineering-system-of-pingcap-1" target="_blank" rel="noopener">https://pingcap.com/zh/blog/behind-tidb-5.0-engineering-system-of-pingcap-1</a></p>
+<h1 id="活锁问题"><a class="markdownIt-Anchor" href="#活锁问题"></a> 活锁问题</h1>
+<p><a href="https://www.zhihu.com/question/20566246" target="_blank" rel="noopener">https://www.zhihu.com/question/20566246</a></p>
+<blockquote>
+<p>死锁如果是两个不动的齿轮，活锁大概就是你低头走在路上，正好快要碰上一个美女，你马上往左边垮了一步，但美女也正好往右边跨了一步，不断循环，最后谁都过不去。</p>
+</blockquote>
+<p><img src="https://pic2.zhimg.com/50/v2-ab2ee9eefc6628d92ac61905e9f15055_720w.webp?source=1940ef5c" alt="img"></p>
+<h1 id="lockfree之美-共享变量的并发读写"><a class="markdownIt-Anchor" href="#lockfree之美-共享变量的并发读写"></a> [LockFree之美] 共享变量的并发读写</h1>
+<p><a href="http://oceanbase.org.cn/?p=82" target="_blank" rel="noopener">http://oceanbase.org.cn/?p=82</a></p>
+<p><a href="http://oceanbase.org.cn/?cat=14" target="_blank" rel="noopener">http://oceanbase.org.cn/?cat=14</a></p>
+<h1 id="规范git-commit"><a class="markdownIt-Anchor" href="#规范git-commit"></a> 规范Git Commit</h1>
+<p><a href="https://zhuanlan.zhihu.com/p/182553920" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/182553920</a></p>
+<p>一套可行的验证工具， 通过git hook来检查commit message</p>
+<p><a href="https://github.com/typicode/husky" target="_blank" rel="noopener">https://github.com/typicode/husky</a></p>
+<p><a href="https://github.com/conventional-changelog/commitlint" target="_blank" rel="noopener">https://github.com/conventional-changelog/commitlint</a></p>
+<h1 id="美团外卖数仓建设实践"><a class="markdownIt-Anchor" href="#美团外卖数仓建设实践"></a> 美团外卖数仓建设实践</h1>
+<p><a href="https://tech.meituan.com/2021/08/26/data-warehouse-in-meituan-waimai.html" target="_blank" rel="noopener">https://tech.meituan.com/2021/08/26/data-warehouse-in-meituan-waimai.html</a></p>
+<blockquote>
+<p>大数据实时系统架构：</p>
+<ul>
+<li>Lamba架构
+<ul>
+<li>离线和实时双路生产，在应用层面整合。</li>
+</ul>
+</li>
+<li>Kappa 架构
+<ul>
+<li>一套逻辑同时生产离线和实时。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
 
       
     </div>
@@ -641,6 +676,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/08/20/NoteBook/interview-points/" rel="prev" title="">
+                 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -713,7 +752,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">55</span>
+                    <span class="site-state-item-count">57</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -861,11 +900,7 @@
                     
                       
                     
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">45</span>
+                    <span class="site-state-item-count">43</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -873,6 +908,13 @@
             </nav>
           
 
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
           
 
           
@@ -938,7 +980,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一文解释清楚google-bbr拥塞控制算法原理"><span class="nav-text"> 一文解释清楚Google BBR拥塞控制算法原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#协议"><span class="nav-text"> 协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bbr-论文"><span class="nav-text"> BBR 论文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#论坛"><span class="nav-text"> 论坛</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#对比-bbrv2-和-bbr"><span class="nav-text"> 对比 BBRv2 和 BBR</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#parallel-hashmap"><span class="nav-text"> Parallel-hashmap</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-text"> </span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#都是事件驱动为什么nginx的性能远高于redis"><span class="nav-text"> 都是事件驱动，为什么Nginx的性能远高于Redis？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用预设字典进行压缩"><span class="nav-text"> 使用预设字典进行压缩</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#深入理解-iptables-和-netfilter-架构"><span class="nav-text"> 深入理解 iptables 和 netfilter 架构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#grpc数据流"><span class="nav-text"> GRPC数据流</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#epoll水平触发与边缘触发"><span class="nav-text"> Epoll：水平触发与边缘触发</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pingcap工程体系"><span class="nav-text"> Pingcap工程体系</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一文解释清楚google-bbr拥塞控制算法原理"><span class="nav-text"> 一文解释清楚Google BBR拥塞控制算法原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#协议"><span class="nav-text"> 协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bbr-论文"><span class="nav-text"> BBR 论文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#论坛"><span class="nav-text"> 论坛</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#对比-bbrv2-和-bbr"><span class="nav-text"> 对比 BBRv2 和 BBR</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#parallel-hashmap"><span class="nav-text"> Parallel-hashmap</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-text"> </span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#都是事件驱动为什么nginx的性能远高于redis"><span class="nav-text"> 都是事件驱动，为什么Nginx的性能远高于Redis？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用预设字典进行压缩"><span class="nav-text"> 使用预设字典进行压缩</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#深入理解-iptables-和-netfilter-架构"><span class="nav-text"> 深入理解 iptables 和 netfilter 架构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#grpc数据流"><span class="nav-text"> GRPC数据流</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#epoll水平触发与边缘触发"><span class="nav-text"> Epoll：水平触发与边缘触发</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pingcap工程体系"><span class="nav-text"> Pingcap工程体系</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#活锁问题"><span class="nav-text"> 活锁问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#lockfree之美-共享变量的并发读写"><span class="nav-text"> [LockFree之美] 共享变量的并发读写</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#规范git-commit"><span class="nav-text"> 规范Git Commit</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#美团外卖数仓建设实践"><span class="nav-text"> 美团外卖数仓建设实践</span></a></li></ol></div>
             
 
           </div>
@@ -971,7 +1013,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">142k</span>
+    <span title="站点总字数">144k</span>
   
 
   
@@ -980,7 +1022,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="站点阅读时长">2:09</span>
+    <span title="站点阅读时长">2:11</span>
   
 </div>
 
