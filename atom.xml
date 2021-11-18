@@ -97,17 +97,10 @@
     <link href="http://yoursite.com/2021/08/26/C-%E7%BC%96%E8%AF%91Warning%E6%B1%87%E6%80%BB/"/>
     <id>http://yoursite.com/2021/08/26/C-%E7%BC%96%E8%AF%91Warning%E6%B1%87%E6%80%BB/</id>
     <published>2021-08-26T12:52:34.000Z</published>
-    <updated>2021-08-26T13:00:36.362Z</updated>
+    <updated>2021-11-18T02:12:16.729Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;按条目记录平时遇到的编译Error和Warning，避免重复排查&lt;/p&gt;
-&lt;h2 id=&quot;-wpessimizing-move&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#-wpessimizing-move&quot;&gt;&lt;/a&gt;</summary>
-        
-      
+    <summary type="html">&lt;p&gt;按条目记录平时遇到的编译Error和Warning，避免重复排查&lt;/p&gt;</summary>
     
     
     
@@ -200,28 +193,6 @@
     
     
     <category term="技术文摘" scheme="http://yoursite.com/tags/技术文摘/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>造💩规范</title>
-    <link href="http://yoursite.com/2021/06/02/%E9%80%A0%F0%9F%92%A9%E8%A7%84%E8%8C%83/"/>
-    <id>http://yoursite.com/2021/06/02/%E9%80%A0%F0%9F%92%A9%E8%A7%84%E8%8C%83/</id>
-    <published>2021-06-02T07:55:17.000Z</published>
-    <updated>2021-06-02T07:57:29.321Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;ul&gt;
-&lt;li&gt;类命名： 父类 BaseShi  子类 Shi1</summary>
-        
-      
-    
-    
-    
     
   </entry>
   
@@ -485,47 +456,76 @@
   </entry>
   
   <entry>
-    <title>转-如何写代码注释</title>
-    <link href="http://yoursite.com/2020/12/12/Programing/%E8%BD%AC-%E5%A6%82%E4%BD%95%E5%86%99%E4%BB%A3%E7%A0%81%E6%B3%A8%E9%87%8A/"/>
-    <id>http://yoursite.com/2020/12/12/Programing/%E8%BD%AC-%E5%A6%82%E4%BD%95%E5%86%99%E4%BB%A3%E7%A0%81%E6%B3%A8%E9%87%8A/</id>
-    <published>2020-12-12T14:56:56.000Z</published>
-    <updated>2021-01-31T05:51:46.839Z</updated>
+    <title>Java杂记</title>
+    <link href="http://yoursite.com/2020/12/12/Java%E6%9D%82%E8%AE%B0/"/>
+    <id>http://yoursite.com/2020/12/12/Java%E6%9D%82%E8%AE%B0/</id>
+    <published>2020-12-12T14:38:07.000Z</published>
+    <updated>2021-05-05T09:34:57.705Z</updated>
     
     
-    <summary type="html">&lt;blockquote&gt;
-&lt;p&gt;许多人认为，如果代码写得足够扎实，注释就没什么用了。在他们看来，当一切都设计妥当时，代码本身会记录其作用，因此代码注释是多余的。我对此持不同意见，主要出于两个原因：&lt;/p&gt;
-&lt;p&gt;\1. 许多注释并未起到解释代码的作用。&lt;/p&gt;
-&lt;p&gt;\2. 注释使读者不必凭空想象太多细枝末节，帮助读者降低认知负担。&lt;/p&gt;
-&lt;/blockquote&gt;</summary>
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;java-proto对象转byte&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#java-proto对象转byte&quot;&gt;&lt;/a&gt; Java Proto对象转byte&lt;/h1&gt;
+&lt;p&gt;&lt;a</summary>
+        
+      
     
     
     
-    <category term="开发规范" scheme="http://yoursite.com/categories/开发规范/"/>
+    <category term="文摘" scheme="http://yoursite.com/categories/文摘/"/>
     
     
-    <category term="注释" scheme="http://yoursite.com/tags/注释/"/>
+    <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
     
   </entry>
   
   <entry>
-    <title>转-日志规范</title>
-    <link href="http://yoursite.com/2020/12/12/Programing/%E8%BD%AC-%E6%97%A5%E5%BF%97%E8%A7%84%E8%8C%83/"/>
-    <id>http://yoursite.com/2020/12/12/Programing/%E8%BD%AC-%E6%97%A5%E5%BF%97%E8%A7%84%E8%8C%83/</id>
-    <published>2020-12-12T14:55:54.000Z</published>
-    <updated>2021-01-31T07:07:12.037Z</updated>
+    <title>2020-11-技术文摘</title>
+    <link href="http://yoursite.com/2020/12/12/TechnicalDigest/2020-11-%E6%8A%80%E6%9C%AF%E6%96%87%E6%91%98/"/>
+    <id>http://yoursite.com/2020/12/12/TechnicalDigest/2020-11-%E6%8A%80%E6%9C%AF%E6%96%87%E6%91%98/</id>
+    <published>2020-12-12T14:32:53.000Z</published>
+    <updated>2021-06-08T09:36:14.574Z</updated>
     
     
-    <summary type="html">&lt;h1 id=&quot;日志&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#日志&quot;&gt;&lt;/a&gt; 日志&lt;/h1&gt;
-&lt;h2 id=&quot;日志是什么&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#日志是什么&quot;&gt;&lt;/a&gt; 日志是什么？&lt;/h2&gt;
-&lt;p&gt;日志，维基百科的定义是记录服务器等电脑设备或软件的运作。&lt;/p&gt;
-&lt;p&gt;日志文件提供精确的系统记录，根据日志最终定位到错误详情和根源。日志的特点是，它描述一些离散的（不连续的）事件。 例如：应用通过一个滚动的文件输出 INFO 或 ERROR 信息，并通过日志收集系统，存储到一些存储引擎（Elasticsearch）中方便查询。&lt;/p&gt;</summary>
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;big-list-of-20-common-bottlenecks&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#big-list-of-20-common-bottlenecks&quot;&gt;&lt;/a&gt; Big List Of 20</summary>
+        
+      
     
     
     
-    <category term="开发规范" scheme="http://yoursite.com/categories/开发规范/"/>
+    <category term="文摘" scheme="http://yoursite.com/categories/文摘/"/>
     
     
-    <category term="日志" scheme="http://yoursite.com/tags/日志/"/>
+    <category term="技术文摘" scheme="http://yoursite.com/tags/技术文摘/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>C++函数修饰符</title>
+    <link href="http://yoursite.com/2020/12/12/C++/C-%E5%87%BD%E6%95%B0%E4%BF%AE%E9%A5%B0%E7%AC%A6/"/>
+    <id>http://yoursite.com/2020/12/12/C++/C-%E5%87%BD%E6%95%B0%E4%BF%AE%E9%A5%B0%E7%AC%A6/</id>
+    <published>2020-12-12T14:28:59.000Z</published>
+    <updated>2020-12-12T14:47:11.720Z</updated>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;c-函数修饰符学习&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#c-函数修饰符学习&quot;&gt;&lt;/a&gt; C++ 函数修饰符学习&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&quot;https://tlanyan.me/cpp-function-modifier-summary/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://tlanyan.me/cpp-function-modifier-summary/&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;函数名前&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#函数名前&quot;&gt;&lt;/a&gt; 函数名前&lt;/h2&gt;
+&lt;h3 id=&quot;返回值类型&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#返回值类型&quot;&gt;&lt;/a&gt; 返回值类型&lt;/h3&gt;
+&lt;p&gt;返回值类型是&lt;code&gt;C++&lt;/code&gt;中定义函数的必备部分，这些修饰符包括&lt;code&gt;void&lt;/code&gt;，&lt;code&gt;(unsigned) int&lt;/code&gt;，&lt;code&gt;bool&lt;/code&gt;等内置基本数据类型和自定义类型，也包括修饰返回值&lt;code&gt;const&lt;/code&gt;关键字（如&lt;code&gt;const int*&lt;/code&gt;），还包括&lt;code&gt;C++11&lt;/code&gt;中新增的类型自动推导&lt;code&gt;auto&lt;/code&gt;关键字。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="C++" scheme="http://yoursite.com/categories/C/"/>
+    
+    
+    <category term="C++基础" scheme="http://yoursite.com/tags/C-基础/"/>
     
   </entry>
   
