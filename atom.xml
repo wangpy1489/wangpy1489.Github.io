@@ -6,7 +6,7 @@
   <link href="http://yoursite.com/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2022-01-12T05:51:17.743Z</updated>
+  <updated>2022-01-13T14:22:07.899Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,47 +17,16 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>字符串</title>
-    <link href="http://yoursite.com/2022/01/12/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Python/Python%E5%9F%BA%E7%A1%80/%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
-    <id>http://yoursite.com/2022/01/12/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Python/Python%E5%9F%BA%E7%A1%80/%E5%AD%97%E7%AC%A6%E4%B8%B2/</id>
-    <published>2022-01-12T05:51:00.000Z</published>
-    <updated>2022-01-12T05:51:17.743Z</updated>
-    
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>字典和集合</title>
-    <link href="http://yoursite.com/2022/01/12/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Python/Python%E5%9F%BA%E7%A1%80/%E5%AD%97%E5%85%B8%E5%92%8C%E9%9B%86%E5%90%88/"/>
-    <id>http://yoursite.com/2022/01/12/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Python/Python%E5%9F%BA%E7%A1%80/%E5%AD%97%E5%85%B8%E5%92%8C%E9%9B%86%E5%90%88/</id>
-    <published>2022-01-12T05:47:00.000Z</published>
-    <updated>2022-01-12T05:47:27.147Z</updated>
-    
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
     <title>列表和元组</title>
     <link href="http://yoursite.com/2022/01/11/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Python/Python%E5%9F%BA%E7%A1%80/%E5%88%97%E8%A1%A8%E5%92%8C%E5%85%83%E7%BB%84/"/>
     <id>http://yoursite.com/2022/01/11/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Python/Python%E5%9F%BA%E7%A1%80/%E5%88%97%E8%A1%A8%E5%92%8C%E5%85%83%E7%BB%84/</id>
     <published>2022-01-11T07:40:00.000Z</published>
-    <updated>2022-01-11T12:27:16.651Z</updated>
+    <updated>2022-01-13T14:22:07.899Z</updated>
     
     
-      
-      
-        
-        
     <summary type="html">&lt;h1 id=&quot;列表和元组&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#列表和元组&quot;&gt;&lt;/a&gt; 列表和元组&lt;/h1&gt;
-&lt;h2 id=&quot;基础&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#基础&quot;&gt;&lt;/a&gt;</summary>
-        
-      
+&lt;h2 id=&quot;基础&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#基础&quot;&gt;&lt;/a&gt; 基础&lt;/h2&gt;
+&lt;p&gt;列表和元组都是可以放置&lt;strong&gt;任意数据类型&lt;/strong&gt;的&lt;strong&gt;有序&lt;/strong&gt;容器。&lt;/p&gt;</summary>
     
     
     
@@ -73,18 +42,11 @@
     <link href="http://yoursite.com/2021/12/31/%E8%BD%AF%E6%8A%80%E8%83%BD/OKR/OKR%E5%A4%8D%E7%9B%98/"/>
     <id>http://yoursite.com/2021/12/31/%E8%BD%AF%E6%8A%80%E8%83%BD/OKR/OKR%E5%A4%8D%E7%9B%98/</id>
     <published>2021-12-31T09:21:00.000Z</published>
-    <updated>2021-12-31T09:38:26.468Z</updated>
+    <updated>2022-01-13T14:24:09.568Z</updated>
     
     
-      
-      
-        
-        
     <summary type="html">&lt;h1 id=&quot;okr复盘&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#okr复盘&quot;&gt;&lt;/a&gt; OKR复盘&lt;/h1&gt;
-&lt;p&gt;OKR复盘是对OKR执行情况的客观评价，和OKR评估不同，复盘是为了知道在下一个周期更好的进行OKE&lt;/p&gt;
-&lt;h2</summary>
-        
-      
+&lt;p&gt;OKR复盘是对OKR执行情况的客观评价，和OKR评估不同，复盘是为了知道在下一个周期更好的进行OKR&lt;/p&gt;</summary>
     
     
     
@@ -98,17 +60,18 @@
     <link href="http://yoursite.com/2021/12/31/%E8%BD%AF%E6%8A%80%E8%83%BD/OKR/OKR%E8%AF%84%E4%BC%B0/"/>
     <id>http://yoursite.com/2021/12/31/%E8%BD%AF%E6%8A%80%E8%83%BD/OKR/OKR%E8%AF%84%E4%BC%B0/</id>
     <published>2021-12-31T09:10:00.000Z</published>
-    <updated>2021-12-31T09:20:42.381Z</updated>
+    <updated>2022-01-13T14:24:18.910Z</updated>
     
     
-      
-      
-        
-        
     <summary type="html">&lt;h1 id=&quot;okr评估的最佳实践&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#okr评估的最佳实践&quot;&gt;&lt;/a&gt; OKR评估的最佳实践&lt;/h1&gt;
-&lt;h2 id=&quot;标准简化&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot;</summary>
-        
-      
+&lt;h2 id=&quot;标准简化&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#标准简化&quot;&gt;&lt;/a&gt; 标准简化&lt;/h2&gt;
+&lt;p&gt;KR的评分标准：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;1.0 分：不可能做到，但实际做到了。&lt;/li&gt;
+&lt;li&gt;0.7 分：希望能做到，实际也做到了。&lt;/li&gt;
+&lt;li&gt;0.3 分：肯定能做到，实际也做到了。&lt;/li&gt;
+&lt;li&gt;0 分：肯定能做到，但实际没做到。&lt;/li&gt;
+&lt;/ul&gt;</summary>
     
     
     
@@ -122,16 +85,17 @@
     <link href="http://yoursite.com/2021/12/30/%E8%BD%AF%E6%8A%80%E8%83%BD/OKR/OKR%E6%89%A7%E8%A1%8C/"/>
     <id>http://yoursite.com/2021/12/30/%E8%BD%AF%E6%8A%80%E8%83%BD/OKR/OKR%E6%89%A7%E8%A1%8C/</id>
     <published>2021-12-30T05:59:00.000Z</published>
-    <updated>2021-12-31T09:07:55.686Z</updated>
+    <updated>2022-01-13T14:22:31.191Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;okr高效执行心得&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#okr高效执行心得&quot;&gt;&lt;/a&gt;</summary>
-        
-      
+    <summary type="html">&lt;h1 id=&quot;okr高效执行心得&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#okr高效执行心得&quot;&gt;&lt;/a&gt; OKR高效执行心得&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;OKR需要设定一个固定的执行周期。&lt;/li&gt;
+&lt;li&gt;OKR指定完毕后，必须定期对内容、进度、信心指数进行更新和同步，最大化避免OKR更新不及时。&lt;/li&gt;
+&lt;li&gt;将OKR与日常工作任务关联起来，并通过任务去驱动OKR完成。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;核心秘诀：&lt;/strong&gt; 核心秘诀在于：将任务与 OKR 之间看成是一个“二级驱动”关系，即任务驱动 KR 的完成，进而促使 KR 驱动 O 的达成。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://static001.geekbang.org/resource/image/16/d6/1612f6c74e5f6786707fa330ec0e6dd6.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;</summary>
     
     
     
@@ -145,18 +109,17 @@
     <link href="http://yoursite.com/2021/12/29/%E8%BD%AF%E6%8A%80%E8%83%BD/OKR/OKR%E5%88%B6%E5%AE%9A/"/>
     <id>http://yoursite.com/2021/12/29/%E8%BD%AF%E6%8A%80%E8%83%BD/OKR/OKR%E5%88%B6%E5%AE%9A/</id>
     <published>2021-12-29T09:21:00.000Z</published>
-    <updated>2022-01-13T03:50:23.165Z</updated>
+    <updated>2022-01-13T14:24:24.930Z</updated>
     
     
-      
-      
-        
-        
     <summary type="html">&lt;h1 id=&quot;o的制定&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#o的制定&quot;&gt;&lt;/a&gt; O的制定&lt;/h1&gt;
 &lt;p&gt;O是OKR中的What层面&lt;/p&gt;
-&lt;h2 id=&quot;核心原则&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot;</summary>
-        
-      
+&lt;h2 id=&quot;核心原则&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#核心原则&quot;&gt;&lt;/a&gt; 核心原则&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;O要有实际价值，你要深度思考。&lt;/li&gt;
+&lt;li&gt;O要能激励人心，你要善于表达。&lt;/li&gt;
+&lt;li&gt;O要短期可实现，你要脚踏实地。&lt;/li&gt;
+&lt;/ol&gt;</summary>
     
     
     
@@ -170,19 +133,15 @@
     <link href="http://yoursite.com/2021/12/29/%E8%BD%AF%E6%8A%80%E8%83%BD/OKR/OKR%E8%90%BD%E5%9C%B0/"/>
     <id>http://yoursite.com/2021/12/29/%E8%BD%AF%E6%8A%80%E8%83%BD/OKR/OKR%E8%90%BD%E5%9C%B0/</id>
     <published>2021-12-29T08:49:00.000Z</published>
-    <updated>2021-12-29T09:17:22.225Z</updated>
+    <updated>2022-01-13T14:22:47.840Z</updated>
     
     
-      
-      
-        
-        
     <summary type="html">&lt;h1 id=&quot;okr的价值&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#okr的价值&quot;&gt;&lt;/a&gt; OKR的价值&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;自底向上：与上级目标对齐，全员对齐向公司目标推进&lt;/li&gt;
-&lt;li&gt;自顶向下</summary>
-        
-      
+&lt;li&gt;自顶向下 ：沟通了解下级的岗位特征和个人成长诉求&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&quot;https://static001.geekbang.org/resource/image/a1/92/a13d4d9f9f114c5051fb0741b2792892.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;</summary>
     
     
     
@@ -196,18 +155,19 @@
     <link href="http://yoursite.com/2021/12/29/%E8%BD%AF%E6%8A%80%E8%83%BD/OKR/OKR%E4%B8%8EKPI/"/>
     <id>http://yoursite.com/2021/12/29/%E8%BD%AF%E6%8A%80%E8%83%BD/OKR/OKR%E4%B8%8EKPI/</id>
     <published>2021-12-29T07:23:00.000Z</published>
-    <updated>2021-12-29T07:29:50.820Z</updated>
+    <updated>2022-01-13T14:23:24.872Z</updated>
     
     
-      
-      
-        
-        
     <summary type="html">&lt;blockquote&gt;
 &lt;p&gt;OKR和KPI的差别主要不在形式，而在于底层理念和实施方法。&lt;/p&gt;
-&lt;p&gt;两者都可以用于目标管理。OKR偏重于目标制订，配合信息化工具可进一步延展，从战略拆解到目标初始制订，然后上下左右对齐，再到目标完成度和问题追踪，接着依据情况（包括执行状况、</summary>
-        
-      
+&lt;p&gt;两者都可以用于目标管理。OKR偏重于目标制订，配合信息化工具可进一步延展，从战略拆解到目标初始制订，然后上下左右对齐，再到目标完成度和问题追踪，接着依据情况（包括执行状况、团队资源和市场情形等）进行调整，再开始新的循环。按照其理念，KR虽然有量化，但并不用于考核，而是给团队衡量目标的达成情况。&lt;/p&gt;
+&lt;p&gt;KPI的量化指标其实就是目标，但因为直接是数字，实践中容易让人忽略其背后企业和团队真正要达成的使命，而变成主要用来考核。在不强调使命愿景的时代，这是简单易用的绩效管理方法。&lt;/p&gt;
+&lt;p&gt;OKR强调目标制订和绩效考核分开，运用得好团队就可能制订出有挑战性的目标。KPI直接用来考核，团队可能就会保守。&lt;/p&gt;
+&lt;p&gt;OKR和KPI都可以达到信息透明、沟通顺畅的目的。它们更主要的差别是，前者强调上级的辅导职能（时髦词叫赋能），帮助团队达成目标，而不是完成不了受惩罚。后者则强调监控，胡萝卜和大棒齐飞&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&quot;okr-和-kpi-的差别&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#okr-和-kpi-的差别&quot;&gt;&lt;/a&gt; OKR 和 KPI 的差别&lt;/h1&gt;
+&lt;h2 id=&quot;关注对象&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#关注对象&quot;&gt;&lt;/a&gt; 关注对象&lt;/h2&gt;
+&lt;p&gt;OKR 关注的是目标是否达成，而 KPI 关注的却是结果是否完成。OKR 的目标野心勃勃和无限挑战，而 KPI 体现的是制定的指标是否可以达标。&lt;/p&gt;</summary>
     
     
     
@@ -221,48 +181,19 @@
     <link href="http://yoursite.com/2021/12/29/%E8%BD%AF%E6%8A%80%E8%83%BD/OKR/OKR%E6%98%AF%E4%BB%80%E4%B9%88/"/>
     <id>http://yoursite.com/2021/12/29/%E8%BD%AF%E6%8A%80%E8%83%BD/OKR/OKR%E6%98%AF%E4%BB%80%E4%B9%88/</id>
     <published>2021-12-29T06:18:00.000Z</published>
-    <updated>2021-12-29T07:24:48.680Z</updated>
+    <updated>2022-01-13T14:22:58.167Z</updated>
     
     
-      
-      
-        
-        
     <summary type="html">&lt;h1 id=&quot;okr-是什么&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#okr-是什么&quot;&gt;&lt;/a&gt; OKR 是什么&lt;/h1&gt;
-&lt;p&gt;&lt;img</summary>
-        
-      
+&lt;p&gt;&lt;img src=&quot;https://static001.geekbang.org/resource/image/ad/0e/ad16da5cc73c1517e7870933c0b7570e.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;OKR 是一款目标管理工具，它由 Objectives（目标）和 Key Results（关键结果）两部分组成。&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
     
     
     
     
     <category term="OKR" scheme="http://yoursite.com/tags/OKR/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>网络层</title>
-    <link href="http://yoursite.com/2021/12/20/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E7%BD%91%E7%BB%9C%E5%B1%82/%E7%BD%91%E7%BB%9C%E5%B1%82/"/>
-    <id>http://yoursite.com/2021/12/20/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E7%BD%91%E7%BB%9C%E5%B1%82/%E7%BD%91%E7%BB%9C%E5%B1%82/</id>
-    <published>2021-12-20T06:37:00.000Z</published>
-    <updated>2021-12-31T05:51:03.841Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;网络层&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#网络层&quot;&gt;&lt;/a&gt; 网络层&lt;/h1&gt;
-&lt;h3 id=&quot;ip协议&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#ip协议&quot;&gt;&lt;/a&gt;</summary>
-        
-      
-    
-    
-    
-    <category term="计算机网络" scheme="http://yoursite.com/categories/计算机网络/"/>
-    
-    
-    <category term="计算机网络" scheme="http://yoursite.com/tags/计算机网络/"/>
     
   </entry>
   
@@ -306,6 +237,32 @@
         
     <summary type="html">&lt;h1 id=&quot;数据链路层&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#数据链路层&quot;&gt;&lt;/a&gt; 数据链路层&lt;/h1&gt;
 &lt;h3 id=&quot;链路层的三个目的&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="计算机网络" scheme="http://yoursite.com/categories/计算机网络/"/>
+    
+    
+    <category term="计算机网络" scheme="http://yoursite.com/tags/计算机网络/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>网络层</title>
+    <link href="http://yoursite.com/2021/12/20/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E7%BD%91%E7%BB%9C%E5%B1%82/%E7%BD%91%E7%BB%9C%E5%B1%82/"/>
+    <id>http://yoursite.com/2021/12/20/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E7%BD%91%E7%BB%9C%E5%B1%82/%E7%BD%91%E7%BB%9C%E5%B1%82/</id>
+    <published>2021-12-20T06:37:00.000Z</published>
+    <updated>2021-12-31T05:51:03.841Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;网络层&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#网络层&quot;&gt;&lt;/a&gt; 网络层&lt;/h1&gt;
+&lt;h3 id=&quot;ip协议&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#ip协议&quot;&gt;&lt;/a&gt;</summary>
         
       
     
@@ -493,6 +450,48 @@
     
     
     <category term="分布式共识算法" scheme="http://yoursite.com/tags/分布式共识算法/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>非拜占庭场景</title>
+    <link href="http://yoursite.com/2021/12/19/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%AE%97%E6%B3%95/%E5%88%86%E5%B8%83%E5%BC%8F%E5%85%B1%E8%AF%86%E7%AE%97%E6%B3%95/%E9%9D%9E%E6%8B%9C%E5%8D%A0%E5%BA%AD%E5%9C%BA%E6%99%AF/"/>
+    <id>http://yoursite.com/2021/12/19/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%AE%97%E6%B3%95/%E5%88%86%E5%B8%83%E5%BC%8F%E5%85%B1%E8%AF%86%E7%AE%97%E6%B3%95/%E9%9D%9E%E6%8B%9C%E5%8D%A0%E5%BA%AD%E5%9C%BA%E6%99%AF/</id>
+    <published>2021-12-19T12:57:00.000Z</published>
+    <updated>2021-12-31T05:53:51.815Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;非拜占庭场景&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#非拜占庭场景&quot;&gt;&lt;/a&gt;</summary>
+        
+      
+    
+    
+    
+    <category term="算法" scheme="http://yoursite.com/categories/算法/"/>
+    
+    
+    <category term="分布式共识算法" scheme="http://yoursite.com/tags/分布式共识算法/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>C++编译Warning汇总</title>
+    <link href="http://yoursite.com/2021/08/26/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/C++/C-%E7%BC%96%E8%AF%91Warning%E6%B1%87%E6%80%BB/"/>
+    <id>http://yoursite.com/2021/08/26/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/C++/C-%E7%BC%96%E8%AF%91Warning%E6%B1%87%E6%80%BB/</id>
+    <published>2021-08-26T12:52:34.000Z</published>
+    <updated>2021-12-20T06:21:04.593Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;按条目记录平时遇到的编译Error和Warning，避免重复排查&lt;/p&gt;</summary>
+    
+    
+    
+    
+    <category term="CPP" scheme="http://yoursite.com/tags/CPP/"/>
     
   </entry>
   

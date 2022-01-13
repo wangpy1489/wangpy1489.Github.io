@@ -764,764 +764,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/12/20/计算机/计算机网络/应用层/应用层/"/>
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="王谱越"/>
-      <meta itemprop="description" content=""/>
-      <meta itemprop="image" content="/images/myavatar.jpg"/>
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Norton's Blog"/>
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2021/12/20/计算机/计算机网络/应用层/应用层/" class="post-title-link" itemprop="url">应用层</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2021-12-20 14:37:00" itemprop="dateCreated datePublished" datetime="2021-12-20T14:37:00+08:00">2021-12-20</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2021-12-31 13:51:02" itemprop="dateModified" datetime="2021-12-31T13:51:02+08:00">2021-12-31</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/计算机网络/" itemprop="url" rel="index"><span itemprop="name">计算机网络</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">1.1k</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="应用层"><a class="markdownIt-Anchor" href="#应用层"></a> 应用层</h1>
-<h3 id="ping"><a class="markdownIt-Anchor" href="#ping"></a> Ping</h3>
-<ul>
-<li>
-<p>基于网络层的ICMP</p>
-</li>
-<li>
-<p>格式</p>
-<ul>
-<li>代码为0</li>
-<li>类型为0/8</li>
-<li>UNIX中标识符为进程ID</li>
-</ul>
-</li>
-<li>
-<p>-r 可提供IP路由路径</p>
-</li>
-</ul>
-<h3 id="http协议wip"><a class="markdownIt-Anchor" href="#http协议wip"></a> HTTP协议(WIP)</h3>
-<ul>
-<li>
-<p>HTTP2</p>
-<ul>
-<li>
-<p>帧 - Frame</p>
-<ul>
-<li>
-<p>帧是最小传输单位，二进制传输代替明文传输</p>
-</li>
-<li>
-<p>帧结构</p>
-<ul>
-<li>
-<p>示意图</p>
-<ul>
-<li></li>
-</ul>
-</li>
-<li>
-<p>Length: 整个长度  24位</p>
-</li>
-<li>
-<p>Type: 帧语义 8位</p>
-</li>
-<li>
-<p>Flags: 布尔标识 8位</p>
-</li>
-<li>
-<p>R: 保留的比特位 1位</p>
-</li>
-<li>
-<p>Stream Identifier: 流控制用 31位</p>
-<ul>
-<li>客户端奇数</li>
-<li>服务端偶数</li>
-</ul>
-</li>
-<li>
-<p>Payload: 内容主体</p>
-</li>
-</ul>
-</li>
-<li>
-<p>帧类型</p>
-<ul>
-<li>
-<p>HEADER</p>
-<ul>
-<li>打开流</li>
-</ul>
-</li>
-<li>
-<p>DATA</p>
-<ul>
-<li>装填主体信息</li>
-</ul>
-</li>
-<li>
-<p>PRIORITY</p>
-<ul>
-<li>指定发送者建议的流优先级</li>
-</ul>
-</li>
-<li>
-<p>RST_STREAM</p>
-<ul>
-<li>用来取消流，或者表示发生错误</li>
-</ul>
-</li>
-<li>
-<p>SETTINGS</p>
-<ul>
-<li>设置连接参数</li>
-</ul>
-</li>
-<li>
-<p>PING</p>
-<ul>
-<li>判断连接是否可用</li>
-</ul>
-</li>
-<li>
-<p>GOAWAY</p>
-<ul>
-<li>发起关闭连接请求</li>
-</ul>
-</li>
-<li>
-<p>WINDOW_UPDATE</p>
-<ul>
-<li>更新窗口，用于流量控制，只限制DATA帧</li>
-</ul>
-</li>
-<li>
-<p>CONTINUATION</p>
-<ul>
-<li>用于首部压缩时继续传输首部序列</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>流 - Stream</p>
-<ul>
-<li>
-<p>特性</p>
-<ul>
-<li>单个h2连接可以包含多个并发流</li>
-<li>流可以由任一方关闭</li>
-<li>接收方会把同一个流上的帧重新组装成完整的报文。</li>
-</ul>
-</li>
-<li>
-<p>流的状态</p>
-<ul>
-<li>
-<p>状态转移图</p>
-<ul>
-<li></li>
-</ul>
-</li>
-<li>
-<p>IDLE</p>
-</li>
-<li>
-<p>reserved</p>
-</li>
-<li>
-<p>open</p>
-</li>
-<li>
-<p>half-closed</p>
-</li>
-<li>
-<p>closed</p>
-</li>
-</ul>
-</li>
-<li>
-<p>流的标识符</p>
-<ul>
-<li>0x0 保留为连接控制消息</li>
-<li>客户端发起流为奇数</li>
-<li>服务端发起流为偶数</li>
-<li>新的流ID必须大于所有已使用过的数字</li>
-</ul>
-</li>
-<li>
-<p>流的优先级</p>
-<ul>
-<li>
-<p>用来调节多个流见的资源分配</p>
-</li>
-<li>
-<p>流依赖</p>
-<ul>
-<li>依赖表示优先将资源分配给父级流</li>
-<li>每个流可以显式地依赖另一个流</li>
-<li>父级流按优先级权重分配资源</li>
-</ul>
-</li>
-<li>
-<p>独占流</p>
-<ul>
-<li>标识其为父级流下唯一的依赖流</li>
-</ul>
-</li>
-<li>
-<p>优先级调整</p>
-<ul>
-<li>父级重置优先级，依赖流会随父级流移动</li>
-</ul>
-</li>
-<li>
-<p>默认优先级</p>
-<ul>
-<li>所有流都默认依赖于0x0</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>Server-Push</p>
-</li>
-<li>
-<p>流量控制</p>
-<ul>
-<li>流量控制作用域单个流或整个连接</li>
-<li>初始值65535字节</li>
-<li>流量控制是有方向的，由接收者控制</li>
-<li>流量控制不能被禁用</li>
-<li>只有DATA帧会受流量控制</li>
-</ul>
-</li>
-<li>
-<p>首部压缩（HPACK）</p>
-<ul>
-<li>
-<p>索引表</p>
-<ul>
-<li>
-<p>静态索引</p>
-<ul>
-<li>对于一些常用字段用静态索引值代替</li>
-</ul>
-</li>
-<li>
-<p>动态索引</p>
-<ul>
-<li>每个连接一份的索引，由双方共同维护。</li>
-<li>FIOF队列，索引值从静态索引后边开始</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>编码类型表示</p>
-<ul>
-<li>
-<p>整数编码</p>
-<ul>
-<li>varint 编码</li>
-</ul>
-</li>
-<li>
-<p>字符编码</p>
-<ul>
-<li>哈夫曼编码</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="ftp协议"><a class="markdownIt-Anchor" href="#ftp协议"></a> FTP协议</h3>
-<h3 id="smtp协议"><a class="markdownIt-Anchor" href="#smtp协议"></a> SMTP协议</h3>
-<h3 id="ntpnetwork-time-protocol协议"><a class="markdownIt-Anchor" href="#ntpnetwork-time-protocol协议"></a> NTP（Network Time Protocol）协议</h3>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/12/20/计算机/计算机网络/数据链路层/数据链路层/"/>
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="王谱越"/>
-      <meta itemprop="description" content=""/>
-      <meta itemprop="image" content="/images/myavatar.jpg"/>
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Norton's Blog"/>
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2021/12/20/计算机/计算机网络/数据链路层/数据链路层/" class="post-title-link" itemprop="url">数据链路层</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2021-12-20 14:37:00" itemprop="dateCreated datePublished" datetime="2021-12-20T14:37:00+08:00">2021-12-20</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2021-12-31 13:51:05" itemprop="dateModified" datetime="2021-12-31T13:51:05+08:00">2021-12-31</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/计算机网络/" itemprop="url" rel="index"><span itemprop="name">计算机网络</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">957</span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">1 分钟</span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="数据链路层"><a class="markdownIt-Anchor" href="#数据链路层"></a> 数据链路层</h1>
-<h3 id="链路层的三个目的"><a class="markdownIt-Anchor" href="#链路层的三个目的"></a> 链路层的三个目的</h3>
-<ul>
-<li>
-<ol>
-<li>发送接收IP数据报</li>
-</ol>
-</li>
-<li>2.发送ARP和接收ARP应答</li>
-<li>3.发送RARP请求和接收RARP应答</li>
-</ul>
-<h3 id="以太网和ieee-802"><a class="markdownIt-Anchor" href="#以太网和ieee-802"></a> 以太网和IEEE 802</h3>
-<ul>
-<li>
-<p>封装格式</p>
-<ul>
-<li></li>
-</ul>
-</li>
-<li>
-<p>最小帧长</p>
-<ul>
-<li>46字节</li>
-</ul>
-</li>
-</ul>
-<h3 id="slip穿行线路ip"><a class="markdownIt-Anchor" href="#slip穿行线路ip"></a> SLIP（穿行线路IP）</h3>
-<ul>
-<li>
-<p>帧格式</p>
-<p>1 ) I P 数据报以一个称作 E N D( 0 x c 0 ) 的 特 殊 字 符 结 束 。 同 时 ， 为 了 防 止 数 据 报 到 来 之 前 的线路噪声被当成数据报内容，大多数实现在数据报的开始处也传一个 E N D字 符 ( 如 果 有 线 路噪声，那么 E N D 字 符 将 结 束 这 份 错 误 的 报 文 。 这 样 当 前 的 报 文 得 以 正 确 地 传 输 ， 而 前 一 个 错误报文交给上层后，会发现其内容毫无意义而被丢弃)。<br>
-2 ) 如果 I P 报 文 中 某 个 字 符 为 E N D ， 那 么 就 要 连 续 传 输 两 个 字 节 0 x d b 和 0 x d c 来 取 代 它 。 0 x d b 这个特殊字符被称作 S L I P 的 E S C 字符，但是它的值与 A S C I I码的 E S C 字符( 0 x 1 b )不同。<br>
-3) 如果 I P 报 文 中 某 个 字 符 为 S L I P 的 E S C 字 符 ， 那 么 就 要 连 续 传 输 两 个 字 节 0 x d b 和 0 x d d 来 取代它。</p>
-<ul>
-<li></li>
-</ul>
-</li>
-<li>
-<p>缺陷</p>
-<ul>
-<li>
-<ol>
-<li>每一端必须知道对方的地址</li>
-</ol>
-</li>
-<li>2.数据帧中没有类型字段，一条线路使用SLIP后，就都用SLIP</li>
-<li>
-<ol start="3">
-<li>没有校验和</li>
-</ol>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="ppp点对点协议"><a class="markdownIt-Anchor" href="#ppp点对点协议"></a> PPP（点对点协议）</h3>
-<ul>
-<li>
-<p>帧格式</p>
-<ul>
-<li></li>
-<li>每一帧都以标志字符 0 x 7 e 开始和结束。紧接着是一个地址字节，值始终是 0 x ff ，然后是一 个值为 0 x 0 3 的控制字节。</li>
-</ul>
-</li>
-<li>
-<p>优点</p>
-<ul>
-<li>支持多种协议</li>
-<li>每一帧都有CRC</li>
-<li>双方IP地址可动态协商</li>
-<li>对TCP和IP报文首部压缩</li>
-<li>链路控制协议可以对多个数据链路选项进行设置</li>
-</ul>
-</li>
-<li>
-<p>缺点</p>
-<ul>
-<li>每一帧首部多3帧</li>
-</ul>
-</li>
-</ul>
-<h3 id="回环接口"><a class="markdownIt-Anchor" href="#回环接口"></a> 回环接口</h3>
-<ul>
-<li>
-<p>过程图</p>
-<ul>
-<li></li>
-</ul>
-</li>
-</ul>
-<h3 id="最大传输单元-mtu"><a class="markdownIt-Anchor" href="#最大传输单元-mtu"></a> 最大传输单元 MTU</h3>
-<ul>
-<li>以太网和802.3对数据帧的长度都有一个限制，其最大值分别是 1500和1492</li>
-<li>路径MTU</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/12/20/计算机/计算机网络/传输层/传输层/"/>
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -3674,6 +2916,410 @@ DPOS是由被社区选举的可信账户（超级节点，比如得票数前101�
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/12/19/计算机/算法/分布式共识算法/非拜占庭场景/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王谱越"/>
+      <meta itemprop="description" content=""/>
+      <meta itemprop="image" content="/images/myavatar.jpg"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Norton's Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2021/12/19/计算机/算法/分布式共识算法/非拜占庭场景/" class="post-title-link" itemprop="url">非拜占庭场景</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2021-12-19 20:57:00" itemprop="dateCreated datePublished" datetime="2021-12-19T20:57:00+08:00">2021-12-19</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2021-12-31 13:53:51" itemprop="dateModified" datetime="2021-12-31T13:53:51+08:00">2021-12-31</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/算法/" itemprop="url" rel="index"><span itemprop="name">算法</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">37</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="非拜占庭场景"><a class="markdownIt-Anchor" href="#非拜占庭场景"></a> 非拜占庭场景</h1>
+<ul>
+<li>
+<p>paxos</p>
+</li>
+<li>
+<p>raft</p>
+</li>
+<li>
+<p>ZAB</p>
+</li>
+<li>
+<p>QJM</p>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/08/26/计算机/编程语言/C++/C-编译Warning汇总/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王谱越"/>
+      <meta itemprop="description" content=""/>
+      <meta itemprop="image" content="/images/myavatar.jpg"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Norton's Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2021/08/26/计算机/编程语言/C++/C-编译Warning汇总/" class="post-title-link" itemprop="url">C++编译Warning汇总</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2021-08-26 20:52:34" itemprop="dateCreated datePublished" datetime="2021-08-26T20:52:34+08:00">2021-08-26</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2021-12-20 14:21:04" itemprop="dateModified" datetime="2021-12-20T14:21:04+08:00">2021-12-20</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">176</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">1 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>按条目记录平时遇到的编译Error和Warning，避免重复排查</p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2021/08/26/计算机/编程语言/C++/C-编译Warning汇总/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
   
   <nav class="pagination">
@@ -3723,7 +3369,7 @@ DPOS是由被社区选举的可信账户（超级节点，比如得票数前101�
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">56</span>
+                    <span class="site-state-item-count">54</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -3735,22 +3381,6 @@ DPOS是由被社区选举的可信账户（超级节点，比如得票数前101�
                 <div class="site-state-item site-state-categories">
                   <a href="/categories/index.html">
                     
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
                     
                       
                     
@@ -3802,48 +3432,6 @@ DPOS是由被社区选举的可信账户（超级节点，比如得票数前101�
                 <div class="site-state-item site-state-tags">
                   <a href="/tags/index.html">
                     
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
                     
                       
                     
