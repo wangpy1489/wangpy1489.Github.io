@@ -1,0 +1,2019 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2"/>
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1"/>
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/dog_128.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/dog_32.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/dog_16.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/dog.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="本文是阅读学习google 英文技术写作 课程的笔记。  Courses One  Introduction  Learning objectives  前后一致的使用术语（包括缩写形式） 能够区分并消除代词的歧义 能够识别被动语态和主动语态，并能将被动语态转换为主动语态 掌握让句子更加简短、表达更加清晰更加吸引人的几种方法。 理解项目符号列表和数字符号列表的区别，能够正确的选用 段落和文档结构上">
+<meta name="keywords" content="写作 英文写作">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Google技术写作课——笔记">
+<meta property="og:url" content="http://yoursite.com/2021/07/22/软技能/Google技术写作课——笔记/index.html">
+<meta property="og:site_name" content="Norton&#39;s Blog">
+<meta property="og:description" content="本文是阅读学习google 英文技术写作 课程的笔记。  Courses One  Introduction  Learning objectives  前后一致的使用术语（包括缩写形式） 能够区分并消除代词的歧义 能够识别被动语态和主动语态，并能将被动语态转换为主动语态 掌握让句子更加简短、表达更加清晰更加吸引人的几种方法。 理解项目符号列表和数字符号列表的区别，能够正确的选用 段落和文档结构上">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://arthurchiao.art/assets/img/google-tech-writing/passive-passive.svg">
+<meta property="og:image" content="https://arthurchiao.art/assets/img/google-tech-writing/active-passive.svg">
+<meta property="og:image" content="https://arthurchiao.art/assets/img/google-tech-writing/all-active.svg">
+<meta property="og:updated_time" content="2021-12-19T12:25:37.258Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Google技术写作课——笔记">
+<meta name="twitter:description" content="本文是阅读学习google 英文技术写作 课程的笔记。  Courses One  Introduction  Learning objectives  前后一致的使用术语（包括缩写形式） 能够区分并消除代词的歧义 能够识别被动语态和主动语态，并能将被动语态转换为主动语态 掌握让句子更加简短、表达更加清晰更加吸引人的几种方法。 理解项目符号列表和数字符号列表的区别，能够正确的选用 段落和文档结构上">
+<meta name="twitter:image" content="https://arthurchiao.art/assets/img/google-tech-writing/passive-passive.svg">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Norton's Blog" type="application/atom+xml"/>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2021/07/22/软技能/Google技术写作课——笔记/"/>
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Google技术写作课——笔记 | Norton's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Norton's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">You miss 100% of the shot you do not take.</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br/>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br/>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br/>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br/>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br/>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-digest">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/文摘" rel="section"><i class="menu-item-icon fa fa-fw fa-newspaper-o"></i> <br/>技术文摘</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br/>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/07/22/软技能/Google技术写作课——笔记/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王谱越"/>
+      <meta itemprop="description" content=""/>
+      <meta itemprop="image" content="/images/myavatar.jpg"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Norton's Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Google技术写作课——笔记
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2021-07-22 14:15:22" itemprop="dateCreated datePublished" datetime="2021-07-22T14:15:22+08:00">2021-07-22</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2021-12-19 20:25:37" itemprop="dateModified" datetime="2021-12-19T20:25:37+08:00">2021-12-19</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/软技能/" itemprop="url" rel="index"><span itemprop="name">软技能</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">9.2k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">8 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本文是阅读学习<a href="https://developers.google.com/tech-writing" target="_blank" rel="noopener">google 英文技术写作</a> 课程的笔记。</p>
+<h1 id="courses-one"><a class="markdownIt-Anchor" href="#courses-one"></a> Courses One</h1>
+<h2 id="introduction"><a class="markdownIt-Anchor" href="#introduction"></a> Introduction</h2>
+<h3 id="learning-objectives"><a class="markdownIt-Anchor" href="#learning-objectives"></a> Learning objectives</h3>
+<ul>
+<li>前后一致的使用术语（包括缩写形式）</li>
+<li>能够区分并消除代词的歧义</li>
+<li>能够识别被动语态和主动语态，并能将被动语态转换为主动语态</li>
+<li>掌握让句子更加简短、表达更加清晰更加吸引人的几种方法。</li>
+<li>理解项目符号列表和数字符号列表的区别，能够正确的选用</li>
+<li>段落和文档结构上：能在文档开头说明关键点，学会写有效的段首句，每个段落只讲一个主题。</li>
+<li>能够明白目标读者已经知道的和你想让他们知道的，避免知识诅咒</li>
+<li>避免习语（黑话）</li>
+<li>能够将大的话题拆成合适的段落分别说明</li>
+<li>正确的使用标点符号</li>
+<li>使用Markdown</li>
+</ul>
+<a id="more"></a>
+<h2 id="word"><a class="markdownIt-Anchor" href="#word"></a> Word</h2>
+<h3 id="define-new-or-unfamiliar-terms"><a class="markdownIt-Anchor" href="#define-new-or-unfamiliar-terms"></a> Define new or unfamiliar terms</h3>
+<p>对于目标读者不熟悉的术语：</p>
+<ul>
+<li>如果是已经有的术语，给一个好的已有的解释的连接（不要重复造轮子）</li>
+<li>如果是你的文档的新术语，给一个清晰的定义。如果很多，给一个术语表</li>
+</ul>
+<h3 id="use-tems-consistently"><a class="markdownIt-Anchor" href="#use-tems-consistently"></a> Use tems consistently</h3>
+<ul>
+<li>
+<p>前后一致的使用术语，如：不要前边用 <strong>Protocol Buffers</strong> 后边用 <strong>protobufs</strong>。</p>
+</li>
+<li>
+<p>若要使用缩写应当在术语第一次出现时在括号内说明，之后保持一致。如： <strong>Protocol Buffers</strong> (or <strong>protobufs</strong> for short)</p>
+</li>
+</ul>
+<h3 id="use-acronyms-properly"><a class="markdownIt-Anchor" href="#use-acronyms-properly"></a> Use acronyms properly</h3>
+<ul>
+<li>术语第一次出现时要写全称，但之后可以通过使用所写来简化段落。</li>
+<li>但是不要出现全称和缩写再次混用。</li>
+</ul>
+<h3 id="use-the-acronym-or-the-full-term"><a class="markdownIt-Anchor" href="#use-the-acronym-or-the-full-term"></a> Use the acronym or the full term</h3>
+<p>太多的简写读者的脑子里可能要维护一个大的map来存对应关系，因此对于一些术语我们可能不要用简写会好一点。</p>
+<ul>
+<li>对于只出现几次的术语不需要定义简写</li>
+<li>对同时满足一下情况的术语定义简写
+<ul>
+<li>简写要比全称短的多</li>
+<li>简写会在文档里出现很多次（读者熟悉的缩写可以尽情使用，如HTML）</li>
+</ul>
+</li>
+</ul>
+<h3 id="disambiguate-pronouns"><a class="markdownIt-Anchor" href="#disambiguate-pronouns"></a> Disambiguate pronouns</h3>
+<p>代词很容易出现歧义，在恰当时候使用，尽量重复使用名词来表达。</p>
+<ul>
+<li>永远不要在你引入一个名词前就使用代词指代</li>
+<li>将代词和它指代的名词放一起（5个单词举例以内——英文标准）</li>
+<li>如果在代词和指定代的名词之间有第二个名词，建议直接重复使用名词。=</li>
+</ul>
+<h3 id="this-and-that"><a class="markdownIt-Anchor" href="#this-and-that"></a> This and That</h3>
+<p>对于this和 that有几种技巧能够消除歧义</p>
+<ul>
+<li>直接将 this和that换成对应的名词</li>
+<li>在this 和 that 后边紧跟一个名词</li>
+</ul>
+<h2 id="active-voice"><a class="markdownIt-Anchor" href="#active-voice"></a> Active voice</h2>
+<h3 id="distinguish-active-voice-from-passive-voice-in-simple-sentences"><a class="markdownIt-Anchor" href="#distinguish-active-voice-from-passive-voice-in-simple-sentences"></a> Distinguish active voice from passive voice in simple sentences</h3>
+<p><img src="https://arthurchiao.art/assets/img/google-tech-writing/passive-passive.svg" alt="img"></p>
+<p><img src="https://arthurchiao.art/assets/img/google-tech-writing/active-passive.svg" alt="img"></p>
+<p><img src="https://arthurchiao.art/assets/img/google-tech-writing/all-active.svg" alt="img"></p>
+<h3 id="prefer-active-voice-to-passive-voice"><a class="markdownIt-Anchor" href="#prefer-active-voice-to-passive-voice"></a> Prefer active voice to passive voice</h3>
+<ul>
+<li>被动时态往往省略了行为人，读者需要猜测行为人</li>
+<li>主动时态较被动时态要比被动时态直接</li>
+<li>主动时态的句子一般比被动时态短</li>
+</ul>
+<h2 id="clear-sentences"><a class="markdownIt-Anchor" href="#clear-sentences"></a> Clear sentences</h2>
+<h3 id="choose-strong-verbs"><a class="markdownIt-Anchor" href="#choose-strong-verbs"></a> Choose strong verbs</h3>
+<p>技术写作中，<strong>动词（verb）是句子的最重要组成部分</strong>。动词用的好，句子就无需额外解释。</p>
+<p>选用清晰、有力和具体的动词可以有效地吸引和教育读者。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Weak Verb</th>
+<th style="text-align:left">Strong Verb</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">The error <strong>occurs</strong> when clicking the Submit button.</td>
+<td style="text-align:left">Clicking the Submit button <strong>triggers</strong> the error.</td>
+</tr>
+<tr>
+<td style="text-align:left">This error message <strong>happens</strong> when…</td>
+<td style="text-align:left">The system <strong>generates</strong> this error message when…</td>
+</tr>
+<tr>
+<td style="text-align:left">We <strong>are</strong> very careful to ensure…</td>
+<td style="text-align:left">We carefully <strong>ensure</strong>…</td>
+</tr>
+</tbody>
+</table>
+<p>其他的句子问题：</p>
+<ul>
+<li>句子中没有清晰的主语</li>
+<li>被动时态句子</li>
+<li>hava a  xxx 或者 be xxx</li>
+</ul>
+<h3 id="reduce-there-isthere-are"><a class="markdownIt-Anchor" href="#reduce-there-isthere-are"></a> Reduce there is/there are</h3>
+<p>以There is 或者There are开头的句子开很千篇一律。</p>
+<ul>
+<li>直接用具体的主语来代替。</li>
+<li>用 you来代替</li>
+</ul>
+<h3 id="minimize-certain-adjectives-and-adverbs"><a class="markdownIt-Anchor" href="#minimize-certain-adjectives-and-adverbs"></a> Minimize certain adjectives and adverbs</h3>
+<p>形容词和副词对于科技写作来说没有足够的客观性和精确性。 在科技写作中应当使用真实精确的数据替代这些。</p>
+<h2 id="short-sentences"><a class="markdownIt-Anchor" href="#short-sentences"></a> Short sentences</h2>
+<h3 id="focus-each-sentence-on-a-single-idea"><a class="markdownIt-Anchor" href="#focus-each-sentence-on-a-single-idea"></a> Focus each sentence on a single idea</h3>
+<p>每个句子应当只表达一个意思</p>
+<h3 id="convert-some-long-sentences-to-lists"><a class="markdownIt-Anchor" href="#convert-some-long-sentences-to-lists"></a> Convert some long sentences to lists</h3>
+<p>当出现用到连词或者分号的长句子时，换用列表的形式更加直观。</p>
+<h3 id="eliminate-or-reduce-extraneous-words"><a class="markdownIt-Anchor" href="#eliminate-or-reduce-extraneous-words"></a> Eliminate or reduce extraneous words</h3>
+<p>句子中往往会有很多废话（高级表达 ，要精简这样的词语。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Wordy</th>
+<th style="text-align:left">Concise</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">at this point in time</td>
+<td style="text-align:left">now</td>
+</tr>
+<tr>
+<td style="text-align:left">determine the location of</td>
+<td style="text-align:left">find</td>
+</tr>
+<tr>
+<td style="text-align:left">is able to</td>
+<td style="text-align:left">can</td>
+</tr>
+</tbody>
+</table>
+<h3 id="reduce-subordinate-clauses"><a class="markdownIt-Anchor" href="#reduce-subordinate-clauses"></a> Reduce subordinate clauses</h3>
+<p>子句或者从句会打破一个句子只表达一个意思的原则，导致读者理解困难，所以要尽量减少<strong>脱离主句核心意思的</strong>从句。</p>
+<h3 id="distinguish-that-from-which"><a class="markdownIt-Anchor" href="#distinguish-that-from-which"></a> Distinguish that from which</h3>
+<p>that 和 which 从句分别何时使用，有一个经验法则：</p>
+<ul>
+<li>which 从句去掉后不影响主句的意思</li>
+<li>that 去掉后主句的意思不完整</li>
+</ul>
+<blockquote>
+<p>Python is an interpreted language, <strong>which</strong> means the processor runs the program directly.</p>
+<p>FORTRAN is perfect for mathematical calculations <strong>that</strong> don’t involve linear algebra.</p>
+</blockquote>
+<p>或者：尝试读句子，如果发现<strong>读到从句时需要停顿，那适合使用 which</strong>；否则使用 that。</p>
+<h2 id="list-and-table"><a class="markdownIt-Anchor" href="#list-and-table"></a> List and table</h2>
+<h3 id="choose-the-correct-type-of-list"><a class="markdownIt-Anchor" href="#choose-the-correct-type-of-list"></a> Choose the correct type of list</h3>
+<ul>
+<li>项目符号列表
+<ul>
+<li>无序的项目（换顺序不影响表达的意思）</li>
+</ul>
+</li>
+<li>数字序号列表
+<ul>
+<li>有序的项目</li>
+</ul>
+</li>
+<li>嵌入列表（在句子中罗列）
+<ul>
+<li>一般不是一种好的方式，应该用其他两种代替</li>
+</ul>
+</li>
+</ul>
+<h3 id="keep-list-items-parallel"><a class="markdownIt-Anchor" href="#keep-list-items-parallel"></a> Keep list items parallel</h3>
+<p>好的列表在以下几个方面应该保持一致：</p>
+<ul>
+<li>语法</li>
+<li>逻辑类型</li>
+<li>大小写</li>
+<li>标点符号</li>
+</ul>
+<h3 id="start-numbered-list-items-with-imperative-verbs"><a class="markdownIt-Anchor" href="#start-numbered-list-items-with-imperative-verbs"></a> Start numbered list items with imperative verbs</h3>
+<p>在有序列表中，使用祈使句来表达流程。</p>
+<h3 id="punctuate-items-appropriately"><a class="markdownIt-Anchor" href="#punctuate-items-appropriately"></a> Punctuate items appropriately</h3>
+<p>只在列表项是一个句子时，首字母大写和使用标点符号。其他情况下不使用。</p>
+<h3 id="create-useful-tables"><a class="markdownIt-Anchor" href="#create-useful-tables"></a> Create useful tables</h3>
+<p>加入表格应当遵守以下原则：</p>
+<ul>
+<li>每一列都要有一个明确的列头。</li>
+<li>避免一个单元格内有太多文本(不要超过两句话)。</li>
+<li>表格内的数据应当尽量保持关联，不要将毫不相关的东西放到一起。</li>
+</ul>
+<h3 id="introduce-each-list-and-table"><a class="markdownIt-Anchor" href="#introduce-each-list-and-table"></a> Introduce each list and table</h3>
+<p>在引入表格和列标签都用一句话介绍一下。</p>
+<h2 id="paragraphs"><a class="markdownIt-Anchor" href="#paragraphs"></a> Paragraphs</h2>
+<h3 id="write-a-great-opening-sentence"><a class="markdownIt-Anchor" href="#write-a-great-opening-sentence"></a> Write a great opening sentence</h3>
+<p>每段的第一句是最重要的。许多比较忙的读者可能只会跳着读每段的第一句</p>
+<h3 id="focus-each-paragraph-on-a-single-topic"><a class="markdownIt-Anchor" href="#focus-each-paragraph-on-a-single-topic"></a> Focus each paragraph on a single topic</h3>
+<p>每段都应该只有一个主题思想。当段落内有描述其他段的内容时，应该直接删掉。</p>
+<h3 id="dontt-make-paragraphs-too-long-or-too-short"><a class="markdownIt-Anchor" href="#dontt-make-paragraphs-too-long-or-too-short"></a> Dont’t make paragraphs too long or too short</h3>
+<p>太长的段落会看起来很吓人，容易被读者跳过。（3-5句为佳，超过7句就太长了）</p>
+<p>相应的，也不要让段落太短了，这样会使读者聚德你的文章组织不靠谱。</p>
+<h3 id="anser-what-why-and-how"><a class="markdownIt-Anchor" href="#anser-what-why-and-how"></a> Anser what, why, and how</h3>
+<p>一个段落应该能回答以下三个问题：</p>
+<ol>
+<li><strong>What</strong> are you trying to tell your reader?</li>
+<li><strong>Why</strong> is it important for the reader to know this?</li>
+<li><strong>How</strong> should the reader use this knowledge? Alternatively, how should the reader know your point to be true?</li>
+</ol>
+<h2 id="audience"><a class="markdownIt-Anchor" href="#audience"></a> Audience</h2>
+<blockquote>
+<p>good documentation = knowledge and skills your audience needs to do a task − your audience’s current knowledge and skills</p>
+</blockquote>
+<h3 id="define-your-audience"><a class="markdownIt-Anchor" href="#define-your-audience"></a> Define your audience</h3>
+<p>严肃的文档可能会做很多的调研工作来确定读者，但也有一些比较简单的方法：</p>
+<ul>
+<li>确认读者角色</li>
+<li>明确角色的knowledge base（相同角色的读者会有差不多的knowledge base）</li>
+<li>找出对同一个角色的读者的差异
+<ul>
+<li>对于同一个角色的读者有些内容是有些人知道，有些人不知道的。如C++工程师可能比Python工程师更加熟悉操作系统</li>
+</ul>
+</li>
+<li>确认角色的日常经验
+<ul>
+<li>软件工程师虽然一般学过微积分，但可能他们长时间不用，已经不会了，但可能对项目中的知识很了解。</li>
+</ul>
+</li>
+</ul>
+<h3 id="sample-audience-analysis"><a class="markdownIt-Anchor" href="#sample-audience-analysis"></a> Sample audience analysis</h3>
+<p>这是一个例子：</p>
+<blockquote>
+<p>The target audience for Project Zylmon falls into the following roles:</p>
+<ul>
+<li>software engineers</li>
+<li>technical product managers</li>
+</ul>
+<p>The target audience has the following proximity to the knowledge:</p>
+<ul>
+<li>My target audience already knows the Zyljeune APIs, which are somewhat similar to the Zylmon APIs.</li>
+<li>My target audience knows C++, but has not typically built C++ programs in the new Winged Victory development environment.</li>
+<li>My target audience took linear algebra in university, but many members of the team need a refresher on matrix multiplication.</li>
+</ul>
+</blockquote>
+<h3 id="determine-what-your-audience-needs-to-learn"><a class="markdownIt-Anchor" href="#determine-what-your-audience-needs-to-learn"></a> Determine what your audience needs to learn</h3>
+<p>用一个列表写下所有你读者读完你的文档需要能够学到的东西。有时你列这些目标会有一个顺序，需要先知道xxx再学到jjj,也要列出来。如果你是在写一个份设计规约，最好关注在让你的读者了解整个设计，而不是专精于某个细节。</p>
+<h3 id="fit-documentation-to-your-audience"><a class="markdownIt-Anchor" href="#fit-documentation-to-your-audience"></a> Fit documentation to your audience</h3>
+<p>你必须要用读者感兴趣的语言说明问题，而不是你自己习惯的表的方式。</p>
+<h4 id="vovabulary-and-concepts"><a class="markdownIt-Anchor" href="#vovabulary-and-concepts"></a> Vovabulary and concepts</h4>
+<p>用读者能听懂的单词和概念。当目标读者比较广泛的时候，必须要进行更多的名词和概念的解释。</p>
+<h4 id="curse-of-knowledge"><a class="markdownIt-Anchor" href="#curse-of-knowledge"></a> Curse of knowledge</h4>
+<p>一个专家可能意识不到读者不知道他已经知道的知识</p>
+<h4 id="simple-words"><a class="markdownIt-Anchor" href="#simple-words"></a> Simple words</h4>
+<p>尽量使用简单的单词，避免给非母语者造成困扰。</p>
+<h4 id="cultural-neutrality-and-idioms"><a class="markdownIt-Anchor" href="#cultural-neutrality-and-idioms"></a> Cultural neutrality and idioms</h4>
+<p>尽量保持文章文化中立。不要使用一些特定文化内的俗语或者缩写。</p>
+<h2 id="documents"><a class="markdownIt-Anchor" href="#documents"></a> Documents</h2>
+<h3 id="state-your-documents-scope"><a class="markdownIt-Anchor" href="#state-your-documents-scope"></a> State your document’s scope</h3>
+<p>一篇好的文档在开头就应当描述清楚文档的内容。更好的文档还会指明不会不包括的内容（可能是读者预期能够独到的）。</p>
+<h3 id="state-your-audience"><a class="markdownIt-Anchor" href="#state-your-audience"></a> State your audience</h3>
+<p>在开头明确目标读者，除了明确目标读者的角色，可能还需要明确读者需要具备的知识或经验。在一些文档中，可能还要明确需要提前阅读的其他文档。</p>
+<h3 id="establish-your-key-points-up-front"><a class="markdownIt-Anchor" href="#establish-your-key-points-up-front"></a> Establish your key points up front</h3>
+<ul>
+<li>在第一段就表明观点。保证你的第一段能够让读者理解。</li>
+<li>在第一页多下功夫，以能够吸引读者读到后边去。</li>
+<li><strong>长文档一定要写一个执行摘要</strong>（TL; DR）；同时TLDR应当简短有趣，否则会吓退读者。</li>
+</ul>
+<h2 id="write-for-your-audience"><a class="markdownIt-Anchor" href="#write-for-your-audience"></a> Write for your audience</h2>
+<h4 id="define-the-audience"><a class="markdownIt-Anchor" href="#define-the-audience"></a> Define the audience</h4>
+<ul>
+<li>Who is your target audience?</li>
+<li>What do your readers already know <em>before</em> they read your document?</li>
+<li>What should your readers know or be able to do <em>after</em> they read your document?</li>
+</ul>
+<h4 id="organize-for-your-audiences-needs"><a class="markdownIt-Anchor" href="#organize-for-your-audiences-needs"></a> Organize for your audience’s needs</h4>
+<p>以清晰的方式组织文档，以便读者能够有效地掌握或学习。</p>
+<h3 id="break-your-topic-into-sections"><a class="markdownIt-Anchor" href="#break-your-topic-into-sections"></a> Break your topic into sections</h3>
+<ul>
+<li>有结构的切分你的话题</li>
+<li>组织文章就像把罐子填满：
+<ul>
+<li>先以大的主题内容搭建文章框架。</li>
+<li>再列举每一部分的主题。</li>
+<li>最后用细节填充。</li>
+</ul>
+</li>
+</ul>
+<h2 id=""><a class="markdownIt-Anchor" href="#"></a> </h2>
+<h1 id="courses-two"><a class="markdownIt-Anchor" href="#courses-two"></a> Courses Two</h1>
+<h2 id="introduction-2"><a class="markdownIt-Anchor" href="#introduction-2"></a> Introduction</h2>
+<h3 id="learning-objectives-2"><a class="markdownIt-Anchor" href="#learning-objectives-2"></a> Learning objectives</h3>
+<ul>
+<li>写草稿的方法和修正的方法。</li>
+<li>几种检测文章中错误的方法</li>
+<li>大型文档的组织方法</li>
+<li>介绍文章内容和前置知识</li>
+<li>清楚的数字说明</li>
+<li>正确使用技术插图</li>
+<li>创建有用的、准确的、简洁的、清晰的、可重用的、注释良好的示例代码</li>
+<li>区分不同的文档类型</li>
+<li>描述任何事情</li>
+<li>为初学者读者提供指南</li>
+</ul>
+<h2 id="self-editing"><a class="markdownIt-Anchor" href="#self-editing"></a> Self-editing</h2>
+<h3 id="adopt-a-style-guide"><a class="markdownIt-Anchor" href="#adopt-a-style-guide"></a> Adopt a style guide</h3>
+<p>在组内或公司内使用统一的文档风格  <a href="https://developers.google.com/style/highlights" target="_blank" rel="noopener">style-guide highlights</a>。</p>
+<h3 id="think-like-your-audience"><a class="markdownIt-Anchor" href="#think-like-your-audience"></a> Think like your audience</h3>
+<p>在读者角度看你的文章，保证你的文档是清晰的，同时有必要的名词解释。</p>
+<h3 id="read-it-out-loud"><a class="markdownIt-Anchor" href="#read-it-out-loud"></a> Read it out loud</h3>
+<p>通过大声读出来可以找出文章中不自然的地方。同时，读出来也能帮助你判断你的行文风格是否符合文档的场景，如：</p>
+<ul>
+<li>getting started guide 需要偏口语化，轻松一些；</li>
+<li>开发者文档追求严谨，准确。</li>
+</ul>
+<h3 id="come-back-to-it-later"><a class="markdownIt-Anchor" href="#come-back-to-it-later"></a> Come back to it later</h3>
+<p>在写完草稿后先放到一边，过1-2小时后再来看一遍，往往会注意到新的东西。</p>
+<h3 id="change-the-context"><a class="markdownIt-Anchor" href="#change-the-context"></a> Change the context</h3>
+<p>将你的文档复制，用更换字体字号以及颜色等来进行修改。（类似于改作文时用红笔）</p>
+<h3 id="find-a-peer-editor"><a class="markdownIt-Anchor" href="#find-a-peer-editor"></a> Find a peer editor</h3>
+<p>和代码一样，文档也需要review。注意reviewer应当熟悉你们规定的文档风格。</p>
+<h2 id="organizing-large-documents"><a class="markdownIt-Anchor" href="#organizing-large-documents"></a> Organizing large documents</h2>
+<h3 id="when-to-write-large-documents"><a class="markdownIt-Anchor" href="#when-to-write-large-documents"></a> When to write large documents</h3>
+<p>不同的读者的阅读喜好不一样， 因此要区分开来。有以下几个指导原则：</p>
+<ul>
+<li>操作指南、介绍性概述和概念介绍这类的文档，简短最好。</li>
+<li>深入的教程、最佳实践指南和命令行参考页面这类的文档，可以长一点。</li>
+<li>优秀的长文档应当能够引导读者一部分一部分的读完整个教程。</li>
+<li>许多长文档的编写目的就不是被一次读完的，可能是供需要时查询。</li>
+</ul>
+<h3 id="organize-a-document"><a class="markdownIt-Anchor" href="#organize-a-document"></a> Organize a document</h3>
+<h4 id="outline-a-document"><a class="markdownIt-Anchor" href="#outline-a-document"></a> Outline a document</h4>
+<p>在写文章前要现有一份结构化的，高层次的大纲。一份好的大纲有以下指导原则：</p>
+<ul>
+<li>在告诉读者要做什么之前，先告诉他们为什么</li>
+<li>大纲里的一项涉及的范围应当限制在描述一个概念或执行一个具体的动作的范围内。</li>
+<li>把你的大纲组织曾最能够方便读者理解的形式。</li>
+<li>介绍概念和实践交替介绍，帮助读者最有影响的时候实践。</li>
+<li>在开始草稿前应该把大纲分享给你的伙伴。</li>
+</ul>
+<h4 id="introduce-a-document"><a class="markdownIt-Anchor" href="#introduce-a-document"></a> Introduce a document</h4>
+<p>如果读者不能知道你的文档是不是和他关心的主题有关，他可能就不会读了，所以文档中应该包含以下几个部分：</p>
+<ul>
+<li>What the document covers</li>
+<li>What prior knowledge you expect readers to have.</li>
+<li>What the document doesn’t cover</li>
+</ul>
+<h3 id="add-navigation"><a class="markdownIt-Anchor" href="#add-navigation"></a> Add navigation</h3>
+<p>添加导航栏，导航栏应该包括：</p>
+<ul>
+<li>介绍和总结段</li>
+<li>逻辑清晰的主题</li>
+<li>能帮助读者理解主题的主副标题</li>
+<li>能够显示当前位置的菜单栏</li>
+<li>链接到相关的资源和更深层次的信息</li>
+<li>链接到下一步该学习的内容</li>
+</ul>
+<h4 id="prefer-task-based-headings"><a class="markdownIt-Anchor" href="#prefer-task-based-headings"></a> Prefer task-based headings</h4>
+<p>用读者正在处理的任务作为标题（如用C<ins>写服务器），避免出现读者目前还不熟悉的术语和工具（如不要出现具体的C</ins>框架名）。</p>
+<h4 id="provide-text-under-each-heading"><a class="markdownIt-Anchor" href="#provide-text-under-each-heading"></a> Provide text under each heading</h4>
+<p>在每段标题下最少要有一段简短的介绍。不要标题挨着这标题</p>
+<h3 id="disclose-information-progressively"><a class="markdownIt-Anchor" href="#disclose-information-progressively"></a> Disclose information progressively</h3>
+<p>太多的新术语和新名词会让读者难以读下去，应当在需要时才循序渐进的向读者提供信息。 以下小技巧可以帮助你更好的平衡：</p>
+<ul>
+<li>尽量在需要用到的地方附近介绍新术语或概念</li>
+<li>避免巨大的一段出现在文本上， 加入一些表格、插图或者标题。</li>
+<li>将大的流程分成多步 。</li>
+<li>用一个简单的例子开始，逐步的添加更多复杂的、有意思的技巧。</li>
+</ul>
+<h2 id="illustrating"><a class="markdownIt-Anchor" href="#illustrating"></a> Illustrating</h2>
+<p>添加插图后，不管是好是坏，会让读者更愿意阅读文档</p>
+<h3 id="write-the-caption-first"><a class="markdownIt-Anchor" href="#write-the-caption-first"></a> Write the caption first</h3>
+<p>好的标题：</p>
+<ol>
+<li>应该是简洁的。</li>
+<li>应该能够告知读者要点。</li>
+<li>应该能够引导读者注意力在某一点上。</li>
+</ol>
+<h3 id="constrain-the-amount-of-information-in-a-single-drawing"><a class="markdownIt-Anchor" href="#constrain-the-amount-of-information-in-a-single-drawing"></a> Constrain the amount of information in a single drawing</h3>
+<p>就像避免冗长复杂的句子一样，一个图例中也不要放太多信息（一个经验值：需要解释的内容不要超过5个项目符号）。</p>
+<h3 id="focus-the-readers-attention"><a class="markdownIt-Anchor" href="#focus-the-readers-attention"></a> Focus the reader’s attention</h3>
+<p>使用一些视觉标记，比如说箭头或者圈，让读者能够注意到重要的部分。</p>
+<h3 id="illustrating-is-re-illustrating"><a class="markdownIt-Anchor" href="#illustrating-is-re-illustrating"></a> Illustrating is re-illustrating</h3>
+<p>第一版的图或标题很难是最优的，因此需要反复迭代。</p>
+<h2 id="creating-sample-code"><a class="markdownIt-Anchor" href="#creating-sample-code"></a> Creating sample code</h2>
+<p>好的示例代码就是最好的文档。</p>
+<h3 id="correct"><a class="markdownIt-Anchor" href="#correct"></a> Correct</h3>
+<p>示例代码直接影响你的用户写的代码是什么样的，示例代码需要符合以下标准：</p>
+<ul>
+<li>Build without errors.</li>
+<li>Perform the task it claims to perform.</li>
+<li>Be as production-ready as possible. For example, the code shouldn’t contain any security vulnerabilities.</li>
+<li>Follow language-specific conventions.</li>
+</ul>
+<h3 id="running-sample-code"><a class="markdownIt-Anchor" href="#running-sample-code"></a> Running sample code</h3>
+<p>好的文档会解释怎么跑示例代码：</p>
+<ul>
+<li>Install a certain library.</li>
+<li>Adjust the values assigned to certain environment variables.</li>
+<li>Adjust something in the integrated development environment (IDE).</li>
+</ul>
+<h3 id="concise"><a class="markdownIt-Anchor" href="#concise"></a> Concise</h3>
+<p>示例代码应该是简短的，只包含必要的组件。</p>
+<h3 id="understandable"><a class="markdownIt-Anchor" href="#understandable"></a> Understandable</h3>
+<p>有以下建议：</p>
+<ul>
+<li>Pick descriptive class, method, and variable names.</li>
+<li>Avoid confusing your readers with hard-to-decipher programming tricks.</li>
+<li>Avoid deeply nested code.</li>
+<li>Optional: Use bold or colored font to draw the reader’s attention to a specific section of your sample code. However, use highlighting judiciously—too much highlighting means the reader won’t focus on anything in particular.</li>
+</ul>
+<h3 id="commented"><a class="markdownIt-Anchor" href="#commented"></a> Commented</h3>
+<ul>
+<li>Keep comments short, but always prefer clarity over brevity.</li>
+<li>Avoid writing comments about <em>obvious</em> code, but remember that what is obvious to you (the expert) might not be obvious to newcomers.</li>
+<li>Focus your commenting energy on anything non-intuitive in the code.</li>
+<li>When your readers are very experienced with a technology, don’t explain <em>what</em> the code is doing, explain <em>why</em> the code is doing it.</li>
+</ul>
+<h3 id="reusable"><a class="markdownIt-Anchor" href="#reusable"></a> Reusable</h3>
+<p>好的示例代码，应当提供以下内容：</p>
+<ul>
+<li>All information necessary to run the sample code, including any dependencies and setup.</li>
+<li>Code that can be extended or customized in useful ways.</li>
+</ul>
+<h3 id="the-example-and-the-anti-example"><a class="markdownIt-Anchor" href="#the-example-and-the-anti-example"></a> The example and the anti-example</h3>
+<p>同时展示正确示例和错误示例，有利于读者理解。</p>
+<h3 id="sequenced"><a class="markdownIt-Anchor" href="#sequenced"></a> Sequenced</h3>
+<p>示例代码只展示了一部分的复杂性。太复杂的功能读者可能也理解不了。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/写作-英文写作/" rel="tag"># 写作 英文写作</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/04/21/灵光一闪/" rel="next" title="灵光一闪">
+                <i class="fa fa-chevron-left"></i> 灵光一闪
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/08/26/计算机/编程语言/C++/C-编译Warning汇总/" rel="prev" title="C++编译Warning汇总">
+                C++编译Warning汇总 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/myavatar.jpg"
+                alt="王谱越"/>
+            
+              <p class="site-author-name" itemprop="name">王谱越</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">56</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">36</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/wangpy1489" title="GitHub &rarr; https://github.com/wangpy1489" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:wangpy1489@sjtu.edu.cn" title="E-Mail &rarr; mailto:wangpy1489@sjtu.edu.cn" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.instagram.com/norton_yue/" title="Instagram &rarr; https://www.instagram.com/norton_yue/" rel="noopener" target="_blank"><i class="fa fa-fw fa-instagram"></i>Instagram</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#courses-one"><span class="nav-text"> Courses One</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#introduction"><span class="nav-text"> Introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#learning-objectives"><span class="nav-text"> Learning objectives</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#word"><span class="nav-text"> Word</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#define-new-or-unfamiliar-terms"><span class="nav-text"> Define new or unfamiliar terms</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#use-tems-consistently"><span class="nav-text"> Use tems consistently</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#use-acronyms-properly"><span class="nav-text"> Use acronyms properly</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#use-the-acronym-or-the-full-term"><span class="nav-text"> Use the acronym or the full term</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#disambiguate-pronouns"><span class="nav-text"> Disambiguate pronouns</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#this-and-that"><span class="nav-text"> This and That</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#active-voice"><span class="nav-text"> Active voice</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#distinguish-active-voice-from-passive-voice-in-simple-sentences"><span class="nav-text"> Distinguish active voice from passive voice in simple sentences</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#prefer-active-voice-to-passive-voice"><span class="nav-text"> Prefer active voice to passive voice</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#clear-sentences"><span class="nav-text"> Clear sentences</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#choose-strong-verbs"><span class="nav-text"> Choose strong verbs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#reduce-there-isthere-are"><span class="nav-text"> Reduce there is/there are</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#minimize-certain-adjectives-and-adverbs"><span class="nav-text"> Minimize certain adjectives and adverbs</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#short-sentences"><span class="nav-text"> Short sentences</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#focus-each-sentence-on-a-single-idea"><span class="nav-text"> Focus each sentence on a single idea</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#convert-some-long-sentences-to-lists"><span class="nav-text"> Convert some long sentences to lists</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#eliminate-or-reduce-extraneous-words"><span class="nav-text"> Eliminate or reduce extraneous words</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#reduce-subordinate-clauses"><span class="nav-text"> Reduce subordinate clauses</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#distinguish-that-from-which"><span class="nav-text"> Distinguish that from which</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#list-and-table"><span class="nav-text"> List and table</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#choose-the-correct-type-of-list"><span class="nav-text"> Choose the correct type of list</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#keep-list-items-parallel"><span class="nav-text"> Keep list items parallel</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#start-numbered-list-items-with-imperative-verbs"><span class="nav-text"> Start numbered list items with imperative verbs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#punctuate-items-appropriately"><span class="nav-text"> Punctuate items appropriately</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#create-useful-tables"><span class="nav-text"> Create useful tables</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#introduce-each-list-and-table"><span class="nav-text"> Introduce each list and table</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#paragraphs"><span class="nav-text"> Paragraphs</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#write-a-great-opening-sentence"><span class="nav-text"> Write a great opening sentence</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#focus-each-paragraph-on-a-single-topic"><span class="nav-text"> Focus each paragraph on a single topic</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dontt-make-paragraphs-too-long-or-too-short"><span class="nav-text"> Dont’t make paragraphs too long or too short</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#anser-what-why-and-how"><span class="nav-text"> Anser what, why, and how</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#audience"><span class="nav-text"> Audience</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#define-your-audience"><span class="nav-text"> Define your audience</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sample-audience-analysis"><span class="nav-text"> Sample audience analysis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#determine-what-your-audience-needs-to-learn"><span class="nav-text"> Determine what your audience needs to learn</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fit-documentation-to-your-audience"><span class="nav-text"> Fit documentation to your audience</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#vovabulary-and-concepts"><span class="nav-text"> Vovabulary and concepts</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#curse-of-knowledge"><span class="nav-text"> Curse of knowledge</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#simple-words"><span class="nav-text"> Simple words</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cultural-neutrality-and-idioms"><span class="nav-text"> Cultural neutrality and idioms</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#documents"><span class="nav-text"> Documents</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#state-your-documents-scope"><span class="nav-text"> State your document’s scope</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#state-your-audience"><span class="nav-text"> State your audience</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#establish-your-key-points-up-front"><span class="nav-text"> Establish your key points up front</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#write-for-your-audience"><span class="nav-text"> Write for your audience</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#define-the-audience"><span class="nav-text"> Define the audience</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#organize-for-your-audiences-needs"><span class="nav-text"> Organize for your audience’s needs</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#break-your-topic-into-sections"><span class="nav-text"> Break your topic into sections</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-text"> </span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#courses-two"><span class="nav-text"> Courses Two</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#introduction-2"><span class="nav-text"> Introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#learning-objectives-2"><span class="nav-text"> Learning objectives</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#self-editing"><span class="nav-text"> Self-editing</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#adopt-a-style-guide"><span class="nav-text"> Adopt a style guide</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#think-like-your-audience"><span class="nav-text"> Think like your audience</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#read-it-out-loud"><span class="nav-text"> Read it out loud</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#come-back-to-it-later"><span class="nav-text"> Come back to it later</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#change-the-context"><span class="nav-text"> Change the context</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#find-a-peer-editor"><span class="nav-text"> Find a peer editor</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#organizing-large-documents"><span class="nav-text"> Organizing large documents</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#when-to-write-large-documents"><span class="nav-text"> When to write large documents</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#organize-a-document"><span class="nav-text"> Organize a document</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#outline-a-document"><span class="nav-text"> Outline a document</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#introduce-a-document"><span class="nav-text"> Introduce a document</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#add-navigation"><span class="nav-text"> Add navigation</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#prefer-task-based-headings"><span class="nav-text"> Prefer task-based headings</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#provide-text-under-each-heading"><span class="nav-text"> Provide text under each heading</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#disclose-information-progressively"><span class="nav-text"> Disclose information progressively</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#illustrating"><span class="nav-text"> Illustrating</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#write-the-caption-first"><span class="nav-text"> Write the caption first</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#constrain-the-amount-of-information-in-a-single-drawing"><span class="nav-text"> Constrain the amount of information in a single drawing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#focus-the-readers-attention"><span class="nav-text"> Focus the reader’s attention</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#illustrating-is-re-illustrating"><span class="nav-text"> Illustrating is re-illustrating</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#creating-sample-code"><span class="nav-text"> Creating sample code</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#correct"><span class="nav-text"> Correct</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#running-sample-code"><span class="nav-text"> Running sample code</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#concise"><span class="nav-text"> Concise</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#understandable"><span class="nav-text"> Understandable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#commented"><span class="nav-text"> Commented</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#reusable"><span class="nav-text"> Reusable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#the-example-and-the-anti-example"><span class="nav-text"> The example and the anti-example</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sequenced"><span class="nav-text"> Sequenced</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">  <a href="http://beian.miit.gov.cn" rel="noopener" target="_blank">蒙ICP备18004819号-1 </a>&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">王谱越</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">104k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">1:35</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.0.1</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/schemes/muse.js?v=7.0.1"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.1"></script>
+
+
+  
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      
+        background-color: #eee;
+        background-image: linear-gradient(#fcfcfc, #eee);
+        border: 1px solid #d5d5d5;
+        border-radius: 3px;
+      
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      
+        right: 4px;
+        top: 8px;
+      
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1;
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function(i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap');
+      $(e).after($wrap);
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function(e) {
+        var code = $(this).parent().find('.code').find('.line').map(function(i, e) {
+          return $(e).text();
+        }).toArray().join('\n');
+        var ta = document.createElement('textarea');
+        var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+        ta.style.top = yPosition + 'px'; // Prevent page scroll
+        ta.style.position = 'absolute';
+        ta.style.opacity = '0';
+        ta.readOnly = true;
+        ta.value = code;
+        document.body.appendChild(ta);
+        ta.select();
+        ta.setSelectionRange(0, code.length);
+        ta.readOnly = false;
+        var result = document.execCommand('copy');
+        
+        ta.blur(); // For iOS
+        $(this).blur();
+      })).on('mouseleave', function(e) {
+        var $b = $(this).find('.copy-btn');
+        setTimeout(function() {
+          $b.text('复制');
+        }, 300);
+      }).append(e);
+    })
+  </script>
+
+
+</body>
+</html>

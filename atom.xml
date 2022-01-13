@@ -6,7 +6,7 @@
   <link href="http://yoursite.com/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-11-05T03:54:27.702Z</updated>
+  <updated>2022-01-12T05:51:17.743Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,90 +17,12 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>2021-11-技术文摘</title>
-    <link href="http://yoursite.com/2021/11/05/TechnicalDigest/2021-11-%E6%8A%80%E6%9C%AF%E6%96%87%E6%91%98/"/>
-    <id>http://yoursite.com/2021/11/05/TechnicalDigest/2021-11-%E6%8A%80%E6%9C%AF%E6%96%87%E6%91%98/</id>
-    <published>2021-11-05T03:52:16.000Z</published>
-    <updated>2021-11-05T03:54:27.702Z</updated>
+    <title>字符串</title>
+    <link href="http://yoursite.com/2022/01/12/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Python/Python%E5%9F%BA%E7%A1%80/%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
+    <id>http://yoursite.com/2022/01/12/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Python/Python%E5%9F%BA%E7%A1%80/%E5%AD%97%E7%AC%A6%E4%B8%B2/</id>
+    <published>2022-01-12T05:51:00.000Z</published>
+    <updated>2022-01-12T05:51:17.743Z</updated>
     
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;google-twitter和spotify的文档规范&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#google-twitter和spotify的文档规范&quot;&gt;&lt;/a&gt; &lt;a</summary>
-        
-      
-    
-    
-    
-    <category term="文摘" scheme="http://yoursite.com/categories/文摘/"/>
-    
-    
-    <category term="技术文摘" scheme="http://yoursite.com/tags/技术文摘/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>2021-10-技术文摘</title>
-    <link href="http://yoursite.com/2021/10/17/TechnicalDigest/2021-10-%E6%8A%80%E6%9C%AF%E6%96%87%E6%91%98/"/>
-    <id>http://yoursite.com/2021/10/17/TechnicalDigest/2021-10-%E6%8A%80%E6%9C%AF%E6%96%87%E6%91%98/</id>
-    <published>2021-10-17T13:58:12.000Z</published>
-    <updated>2021-11-05T03:52:39.437Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;smp-numa-mpp体系结构介绍&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#smp-numa-mpp体系结构介绍&quot;&gt;&lt;/a&gt; &lt;a</summary>
-        
-      
-    
-    
-    
-    <category term="文摘" scheme="http://yoursite.com/categories/文摘/"/>
-    
-    
-    <category term="技术文摘" scheme="http://yoursite.com/tags/技术文摘/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>2021-09-技术文摘</title>
-    <link href="http://yoursite.com/2021/09/03/TechnicalDigest/2021-09-%E6%8A%80%E6%9C%AF%E6%96%87%E6%91%98/"/>
-    <id>http://yoursite.com/2021/09/03/TechnicalDigest/2021-09-%E6%8A%80%E6%9C%AF%E6%96%87%E6%91%98/</id>
-    <published>2021-09-03T09:13:01.000Z</published>
-    <updated>2021-09-26T08:24:03.383Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;降低软件复杂性的一般原则和方法&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#降低软件复杂性的一般原则和方法&quot;&gt;&lt;/a&gt; 降低软件复杂性的一般原则和方法&lt;/h1&gt;
-&lt;p&gt;&lt;a</summary>
-        
-      
-    
-    
-    
-    <category term="文摘" scheme="http://yoursite.com/categories/文摘/"/>
-    
-    
-    <category term="技术文摘" scheme="http://yoursite.com/tags/技术文摘/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>C++编译Warning汇总</title>
-    <link href="http://yoursite.com/2021/08/26/C-%E7%BC%96%E8%AF%91Warning%E6%B1%87%E6%80%BB/"/>
-    <id>http://yoursite.com/2021/08/26/C-%E7%BC%96%E8%AF%91Warning%E6%B1%87%E6%80%BB/</id>
-    <published>2021-08-26T12:52:34.000Z</published>
-    <updated>2021-11-18T02:12:16.729Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;按条目记录平时遇到的编译Error和Warning，避免重复排查&lt;/p&gt;</summary>
     
     
     
@@ -108,100 +30,402 @@
   </entry>
   
   <entry>
-    <title>2021-08-技术文摘</title>
-    <link href="http://yoursite.com/2021/08/02/TechnicalDigest/2021-08-%E6%8A%80%E6%9C%AF%E6%96%87%E6%91%98/"/>
-    <id>http://yoursite.com/2021/08/02/TechnicalDigest/2021-08-%E6%8A%80%E6%9C%AF%E6%96%87%E6%91%98/</id>
-    <published>2021-08-02T05:46:57.000Z</published>
-    <updated>2021-09-22T09:28:27.966Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;一文解释清楚google-bbr拥塞控制算法原理&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#一文解释清楚google-bbr拥塞控制算法原理&quot;&gt;&lt;/a&gt; 一文解释清楚Google BBR拥塞控制算法原理&lt;/h1&gt;
-&lt;p&gt;&lt;a</summary>
-        
-      
+    <title>字典和集合</title>
+    <link href="http://yoursite.com/2022/01/12/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Python/Python%E5%9F%BA%E7%A1%80/%E5%AD%97%E5%85%B8%E5%92%8C%E9%9B%86%E5%90%88/"/>
+    <id>http://yoursite.com/2022/01/12/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Python/Python%E5%9F%BA%E7%A1%80/%E5%AD%97%E5%85%B8%E5%92%8C%E9%9B%86%E5%90%88/</id>
+    <published>2022-01-12T05:47:00.000Z</published>
+    <updated>2022-01-12T05:47:27.147Z</updated>
     
     
     
-    <category term="文摘" scheme="http://yoursite.com/categories/文摘/"/>
     
-    
-    <category term="技术文摘" scheme="http://yoursite.com/tags/技术文摘/"/>
     
   </entry>
   
   <entry>
-    <title>Google技术写作课——笔记</title>
-    <link href="http://yoursite.com/2021/07/22/Google%E6%8A%80%E6%9C%AF%E5%86%99%E4%BD%9C%E8%AF%BE%E2%80%94%E2%80%94%E7%AC%94%E8%AE%B0/"/>
-    <id>http://yoursite.com/2021/07/22/Google%E6%8A%80%E6%9C%AF%E5%86%99%E4%BD%9C%E8%AF%BE%E2%80%94%E2%80%94%E7%AC%94%E8%AE%B0/</id>
-    <published>2021-07-22T06:15:22.000Z</published>
-    <updated>2021-08-01T12:26:39.657Z</updated>
+    <title>列表和元组</title>
+    <link href="http://yoursite.com/2022/01/11/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Python/Python%E5%9F%BA%E7%A1%80/%E5%88%97%E8%A1%A8%E5%92%8C%E5%85%83%E7%BB%84/"/>
+    <id>http://yoursite.com/2022/01/11/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/Python/Python%E5%9F%BA%E7%A1%80/%E5%88%97%E8%A1%A8%E5%92%8C%E5%85%83%E7%BB%84/</id>
+    <published>2022-01-11T07:40:00.000Z</published>
+    <updated>2022-01-11T12:27:16.651Z</updated>
     
     
-    <summary type="html">&lt;p&gt;本文是阅读学习&lt;a href=&quot;https://developers.google.com/tech-writing&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;google 英文技术写作&lt;/a&gt; 课程的笔记。&lt;/p&gt;
-&lt;h1 id=&quot;courses-one&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#courses-one&quot;&gt;&lt;/a&gt; Courses One&lt;/h1&gt;
-&lt;h2 id=&quot;introduction&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#introduction&quot;&gt;&lt;/a&gt; Introduction&lt;/h2&gt;
-&lt;h3 id=&quot;learning-objectives&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#learning-objectives&quot;&gt;&lt;/a&gt; Learning objectives&lt;/h3&gt;
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;列表和元组&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#列表和元组&quot;&gt;&lt;/a&gt; 列表和元组&lt;/h1&gt;
+&lt;h2 id=&quot;基础&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#基础&quot;&gt;&lt;/a&gt;</summary>
+        
+      
+    
+    
+    
+    <category term="Python" scheme="http://yoursite.com/categories/Python/"/>
+    
+    
+    <category term="Python  Python基础" scheme="http://yoursite.com/tags/Python-Python基础/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>OKR复盘</title>
+    <link href="http://yoursite.com/2021/12/31/%E8%BD%AF%E6%8A%80%E8%83%BD/OKR/OKR%E5%A4%8D%E7%9B%98/"/>
+    <id>http://yoursite.com/2021/12/31/%E8%BD%AF%E6%8A%80%E8%83%BD/OKR/OKR%E5%A4%8D%E7%9B%98/</id>
+    <published>2021-12-31T09:21:00.000Z</published>
+    <updated>2021-12-31T09:38:26.468Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;okr复盘&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#okr复盘&quot;&gt;&lt;/a&gt; OKR复盘&lt;/h1&gt;
+&lt;p&gt;OKR复盘是对OKR执行情况的客观评价，和OKR评估不同，复盘是为了知道在下一个周期更好的进行OKE&lt;/p&gt;
+&lt;h2</summary>
+        
+      
+    
+    
+    
+    
+    <category term="OKR" scheme="http://yoursite.com/tags/OKR/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>OKR评估</title>
+    <link href="http://yoursite.com/2021/12/31/%E8%BD%AF%E6%8A%80%E8%83%BD/OKR/OKR%E8%AF%84%E4%BC%B0/"/>
+    <id>http://yoursite.com/2021/12/31/%E8%BD%AF%E6%8A%80%E8%83%BD/OKR/OKR%E8%AF%84%E4%BC%B0/</id>
+    <published>2021-12-31T09:10:00.000Z</published>
+    <updated>2021-12-31T09:20:42.381Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;okr评估的最佳实践&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#okr评估的最佳实践&quot;&gt;&lt;/a&gt; OKR评估的最佳实践&lt;/h1&gt;
+&lt;h2 id=&quot;标准简化&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="OKR" scheme="http://yoursite.com/tags/OKR/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>OKR执行</title>
+    <link href="http://yoursite.com/2021/12/30/%E8%BD%AF%E6%8A%80%E8%83%BD/OKR/OKR%E6%89%A7%E8%A1%8C/"/>
+    <id>http://yoursite.com/2021/12/30/%E8%BD%AF%E6%8A%80%E8%83%BD/OKR/OKR%E6%89%A7%E8%A1%8C/</id>
+    <published>2021-12-30T05:59:00.000Z</published>
+    <updated>2021-12-31T09:07:55.686Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;okr高效执行心得&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#okr高效执行心得&quot;&gt;&lt;/a&gt;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="OKR" scheme="http://yoursite.com/tags/OKR/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>OKR制定</title>
+    <link href="http://yoursite.com/2021/12/29/%E8%BD%AF%E6%8A%80%E8%83%BD/OKR/OKR%E5%88%B6%E5%AE%9A/"/>
+    <id>http://yoursite.com/2021/12/29/%E8%BD%AF%E6%8A%80%E8%83%BD/OKR/OKR%E5%88%B6%E5%AE%9A/</id>
+    <published>2021-12-29T09:21:00.000Z</published>
+    <updated>2022-01-13T03:50:23.165Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;o的制定&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#o的制定&quot;&gt;&lt;/a&gt; O的制定&lt;/h1&gt;
+&lt;p&gt;O是OKR中的What层面&lt;/p&gt;
+&lt;h2 id=&quot;核心原则&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="OKR" scheme="http://yoursite.com/tags/OKR/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>OKR落地</title>
+    <link href="http://yoursite.com/2021/12/29/%E8%BD%AF%E6%8A%80%E8%83%BD/OKR/OKR%E8%90%BD%E5%9C%B0/"/>
+    <id>http://yoursite.com/2021/12/29/%E8%BD%AF%E6%8A%80%E8%83%BD/OKR/OKR%E8%90%BD%E5%9C%B0/</id>
+    <published>2021-12-29T08:49:00.000Z</published>
+    <updated>2021-12-29T09:17:22.225Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;okr的价值&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#okr的价值&quot;&gt;&lt;/a&gt; OKR的价值&lt;/h1&gt;
 &lt;ul&gt;
-&lt;li&gt;前后一致的使用术语（包括缩写形式）&lt;/li&gt;
-&lt;li&gt;能够区分并消除代词的歧义&lt;/li&gt;
-&lt;li&gt;能够识别被动语态和主动语态，并能将被动语态转换为主动语态&lt;/li&gt;
-&lt;li&gt;掌握让句子更加简短、表达更加清晰更加吸引人的几种方法。&lt;/li&gt;
-&lt;li&gt;理解项目符号列表和数字符号列表的区别，能够正确的选用&lt;/li&gt;
-&lt;li&gt;段落和文档结构上：能在文档开头说明关键点，学会写有效的段首句，每个段落只讲一个主题。&lt;/li&gt;
-&lt;li&gt;能够明白目标读者已经知道的和你想让他们知道的，避免知识诅咒&lt;/li&gt;
-&lt;li&gt;避免习语（黑话）&lt;/li&gt;
-&lt;li&gt;能够将大的话题拆成合适的段落分别说明&lt;/li&gt;
-&lt;li&gt;正确的使用标点符号&lt;/li&gt;
-&lt;li&gt;使用Markdown&lt;/li&gt;
-&lt;/ul&gt;</summary>
+&lt;li&gt;自底向上：与上级目标对齐，全员对齐向公司目标推进&lt;/li&gt;
+&lt;li&gt;自顶向下</summary>
+        
+      
     
     
     
-    <category term="软技能" scheme="http://yoursite.com/categories/软技能/"/>
     
-    
-    <category term="写作" scheme="http://yoursite.com/tags/写作/"/>
-    
-    <category term="英文写作" scheme="http://yoursite.com/tags/英文写作/"/>
+    <category term="OKR" scheme="http://yoursite.com/tags/OKR/"/>
     
   </entry>
   
   <entry>
-    <title>2021-07-技术文摘</title>
-    <link href="http://yoursite.com/2021/07/06/TechnicalDigest/2021-07-%E6%8A%80%E6%9C%AF%E6%96%87%E6%91%98/"/>
-    <id>http://yoursite.com/2021/07/06/TechnicalDigest/2021-07-%E6%8A%80%E6%9C%AF%E6%96%87%E6%91%98/</id>
-    <published>2021-07-06T08:47:12.000Z</published>
-    <updated>2021-08-18T13:04:19.026Z</updated>
+    <title>OKR与KPI</title>
+    <link href="http://yoursite.com/2021/12/29/%E8%BD%AF%E6%8A%80%E8%83%BD/OKR/OKR%E4%B8%8EKPI/"/>
+    <id>http://yoursite.com/2021/12/29/%E8%BD%AF%E6%8A%80%E8%83%BD/OKR/OKR%E4%B8%8EKPI/</id>
+    <published>2021-12-29T07:23:00.000Z</published>
+    <updated>2021-12-29T07:29:50.820Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;h2 id=&quot;socket缓存究竟如何影响tcp的性能&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#socket缓存究竟如何影响tcp的性能&quot;&gt;&lt;/a&gt; Socket缓存究竟如何影响TCP的性能？&lt;/h2&gt;
-&lt;p&gt;&lt;a</summary>
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;OKR和KPI的差别主要不在形式，而在于底层理念和实施方法。&lt;/p&gt;
+&lt;p&gt;两者都可以用于目标管理。OKR偏重于目标制订，配合信息化工具可进一步延展，从战略拆解到目标初始制订，然后上下左右对齐，再到目标完成度和问题追踪，接着依据情况（包括执行状况、</summary>
         
       
     
     
     
-    <category term="文摘" scheme="http://yoursite.com/categories/文摘/"/>
     
-    
-    <category term="技术文摘" scheme="http://yoursite.com/tags/技术文摘/"/>
+    <category term="OKR" scheme="http://yoursite.com/tags/OKR/"/>
     
   </entry>
   
   <entry>
-    <title>2021-06-技术文摘</title>
-    <link href="http://yoursite.com/2021/06/01/TechnicalDigest/2021-06-%E6%8A%80%E6%9C%AF%E6%96%87%E6%91%98/"/>
-    <id>http://yoursite.com/2021/06/01/TechnicalDigest/2021-06-%E6%8A%80%E6%9C%AF%E6%96%87%E6%91%98/</id>
-    <published>2021-06-01T06:26:05.000Z</published>
-    <updated>2021-10-17T06:34:18.043Z</updated>
+    <title>OKR是什么</title>
+    <link href="http://yoursite.com/2021/12/29/%E8%BD%AF%E6%8A%80%E8%83%BD/OKR/OKR%E6%98%AF%E4%BB%80%E4%B9%88/"/>
+    <id>http://yoursite.com/2021/12/29/%E8%BD%AF%E6%8A%80%E8%83%BD/OKR/OKR%E6%98%AF%E4%BB%80%E4%B9%88/</id>
+    <published>2021-12-29T06:18:00.000Z</published>
+    <updated>2021-12-29T07:24:48.680Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;okr-是什么&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#okr-是什么&quot;&gt;&lt;/a&gt; OKR 是什么&lt;/h1&gt;
+&lt;p&gt;&lt;img</summary>
+        
+      
+    
+    
+    
+    
+    <category term="OKR" scheme="http://yoursite.com/tags/OKR/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>网络层</title>
+    <link href="http://yoursite.com/2021/12/20/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E7%BD%91%E7%BB%9C%E5%B1%82/%E7%BD%91%E7%BB%9C%E5%B1%82/"/>
+    <id>http://yoursite.com/2021/12/20/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E7%BD%91%E7%BB%9C%E5%B1%82/%E7%BD%91%E7%BB%9C%E5%B1%82/</id>
+    <published>2021-12-20T06:37:00.000Z</published>
+    <updated>2021-12-31T05:51:03.841Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;网络层&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#网络层&quot;&gt;&lt;/a&gt; 网络层&lt;/h1&gt;
+&lt;h3 id=&quot;ip协议&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#ip协议&quot;&gt;&lt;/a&gt;</summary>
+        
+      
+    
+    
+    
+    <category term="计算机网络" scheme="http://yoursite.com/categories/计算机网络/"/>
+    
+    
+    <category term="计算机网络" scheme="http://yoursite.com/tags/计算机网络/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>应用层</title>
+    <link href="http://yoursite.com/2021/12/20/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E5%BA%94%E7%94%A8%E5%B1%82/%E5%BA%94%E7%94%A8%E5%B1%82/"/>
+    <id>http://yoursite.com/2021/12/20/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E5%BA%94%E7%94%A8%E5%B1%82/%E5%BA%94%E7%94%A8%E5%B1%82/</id>
+    <published>2021-12-20T06:37:00.000Z</published>
+    <updated>2021-12-31T05:51:02.587Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;应用层&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#应用层&quot;&gt;&lt;/a&gt; 应用层&lt;/h1&gt;
+&lt;h3 id=&quot;ping&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#ping&quot;&gt;&lt;/a&gt;</summary>
+        
+      
+    
+    
+    
+    <category term="计算机网络" scheme="http://yoursite.com/categories/计算机网络/"/>
+    
+    
+    <category term="计算机网络" scheme="http://yoursite.com/tags/计算机网络/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>数据链路层</title>
+    <link href="http://yoursite.com/2021/12/20/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/"/>
+    <id>http://yoursite.com/2021/12/20/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82/</id>
+    <published>2021-12-20T06:37:00.000Z</published>
+    <updated>2021-12-31T05:51:05.513Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;数据链路层&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#数据链路层&quot;&gt;&lt;/a&gt; 数据链路层&lt;/h1&gt;
+&lt;h3 id=&quot;链路层的三个目的&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="计算机网络" scheme="http://yoursite.com/categories/计算机网络/"/>
+    
+    
+    <category term="计算机网络" scheme="http://yoursite.com/tags/计算机网络/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>传输层</title>
+    <link href="http://yoursite.com/2021/12/20/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E4%BC%A0%E8%BE%93%E5%B1%82/%E4%BC%A0%E8%BE%93%E5%B1%82/"/>
+    <id>http://yoursite.com/2021/12/20/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E4%BC%A0%E8%BE%93%E5%B1%82/%E4%BC%A0%E8%BE%93%E5%B1%82/</id>
+    <published>2021-12-20T06:36:00.000Z</published>
+    <updated>2021-12-31T05:50:22.447Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;传输层&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#传输层&quot;&gt;&lt;/a&gt; 传输层&lt;/h1&gt;
+&lt;h3 id=&quot;tcp&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#tcp&quot;&gt;&lt;/a&gt;</summary>
+        
+      
+    
+    
+    
+    <category term="计算机网络" scheme="http://yoursite.com/categories/计算机网络/"/>
+    
+    
+    <category term="计算机网络" scheme="http://yoursite.com/tags/计算机网络/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>分布式事务</title>
+    <link href="http://yoursite.com/2021/12/19/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/"/>
+    <id>http://yoursite.com/2021/12/19/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/</id>
+    <published>2021-12-19T13:56:00.000Z</published>
+    <updated>2021-12-31T05:59:44.739Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;分布式事务&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#分布式事务&quot;&gt;&lt;/a&gt; 分布式事务&lt;/h1&gt;
+&lt;h3 id=&quot;cap&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#cap&quot;&gt;&lt;/a&gt;</summary>
+        
+      
+    
+    
+    
+    <category term="分布式系统" scheme="http://yoursite.com/categories/分布式系统/"/>
+    
+    
+    <category term="事务" scheme="http://yoursite.com/tags/事务/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>事务处理</title>
+    <link href="http://yoursite.com/2021/12/19/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84/%E4%BA%8B%E5%8A%A1%E5%A4%84%E7%90%86/%E4%BA%8B%E5%8A%A1%E5%A4%84%E7%90%86/"/>
+    <id>http://yoursite.com/2021/12/19/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84/%E4%BA%8B%E5%8A%A1%E5%A4%84%E7%90%86/%E4%BA%8B%E5%8A%A1%E5%A4%84%E7%90%86/</id>
+    <published>2021-12-19T13:48:00.000Z</published>
+    <updated>2021-12-31T05:52:14.038Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;事务处理&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#事务处理&quot;&gt;&lt;/a&gt; 事务处理&lt;/h1&gt;
+&lt;h3 id=&quot;acid&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#acid&quot;&gt;&lt;/a&gt;</summary>
+        
+      
+    
+    
+    
+    <category term="软件架构" scheme="http://yoursite.com/categories/软件架构/"/>
+    
+    
+    <category term="软件架构" scheme="http://yoursite.com/tags/软件架构/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>架构安全</title>
+    <link href="http://yoursite.com/2021/12/19/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84/%E6%9E%B6%E6%9E%84%E5%AE%89%E5%85%A8/%E6%9E%B6%E6%9E%84%E5%AE%89%E5%85%A8/"/>
+    <id>http://yoursite.com/2021/12/19/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84/%E6%9E%B6%E6%9E%84%E5%AE%89%E5%85%A8/%E6%9E%B6%E6%9E%84%E5%AE%89%E5%85%A8/</id>
+    <published>2021-12-19T13:46:00.000Z</published>
+    <updated>2021-12-31T05:51:59.521Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;架构安全&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#架构安全&quot;&gt;&lt;/a&gt; 架构安全&lt;/h1&gt;
+&lt;h3 id=&quot;认证&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#认证&quot;&gt;&lt;/a&gt;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="软件架构" scheme="http://yoursite.com/tags/软件架构/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>压缩算法</title>
+    <link href="http://yoursite.com/2021/12/19/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%AE%97%E6%B3%95/%E5%8E%8B%E7%BC%A9%E7%AE%97%E6%B3%95/%E5%8E%8B%E7%BC%A9%E7%AE%97%E6%B3%95/"/>
+    <id>http://yoursite.com/2021/12/19/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%AE%97%E6%B3%95/%E5%8E%8B%E7%BC%A9%E7%AE%97%E6%B3%95/%E5%8E%8B%E7%BC%A9%E7%AE%97%E6%B3%95/</id>
+    <published>2021-12-19T13:16:00.000Z</published>
+    <updated>2021-12-31T05:54:43.948Z</updated>
     
     
       
@@ -209,323 +433,66 @@
         
         
     <summary type="html">&lt;h1 id=&quot;压缩算法&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#压缩算法&quot;&gt;&lt;/a&gt; 压缩算法&lt;/h1&gt;
-&lt;p&gt;&lt;a</summary>
+&lt;h3 id=&quot;压缩库&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#压缩库&quot;&gt;&lt;/a&gt;</summary>
         
       
     
     
     
-    <category term="文摘" scheme="http://yoursite.com/categories/文摘/"/>
+    <category term="算法" scheme="http://yoursite.com/categories/算法/"/>
     
     
-    <category term="技术文摘" scheme="http://yoursite.com/tags/技术文摘/"/>
+    <category term="压缩" scheme="http://yoursite.com/tags/压缩/"/>
     
   </entry>
   
   <entry>
-    <title>2021-05-技术文摘</title>
-    <link href="http://yoursite.com/2021/05/13/TechnicalDigest/2021-05-%E6%8A%80%E6%9C%AF%E6%96%87%E6%91%98/"/>
-    <id>http://yoursite.com/2021/05/13/TechnicalDigest/2021-05-%E6%8A%80%E6%9C%AF%E6%96%87%E6%91%98/</id>
-    <published>2021-05-13T12:41:21.000Z</published>
-    <updated>2021-05-30T13:21:48.919Z</updated>
+    <title>模拟退火算法</title>
+    <link href="http://yoursite.com/2021/12/19/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%AE%97%E6%B3%95/%E6%9C%80%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95/%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB%E7%AE%97%E6%B3%95/"/>
+    <id>http://yoursite.com/2021/12/19/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%AE%97%E6%B3%95/%E6%9C%80%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95/%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB%E7%AE%97%E6%B3%95/</id>
+    <published>2021-12-19T13:11:00.000Z</published>
+    <updated>2021-12-31T05:54:59.178Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;h1 id=&quot;12要素&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#12要素&quot;&gt;&lt;/a&gt; 12要素&lt;/h1&gt;
-&lt;p&gt;&lt;a href=&quot;https://12factor.net/zh_cn/&quot; target=&quot;_blank&quot;</summary>
+    <summary type="html">&lt;h3 id=&quot;模拟退火算法&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#模拟退火算法&quot;&gt;&lt;/a&gt;</summary>
         
       
     
     
     
-    <category term="文摘" scheme="http://yoursite.com/categories/文摘/"/>
+    <category term="算法" scheme="http://yoursite.com/categories/算法/"/>
     
     
-    <category term="技术文摘" scheme="http://yoursite.com/tags/技术文摘/"/>
+    <category term="最优化算法" scheme="http://yoursite.com/tags/最优化算法/"/>
     
   </entry>
   
   <entry>
-    <title>灵光一闪</title>
-    <link href="http://yoursite.com/2021/04/21/%E7%81%B5%E5%85%89%E4%B8%80%E9%97%AA/"/>
-    <id>http://yoursite.com/2021/04/21/%E7%81%B5%E5%85%89%E4%B8%80%E9%97%AA/</id>
-    <published>2021-04-21T09:55:43.000Z</published>
-    <updated>2021-11-09T03:16:10.666Z</updated>
-    
-    
-    <summary type="html">&lt;p&gt;记录一下平时突然想到的一些好的 idea。&lt;/p&gt;
-&lt;h1 id=&quot;计算机&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#计算机&quot;&gt;&lt;/a&gt; 计算机&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;架构应当解耦，但架构设计的思考过程不能解耦。&lt;/li&gt;
-&lt;li&gt;代码复用性越高，功能可用性就越低（观某难产项目后有感&lt;/li&gt;
-&lt;li&gt;80%的bug出现在设计阶段， 单测是横好的检验方法&lt;/li&gt;
-&lt;li&gt;高并发情境下，CPU以外的内存、磁盘都可能成为并发瓶颈&lt;/li&gt;
-&lt;li&gt;测试和需求是一致的， 有什么样的需求就会有什么样的测试。&lt;/li&gt;
-&lt;li&gt;代码的传染性：CodeBase内的代码会被各处copy&lt;/li&gt;
-&lt;li&gt;云作为基础设施，未来应当像自来水一样随用可取。同样的云原生应用也应当是随用可取的。&lt;/li&gt;
-&lt;li&gt;功能方面需求不要依赖用户理解接口实现，性能方面需求可以依赖理解接口实现&lt;/li&gt;
-&lt;/ul&gt;</summary>
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>数学文摘</title>
-    <link href="http://yoursite.com/2021/04/13/%E6%95%B0%E5%AD%A6%E6%96%87%E6%91%98/"/>
-    <id>http://yoursite.com/2021/04/13/%E6%95%B0%E5%AD%A6%E6%96%87%E6%91%98/</id>
-    <published>2021-04-13T12:05:25.000Z</published>
-    <updated>2021-05-05T09:33:24.118Z</updated>
+    <title>拜占庭容错</title>
+    <link href="http://yoursite.com/2021/12/19/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%AE%97%E6%B3%95/%E5%88%86%E5%B8%83%E5%BC%8F%E5%85%B1%E8%AF%86%E7%AE%97%E6%B3%95/%E6%8B%9C%E5%8D%A0%E5%BA%AD%E5%AE%B9%E9%94%99/"/>
+    <id>http://yoursite.com/2021/12/19/%E8%AE%A1%E7%AE%97%E6%9C%BA/%E7%AE%97%E6%B3%95/%E5%88%86%E5%B8%83%E5%BC%8F%E5%85%B1%E8%AF%86%E7%AE%97%E6%B3%95/%E6%8B%9C%E5%8D%A0%E5%BA%AD%E5%AE%B9%E9%94%99/</id>
+    <published>2021-12-19T13:01:00.000Z</published>
+    <updated>2021-12-31T05:53:37.973Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;h1 id=&quot;贝叶斯方法&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#贝叶斯方法&quot;&gt;&lt;/a&gt; 贝叶斯方法&lt;/h1&gt;
-&lt;p&gt;&lt;a</summary>
+    <summary type="html">&lt;h1 id=&quot;拜占庭容错&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#拜占庭容错&quot;&gt;&lt;/a&gt;</summary>
         
       
     
     
     
-    <category term="文摘" scheme="http://yoursite.com/categories/文摘/"/>
+    <category term="算法" scheme="http://yoursite.com/categories/算法/"/>
     
     
-    <category term="数学" scheme="http://yoursite.com/tags/数学/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>2021-04-技术文摘</title>
-    <link href="http://yoursite.com/2021/04/11/TechnicalDigest/2021-04-%E6%8A%80%E6%9C%AF%E6%96%87%E6%91%98/"/>
-    <id>http://yoursite.com/2021/04/11/TechnicalDigest/2021-04-%E6%8A%80%E6%9C%AF%E6%96%87%E6%91%98/</id>
-    <published>2021-04-11T03:34:04.000Z</published>
-    <updated>2021-05-05T09:34:26.933Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;gdb保存断点&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#gdb保存断点&quot;&gt;&lt;/a&gt; GDB保存断点&lt;/h1&gt;
-&lt;p&gt;&lt;a</summary>
-        
-      
-    
-    
-    
-    <category term="文摘" scheme="http://yoursite.com/categories/文摘/"/>
-    
-    
-    <category term="技术文摘" scheme="http://yoursite.com/tags/技术文摘/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>2021-03-技术文摘</title>
-    <link href="http://yoursite.com/2021/03/25/TechnicalDigest/2021-03-%E6%8A%80%E6%9C%AF%E6%96%87%E6%91%98/"/>
-    <id>http://yoursite.com/2021/03/25/TechnicalDigest/2021-03-%E6%8A%80%E6%9C%AF%E6%96%87%E6%91%98/</id>
-    <published>2021-03-25T07:50:05.000Z</published>
-    <updated>2021-05-05T09:34:24.151Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;foqs&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#foqs&quot;&gt;&lt;/a&gt; FOQS&lt;/h1&gt;
-&lt;p&gt;一种可以水平扩缩容 分布式 priority queue&lt;/p&gt;
-&lt;p&gt;&lt;a</summary>
-        
-      
-    
-    
-    
-    <category term="文摘" scheme="http://yoursite.com/categories/文摘/"/>
-    
-    
-    <category term="技术文摘" scheme="http://yoursite.com/tags/技术文摘/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>2021-02-技术文摘</title>
-    <link href="http://yoursite.com/2021/02/01/TechnicalDigest/2021-02-%E6%8A%80%E6%9C%AF%E6%96%87%E6%91%98/"/>
-    <id>http://yoursite.com/2021/02/01/TechnicalDigest/2021-02-%E6%8A%80%E6%9C%AF%E6%96%87%E6%91%98/</id>
-    <published>2021-02-01T07:03:04.000Z</published>
-    <updated>2021-06-08T09:36:48.491Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;6w字搞定linux基本操作建议收藏&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#6w字搞定linux基本操作建议收藏&quot;&gt;&lt;/a&gt; 6w字搞定Linux基本操作，建议收藏&lt;/h1&gt;
-&lt;p&gt;&lt;a</summary>
-        
-      
-    
-    
-    
-    <category term="文摘" scheme="http://yoursite.com/categories/文摘/"/>
-    
-    
-    <category term="技术文摘" scheme="http://yoursite.com/tags/技术文摘/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>工具杂记</title>
-    <link href="http://yoursite.com/2021/01/07/%E5%B7%A5%E5%85%B7%E6%9D%82%E8%AE%B0/"/>
-    <id>http://yoursite.com/2021/01/07/%E5%B7%A5%E5%85%B7%E6%9D%82%E8%AE%B0/</id>
-    <published>2021-01-07T03:14:07.000Z</published>
-    <updated>2021-10-24T13:37:06.375Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;vscode&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#vscode&quot;&gt;&lt;/a&gt; VScode&lt;/h1&gt;
-&lt;h2 id=&quot;21个vscode快捷键&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="文摘" scheme="http://yoursite.com/categories/文摘/"/>
-    
-    
-    <category term="开发工具" scheme="http://yoursite.com/tags/开发工具/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>2021-01-技术文摘</title>
-    <link href="http://yoursite.com/2021/01/03/TechnicalDigest/2021-01-%E6%8A%80%E6%9C%AF%E6%96%87%E6%91%98/"/>
-    <id>http://yoursite.com/2021/01/03/TechnicalDigest/2021-01-%E6%8A%80%E6%9C%AF%E6%96%87%E6%91%98/</id>
-    <published>2021-01-03T12:34:59.000Z</published>
-    <updated>2021-06-08T09:36:07.741Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;刨根问底kafka-到底会不会丢消息&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#刨根问底kafka-到底会不会丢消息&quot;&gt;&lt;/a&gt; &lt;a</summary>
-        
-      
-    
-    
-    
-    <category term="文摘" scheme="http://yoursite.com/categories/文摘/"/>
-    
-    
-    <category term="技术文摘" scheme="http://yoursite.com/tags/技术文摘/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>2020-12-技术文摘</title>
-    <link href="http://yoursite.com/2020/12/15/TechnicalDigest/2020-12-%E6%8A%80%E6%9C%AF%E6%96%87%E6%91%98/"/>
-    <id>http://yoursite.com/2020/12/15/TechnicalDigest/2020-12-%E6%8A%80%E6%9C%AF%E6%96%87%E6%91%98/</id>
-    <published>2020-12-15T03:12:43.000Z</published>
-    <updated>2021-06-08T09:36:11.319Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;软件研发中的信任链问题&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#软件研发中的信任链问题&quot;&gt;&lt;/a&gt; &lt;a</summary>
-        
-      
-    
-    
-    
-    <category term="文摘" scheme="http://yoursite.com/categories/文摘/"/>
-    
-    
-    <category term="技术文摘" scheme="http://yoursite.com/tags/技术文摘/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java杂记</title>
-    <link href="http://yoursite.com/2020/12/12/Java%E6%9D%82%E8%AE%B0/"/>
-    <id>http://yoursite.com/2020/12/12/Java%E6%9D%82%E8%AE%B0/</id>
-    <published>2020-12-12T14:38:07.000Z</published>
-    <updated>2021-05-05T09:34:57.705Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;java-proto对象转byte&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#java-proto对象转byte&quot;&gt;&lt;/a&gt; Java Proto对象转byte&lt;/h1&gt;
-&lt;p&gt;&lt;a</summary>
-        
-      
-    
-    
-    
-    <category term="文摘" scheme="http://yoursite.com/categories/文摘/"/>
-    
-    
-    <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>2020-11-技术文摘</title>
-    <link href="http://yoursite.com/2020/12/12/TechnicalDigest/2020-11-%E6%8A%80%E6%9C%AF%E6%96%87%E6%91%98/"/>
-    <id>http://yoursite.com/2020/12/12/TechnicalDigest/2020-11-%E6%8A%80%E6%9C%AF%E6%96%87%E6%91%98/</id>
-    <published>2020-12-12T14:32:53.000Z</published>
-    <updated>2021-06-08T09:36:14.574Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;big-list-of-20-common-bottlenecks&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#big-list-of-20-common-bottlenecks&quot;&gt;&lt;/a&gt; Big List Of 20</summary>
-        
-      
-    
-    
-    
-    <category term="文摘" scheme="http://yoursite.com/categories/文摘/"/>
-    
-    
-    <category term="技术文摘" scheme="http://yoursite.com/tags/技术文摘/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>C++函数修饰符</title>
-    <link href="http://yoursite.com/2020/12/12/C++/C-%E5%87%BD%E6%95%B0%E4%BF%AE%E9%A5%B0%E7%AC%A6/"/>
-    <id>http://yoursite.com/2020/12/12/C++/C-%E5%87%BD%E6%95%B0%E4%BF%AE%E9%A5%B0%E7%AC%A6/</id>
-    <published>2020-12-12T14:28:59.000Z</published>
-    <updated>2020-12-12T14:47:11.720Z</updated>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;c-函数修饰符学习&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#c-函数修饰符学习&quot;&gt;&lt;/a&gt; C++ 函数修饰符学习&lt;/h1&gt;
-&lt;p&gt;&lt;a href=&quot;https://tlanyan.me/cpp-function-modifier-summary/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://tlanyan.me/cpp-function-modifier-summary/&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&quot;函数名前&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#函数名前&quot;&gt;&lt;/a&gt; 函数名前&lt;/h2&gt;
-&lt;h3 id=&quot;返回值类型&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#返回值类型&quot;&gt;&lt;/a&gt; 返回值类型&lt;/h3&gt;
-&lt;p&gt;返回值类型是&lt;code&gt;C++&lt;/code&gt;中定义函数的必备部分，这些修饰符包括&lt;code&gt;void&lt;/code&gt;，&lt;code&gt;(unsigned) int&lt;/code&gt;，&lt;code&gt;bool&lt;/code&gt;等内置基本数据类型和自定义类型，也包括修饰返回值&lt;code&gt;const&lt;/code&gt;关键字（如&lt;code&gt;const int*&lt;/code&gt;），还包括&lt;code&gt;C++11&lt;/code&gt;中新增的类型自动推导&lt;code&gt;auto&lt;/code&gt;关键字。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="C++" scheme="http://yoursite.com/categories/C/"/>
-    
-    
-    <category term="C++基础" scheme="http://yoursite.com/tags/C-基础/"/>
+    <category term="分布式共识算法" scheme="http://yoursite.com/tags/分布式共识算法/"/>
     
   </entry>
   

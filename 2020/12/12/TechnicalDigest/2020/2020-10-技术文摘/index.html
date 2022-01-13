@@ -1,0 +1,1780 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2"/>
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1"/>
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/dog_128.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/dog_32.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/dog_16.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/dog.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="源码分析怎么做 https://xie.infoq.cn/article/edfa7ea32baaff2dbf21ff766  源码分析应从软件整体入手而不是代码 源码分析的目的  代码要解决什么问题、 代码如何解决问题的 代码为什么要这么解决问题     源码分析重要的是分析，是以软件为切入点，从务实的角度，讲解代码要解决什么问题、代码如何解决问题的以及代码为什么要这么解决问题，绝对不是大篇幅">
+<meta name="keywords" content="技术文摘">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2020-10-技术文摘">
+<meta property="og:url" content="http://yoursite.com/2020/12/12/TechnicalDigest/2020/2020-10-技术文摘/index.html">
+<meta property="og:site_name" content="Norton&#39;s Blog">
+<meta property="og:description" content="源码分析怎么做 https://xie.infoq.cn/article/edfa7ea32baaff2dbf21ff766  源码分析应从软件整体入手而不是代码 源码分析的目的  代码要解决什么问题、 代码如何解决问题的 代码为什么要这么解决问题     源码分析重要的是分析，是以软件为切入点，从务实的角度，讲解代码要解决什么问题、代码如何解决问题的以及代码为什么要这么解决问题，绝对不是大篇幅">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2021-12-31T06:38:47.818Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2020-10-技术文摘">
+<meta name="twitter:description" content="源码分析怎么做 https://xie.infoq.cn/article/edfa7ea32baaff2dbf21ff766  源码分析应从软件整体入手而不是代码 源码分析的目的  代码要解决什么问题、 代码如何解决问题的 代码为什么要这么解决问题     源码分析重要的是分析，是以软件为切入点，从务实的角度，讲解代码要解决什么问题、代码如何解决问题的以及代码为什么要这么解决问题，绝对不是大篇幅">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Norton's Blog" type="application/atom+xml"/>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/12/12/TechnicalDigest/2020/2020-10-技术文摘/"/>
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>2020-10-技术文摘 | Norton's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Norton's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">You miss 100% of the shot you do not take.</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br/>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br/>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br/>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br/>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br/>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-digest">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/文摘" rel="section"><i class="menu-item-icon fa fa-fw fa-newspaper-o"></i> <br/>技术文摘</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br/>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/12/TechnicalDigest/2020/2020-10-技术文摘/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王谱越"/>
+      <meta itemprop="description" content=""/>
+      <meta itemprop="image" content="/images/myavatar.jpg"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Norton's Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">2020-10-技术文摘
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-12-12 22:21:48" itemprop="dateCreated datePublished" datetime="2020-12-12T22:21:48+08:00">2020-12-12</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2021-12-31 14:38:47" itemprop="dateModified" datetime="2021-12-31T14:38:47+08:00">2021-12-31</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/文摘/" itemprop="url" rel="index"><span itemprop="name">文摘</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">4.9k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">4 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="源码分析怎么做"><a class="markdownIt-Anchor" href="#源码分析怎么做"></a> 源码分析怎么做</h1>
+<p><a href="https://xie.infoq.cn/article/edfa7ea32baaff2dbf21ff766" target="_blank" rel="noopener">https://xie.infoq.cn/article/edfa7ea32baaff2dbf21ff766</a></p>
+<ul>
+<li>源码分析应从软件整体入手而不是代码</li>
+<li>源码分析的目的
+<ul>
+<li>代码要解决什么问题、</li>
+<li>代码如何解决问题的</li>
+<li>代码为什么要这么解决问题</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>源码分析重要的是分析，是以软件为切入点，从务实的角度，讲解代码要解决什么问题、代码如何解决问题的以及代码为什么要这么解决问题，绝对不是大篇幅的复制粘贴真正的源代码。</p>
+</blockquote>
+<blockquote>
+<p>我们在编程的时候强调不要测试三方库的行为，应该测试业务逻辑的行为。这是因为软件之间应该有清晰的限界上下文。源码分析也一样，</p>
+</blockquote>
+<blockquote>
+<p>这其中最有意义的是模块的逻辑划分和交互图，因为这个是我们从一个高的抽象层次来理解一个模块的助力。</p>
+<p>其次比较有意义的是时序图。对于关键的交互流程来说，时序图是一种细化的交互流程表达方式，往往能够指导代码的实现以及排查交互的问题。</p>
+<p>UML 图真的是没什么大用。《领域驱动设计》里面就提过，很多 UML 图在某些地方过于细致，同时在某些地方又有很多遗漏。细致的点在于人们认为必须将所有要编码的对象都放到建模工具中，而细节过多的结果是不分轻重。</p>
+</blockquote>
+<h3 id="一个中心两个基本点"><a class="markdownIt-Anchor" href="#一个中心两个基本点"></a> 一个中心两个基本点</h3>
+<p><strong>一个中心</strong>是源码分析要从软件入手而不是源代码本身入手，从务实的角度分析代码要解决什么问题、代码如何解决问题的以及代码为什么要这么解决问题。</p>
+<p><strong>两个基本点</strong>包括分析的过程要逐层深入，从高层次的抽象完整地讲解，低层次的细节只需要讲解要点；以及抓大放小，对旁路的、不重要的内容一笔带过或完全不提。</p>
+<p>最后在技巧上，不要选择 UML 图或者复杂的时序图作为辅助说明的手段，它们只会把事情变得更复杂；应该选择模块划分图、模块交互图和功能流程图作为辅助说明的手段。不得不提的是，不要大段大段地贴源代码！</p>
+<h1 id="code-review怎么做"><a class="markdownIt-Anchor" href="#code-review怎么做"></a> <a href="https://xie.infoq.cn/article/c602fe972a01e7953bbcaaeb2" target="_blank" rel="noopener">Code Review怎么做</a></h1>
+<h3 id="第一层检查是否是打磨过的代码"><a class="markdownIt-Anchor" href="#第一层检查是否是打磨过的代码"></a> 第一层（检查是否是打磨过的代码）</h3>
+<ol>
+<li>代码是否足够简单，是否容易阅读，是否容易理解</li>
+<li>代码有没有陌生的或者不符合常人思维的概念</li>
+<li>代码的排版是否符合编程规范，风格是否和现有代码一致</li>
+<li>代码是否容易测试，是否有相应的测试代码</li>
+<li>代码是否有明显的重复，是否拷贝了其他模块的代码</li>
+</ol>
+<h3 id="第二层宏观上"><a class="markdownIt-Anchor" href="#第二层宏观上"></a> 第二层（宏观上）</h3>
+<ol>
+<li>新增的代码和已有的架构设计是否一致。</li>
+<li>上下文的切分是否合理。</li>
+<li>依赖是否正交。（编程中正交这个词指相互独立，不可替代，并且组合起来可实现其它功能。）</li>
+</ol>
+<h3 id="第三层微观上"><a class="markdownIt-Anchor" href="#第三层微观上"></a> 第三层（微观上）</h3>
+<ol>
+<li>语言最佳实践。</li>
+<li>算法的时间或者空间复杂度。</li>
+<li>设计模式的使用。</li>
+<li>安全问题。</li>
+</ol>
+<h1 id="非功能性约束之性能-性能银弹缓存"><a class="markdownIt-Anchor" href="#非功能性约束之性能-性能银弹缓存"></a> <a href="https://juejin.im/post/6881464246811492359" target="_blank" rel="noopener">非功能性约束之性能-性能银弹：缓存</a></h1>
+<blockquote>
+<p>一般我们使用缓存来存储一些内容，这些内容有如下一些特点（符合一条或多条）：</p>
+<ul>
+<li>使用较频繁</li>
+<li>变更不频繁</li>
+<li>获取较耗时</li>
+<li>多系统访问</li>
+</ul>
+</blockquote>
+<ul>
+<li>主动缓存 用户主动选择和修改缓存数据的缓存</li>
+<li>被动缓存 根据请求自动添加缓存数据的缓存</li>
+</ul>
+<h3 id="缓存置换算法for-被动"><a class="markdownIt-Anchor" href="#缓存置换算法for-被动"></a> 缓存置换算法（for 被动）</h3>
+<blockquote>
+<p>RR（Random replacement）</p>
+<p>FIFO（First in first out）</p>
+<p>LIFO（Last in first out）</p>
+<p>MRU（Most recently used）</p>
+<p>LFU（Least-frequently used）</p>
+<p>LRU（Least recently used）</p>
+<p>TLRU（Time aware least recently used）</p>
+<p>PLRU（Pseudo-LRU）</p>
+<p>LRU-K</p>
+<p>SLRU（Segmented LRU）</p>
+<p>MQ（Multi queue）</p>
+<p>LFRU（Least frequent recently used）</p>
+<p>LFUDA（LFU with dynamic aging）</p>
+<p>LIRS（Low inter-reference recency set）</p>
+<p>ARC（Adaptive replacement cache）</p>
+<p>CAR（Clock with adaptive replacement）</p>
+<p>Pannier（Container-based caching algorithm for compound objects）</p>
+</blockquote>
+<h1 id="做好分库分表其实很难"><a class="markdownIt-Anchor" href="#做好分库分表其实很难"></a> 做好分库分表其实很难</h1>
+<ol>
+<li><a href="https://xie.infoq.cn/article/ee41e234529bb31ab1de4c69b" target="_blank" rel="noopener">https://xie.infoq.cn/article/ee41e234529bb31ab1de4c69b</a></li>
+<li><a href="https://xie.infoq.cn/article/378822829ef1a4563683b5e0e" target="_blank" rel="noopener">https://xie.infoq.cn/article/378822829ef1a4563683b5e0e</a></li>
+</ol>
+<h3 id="是否需要分"><a class="markdownIt-Anchor" href="#是否需要分"></a> 是否需要分</h3>
+<blockquote>
+<p>单台数据库的能力并非想象中那么脆弱。就算是mysql单表数据量大部分场景下也在百万级别（当然这和存储的具体数据格式有关），sqlserver更是不在话下，我司用的sqlserver，单表千万级别数据的大有所在，亿级的也有几个，Oracle更是不用多说。</p>
+</blockquote>
+<h3 id="分库"><a class="markdownIt-Anchor" href="#分库"></a> 分库</h3>
+<h4 id="根据业务分"><a class="markdownIt-Anchor" href="#根据业务分"></a> 根据业务分</h4>
+<blockquote>
+<p>推荐大家根据业务来进行划分</p>
+<p>务按照规则划分好边界，每个业务对应的数据库自然而然就诞生了，不要站在数据库的层面上去给业务分库。</p>
+</blockquote>
+<h4 id="统一业务横向分"><a class="markdownIt-Anchor" href="#统一业务横向分"></a> 统一业务横向分</h4>
+<blockquote>
+<p>但是如果分配到多个服务器上，意味着这个业务整体的最大IO得到了提升，在一定程度上要比拆表效果要好，当然如果用到了表分区，每个分区散落在不同的物理磁盘上，也不一定比分库方式差。</p>
+</blockquote>
+<h3 id="分表"><a class="markdownIt-Anchor" href="#分表"></a> 分表</h3>
+<h4 id="代价"><a class="markdownIt-Anchor" href="#代价"></a> 代价</h4>
+<blockquote>
+<p>数据表垂直切分之后，原来一次查询有可能会变为连表的join查询，在一定程度上会有性能损失。</p>
+<p>数据表横向切分需要一定的规则，常用的主要有两种规则：范围切分和哈希值切分。范围切分是指按照某个字段的范围来切分，比如用户表按照用户ID来切分，id为1到10万的位于User表1中，100001到200000万的位于User2中，这样切分的优势是，可以无限的扩容下去，不用考虑数据迁移的问题，劣势就是新表和旧表数据分布不均匀，而且分表的范围选取有一定难度，范围太小会导致表太多，太大会导致问题根本上没有解决的困惑。另外一种分表策略就是把某一列按照哈希值来路由到不同的表中，同样以用户ID为例，假如我们一开始就规划了10个数据库表，路由算法可以简单地用 user_id %10的值来表示数据所属的数据库表编号，ID为985的用户放到编号为 5的子表中，ID为10086的用户放到编号为 6 的字表中。这种切分规则的优势是每个表的数据分布比较均匀，但是后期扩容会设计到部分数据的迁移工作。</p>
+<p>表拆分之后如果遇到有order by 的操作，数据库就无能为力了，只能由业务代码或者数据库中间件来完成了。</p>
+<p>当有搜索的业务需求的时候，sql语句只能是Join多个表来进行连表查询了，类似的还有统计的需求，例如count的统计操作。</p>
+</blockquote>
+<h1 id="fluid"><a class="markdownIt-Anchor" href="#fluid"></a> Fluid</h1>
+<p>Fluid是一个开源的Kubernetes原生的分布式数据集编排和加速引擎，主要服务于云原生场景下的数据密集型应用，</p>
+<p><a href="https://developer.aliyun.com/article/775574?spm=a2c6h.12873581.0.0.5ce86c4dtRCO1D" target="_blank" rel="noopener">https://developer.aliyun.com/article/775574?spm=a2c6h.12873581.0.0.5ce86c4dtRCO1D</a></p>
+<h1 id="深入spark"><a class="markdownIt-Anchor" href="#深入spark"></a> 深入Spark</h1>
+<h3 id="一内存计算的由来"><a class="markdownIt-Anchor" href="#一内存计算的由来"></a> （一）内存计算的由来</h3>
+<p><a href="https://www.infoq.cn/article/oPpQzsJIFopeBpzVcbx7" target="_blank" rel="noopener">https://www.infoq.cn/article/oPpQzsJIFopeBpzVcbx7</a></p>
+<h4 id="rdd"><a class="markdownIt-Anchor" href="#rdd"></a> RDD</h4>
+<p>RDD（Resilient Distributed Datasets），全称是“弹性分布式数据集”。</p>
+<p>为了弄清楚 RDD 的基本构成和特性，我们从它的 5 大核心属性说起。</p>
+<table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>成员类型</th>
+<th>属性含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dependencies</td>
+<td>变量</td>
+<td>生成该 RDD 所依赖的父 RDD</td>
+</tr>
+<tr>
+<td>compute</td>
+<td>方法</td>
+<td>生成该 RDD 的计算接口</td>
+</tr>
+<tr>
+<td>partitions</td>
+<td>变量</td>
+<td>该 RDD 的所有数据分片实体</td>
+</tr>
+<tr>
+<td>partitioner</td>
+<td>方法</td>
+<td>划分数据分片的规则</td>
+</tr>
+<tr>
+<td>preferredLocations</td>
+<td>变量</td>
+<td>数据分片的物理位置偏好</td>
+</tr>
+</tbody>
+</table>
+<h3 id="二dag"><a class="markdownIt-Anchor" href="#二dag"></a> （二）DAG</h3>
+<p><a href="https://www.infoq.cn/article/LBzKJPoaFAre5c0cI4ur" target="_blank" rel="noopener">https://www.infoq.cn/article/LBzKJPoaFAre5c0cI4ur</a></p>
+<h1 id="2w-字-40-张图带你参透并发编程"><a class="markdownIt-Anchor" href="#2w-字-40-张图带你参透并发编程"></a> 2w 字 + 40 张图带你参透并发编程！</h1>
+<p><a href="https://xie.infoq.cn/article/aa1587c2bb3dcc80579f63260" target="_blank" rel="noopener">https://xie.infoq.cn/article/aa1587c2bb3dcc80579f63260</a></p>
+<blockquote>
+<p>并发性是操作系统非常重要的特征，操作系统具有同时处理和调度多个程序的能力，比如多个 I/O 设备同时在输入输出；设备 I/O 和 CPU 计算同时进行；内存中同时有多个系统和用户程序被启动交替、穿插地执行。操作系统在协调和分配进程的同时，操作系统也会为不同进程分配不同的资源</p>
+</blockquote>
+<blockquote>
+<p>当多个线程访问某个类时，这个类始终都能表现出正确的行为，那么就称这个类是线程安全的。</p>
+</blockquote>
+<blockquote>
+<p>竞态条件也就好定义了，它指的就是两个或多个线程同时对一共享数据进行修改，从而影响程序运行的正确性时，这种就被称为竞态条件(race condition) ，线程切换是导致竞态条件出现的诱导因素</p>
+</blockquote>
+<blockquote>
+<p><code>volatile</code> 是一种轻量级的 <code>synchronized</code>，也就是一种轻量级的加锁方式，volatile 通过保证共享变量的可见性来从侧面对对象进行加锁。可见性的意思就是当一个线程修改一个共享变量时，另外一个线程能够 <code>看见</code> 这个修改的值。volatile 的执行成本要比 <code>synchronized</code> 低很多，因为 volatile 不会引起线程的上下文切换。</p>
+</blockquote>
+<h1 id="io"><a class="markdownIt-Anchor" href="#io"></a> IO</h1>
+<p><a href="https://xie.infoq.cn/article/95e01c862c66bf956a30daed2" target="_blank" rel="noopener">https://xie.infoq.cn/article/95e01c862c66bf956a30daed2</a></p>
+<h2 id="bio-nio-and-aio"><a class="markdownIt-Anchor" href="#bio-nio-and-aio"></a> BIO、NIO and AIO</h2>
+<ul>
+<li>BIO：同步阻塞IO</li>
+<li>NIO：同步非阻塞IO</li>
+<li>AIO：异步非阻塞IO</li>
+</ul>
+<h2 id="文件权限"><a class="markdownIt-Anchor" href="#文件权限"></a> 文件权限</h2>
+<p>每个权限位有3个bit</p>
+<ul>
+<li>r（Read）：代表该文件可以被当前用户读，操作权限的序号是 100</li>
+<li>w（Write）：代表该文件可以被当前用户写，操作权限的序号是 010</li>
+<li>x（Execute）：该文件可以被当前用户执行，操作权限的序号是 001</li>
+</ul>
+<p>Linux 下文件的操作权限分为三种用户：</p>
+<ul>
+<li>文件所有者：拥有的权限是红框中的首位上三个bit，<code>-</code>代表没有某个权限</li>
+<li>文件所在组的所有用户：拥有的权限是红框中的中间三个bit</li>
+<li>其它组的所有用户：拥有的权限是红框中的最后三个bit</li>
+</ul>
+<h1 id="gotw-91-solution-smart-pointer-parameters"><a class="markdownIt-Anchor" href="#gotw-91-solution-smart-pointer-parameters"></a> GotW #91 Solution: Smart Pointer Parameters</h1>
+<p><a href="https://herbsutter.com/2013/06/05/gotw-91-solution-smart-pointer-parameters/" target="_blank" rel="noopener">https://herbsutter.com/2013/06/05/gotw-91-solution-smart-pointer-parameters/</a></p>
+<h1 id="精准测试"><a class="markdownIt-Anchor" href="#精准测试"></a> 精准测试</h1>
+<p><a href="https://www.infoq.cn/article/xUu91CRqA4HcJz8UoMJS" target="_blank" rel="noopener">https://www.infoq.cn/article/xUu91CRqA4HcJz8UoMJS</a></p>
+<blockquote>
+<p>精准测试的概念</p>
+<p>借助一定的技术手段、通过辅助算法对传统软件测试过程进行可视化、分析及优化的过程，使得测试过程更加可视化、智能、可信和精准。</p>
+</blockquote>
+<h1 id="性能优化"><a class="markdownIt-Anchor" href="#性能优化"></a> 性能优化</h1>
+<p><a href="https://www.infoq.cn/article/bm8pD6jDPYTW3wV6D6Z6" target="_blank" rel="noopener">https://www.infoq.cn/article/bm8pD6jDPYTW3wV6D6Z6</a></p>
+<blockquote>
+<p>那么，在做性能优化时，本质上也是从“优化时间”、“优化空间”、“时空互换（用时间换空间或用空间换时间）”三个方向去思考，然后在空间、时间上不停地做取舍。</p>
+</blockquote>
+<h1 id="数据库缓存"><a class="markdownIt-Anchor" href="#数据库缓存"></a> 数据库缓存</h1>
+<ul>
+<li>oceanBase存储引擎的设计哲学和应用实践 <a href="https://zhuanlan.zhihu.com/p/78183692" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/78183692</a></li>
+<li>[玩转MySQL之四]MySQL缓存机制 <a href="https://zhuanlan.zhihu.com/p/55947158" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/55947158</a></li>
+<li>tidb 下推结果缓存  <a href="https://docs.pingcap.com/zh/tidb/stable/coprocessor-cache" target="_blank" rel="noopener">https://docs.pingcap.com/zh/tidb/stable/coprocessor-cache</a></li>
+<li>内核干货 | 数据库存储引擎如何利用好CPU缓存 <a href="https://developer.aliyun.com/article/750668?spm=a2c6h.14164896.0.0.3f1b4185PzqStT" target="_blank" rel="noopener">https://developer.aliyun.com/article/750668?spm=a2c6h.14164896.0.0.3f1b4185PzqStT</a></li>
+</ul>
+<h1 id="cpu缓存一致性"><a class="markdownIt-Anchor" href="#cpu缓存一致性"></a> CPU缓存一致性</h1>
+<p><a href="https://xie.infoq.cn/article/2b40b30085796b41752c88e61" target="_blank" rel="noopener">https://xie.infoq.cn/article/2b40b30085796b41752c88e61</a></p>
+<!-- flag of hidden posts -->
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/技术文摘/" rel="tag"># 技术文摘</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/myavatar.jpg"
+                alt="王谱越"/>
+            
+              <p class="site-author-name" itemprop="name">王谱越</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">56</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">36</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/wangpy1489" title="GitHub &rarr; https://github.com/wangpy1489" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:wangpy1489@sjtu.edu.cn" title="E-Mail &rarr; mailto:wangpy1489@sjtu.edu.cn" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.instagram.com/norton_yue/" title="Instagram &rarr; https://www.instagram.com/norton_yue/" rel="noopener" target="_blank"><i class="fa fa-fw fa-instagram"></i>Instagram</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#源码分析怎么做"><span class="nav-text"> 源码分析怎么做</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一个中心两个基本点"><span class="nav-text"> 一个中心两个基本点</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#code-review怎么做"><span class="nav-text"> Code Review怎么做</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一层检查是否是打磨过的代码"><span class="nav-text"> 第一层（检查是否是打磨过的代码）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二层宏观上"><span class="nav-text"> 第二层（宏观上）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第三层微观上"><span class="nav-text"> 第三层（微观上）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#非功能性约束之性能-性能银弹缓存"><span class="nav-text"> 非功能性约束之性能-性能银弹：缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存置换算法for-被动"><span class="nav-text"> 缓存置换算法（for 被动）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#做好分库分表其实很难"><span class="nav-text"> 做好分库分表其实很难</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#是否需要分"><span class="nav-text"> 是否需要分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分库"><span class="nav-text"> 分库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#根据业务分"><span class="nav-text"> 根据业务分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#统一业务横向分"><span class="nav-text"> 统一业务横向分</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分表"><span class="nav-text"> 分表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#代价"><span class="nav-text"> 代价</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#fluid"><span class="nav-text"> Fluid</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#深入spark"><span class="nav-text"> 深入Spark</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一内存计算的由来"><span class="nav-text"> （一）内存计算的由来</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#rdd"><span class="nav-text"> RDD</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二dag"><span class="nav-text"> （二）DAG</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2w-字-40-张图带你参透并发编程"><span class="nav-text"> 2w 字 + 40 张图带你参透并发编程！</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#io"><span class="nav-text"> IO</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#bio-nio-and-aio"><span class="nav-text"> BIO、NIO and AIO</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件权限"><span class="nav-text"> 文件权限</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#gotw-91-solution-smart-pointer-parameters"><span class="nav-text"> GotW #91 Solution: Smart Pointer Parameters</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#精准测试"><span class="nav-text"> 精准测试</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#性能优化"><span class="nav-text"> 性能优化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据库缓存"><span class="nav-text"> 数据库缓存</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cpu缓存一致性"><span class="nav-text"> CPU缓存一致性</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">  <a href="http://beian.miit.gov.cn" rel="noopener" target="_blank">蒙ICP备18004819号-1 </a>&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">王谱越</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">104k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">1:35</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.0.1</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/schemes/muse.js?v=7.0.1"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.1"></script>
+
+
+  
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      
+        background-color: #eee;
+        background-image: linear-gradient(#fcfcfc, #eee);
+        border: 1px solid #d5d5d5;
+        border-radius: 3px;
+      
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      
+        right: 4px;
+        top: 8px;
+      
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1;
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function(i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap');
+      $(e).after($wrap);
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function(e) {
+        var code = $(this).parent().find('.code').find('.line').map(function(i, e) {
+          return $(e).text();
+        }).toArray().join('\n');
+        var ta = document.createElement('textarea');
+        var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+        ta.style.top = yPosition + 'px'; // Prevent page scroll
+        ta.style.position = 'absolute';
+        ta.style.opacity = '0';
+        ta.readOnly = true;
+        ta.value = code;
+        document.body.appendChild(ta);
+        ta.select();
+        ta.setSelectionRange(0, code.length);
+        ta.readOnly = false;
+        var result = document.execCommand('copy');
+        
+        ta.blur(); // For iOS
+        $(this).blur();
+      })).on('mouseleave', function(e) {
+        var $b = $(this).find('.copy-btn');
+        setTimeout(function() {
+          $b.text('复制');
+        }, 300);
+      }).append(e);
+    })
+  </script>
+
+
+</body>
+</html>

@@ -1,0 +1,1737 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2"/>
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1"/>
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/dog_128.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/dog_32.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/dog_16.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/dog.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="本文旨在帮助同学们理解测试的目的以及如何写一个好的测试。力图给一些实用的参考建议，而不求内容的全面性。 在本文中，我们会以一个简单的上传、下载文件的服务来作为例子。在这个例子中：  有一个http协议层，使得用户可以通过http协议进行上传（put）、下载（get）、删除（delete）、枚举（list） 有一个存储引擎层（storage_engine），可以把文件放在本地内存、本地磁盘或是HDF">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何测试【转】">
+<meta property="og:url" content="http://yoursite.com/2022/01/11/计算机/软件工程方法论/软件测试/如何测试【转】/index.html">
+<meta property="og:site_name" content="Norton&#39;s Blog">
+<meta property="og:description" content="本文旨在帮助同学们理解测试的目的以及如何写一个好的测试。力图给一些实用的参考建议，而不求内容的全面性。 在本文中，我们会以一个简单的上传、下载文件的服务来作为例子。在这个例子中：  有一个http协议层，使得用户可以通过http协议进行上传（put）、下载（get）、删除（delete）、枚举（list） 有一个存储引擎层（storage_engine），可以把文件放在本地内存、本地磁盘或是HDF">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2022-01-11T08:40:09.034Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="如何测试【转】">
+<meta name="twitter:description" content="本文旨在帮助同学们理解测试的目的以及如何写一个好的测试。力图给一些实用的参考建议，而不求内容的全面性。 在本文中，我们会以一个简单的上传、下载文件的服务来作为例子。在这个例子中：  有一个http协议层，使得用户可以通过http协议进行上传（put）、下载（get）、删除（delete）、枚举（list） 有一个存储引擎层（storage_engine），可以把文件放在本地内存、本地磁盘或是HDF">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Norton's Blog" type="application/atom+xml"/>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2022/01/11/计算机/软件工程方法论/软件测试/如何测试【转】/"/>
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>如何测试【转】 | Norton's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Norton's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">You miss 100% of the shot you do not take.</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br/>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br/>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br/>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br/>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br/>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-digest">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/文摘" rel="section"><i class="menu-item-icon fa fa-fw fa-newspaper-o"></i> <br/>技术文摘</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br/>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/01/11/计算机/软件工程方法论/软件测试/如何测试【转】/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王谱越"/>
+      <meta itemprop="description" content=""/>
+      <meta itemprop="image" content="/images/myavatar.jpg"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Norton's Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">如何测试【转】
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2022-01-11 15:58:00 / 修改时间：16:40:09" itemprop="dateCreated datePublished" datetime="2022-01-11T15:58:00+08:00">2022-01-11</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">5.1k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">5 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本文旨在帮助同学们理解测试的目的以及如何写一个好的测试。力图给一些实用的参考建议，而不求内容的全面性。</p>
+<p>在本文中，我们会以一个简单的上传、下载文件的服务来作为例子。在这个例子中：</p>
+<ul>
+<li>有一个http协议层，使得用户可以通过http协议进行上传（put）、下载（get）、删除（delete）、枚举（list）</li>
+<li>有一个存储引擎层（storage_engine），可以把文件放在本地内存、本地磁盘或是HDFS上等等。</li>
+</ul>
+<h1 id="一些精选的资料"><a class="markdownIt-Anchor" href="#一些精选的资料"></a> 一些精选的资料</h1>
+<p>这些资料都是非常好的，建议每个人都阅读至少一遍</p>
+<ul>
+<li><a href="https://sqlite.org/testing.html" target="_blank" rel="noopener">How SQLite is Tested</a></li>
+<li><a href="https://asatarin.github.io/testing-distributed-systems/#scylladb" target="_blank" rel="noopener">ScyllaDB如何做测试</a></li>
+</ul>
+<h1 id="如何开展测试"><a class="markdownIt-Anchor" href="#如何开展测试"></a> 如何开展测试？</h1>
+<p>在我们写代码的时候，或者对他人代码进行测试的时候，我们应该怎么开展一个测试工作？这里给出一些建议：</p>
+<h2 id="设计阶段"><a class="markdownIt-Anchor" href="#设计阶段"></a> 设计阶段</h2>
+<h3 id="工作内容"><a class="markdownIt-Anchor" href="#工作内容"></a> 工作内容</h3>
+<p>给出测试计划，需要包括：</p>
+<ul>
+<li>功能测试：这些测试定义了该项工作的各个功能点</li>
+<li>专项测试：该项工作中一些大的风险点，复杂点可能需要专门的测试</li>
+</ul>
+<h3 id="说明"><a class="markdownIt-Anchor" href="#说明"></a> 说明</h3>
+<p>测试计划的目的在于</p>
+<ul>
+<li>促使你能够系统的、TopDown的思考问题</li>
+<li>促使你关注该项任务的最初目标、核心风险</li>
+<li>帮助你清晰的定义产品功能</li>
+</ul>
+<p>一些Tips：</p>
+<ul>
+<li>测试计划中大多数用例不需要详细的描述</li>
+</ul>
+<h3 id="举例"><a class="markdownIt-Anchor" href="#举例"></a> 举例</h3>
+<ul>
+<li>功能测试
+<ul>
+<li>能够正确的上传、下载、删除、枚举</li>
+<li>能够正确的处理并发请求</li>
+<li>能够处理超大文件（&gt;5GB）</li>
+</ul>
+</li>
+<li>专项测试
+<ul>
+<li>性能测试</li>
+<li>错误注入测试</li>
+</ul>
+</li>
+</ul>
+<h2 id="编码阶段"><a class="markdownIt-Anchor" href="#编码阶段"></a> 编码阶段</h2>
+<h3 id="工作内容-2"><a class="markdownIt-Anchor" href="#工作内容-2"></a> 工作内容</h3>
+<ul>
+<li>及时记录感受到的复杂点、风险点，并转化为测试用例</li>
+</ul>
+<h3 id="说明-2"><a class="markdownIt-Anchor" href="#说明-2"></a> 说明</h3>
+<p>在编码过程中，常常会发现此前没有考虑到的一些细节和风险，这些都要转化为测试用例</p>
+<h3 id="举例-2"><a class="markdownIt-Anchor" href="#举例-2"></a> 举例</h3>
+<ul>
+<li>正在下载中的文件，即使被删除了，也能继续下载</li>
+</ul>
+<h2 id="验收阶段"><a class="markdownIt-Anchor" href="#验收阶段"></a> 验收阶段</h2>
+<h3 id="工作内容-3"><a class="markdownIt-Anchor" href="#工作内容-3"></a> 工作内容</h3>
+<ul>
+<li>交叉测试</li>
+</ul>
+<h3 id="说明-3"><a class="markdownIt-Anchor" href="#说明-3"></a> 说明</h3>
+<p>交叉测试的好处非常多（多一个人理解系统，多一个小黄鸭），建议大家经常性使用这一招。</p>
+<h3 id="举例-3"><a class="markdownIt-Anchor" href="#举例-3"></a> 举例</h3>
+<ul>
+<li>有些工作一定要另外一个同学进行“交叉测试”, 一些参考
+<ul>
+<li>复杂的逻辑，如分布式系统中数据均衡</li>
+<li>高风险的工作，如数据的删除、落盘格式的改变</li>
+<li>对外接口，如本文示例中的HTTP API</li>
+</ul>
+</li>
+</ul>
+<h2 id="全过程"><a class="markdownIt-Anchor" href="#全过程"></a> 全过程</h2>
+<ul>
+<li>回归测试</li>
+</ul>
+<p>在我们开发、测试、灰度过程中，遇到的任何一个Bug，都要变成一个回归测试。</p>
+<h1 id="如何写一个好的单元测试"><a class="markdownIt-Anchor" href="#如何写一个好的单元测试"></a> 如何写一个好的单元测试？</h1>
+<h2 id="rule-1尽可能写业务层面的测试"><a class="markdownIt-Anchor" href="#rule-1尽可能写业务层面的测试"></a> Rule 1：尽可能写业务层面的测试</h2>
+<p>即使是做单元测试，也要尽可能的写业务层面的测试，或者说是端到端的测试；如无必要，少些针对某个特定函数、特定逻辑层的测试。下面是一些例子：</p>
+<h3 id="case1-验证用户上传的文件名的合法性"><a class="markdownIt-Anchor" href="#case1-验证用户上传的文件名的合法性"></a> Case1 验证用户上传的文件名的合法性</h3>
+<h4 id="不好的做法"><a class="markdownIt-Anchor" href="#不好的做法"></a> 不好的做法</h4>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//对各种不同的输入file：</span></span><br><span class="line"></span><br><span class="line"> assert InvalidFileName == CheckFileName(file)</span><br></pre></td></tr></table></figure>
+<p>这个测试的缺点是，只测试了一个很专门的函数，可能的问题：</p>
+<ul>
+<li>有的地方的可能是调CheckSpecialFileName，并没有调用CheckFileName</li>
+<li>后来代码变更了，根本没有再调用CheckFileName</li>
+</ul>
+<h4 id="好的做法"><a class="markdownIt-Anchor" href="#好的做法"></a> 好的做法</h4>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//对各种不同的输入file：</span></span><br><span class="line"></span><br><span class="line"> assert  InvalidFileName = http.put(file)</span><br></pre></td></tr></table></figure>
+<p>注意这里的http.put在key不出错时，涵盖了协议层、存储层。</p>
+<h3 id="case2-验证listfile输出的文件列表是有序的"><a class="markdownIt-Anchor" href="#case2-验证listfile输出的文件列表是有序的"></a> Case2 验证ListFile输出的文件列表是有序的</h3>
+<h4 id="不好的做法-2"><a class="markdownIt-Anchor" href="#不好的做法-2"></a> 不好的做法</h4>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//仅在存储引擎层测试、验证：</span></span><br><span class="line"></span><br><span class="line"> assert sorted storage_engine.<span class="built_in">list</span>(<span class="string">"/"</span>)</span><br></pre></td></tr></table></figure>
+<p>这个测试的缺点是：</p>
+<ul>
+<li>存储层可能做正确了，协议层可能有Bug</li>
+</ul>
+<p>千万不要因为，协议层是非常薄的一层，就可以跳过这一层只测试存储引擎层。</p>
+<h4 id="好的做法-2"><a class="markdownIt-Anchor" href="#好的做法-2"></a> 好的做法</h4>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//在协议层就开始测试、验证：</span></span><br><span class="line"> assert sorted http.<span class="built_in">list</span>(<span class="string">"/"</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="总结"><a class="markdownIt-Anchor" href="#总结"></a> 总结</h3>
+<p>相比对某个专门函数、类或是某个特定逻辑层的测试有如下缺点：</p>
+<ul>
+<li>代码经常会发生重构，而重构会使得这类测试被作废了，或要做很大的改动</li>
+<li>只测试了某个组件，而没有测试到整合起来的效果</li>
+</ul>
+<h2 id="rule-2验证环节要多方验证不仅要验证最终结果还要验证内部状态"><a class="markdownIt-Anchor" href="#rule-2验证环节要多方验证不仅要验证最终结果还要验证内部状态"></a> Rule 2：验证环节要多方验证，不仅要验证最终结果，还要验证内部状态</h2>
+<h3 id="case1-验证能够正确的上传文件"><a class="markdownIt-Anchor" href="#case1-验证能够正确的上传文件"></a> Case1 验证能够正确的上传文件</h3>
+<h4 id="不好的做法-3"><a class="markdownIt-Anchor" href="#不好的做法-3"></a> 不好的做法</h4>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//验证能够正确的上传文件</span></span><br><span class="line"></span><br><span class="line"> assert Ok == http.put(file)</span><br></pre></td></tr></table></figure>
+<p>缺点：</p>
+<ul>
+<li>只验证了返回值是Ok，没有验证任何其他细节</li>
+</ul>
+<h4 id="好的做法-3"><a class="markdownIt-Anchor" href="#好的做法-3"></a> 好的做法</h4>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">assert Ok == http.put(file)</span><br><span class="line"></span><br><span class="line">assert http.get(file) == uploaded_content</span><br><span class="line"></span><br><span class="line">assert file in http.<span class="built_in">list</span>(<span class="string">"/"</span>)</span><br></pre></td></tr></table></figure>
+<p>优点：</p>
+<ul>
+<li>不仅仅验证了返回值，还验证了内容是否一致，枚举是否正确。</li>
+</ul>
+<h2 id="rule-3不仅要验证代码做了什么还要验证代码不应该做什么"><a class="markdownIt-Anchor" href="#rule-3不仅要验证代码做了什么还要验证代码不应该做什么"></a> Rule 3：不仅要验证代码做了什么，还要验证代码不应该做什么</h2>
+<h3 id="case1-验证能够正确的删除文件"><a class="markdownIt-Anchor" href="#case1-验证能够正确的删除文件"></a> Case1 验证能够正确的删除文件</h3>
+<h4 id="不好的做法-4"><a class="markdownIt-Anchor" href="#不好的做法-4"></a> 不好的做法</h4>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">assert Ok == http.put(file)</span><br><span class="line"></span><br><span class="line">assert Ok == http.<span class="keyword">delete</span>(file)</span><br><span class="line"></span><br><span class="line">assert NotFound == http.get(file)</span><br></pre></td></tr></table></figure>
+<p>缺点：</p>
+<ul>
+<li>只验证的目标文件被删除了</li>
+</ul>
+<h4 id="好的做法-4"><a class="markdownIt-Anchor" href="#好的做法-4"></a> 好的做法</h4>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">assert Ok = http.put([file1, file2])</span><br><span class="line"></span><br><span class="line">assert Ok = http.<span class="keyword">delete</span>(file1)</span><br><span class="line"></span><br><span class="line">assert NotFound == http.get(file1)</span><br><span class="line"></span><br><span class="line">assert Ok = http.get(file2)</span><br></pre></td></tr></table></figure>
+<p>优点：</p>
+<ul>
+<li>还验证了没有删除不该被删除的文件</li>
+</ul>
+<h3 id="总结-2"><a class="markdownIt-Anchor" href="#总结-2"></a> 总结</h3>
+<p>上面这个例子可能没有那么强的说服力，我这里给一个稍微复杂一点的例子：</p>
+<ul>
+<li>假设我们的删除只是“标记删除”，真正删除数据是由后台一个垃圾回收的机制进行的</li>
+<li>那么，我们就非常有必要在测试里面验证2个方面
+<ul>
+<li>被标记删除了的文件，一定会被垃圾回收掉</li>
+<li>没有被标记删除的文件，一定不能被垃圾回收掉</li>
+</ul>
+</li>
+</ul>
+<h4 id="rule-4测试代码是一等公民需要充分的注释和抽象避免拷贝-粘贴代码"><a class="markdownIt-Anchor" href="#rule-4测试代码是一等公民需要充分的注释和抽象避免拷贝-粘贴代码"></a> Rule 4：测试代码是一等公民：需要充分的注释和抽象，避免拷贝、粘贴代码</h4>
+<p>测试代码通常被认为是二等公民，表现在：</p>
+<ul>
+<li>大部分Review代码的人并不会去认真Review测试用例</li>
+<li>测试代码通常是繁琐、冗长的</li>
+<li>测试代码本身是没有测试的</li>
+</ul>
+<p>而实际上，我们要认识到，测试代码是我们最重要的资产，重要程度超过代码本身。所以我们需要：</p>
+<ul>
+<li>每个测试用例都要给出注释，说明，我要测试什么，我要验证什么，我是如何测试的</li>
+<li>一些通用的部分，一定要抽象出来，避免拷贝粘贴</li>
+</ul>
+<h3 id="case"><a class="markdownIt-Anchor" href="#case"></a> Case</h3>
+<h4 id="不好的"><a class="markdownIt-Anchor" href="#不好的"></a> 不好的</h4>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">test_get_1() &#123; </span><br><span class="line"></span><br><span class="line"> assert Ok http.put(<span class="string">"logo.jpg"</span>) </span><br><span class="line"></span><br><span class="line"> assert http.get(<span class="string">"logo.jpg"</span>) == content(<span class="string">"logo.jpg"</span>) </span><br><span class="line"></span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">test_get_2() &#123; </span><br><span class="line"></span><br><span class="line"> assert Ok http.put(<span class="string">"蝙蝠侠.jpg"</span>) </span><br><span class="line"></span><br><span class="line"> assert http.get(<span class="string">"蝙蝠侠.jpg"</span>) == content(<span class="string">"蝙蝠侠.jpg"</span>) </span><br><span class="line"></span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">test_get_3() &#123; </span><br><span class="line"></span><br><span class="line"> assert Ok http.put(<span class="string">"batman.mp4"</span>) </span><br><span class="line"></span><br><span class="line"> inject_io_error() </span><br><span class="line"></span><br><span class="line"> assert IoError == http.get(<span class="string">"batman.mp4"</span>) </span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>一些问题：</p>
+<ul>
+<li>没有任何注释说明测试的意图、测试的步骤</li>
+<li>测试用例名没有提供额外的信息，不便于讨论、引用</li>
+</ul>
+<h4 id="好的"><a class="markdownIt-Anchor" href="#好的"></a> 好的</h4>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 测试基本的 put/get 逻辑，验证get到的内容和put的一样 </span></span><br><span class="line"></span><br><span class="line">test_get_basic() &#123; </span><br><span class="line"></span><br><span class="line"> <span class="comment">// ... </span></span><br><span class="line"></span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="comment">// 测试中文名，验证能够put/get中文文件 </span></span><br><span class="line"></span><br><span class="line">test_get_chinese_filename() &#123; </span><br><span class="line"></span><br><span class="line"> <span class="comment">//... </span></span><br><span class="line"></span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="comment">// 测试存储层发生IO错误时，返回错误给客户端。 </span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 测试步骤为 </span></span><br><span class="line"></span><br><span class="line"><span class="comment">//  step 1：上传一个文件 </span></span><br><span class="line"></span><br><span class="line"><span class="comment">//  step 2: 注入 IO 错误 </span></span><br><span class="line"></span><br><span class="line"><span class="comment">//  step 3: 验证 get 返回 IO Error </span></span><br><span class="line"></span><br><span class="line">test_get_with_io_error() &#123; </span><br><span class="line"></span><br><span class="line"><span class="comment">// ... </span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="case-2"><a class="markdownIt-Anchor" href="#case-2"></a> Case</h3>
+<h4 id="不好的-2"><a class="markdownIt-Anchor" href="#不好的-2"></a> 不好的</h4>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">test_list_empty() &#123; </span><br><span class="line"></span><br><span class="line"> assert [] == http.<span class="built_in">list</span>(<span class="string">"/"</span>) </span><br><span class="line"></span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">test_list_one() &#123; </span><br><span class="line"></span><br><span class="line"> assert Ok == http.put(<span class="string">"a.txt"</span>) </span><br><span class="line"></span><br><span class="line"> assert [<span class="string">"a.txt"</span>] == http.<span class="built_in">list</span>(<span class="string">"/"</span>) </span><br><span class="line"></span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">test_list_two() &#123; </span><br><span class="line"></span><br><span class="line"> assert Ok == http.put(<span class="string">"a.txt"</span>) </span><br><span class="line"></span><br><span class="line"> assert Ok == http.put(<span class="string">"b.txt"</span>) </span><br><span class="line"></span><br><span class="line"> assert [<span class="string">"a.txt"</span>, <span class="string">"b.txt"</span>] == http.<span class="built_in">list</span>(<span class="string">"/"</span>) </span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>问题：</p>
+<ul>
+<li>没有足够的抽象（当然，这个例子比较简单，并不需要额外抽象，只是给大家一个具体的例子为主）</li>
+</ul>
+<h4 id="好的-2"><a class="markdownIt-Anchor" href="#好的-2"></a> 好的</h4>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 帮助函数 </span></span><br><span class="line"></span><br><span class="line">__test_list_order(input_files) &#123; </span><br><span class="line"></span><br><span class="line"> <span class="keyword">for</span> file in input_files &#123; </span><br><span class="line"></span><br><span class="line"> assert Ok == http.put(file) </span><br><span class="line"></span><br><span class="line"> &#125; </span><br><span class="line"></span><br><span class="line"> assert sort(input_files) == http.<span class="built_in">list</span>(<span class="string">"/"</span>) </span><br><span class="line"></span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">test_list_empty() &#123; </span><br><span class="line"></span><br><span class="line"> __test_list_order([]) </span><br><span class="line"></span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">test_list_one() &#123; </span><br><span class="line"></span><br><span class="line"> __test_list_order([<span class="string">"a.txt"</span>]) </span><br><span class="line"></span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">test_list_two() &#123; </span><br><span class="line"></span><br><span class="line"> __test_list_order([<span class="string">"a.txt"</span>, <span class="string">"b.txt"</span>]) </span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="关于随机性"><a class="markdownIt-Anchor" href="#关于随机性"></a> 关于随机性</h1>
+<p>一些Tips：</p>
+<ol>
+<li>大部分的测试用例是不需要注入随机性的。因为大部分情况下，我们需要的是确定性的测试用例。</li>
+<li>对于一次测试任务，我们可以给出1到2个随机性测试用例。类似于fuzzing test的。</li>
+<li>随机故障测试是非常强大的工具，如端到端的随机I/O出错、随机Kill测试。</li>
+<li>对于输入是一个列表、集合的用例，一定要注意随机性</li>
+</ol>
+<p>对于第4点，一个简化例子是：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 不好的测试 </span></span><br><span class="line"></span><br><span class="line">assert Ok == http.put(<span class="string">"a.txt"</span>) </span><br><span class="line"></span><br><span class="line">assert Ok == http.put(<span class="string">"b.txt"</span>) </span><br><span class="line"></span><br><span class="line">assert Ok == http.put(<span class="string">"c.txt"</span>) </span><br><span class="line"></span><br><span class="line"><span class="comment">// 验证 http.list("/") 出来的结果是有序的 </span></span><br><span class="line"></span><br><span class="line">assert [<span class="string">"a.txt"</span>, <span class="string">"b.txt"</span>, <span class="string">"c.txt"</span>] == http.<span class="built_in">list</span>(<span class="string">"/"</span>)</span><br></pre></td></tr></table></figure>
+<p>万一内部的实现是按插入顺序排序的，这个测试就无法发现问题。</p>
+<p>Indexlib早期代码就犯过类似的问题，联调的时候发现数据被误删除了。</p>
+<h1 id="如何review测试"><a class="markdownIt-Anchor" href="#如何review测试"></a> 如何Review测试？</h1>
+<p>测试代码通常是枯燥无味的，大部分reviewer都很难对测试代码提起兴趣。结果就是，测试代码得不到充分的Review，经常出现测试不充分，或者测试代码压根就没有测到点子上。</p>
+<p>这里列一些Tips来帮助我们Review测试代码：</p>
+<ul>
+<li><strong>比对测试计划</strong>：Reviewer根据设计文档、功能需求，自己先列一个测试计划，然后和被测试代码的测试计划进行比对</li>
+<li><strong>关注测试代码的可读性</strong>：是不是有足够的注释说明测试的目的、测试的步骤、验证的手段？是不是有足够的抽象，避免了重复的代码，关注的是测试逻辑，而不是测试的实现？</li>
+<li><strong>重点阅读一些核心用例</strong>：至少要深入的、仔细的阅读几个核心用例，看看测试人员的测试方法、测试代码是否正确。</li>
+<li><strong>关注测试真实性</strong>：
+<ul>
+<li>一个测试有多少是Mock的东西？Mock的东西越多，测试的真实性、有效性就越低。</li>
+<li>UT的真实性不如E2E。</li>
+</ul>
+</li>
+<li>Review代码时，<strong>收集代码中的复杂点、风险点</strong>，确认这些地方被测试覆盖了。</li>
+</ul>
+<!-- flag of hidden posts -->
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/myavatar.jpg"
+                alt="王谱越"/>
+            
+              <p class="site-author-name" itemprop="name">王谱越</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">56</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">36</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/wangpy1489" title="GitHub &rarr; https://github.com/wangpy1489" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:wangpy1489@sjtu.edu.cn" title="E-Mail &rarr; mailto:wangpy1489@sjtu.edu.cn" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.instagram.com/norton_yue/" title="Instagram &rarr; https://www.instagram.com/norton_yue/" rel="noopener" target="_blank"><i class="fa fa-fw fa-instagram"></i>Instagram</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一些精选的资料"><span class="nav-text"> 一些精选的资料</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如何开展测试"><span class="nav-text"> 如何开展测试？</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#设计阶段"><span class="nav-text"> 设计阶段</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#工作内容"><span class="nav-text"> 工作内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#说明"><span class="nav-text"> 说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#举例"><span class="nav-text"> 举例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编码阶段"><span class="nav-text"> 编码阶段</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#工作内容-2"><span class="nav-text"> 工作内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#说明-2"><span class="nav-text"> 说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#举例-2"><span class="nav-text"> 举例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#验收阶段"><span class="nav-text"> 验收阶段</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#工作内容-3"><span class="nav-text"> 工作内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#说明-3"><span class="nav-text"> 说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#举例-3"><span class="nav-text"> 举例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#全过程"><span class="nav-text"> 全过程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如何写一个好的单元测试"><span class="nav-text"> 如何写一个好的单元测试？</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#rule-1尽可能写业务层面的测试"><span class="nav-text"> Rule 1：尽可能写业务层面的测试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#case1-验证用户上传的文件名的合法性"><span class="nav-text"> Case1 验证用户上传的文件名的合法性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#不好的做法"><span class="nav-text"> 不好的做法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#好的做法"><span class="nav-text"> 好的做法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#case2-验证listfile输出的文件列表是有序的"><span class="nav-text"> Case2 验证ListFile输出的文件列表是有序的</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#不好的做法-2"><span class="nav-text"> 不好的做法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#好的做法-2"><span class="nav-text"> 好的做法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-text"> 总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rule-2验证环节要多方验证不仅要验证最终结果还要验证内部状态"><span class="nav-text"> Rule 2：验证环节要多方验证，不仅要验证最终结果，还要验证内部状态</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#case1-验证能够正确的上传文件"><span class="nav-text"> Case1 验证能够正确的上传文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#不好的做法-3"><span class="nav-text"> 不好的做法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#好的做法-3"><span class="nav-text"> 好的做法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#rule-3不仅要验证代码做了什么还要验证代码不应该做什么"><span class="nav-text"> Rule 3：不仅要验证代码做了什么，还要验证代码不应该做什么</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#case1-验证能够正确的删除文件"><span class="nav-text"> Case1 验证能够正确的删除文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#不好的做法-4"><span class="nav-text"> 不好的做法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#好的做法-4"><span class="nav-text"> 好的做法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结-2"><span class="nav-text"> 总结</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#rule-4测试代码是一等公民需要充分的注释和抽象避免拷贝-粘贴代码"><span class="nav-text"> Rule 4：测试代码是一等公民：需要充分的注释和抽象，避免拷贝、粘贴代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#case"><span class="nav-text"> Case</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#不好的"><span class="nav-text"> 不好的</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#好的"><span class="nav-text"> 好的</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#case-2"><span class="nav-text"> Case</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#不好的-2"><span class="nav-text"> 不好的</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#好的-2"><span class="nav-text"> 好的</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#关于随机性"><span class="nav-text"> 关于随机性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如何review测试"><span class="nav-text"> 如何Review测试？</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">  <a href="http://beian.miit.gov.cn" rel="noopener" target="_blank">蒙ICP备18004819号-1 </a>&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">王谱越</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">104k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">1:35</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.0.1</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/schemes/muse.js?v=7.0.1"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.1"></script>
+
+
+  
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      
+        background-color: #eee;
+        background-image: linear-gradient(#fcfcfc, #eee);
+        border: 1px solid #d5d5d5;
+        border-radius: 3px;
+      
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      
+        right: 4px;
+        top: 8px;
+      
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1;
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function(i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap');
+      $(e).after($wrap);
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function(e) {
+        var code = $(this).parent().find('.code').find('.line').map(function(i, e) {
+          return $(e).text();
+        }).toArray().join('\n');
+        var ta = document.createElement('textarea');
+        var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+        ta.style.top = yPosition + 'px'; // Prevent page scroll
+        ta.style.position = 'absolute';
+        ta.style.opacity = '0';
+        ta.readOnly = true;
+        ta.value = code;
+        document.body.appendChild(ta);
+        ta.select();
+        ta.setSelectionRange(0, code.length);
+        ta.readOnly = false;
+        var result = document.execCommand('copy');
+        
+        ta.blur(); // For iOS
+        $(this).blur();
+      })).on('mouseleave', function(e) {
+        var $b = $(this).find('.copy-btn');
+        setTimeout(function() {
+          $b.text('复制');
+        }, 300);
+      }).append(e);
+    })
+  </script>
+
+
+</body>
+</html>

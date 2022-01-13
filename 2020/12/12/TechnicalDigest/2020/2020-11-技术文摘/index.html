@@ -1,0 +1,1769 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2"/>
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1"/>
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/dog_128.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/dog_32.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/dog_16.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/dog.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Big List Of 20 Common Bottlenecks http://highscalability.com/blog/2012/5/16/big-list-of-20-common-bottlenecks.html  数据库    Working size超过可用内存  Working Size怎么理解？肯定不是指数据库的大小，应该是在保证业务指标——响应时间、QPS的情况下，数据">
+<meta name="keywords" content="技术文摘">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2020-11-技术文摘">
+<meta property="og:url" content="http://yoursite.com/2020/12/12/TechnicalDigest/2020/2020-11-技术文摘/index.html">
+<meta property="og:site_name" content="Norton&#39;s Blog">
+<meta property="og:description" content="Big List Of 20 Common Bottlenecks http://highscalability.com/blog/2012/5/16/big-list-of-20-common-bottlenecks.html  数据库    Working size超过可用内存  Working Size怎么理解？肯定不是指数据库的大小，应该是在保证业务指标——响应时间、QPS的情况下，数据">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2021-12-31T06:38:47.818Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2020-11-技术文摘">
+<meta name="twitter:description" content="Big List Of 20 Common Bottlenecks http://highscalability.com/blog/2012/5/16/big-list-of-20-common-bottlenecks.html  数据库    Working size超过可用内存  Working Size怎么理解？肯定不是指数据库的大小，应该是在保证业务指标——响应时间、QPS的情况下，数据">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Norton's Blog" type="application/atom+xml"/>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/12/12/TechnicalDigest/2020/2020-11-技术文摘/"/>
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>2020-11-技术文摘 | Norton's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Norton's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">You miss 100% of the shot you do not take.</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br/>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br/>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br/>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br/>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br/>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-digest">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/文摘" rel="section"><i class="menu-item-icon fa fa-fw fa-newspaper-o"></i> <br/>技术文摘</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br/>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/12/12/TechnicalDigest/2020/2020-11-技术文摘/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王谱越"/>
+      <meta itemprop="description" content=""/>
+      <meta itemprop="image" content="/images/myavatar.jpg"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Norton's Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">2020-11-技术文摘
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-12-12 22:32:53" itemprop="dateCreated datePublished" datetime="2020-12-12T22:32:53+08:00">2020-12-12</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2021-12-31 14:38:47" itemprop="dateModified" datetime="2021-12-31T14:38:47+08:00">2021-12-31</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/文摘/" itemprop="url" rel="index"><span itemprop="name">文摘</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">4.5k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">4 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="big-list-of-20-common-bottlenecks"><a class="markdownIt-Anchor" href="#big-list-of-20-common-bottlenecks"></a> Big List Of 20 Common Bottlenecks</h1>
+<p><a href="http://highscalability.com/blog/2012/5/16/big-list-of-20-common-bottlenecks.html" target="_blank" rel="noopener">http://highscalability.com/blog/2012/5/16/big-list-of-20-common-bottlenecks.html</a></p>
+<ol>
+<li>数据库</li>
+</ol>
+<ul>
+<li>
+<p>Working size超过可用内存</p>
+<ul>
+<li>Working Size怎么理解？肯定不是指数据库的大小，应该是在保证业务指标——响应时间、QPS的情况下，数据库使用的内存大小。其超过可用内存后的直接影响就是系统开始使用“swap”，从而大大降低DB的性能。所以，DB服务器要有充足的内存。</li>
+</ul>
+</li>
+<li>
+<p>长查询和短查询</p>
+<ul>
+<li>指运行时间很长和很短的查询。运行时间很长的查询，要是么很消耗内存、CPU，比如联合查询，要么是很消耗磁盘I/O，比如没有用到索引的“遍历”——这应该算是“事故”。长查询对“DB性能”的影响是显而易见的。</li>
+<li>短查询，我可能理解有误，咨询了我们的DBA，认为大概是“短连接”的意思。DB的连接，也是消耗资源的，大约每个2M内存的样子，所以，Java使用“连接池”来避免频繁连接数据库。当短连接并发过多的时候，建议改用“长连接”来避免不必要的开销，提代高性能。</li>
+</ul>
+</li>
+<li>
+<p>写冲突（需要用锁的场景）</p>
+<ul>
+<li>写冲突的场景，通常会遇到“锁”，如MyISA的“表锁”，与InnoDB的“行锁”，当遇上“锁”时，只能有一个“用户”在写，其他用户均需要等待。当有大量的冲突时，用户需要等待的时间就越长，“锁”机制会导致CPU的有效利用率大大下降——花在“获取锁”上的CPU时间变多，从而导致DB可用的有效CPU时间变少，性能下降。</li>
+</ul>
+</li>
+<li>
+<p>大量的Join操作消耗内存</p>
+<ul>
+<li>Join操作本身比较消耗内存和CPU，尽可能不用或少用。</li>
+</ul>
+</li>
+</ul>
+<ol start="2">
+<li>虚拟化</li>
+</ol>
+<ul>
+<li>
+<p>共享磁盘，磁盘随机读严重</p>
+<ul>
+<li>虚拟化场景，使用共享磁盘（HDD），磁盘会成为瓶颈。磁盘差不多是计算机上最慢的设备了。随机I/O能力极差。</li>
+</ul>
+</li>
+<li>
+<p>网络I/O波动</p>
+<ul>
+<li>因为虚拟化场景同一台物理机上的多个VM之间的网络是共享的，会互相影响。</li>
+</ul>
+</li>
+</ul>
+<ol start="3">
+<li>程序</li>
+</ol>
+<ul>
+<li>线程：死锁，与“事件驱动型”（方案）相比过重，debug，非线性扩展，等等</li>
+<li>事件驱动编程：回调的复杂度，如何保存函数状态，等等</li>
+<li>缺乏“profiling”、跟踪、日志机制。</li>
+<li>耦合严重，单独故障，不可水平扩展，等等</li>
+<li>有状态的应用（不易水平扩展）</li>
+<li>糟糕的设计：开发都开发了一个程序，在自己的电脑上运行良好；到了生产环境，对于两三个用户，也运行良好。等到数月、数年过后，用户量上来以后，程序不能运行了，需要重构、重写。</li>
+<li>算法复杂性</li>
+<li>依赖其他服务，比如DNS查询以及其它，你可会被阻塞。</li>
+<li>栈空间</li>
+</ul>
+<ol start="4">
+<li>磁盘</li>
+</ol>
+<ul>
+<li>本地磁盘访问</li>
+<li>随机磁盘I/O（引发大量磁盘寻道）</li>
+<li>磁盘碎片（增加寻道机会和时间）</li>
+<li>当写入数据量超过SSD空间量以后，SSD性能的下降</li>
+</ul>
+<ol start="5">
+<li>操作系统</li>
+</ol>
+<ul>
+<li>Fsync flushing, linux buffer cache filling up</li>
+<li>TCP Buffer过小</li>
+<li>文件句柄限制</li>
+<li>功率分配（CPU节能？）</li>
+</ul>
+<ol start="6">
+<li>缓存</li>
+</ol>
+<ul>
+<li>不使用Memcached(数据库前端)</li>
+<li>HTTP：headers,etags，不压缩，等等</li>
+<li>不充分利用浏览器的缓存</li>
+<li>字节码缓存（比如PHP的APC）</li>
+<li>处理器的L1/L2缓存：这是一个重要的“瓶颈”。保持重要的热数据在L1/L2缓存中。这个关系到方方面面太广，</li>
+</ul>
+<ol start="7">
+<li>处理器</li>
+</ol>
+<ul>
+<li>CPU超载</li>
+<li>上下文切换-&gt;一个核上太多线程，这可能是因为“坏运气”或者是Linux调度器；太多系统调用，等等</li>
+<li>I/O等待-&gt;所有CPU以相同的速度在等待（同时等待）</li>
+<li>CPU缓存：未完……</li>
+<li>主板能力（其它限制CPU性能的因素）</li>
+</ul>
+<ol start="8">
+<li>网络</li>
+</ol>
+<ul>
+<li>网卡最大带宽，IRQ饱和，软中断用光CPU资源</li>
+<li>DNS查询</li>
+<li>丢包</li>
+<li>意外路由</li>
+<li>网络磁盘访问（比如NFS, drbd）</li>
+<li>共享SANs</li>
+<li>服务故障-&gt;服务不响应</li>
+</ul>
+<ol start="9">
+<li>进程</li>
+</ol>
+<ul>
+<li>测试时间</li>
+<li>程序调试时间</li>
+<li>团队大小</li>
+<li>预算</li>
+<li>代码“欠债”</li>
+</ul>
+<ol start="10">
+<li>内存</li>
+</ol>
+<ul>
+<li>
+<p>OOM-&gt;杀进程，使用交换甚至导致死机</p>
+</li>
+<li>
+<p>OOM导致磁盘超负荷（因为swap）</p>
+</li>
+<li>
+<p>内存管理库极限</p>
+</li>
+<li>
+<p>内存碎片</p>
+<ul>
+<li>Java中会导致GC停顿，速度变慢</li>
+<li>C中，导致malloc()分配内存变慢</li>
+</ul>
+</li>
+</ul>
+<h1 id="最新性能测试kafka-pulsar-和-pravega-哪个最强"><a class="markdownIt-Anchor" href="#最新性能测试kafka-pulsar-和-pravega-哪个最强"></a> 最新性能测试：Kafka、Pulsar 和 Pravega 哪个最强？</h1>
+<p><a href="https://www.infoq.cn/article/fp1TLWAUROkOXxq15qGf" target="_blank" rel="noopener">https://www.infoq.cn/article/fp1TLWAUROkOXxq15qGf</a></p>
+<h1 id="pravega-的前景"><a class="markdownIt-Anchor" href="#pravega-的前景"></a> Pravega 的前景</h1>
+<p><a href="https://www.zhihu.com/question/310212569/answer/581672480" target="_blank" rel="noopener">https://www.zhihu.com/question/310212569/answer/581672480</a></p>
+<h1 id="爱奇艺如何处理千亿级数据"><a class="markdownIt-Anchor" href="#爱奇艺如何处理千亿级数据"></a> 爱奇艺如何处理千亿级数据</h1>
+<p><a href="https://www.infoq.cn/article/zI6d1pYAlyoLhQojILXq" target="_blank" rel="noopener">https://www.infoq.cn/article/zI6d1pYAlyoLhQojILXq</a></p>
+<h1 id="cherry-pick使用"><a class="markdownIt-Anchor" href="#cherry-pick使用"></a> cherry pick使用</h1>
+<p><a href="https://blog.csdn.net/FightFightFight/article/details/81039050" target="_blank" rel="noopener">https://blog.csdn.net/FightFightFight/article/details/81039050</a></p>
+<h1 id="我敢说-80-的程序员都掉进了老鼠赛跑的陷阱"><a class="markdownIt-Anchor" href="#我敢说-80-的程序员都掉进了老鼠赛跑的陷阱"></a> 我敢说 80% 的程序员都掉进了「老鼠赛跑」的陷阱</h1>
+<p><a href="https://xie.infoq.cn/article/e0c5a94acbaabff00aa065c03" target="_blank" rel="noopener">https://xie.infoq.cn/article/e0c5a94acbaabff00aa065c03</a></p>
+<blockquote>
+<p>不要天天谈什么框架，什么库，框架每年层出不穷，可是扒下框架那层炫酷漂亮的外衣，里面还是那些最基础的知识和原理。就是这些算法，数据结构，计算机网络，计算机原理这些看似基础的东西。如果这些掌握扎实了，你才有更加深一步的可能。</p>
+<p>我们应该学会提升认知效率，而非技术效率。</p>
+</blockquote>
+<h1 id="软件架构中的解耦"><a class="markdownIt-Anchor" href="#软件架构中的解耦"></a> 软件架构中的解耦</h1>
+<p><a href="https://www.infoq.cn/article/8hlh2qEWP1Y00qumdMQj" target="_blank" rel="noopener">https://www.infoq.cn/article/8hlh2qEWP1Y00qumdMQj</a></p>
+<h1 id="香蕉法则"><a class="markdownIt-Anchor" href="#香蕉法则"></a> 香蕉法则</h1>
+<blockquote>
+<p>讲到自主开发软件系统，这里先引入一个《哈佛商业评论》中讲述过的有趣理论。</p>
+<p>现在有很多企业为了增加雇员与企业的感情，会给员工提供免费的下午茶和水果。时间久了就会发现一个有意思的现象，在水果区，香蕉永远比橙子更受青睐。而且更值得玩味的现象是，当香蕉没了橙子还剩很多时，想吃水果的雇员也极少会去选择橙子。</p>
+<p>有人专门研究了这一现象，他们在拜访过数百家大型企业的职场人士之后得出结论：在职场上，香蕉之所以会比橙子更受欢迎，其原因只是因为香蕉比橙子更容易剥皮。其实，有点生活常识的就会知道，香蕉不仅容易剥，而且吃完后也容易处理。但反观橙子，不仅处理起来非常麻烦，容易喷溅的橙汁还可能弄脏手和衣服。</p>
+<p>社会心理学家认为，这是人类长期进化而来的一种天性，可以帮助人类更高效的生活在这个社会，他们称之为“香蕉法则”。</p>
+<p>香蕉法则让我立刻联想起，罗伯特弗里茨（Robert Fritz）所著的《最小阻力之路》（The Path of Least Resistance），书中提出了一个观点，即结构决定行为，所有的能量都沿着最小阻力之路进行。</p>
+<p>两种理论有异曲同工之妙，二者都表达出了同一个意思。即，但凡有多条路可选，人一定会选最好走的那条路。因为这条路受到的阻力最小。所以，当下有很多的设计师和程序开发者都从中获得了更多见解与灵感。</p>
+<p>我们不妨试着将香蕉法则与最小阻力理论引入软件的开发与设计中。大型企业旗下的开发团体通常都是非常忙碌的，他们每一个项目的时间预算都非常紧张，如果遇到复杂的软件开发项目，那单靠开发者加班加点将很难按时完成任务。所以，想要解决这一难题，就得减少开发过程中会拖延开发进度的各种复杂、重复的工作。</p>
+</blockquote>
+<h1 id="关于缓存穿透-缓存击穿-缓存雪崩-热点数据失效问题的解决方案"><a class="markdownIt-Anchor" href="#关于缓存穿透-缓存击穿-缓存雪崩-热点数据失效问题的解决方案"></a> 关于【缓存穿透、缓存击穿、缓存雪崩、热点数据失效】问题的解决方案</h1>
+<p><a href="https://juejin.im/post/6844903807797690376" target="_blank" rel="noopener">https://juejin.im/post/6844903807797690376</a></p>
+<h1 id="release-train"><a class="markdownIt-Anchor" href="#release-train"></a> Release Train</h1>
+<p>Release Train直译过来意思为：发版火车/火车发版。火车大家不陌生，它有一个显著的特点：定时定点发车。这里的发车在软件领域就等同于软件的发版。</p>
+<h3 id="为何需要release-train发版模式"><a class="markdownIt-Anchor" href="#为何需要release-train发版模式"></a> 为何需要Release Train发版模式？</h3>
+<p>在公司还很小很小的时候，整个公司可能只有一个软件，版本发布非常的简单，没什么需要协调的，发就完了。但是，一旦公司快速发展变得比较大后，核心产品功能数以十、百计，各功能模块由不同的团队负责，沟通成本明显升高，单单在版本上稍不注意就会产生各种问题，很容易给人一种“乱如麻”的感觉。</p>
+<p>使用Release Train的发版模式就能很大程度上避免这些问题，可以这样做：规定每个月的最后一天（精确的发版日期）需要发一版（类比于火车发车），那么就可以以这个时间点为deadline，参与的的各方包括产品经理、RD、QA等等都提前沟通好需求内容，并做好计划，充分做好统一发车的准备。在这期间，如果中间某一团队出现问题跟不上节奏了，那么请及时下车（前提是控制好下车的影响面），不要影响整体发车时间点。</p>
+<p>总的来讲：火车是按点准时出发的，各方应按点上车，倘若本次赶不上车的那么就请等下一趟车。通过这种方式可以确保软件产品的持续迭代，保证产品的稳定性，这就是Release Train发版模式。</p>
+<h1 id="aws-运维仪表盘最佳实践"><a class="markdownIt-Anchor" href="#aws-运维仪表盘最佳实践"></a> AWS 运维仪表盘最佳实践</h1>
+<p><a href="https://aws.amazon.com/builders-library/building-dashboards-for-operational-visibility/" target="_blank" rel="noopener">https://aws.amazon.com/builders-library/building-dashboards-for-operational-visibility/</a></p>
+<h1 id="如何进行网络框架的学习和设计"><a class="markdownIt-Anchor" href="#如何进行网络框架的学习和设计"></a> 如何进行网络框架的学习和设计</h1>
+<p><a href="https://www.infoq.cn/article/27hRZ4qgcNXHuk7NauMe" target="_blank" rel="noopener">https://www.infoq.cn/article/27hRZ4qgcNXHuk7NauMe</a></p>
+<h1 id="为什么每家企业都在构建内部kubernetes平台"><a class="markdownIt-Anchor" href="#为什么每家企业都在构建内部kubernetes平台"></a> 为什么每家企业都在构建内部Kubernetes平台？</h1>
+<p><a href="https://www.infoq.cn/article/uOMfYqHxRArwJcMIGctL" target="_blank" rel="noopener">https://www.infoq.cn/article/uOMfYqHxRArwJcMIGctL</a></p>
+<blockquote>
+<p>在许多情况下，应用程序有时会变得太大而无法在本地运行。那时，从本地开发环境转移到基于云的 Kubernetes 开发环境通常是有意义的。</p>
+</blockquote>
+<h1 id="新技术学习不完全指北"><a class="markdownIt-Anchor" href="#新技术学习不完全指北"></a> 新技术学习不完全指北</h1>
+<p><a href="https://juejin.cn/post/6898953413250252814" target="_blank" rel="noopener">https://juejin.cn/post/6898953413250252814</a></p>
+<blockquote>
+<p><strong>严肃学习是指通过权威的、一手的、经典的、系统化的学习材料进行学习的过程。</strong></p>
+<p>高强度间歇性训练方法，原本是用以健身，现在我们借用来描述知识学习的一种时间规划策略。</p>
+<p>找到严肃材料之后，只达成了第一个层面的严肃性。第二层面的严肃性，需要我们自我建设。世界上的严肃材料这么多，如何向我们的大脑证明眼前这一堆确实是严肃的、重要的材料呢？</p>
+<p>一个有效途径是，让这些材料反复出现，即高频次、高密度、高强度地出现。</p>
+<p>找到严肃的学习材料，扎实且认真地学习了这些材料之后，下一个阶段是——超纲训练。</p>
+<p>看过一遍书，不代表充分理解了书里的知识。我们要去证明自己确实在一定程度上领会了知识。</p>
+<p>如何证明？</p>
+<p>做那些没有参考答案的训练，即超纲训练。</p>
+</blockquote>
+<h1 id="网易云音乐推荐中的用户行为序列深度建模"><a class="markdownIt-Anchor" href="#网易云音乐推荐中的用户行为序列深度建模"></a> 网易云音乐推荐中的用户行为序列深度建模</h1>
+<p><a href="https://www.infoq.cn/article/caqErFHGX7S1LLX1Y2wg" target="_blank" rel="noopener">https://www.infoq.cn/article/caqErFHGX7S1LLX1Y2wg</a></p>
+<h1 id="什么是分布式任务调度"><a class="markdownIt-Anchor" href="#什么是分布式任务调度"></a> 什么是分布式任务调度</h1>
+<p><a href="https://zhuanlan.zhihu.com/p/136843131" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/136843131</a></p>
+<!-- flag of hidden posts -->
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/技术文摘/" rel="tag"># 技术文摘</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/myavatar.jpg"
+                alt="王谱越"/>
+            
+              <p class="site-author-name" itemprop="name">王谱越</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">56</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">36</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/wangpy1489" title="GitHub &rarr; https://github.com/wangpy1489" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:wangpy1489@sjtu.edu.cn" title="E-Mail &rarr; mailto:wangpy1489@sjtu.edu.cn" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.instagram.com/norton_yue/" title="Instagram &rarr; https://www.instagram.com/norton_yue/" rel="noopener" target="_blank"><i class="fa fa-fw fa-instagram"></i>Instagram</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#big-list-of-20-common-bottlenecks"><span class="nav-text"> Big List Of 20 Common Bottlenecks</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#最新性能测试kafka-pulsar-和-pravega-哪个最强"><span class="nav-text"> 最新性能测试：Kafka、Pulsar 和 Pravega 哪个最强？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pravega-的前景"><span class="nav-text"> Pravega 的前景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#爱奇艺如何处理千亿级数据"><span class="nav-text"> 爱奇艺如何处理千亿级数据</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cherry-pick使用"><span class="nav-text"> cherry pick使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#我敢说-80-的程序员都掉进了老鼠赛跑的陷阱"><span class="nav-text"> 我敢说 80% 的程序员都掉进了「老鼠赛跑」的陷阱</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#软件架构中的解耦"><span class="nav-text"> 软件架构中的解耦</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#香蕉法则"><span class="nav-text"> 香蕉法则</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#关于缓存穿透-缓存击穿-缓存雪崩-热点数据失效问题的解决方案"><span class="nav-text"> 关于【缓存穿透、缓存击穿、缓存雪崩、热点数据失效】问题的解决方案</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#release-train"><span class="nav-text"> Release Train</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#为何需要release-train发版模式"><span class="nav-text"> 为何需要Release Train发版模式？</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#aws-运维仪表盘最佳实践"><span class="nav-text"> AWS 运维仪表盘最佳实践</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如何进行网络框架的学习和设计"><span class="nav-text"> 如何进行网络框架的学习和设计</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#为什么每家企业都在构建内部kubernetes平台"><span class="nav-text"> 为什么每家企业都在构建内部Kubernetes平台？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#新技术学习不完全指北"><span class="nav-text"> 新技术学习不完全指北</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#网易云音乐推荐中的用户行为序列深度建模"><span class="nav-text"> 网易云音乐推荐中的用户行为序列深度建模</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是分布式任务调度"><span class="nav-text"> 什么是分布式任务调度</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">  <a href="http://beian.miit.gov.cn" rel="noopener" target="_blank">蒙ICP备18004819号-1 </a>&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">王谱越</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">104k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">1:35</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.0.1</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/schemes/muse.js?v=7.0.1"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.1"></script>
+
+
+  
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      
+        background-color: #eee;
+        background-image: linear-gradient(#fcfcfc, #eee);
+        border: 1px solid #d5d5d5;
+        border-radius: 3px;
+      
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      
+        right: 4px;
+        top: 8px;
+      
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1;
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function(i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap');
+      $(e).after($wrap);
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function(e) {
+        var code = $(this).parent().find('.code').find('.line').map(function(i, e) {
+          return $(e).text();
+        }).toArray().join('\n');
+        var ta = document.createElement('textarea');
+        var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+        ta.style.top = yPosition + 'px'; // Prevent page scroll
+        ta.style.position = 'absolute';
+        ta.style.opacity = '0';
+        ta.readOnly = true;
+        ta.value = code;
+        document.body.appendChild(ta);
+        ta.select();
+        ta.setSelectionRange(0, code.length);
+        ta.readOnly = false;
+        var result = document.execCommand('copy');
+        
+        ta.blur(); // For iOS
+        $(this).blur();
+      })).on('mouseleave', function(e) {
+        var $b = $(this).find('.copy-btn');
+        setTimeout(function() {
+          $b.text('复制');
+        }, 300);
+      }).append(e);
+    })
+  </script>
+
+
+</body>
+</html>

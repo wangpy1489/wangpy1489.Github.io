@@ -1,0 +1,1647 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2"/>
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1"/>
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/dog_128.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/dog_32.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/dog_16.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/dog.svg?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false,"dimmer":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="压缩算法 https://tech.meituan.com/2021/01/07/pack-gzip-zstd-lz4.html  以构建部署的情景下，介绍了多种压缩算法的效率和压缩比。其中ISA-L Acceleration Version 的加速方法，指令级的优化比较新颖   自适应算法和学习算法 https://zhuanlan.zhihu.com/p/24893109  自适应算法虽然考">
+<meta name="keywords" content="技术文摘">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2021-06-技术文摘">
+<meta property="og:url" content="http://yoursite.com/2021/06/01/TechnicalDigest/2021/2021-06-技术文摘/index.html">
+<meta property="og:site_name" content="Norton&#39;s Blog">
+<meta property="og:description" content="压缩算法 https://tech.meituan.com/2021/01/07/pack-gzip-zstd-lz4.html  以构建部署的情景下，介绍了多种压缩算法的效率和压缩比。其中ISA-L Acceleration Version 的加速方法，指令级的优化比较新颖   自适应算法和学习算法 https://zhuanlan.zhihu.com/p/24893109  自适应算法虽然考">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2021-12-31T06:38:47.818Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2021-06-技术文摘">
+<meta name="twitter:description" content="压缩算法 https://tech.meituan.com/2021/01/07/pack-gzip-zstd-lz4.html  以构建部署的情景下，介绍了多种压缩算法的效率和压缩比。其中ISA-L Acceleration Version 的加速方法，指令级的优化比较新颖   自适应算法和学习算法 https://zhuanlan.zhihu.com/p/24893109  自适应算法虽然考">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Norton's Blog" type="application/atom+xml"/>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2021/06/01/TechnicalDigest/2021/2021-06-技术文摘/"/>
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>2021-06-技术文摘 | Norton's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Norton's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">You miss 100% of the shot you do not take.</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br/>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br/>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br/>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br/>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br/>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-digest">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/文摘" rel="section"><i class="menu-item-icon fa fa-fw fa-newspaper-o"></i> <br/>技术文摘</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br/>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/06/01/TechnicalDigest/2021/2021-06-技术文摘/"/>
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="王谱越"/>
+      <meta itemprop="description" content=""/>
+      <meta itemprop="image" content="/images/myavatar.jpg"/>
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Norton's Blog"/>
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">2021-06-技术文摘
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2021-06-01 14:26:05" itemprop="dateCreated datePublished" datetime="2021-06-01T14:26:05+08:00">2021-06-01</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2021-12-31 14:38:47" itemprop="dateModified" datetime="2021-12-31T14:38:47+08:00">2021-12-31</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/文摘/" itemprop="url" rel="index"><span itemprop="name">文摘</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">3.5k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">3 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="压缩算法"><a class="markdownIt-Anchor" href="#压缩算法"></a> 压缩算法</h1>
+<p><a href="https://tech.meituan.com/2021/01/07/pack-gzip-zstd-lz4.html" target="_blank" rel="noopener">https://tech.meituan.com/2021/01/07/pack-gzip-zstd-lz4.html</a></p>
+<blockquote>
+<p>以构建部署的情景下，介绍了多种压缩算法的效率和压缩比。其中ISA-L Acceleration Version 的加速方法，指令级的优化比较新颖</p>
+</blockquote>
+<h1 id="自适应算法和学习算法"><a class="markdownIt-Anchor" href="#自适应算法和学习算法"></a> 自适应算法和学习算法</h1>
+<p><a href="https://zhuanlan.zhihu.com/p/24893109" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/24893109</a></p>
+<blockquote>
+<p>自适应算法虽然考虑了锅可能会发生变化，但是并不去主动了解当前的到底是用了什么锅，而学习算法则非常关注当前使用的 是哪一种锅，从而可以建立对应的资料库。在两种算法都收敛后，对于自适应算法，如果换掉锅，那么接下来又是一系列调整，直到用水量合适。而对于学习算法，一查资料库，就能得到最佳的用水量。</p>
+</blockquote>
+<h1 id="位运算技巧"><a class="markdownIt-Anchor" href="#位运算技巧"></a> 位运算技巧</h1>
+<h2 id="位运算简介及技巧系列"><a class="markdownIt-Anchor" href="#位运算简介及技巧系列"></a> 位运算简介及技巧系列</h2>
+<p><a href="http://www.matrix67.com/blog/archives/263" target="_blank" rel="noopener">位运算简介及实用技巧（一）：基础篇</a><br>
+<a href="http://www.matrix67.com/blog/archives/264" target="_blank" rel="noopener">位运算简介及实用技巧（二）：进阶篇(1)</a><br>
+<a href="http://www.matrix67.com/blog/archives/266" target="_blank" rel="noopener">位运算简介及实用技巧（三）：进阶篇(2)</a><br>
+<a href="http://www.matrix67.com/blog/archives/268" target="_blank" rel="noopener">位运算简介及实用技巧（四）：实战篇</a></p>
+<h2 id="20个位运算实用技巧"><a class="markdownIt-Anchor" href="#20个位运算实用技巧"></a> 20个位运算实用技巧</h2>
+<p><a href="https://blog.csdn.net/zmazon/article/details/8262185" target="_blank" rel="noopener">https://blog.csdn.net/zmazon/article/details/8262185</a></p>
+<h1 id="高性能环形队列实现"><a class="markdownIt-Anchor" href="#高性能环形队列实现"></a> 高性能环形队列实现</h1>
+<p><a href="https://hedzr.com/algorithm/golang/ringbuf-01-intro/" target="_blank" rel="noopener">https://hedzr.com/algorithm/golang/ringbuf-01-intro/</a></p>
+<h1 id="rdma技术详解"><a class="markdownIt-Anchor" href="#rdma技术详解"></a> RDMA技术详解</h1>
+<p>非常详细的系列 能够从原理上理解RDMA的工作方式</p>
+<p><a href="https://zhuanlan.zhihu.com/p/55142557" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/55142557</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/55142547" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/55142547</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/55142568" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/55142568</a></p>
+<blockquote>
+<p>使用RDMA的优势如下：</p>
+<ul>
+<li>零拷贝(Zero-copy) - 应用程序能够直接执行数据传输，在不涉及到网络软件栈的情况下。数据能够被直接发送到缓冲区或者能够直接从缓冲区里接收，而不需要被复制到网络层。</li>
+<li>内核旁路(Kernel bypass) - 应用程序可以直接在用户态执行数据传输，不需要在内核态与用户态之间做上下文切换。</li>
+<li>不需要CPU干预(No CPU involvement) - 应用程序可以访问远程主机内存而不消耗远程主机中的任何CPU。远程主机内存能够被读取而不需要远程主机上的进程（或CPU)参与。远程主机的CPU的缓存(cache)不会被访问的内存内容所填充。</li>
+<li>消息基于事务(Message based transactions) - 数据被处理为离散消息而不是流，消除了应用程序将流切割为不同消息/事务的需求。</li>
+<li>支持分散/聚合条目(Scatter/gather entries support) - RDMA原生态支持分散/聚合。也就是说，读取多个内存缓冲区然后作为一个流发出去或者接收一个流然后写入到多个内存缓冲区里去。</li>
+</ul>
+</blockquote>
+<h1 id="读取配置优先级源码设计"><a class="markdownIt-Anchor" href="#读取配置优先级源码设计"></a> 读取配置优先级源码设计</h1>
+<p><a href="https://www.cnblogs.com/wucy/p/13586003.html" target="_blank" rel="noopener">https://www.cnblogs.com/wucy/p/13586003.html</a></p>
+<blockquote>
+<p>介绍了.Net读取配置的优先级顺序，从源码层面探究了这样的不同配置源的优先级的实现方式，很有借鉴意义。</p>
+</blockquote>
+<h1 id="程序员之路"><a class="markdownIt-Anchor" href="#程序员之路"></a> 程序员之路</h1>
+<p><a href="https://icyfenix.cn/tricks/2021/geekbang.html" target="_blank" rel="noopener">https://icyfenix.cn/tricks/2021/geekbang.html</a></p>
+<blockquote>
+<p>人生苦短，光阴易逝，把有限的时间和精力投入到对自己最有价值的方向上显得尤为关键，多数人都能接受“选择永远比努力更重要”的观点，但进一步问什么才是好的选择时，就只有少数人能对自己学习的知识技能、从事的工作方向做出定量的价值判断。这里我以上面提问为例，拿出自己的判断模型，供你参考：</p>
+<blockquote>
+<p>价值 = (技能收益 + 知识收益) × 提升空间 / 投入成本</p>
+</blockquote>
+<ul>
+<li><strong>技能收益</strong>：问题里“每天都是对着协议研究业务实现”就属于典型的技能，它往往代表着直接收益。一项每天工作都要用到的技能，无论你是否感有趣，都值得花一些时间精力去掌握，它至少对短期利益起到了明确的支撑作用；反之，永远都不会派上用场的屠龙术，再高大上也是水月镜花。<br>
+正视技能收益的意义在于避免自己变得过度浮躁，以“兴趣不合”、“发展不符”为借口去过度挑剔。我也提倡兴趣驱动，提倡快乐工作，但不设前提条件的兴趣驱动就未免太过“凡尔赛”了，首先在社会中务实地生存，不涉及是否快乐，先把本分工作做对做好，再追求兴趣选择和机遇发展，这才是对多数人的最大的公平。</li>
+<li><strong>知识收益</strong>：问题里“架构方面的课程”有不少都属于知识，知识的收益往往是间接的，最终会体现在缩减模型中的“投入成本”因素，即降低<a href="https://en.wikipedia.org/wiki/Cognitive_load" target="_blank" rel="noopener">认知负荷</a>（Cognitive Load）上。世界上鲜有“烟囱式”的专业人才，专才的知识体系基本还是“金字塔式”的，在领域里能够显著超过他人高度的前提条件，往往便是拥有着超过他人的知识广度。具体到软件开发中，像计算机体系结构、编译原理、操作系统原理等原理性的知识，对于不写编译器、不开发操作系统的程序员，在实践中几乎找不到<strong>直接的</strong>应用场景的，但它们毫无疑问是程序员知识体系的基石，是许多实用技能和常见工具溯源的归宿。<br>
+花费一定成本去学习这类知识，目的是要将自己的知识点筑成体系，将大量的不同的零散的知识点、通过内化、存储、整理、归档、输出等方式组合起来，以点成线、以线成面，最终形成系统的、有序的、清晰的脉络结构，这就是知识体系。程序员是需要终身学习的群体，当新的信息输入时，如果能在知识体系中快速找到它应该安放的位置，定位它的问题与解题空间，找到它与其他知识点的关联关系，那你接受新信息的认知负荷就降低了，通俗地讲，你就有了比别人更高的学习效率，更敏锐的技术触觉。</li>
+<li><strong>提升空间</strong>：如果一项工作对你来说是个全新的领域，甚至能称为是一项挑战，那风险的背后往往也蕴含有更高的收益。但我将提升空间归入到价值判断的因素之中，更重要的目的是为了规避舒适区的陷阱。人性会在持续的颓废时发出示警，却容易被无效的努力所欺骗。去做已经完全得心应手的事情，不耗费什么精力，不会觉得痛苦困难，如果把它当作打游戏看电影般的娱乐消遣，放松自己是合适的，但不应该再指望从中追求什么价值。<br>
+没有价值，是因为提升空间是可以下降至零，但投入成本不可能为零，因为成本中不仅包括精力，还包括有时间，花时间重复去做已经完全熟练的事情，相当于计算分子为零的算式，结果必然是没有价值的。</li>
+<li><strong>投入成本</strong>：在这门架构课程中，我经常讲的一个词是“权衡”，经常说的一句话是“凡事不能只讲收益不谈成本”，在我的价值模型里，收益大小也是必须在确定的成本下才有衡量比较的意义。这里的成本，既包括你花费的时间、金钱与机会，也包括你投入的知识、精神与毅力。<br>
+强调投入成本，是希望你不要去钻牛角尖，如果一项知识或技能，你学习起来非常吃力，花费大力气弄懂之后过一段时间却又会迅速遗忘掉，这很可能是因为你既没有实际应用它的场景，知识体系中也没有建立好掌握它的稳固的前置基础。这种就属于你目前还拿不动的东西，不妨趁早放手，先做好减法，才能做好加法；也不必觉得可惜，如果它对你来说是必要的，一定还会再次出现，想躲也躲不掉。</li>
+</ul>
+</blockquote>
+<h1 id="ebpf-kubernetes"><a class="markdownIt-Anchor" href="#ebpf-kubernetes"></a> eBPF + Kubernetes</h1>
+<p><a href="https://arthurchiao.art/blog/ebpf-and-k8s-zh/" target="_blank" rel="noopener">https://arthurchiao.art/blog/ebpf-and-k8s-zh/</a></p>
+<blockquote>
+<p>本文内容的时间跨度有 8 年，覆盖了 eBPF 发展的整个历史，非常值得一读。</p>
+</blockquote>
+<h1 id="网卡中tx和rx的意思"><a class="markdownIt-Anchor" href="#网卡中tx和rx的意思"></a> 网卡中TX和RX的意思</h1>
+<p><a href="https://blog.csdn.net/myweishanli/article/details/25506745?utm_source=blogxgwz0" target="_blank" rel="noopener">https://blog.csdn.net/myweishanli/article/details/25506745?utm_source=blogxgwz0</a></p>
+<blockquote>
+<p>其实正常来解释：<br>
+tx是发送（transport），rx是接收(receive)。</p>
+</blockquote>
+<h1 id="康威定律"><a class="markdownIt-Anchor" href="#康威定律"></a> 康威定律</h1>
+<p><a href="https://zh.wikipedia.org/wiki/%E5%BA%B7%E5%A8%81%E5%AE%9A%E5%BE%8B" target="_blank" rel="noopener">https://zh.wikipedia.org/wiki/康威定律</a></p>
+<p><a href="http://www.woshipm.com/it/4290947.html" target="_blank" rel="noopener">http://www.woshipm.com/it/4290947.html</a></p>
+<blockquote>
+<p>From 凤凰架构：</p>
+<p>康威定律尝试使用社会学的方法去解释软件研发中的问题，其核心观点是“沟通决定设计”（Communication Dictates Design），如果技术层面紧密联系在一起特性，在组织层面上强行分离开来，那结果会是沟通成本的上升，因为会产生大量的跨组织的沟通；如果技术层面本身没什么联系的特性，在组织层面上强行安放一块，那结果会是管理成本的上升，因为成员越多越不利于一致决策的形成。</p>
+</blockquote>
+<h1 id="bdd行为驱动测试"><a class="markdownIt-Anchor" href="#bdd行为驱动测试"></a> BDD行为驱动测试</h1>
+<p><a href="https://www.cnblogs.com/superhin/p/11454716.html" target="_blank" rel="noopener">pytest-bdd用法介绍</a></p>
+<p><a href="https://www.cnblogs.com/superhin/p/14012675.html" target="_blank" rel="noopener">Python behave介绍</a></p>
+<p><a href="https://nebula-graph.com.cn/posts/bdd-testing-practice/" target="_blank" rel="noopener">Nebula BDD实践</a></p>
+<p><a href="https://github.com/opencypher/openCypher/tree/master/tck" target="_blank" rel="noopener">Neo4j Cypher 的套件</a></p>
+<!-- flag of hidden posts -->
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/技术文摘/" rel="tag"># 技术文摘</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/myavatar.jpg"
+                alt="王谱越"/>
+            
+              <p class="site-author-name" itemprop="name">王谱越</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">56</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">16</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">36</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/wangpy1489" title="GitHub &rarr; https://github.com/wangpy1489" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:wangpy1489@sjtu.edu.cn" title="E-Mail &rarr; mailto:wangpy1489@sjtu.edu.cn" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.instagram.com/norton_yue/" title="Instagram &rarr; https://www.instagram.com/norton_yue/" rel="noopener" target="_blank"><i class="fa fa-fw fa-instagram"></i>Instagram</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#压缩算法"><span class="nav-text"> 压缩算法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#自适应算法和学习算法"><span class="nav-text"> 自适应算法和学习算法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#位运算技巧"><span class="nav-text"> 位运算技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#位运算简介及技巧系列"><span class="nav-text"> 位运算简介及技巧系列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#20个位运算实用技巧"><span class="nav-text"> 20个位运算实用技巧</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#高性能环形队列实现"><span class="nav-text"> 高性能环形队列实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#rdma技术详解"><span class="nav-text"> RDMA技术详解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#读取配置优先级源码设计"><span class="nav-text"> 读取配置优先级源码设计</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#程序员之路"><span class="nav-text"> 程序员之路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ebpf-kubernetes"><span class="nav-text"> eBPF + Kubernetes</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#网卡中tx和rx的意思"><span class="nav-text"> 网卡中TX和RX的意思</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#康威定律"><span class="nav-text"> 康威定律</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#bdd行为驱动测试"><span class="nav-text"> BDD行为驱动测试</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">  <a href="http://beian.miit.gov.cn" rel="noopener" target="_blank">蒙ICP备18004819号-1 </a>&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">王谱越</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">104k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">1:35</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.0.1</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/schemes/muse.js?v=7.0.1"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=7.0.1"></script>
+
+
+  
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      
+        background-color: #eee;
+        background-image: linear-gradient(#fcfcfc, #eee);
+        border: 1px solid #d5d5d5;
+        border-radius: 3px;
+      
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      
+        right: 4px;
+        top: 8px;
+      
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1;
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function(i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap');
+      $(e).after($wrap);
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function(e) {
+        var code = $(this).parent().find('.code').find('.line').map(function(i, e) {
+          return $(e).text();
+        }).toArray().join('\n');
+        var ta = document.createElement('textarea');
+        var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+        ta.style.top = yPosition + 'px'; // Prevent page scroll
+        ta.style.position = 'absolute';
+        ta.style.opacity = '0';
+        ta.readOnly = true;
+        ta.value = code;
+        document.body.appendChild(ta);
+        ta.select();
+        ta.setSelectionRange(0, code.length);
+        ta.readOnly = false;
+        var result = document.execCommand('copy');
+        
+        ta.blur(); // For iOS
+        $(this).blur();
+      })).on('mouseleave', function(e) {
+        var $b = $(this).find('.copy-btn');
+        setTimeout(function() {
+          $b.text('复制');
+        }, 300);
+      }).append(e);
+    })
+  </script>
+
+
+</body>
+</html>
